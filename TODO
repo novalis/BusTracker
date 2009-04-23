@@ -1,0 +1,26 @@
+TODO:
+
+(1) Input routes for all NYC buses -- or at least the one we're tracking
+(2) Geocode and reverse geocode all locations
+  (a) geocoding for input can use google
+  (b) geocoding for output can use street information from tiger:
+    (i) a route is an ordered set of street segments
+    (ii) we localize to which segment we're on, using min(st_distance(...)) and 
+         st_dwithin for optimization.  preprocess data with st_linemerge.
+    (iii) that gives us a gid.  For the "and", we figure out
+          what end we're closest to, and we use st_intersects with st_startpoint
+          or st_endpoint to find the cross-street.  
+
+(3) represent routes as a set of route segments.
+
+(a) this allows use of unmodified tiger data
+(b) it allows calculating number of intersections, by doing:
+count(*) where st_intersects() on the subset of the route between here
+and there.  I guess "between" means "compute the segment that we're on",
+"compute the segment the target is on", and use the route's segment
+ordering.
+
+(4) using the number of intersections and bus stops to better
+estimate times.
+
+(5) warn when bus data is very out-of-date

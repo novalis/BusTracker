@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>
+      Bus
+    </th>
+    <th>
+      Estimated arrival time
+    </th>
+    <th>
+      Current Location
+    </th>
+  </tr>
+  
+  {% for bus in buses %}
+    {% if bus.est %}
+    <tr>
+      <td>{{ bus.id }}</td>
+      <td>{{ bus.est|localdatetime }}</td>
+      <td>{{ bus.location }}</td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+</table>

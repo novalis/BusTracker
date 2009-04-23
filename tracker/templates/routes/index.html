@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>
+      Route
+    </th>
+    <th>
+      Active buses
+    </th>
+  </tr>
+  
+  {% for route in routes %}
+  <tr>
+    <td>{{ route.name }}</td>
+    <td>{{ route.buses|length }}</td>
+  </tr>
+  {% endfor %}
+</table>
