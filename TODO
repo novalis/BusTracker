@@ -11,9 +11,10 @@ TODO:
           what end we're closest to, and we use st_intersects with st_startpoint
           or st_endpoint to find the cross-street.  
 
-(3) represent routes as a set of route segments.
+(3) represent routes as a set of route segments. -- DONE
 
-(a) this allows use of unmodified tiger data
+(a) this allows use of unmodified tiger data -- DONE
+
 (b) it allows calculating number of intersections, by doing:
 count(*) where st_intersects() on the subset of the route between here
 and there.  I guess "between" means "compute the segment that we're on",

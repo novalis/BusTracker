@@ -2,8 +2,970 @@
   {
     "model": "tracker.Route",
     "pk" : "M20 Uptown",
+    "fields" : {
+      "geometry": "LINESTRING(-74.005854 40.736534,-74.005539 40.736916,-74.00483 40.737548,-74.004175 40.738134,-74.003861 40.738395,-74.003446 40.738756,-74.003083 40.739077,-74.002789 40.739396,-74.002523 40.739753,-74.002019 40.740444,-74.001555 40.74108,-74.001129 40.741668,-74.000703 40.742254,-74.000275 40.742839,-73.999848 40.743425,-73.999422 40.744009,-73.998972 40.74463,-73.998486 40.745294,-73.998009 40.745952,-73.997552 40.746581,-73.997099 40.747205,-73.996648 40.747823,-73.996196 40.74844,-73.995749 40.749052,-73.995299 40.749671,-73.994844 40.750293,-73.994329 40.750999,-73.993948 40.751522,-73.993464 40.75219,-73.992979 40.752854,-73.992528 40.753474,-73.992079 40.754091,-73.991633 40.754707,-73.991177 40.75533,-73.990726 40.755951,-73.990276 40.756567,-73.989791 40.757234,-73.989297 40.757907,-73.988842 40.758533,-73.988391 40.759164,-73.987927 40.759791,-73.987475 40.760405,-73.987015 40.761038,-73.986561 40.76166,-73.986104 40.76229,-73.985647 40.762915,-73.985192 40.763543,-73.984734 40.76417,-73.984283 40.764792,-73.983822 40.765418,-73.983367 40.766045,-73.982877 40.766715,-73.98238 40.7674,-73.982152 40.767681)"
+    }
+  },
+  {
+    "model": "tracker.Road",
+    "pk" : 1,
     "fields": {
-      "geometry": "0102000000320000008A027D224F8052C0779D0DF9675E44407E1D3867448052C06708C72C7B5E4440B62E35423F8052C0D44334BA835E444054539275388052C0A4DC7D8E8F5E44401C0B0A83328052C0E61C3C139A5E444077F2E9B12D8052C088653387A45E4440389F3A56298052C0170FEF39B05E44401EBE4C14218052C07C4276DEC65E44404C89247A198052C01EDC9DB5DB5E4440F0845E7F128052C0AF3E1EFAEE5E4440958098840B8052C09FA9D72D025F444069006F81048052C0BF982D59155F4440253E7782FD7F52C0AF03E78C285F4440C939B187F67F52C0FF76D9AF3B5F4440A9674128EF7F52C06CCF2C09505F4440E3E0D231E77F52C0D8F335CB655F444046072461DF7F52C06131EA5A7B5F4440CD0358E4D77F52C0516859F78F5F4440F4F75278D07F52C02F34D769A45F4440EC67B114C97F52C02A1900AAB85F4440FC19DEACC17F52C05582C5E1CC5F44409581035ABA7F52C06F8099EFE05F444075AF93FAB27F52C03BE12538F55F4440CC272B86AB7F52C078B5DC9909604440B81D1A16A37F52C0132A38BC206044402D7B12D89C7F52C0BD1C76DF31604440377007EA947F52C06A300DC34760444058A7CAF78C7F52C0D65416855D60444050172994857F52C0723106D6716044401803EB387E7F52C09D9ACB0D86604440992842EA767F52C0F8872D3D9A60444008E3A7716F7F52C006D847A7AE6044400053060E687F52C072309B00C3604440E08096AE607F52C0CD1DFD2FD760444002B859BC587F52C0AAB5300BED604440FA415DA4507F52C06934B9180361444051BAF42F497F52C0E8F7FD9B17614440492A53CC417F52C0782634492C61444077F52A323A7F52C0C765DCD44061444087A757CA327F52C0815B77F354614440556AF6402B7F52C0B28174B16961444094A0BFD0237F52C0EF552B137E6144401B9DF3531C7F52C0AF08FEB792614440A29927D7147F52C05D50DF32A7614440F911BF620D7F52C07C0BEBC6BB6144409850C1E1057F52C0CB4A9352D06144408FC01F7EFE7E52C0081F4AB4E461444076C58CF0F67E52C086E28E37F9614440CD3D247CEF7E52C0D52137C30D62444066BFEE74E77E52C0232D95B723624440"
+      "name" : "8 Ave",
+      "borough" : "Manhattan"
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 53,
+    "fields": {
+      "roadsegment" : 53,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 53,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.005854 40.736534,-74.005539 40.736916))",
+      "gid" : 8509,
+      "path_order" : 1
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 1,
+    "fields": {
+      "roadsegment" : 1,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 1,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.005539 40.736916,-74.00483 40.737548))",
+      "gid" : 5062,
+      "path_order" : 2
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 2,
+    "fields": {
+      "roadsegment" : 2,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 2,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.00483 40.737548,-74.004175 40.738134))",
+      "gid" : 6289,
+      "path_order" : 3
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 3,
+    "fields": {
+      "roadsegment" : 3,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 3,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.004175 40.738134,-74.003861 40.738395))",
+      "gid" : 5066,
+      "path_order" : 4
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 4,
+    "fields": {
+      "roadsegment" : 4,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 4,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.003861 40.738395,-74.003446 40.738756))",
+      "gid" : 2677,
+      "path_order" : 5
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 5,
+    "fields": {
+      "roadsegment" : 5,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 5,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.003446 40.738756,-74.003083 40.739077))",
+      "gid" : 3837,
+      "path_order" : 6
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 6,
+    "fields": {
+      "roadsegment" : 6,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 6,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.003083 40.739077,-74.002789 40.739396))",
+      "gid" :  142,
+      "path_order" : 7
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 7,
+    "fields": {
+      "roadsegment" : 7,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 7,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.002789 40.739396,-74.002523 40.739753))",
+      "gid" : 6088,
+      "path_order" : 8
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 8,
+    "fields": {
+      "roadsegment" : 8,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 8,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.002523 40.739753,-74.002019 40.740444))",
+      "gid" :  132,
+      "path_order" : 9
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 9,
+    "fields": {
+      "roadsegment" : 9,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 9,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.002019 40.740444,-74.001555 40.74108))",
+      "gid" : 1282,
+      "path_order" : 10
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 10,
+    "fields": {
+      "roadsegment" : 10,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 10,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.001555 40.74108,-74.001129 40.741668))",
+      "gid" : 6078,
+      "path_order" : 11
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 11,
+    "fields": {
+      "roadsegment" : 11,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 11,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.001129 40.741668,-74.000703 40.742254))",
+      "gid" : 7219,
+      "path_order" : 12
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 12,
+    "fields": {
+      "roadsegment" : 12,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 12,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.000703 40.742254,-74.000275 40.742839))",
+      "gid" : 7221,
+      "path_order" : 13
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 13,
+    "fields": {
+      "roadsegment" : 13,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 13,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-74.000275 40.742839,-73.999848 40.743425))",
+      "gid" : 3632,
+      "path_order" : 14
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 14,
+    "fields": {
+      "roadsegment" : 14,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 14,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.999848 40.743425,-73.999422 40.744009))",
+      "gid" : 3633,
+      "path_order" : 15
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 15,
+    "fields": {
+      "roadsegment" : 15,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 15,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.999422 40.744009,-73.998972 40.74463))",
+      "gid" : 4846,
+      "path_order" : 16
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 16,
+    "fields": {
+      "roadsegment" : 16,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 16,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.998972 40.74463,-73.998486 40.745294))",
+      "gid" : 2486,
+      "path_order" : 17
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 17,
+    "fields": {
+      "roadsegment" : 17,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 17,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.998486 40.745294,-73.998009 40.745952))",
+      "gid" : 8327,
+      "path_order" : 18
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 18,
+    "fields": {
+      "roadsegment" : 18,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 18,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.998009 40.745952,-73.997552 40.746581))",
+      "gid" : 6082,
+      "path_order" : 19
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 19,
+    "fields": {
+      "roadsegment" : 19,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 19,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.997552 40.746581,-73.997099 40.747205))",
+      "gid" : 6083,
+      "path_order" : 20
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 20,
+    "fields": {
+      "roadsegment" : 20,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 20,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.997099 40.747205,-73.996648 40.747823))",
+      "gid" : 8328,
+      "path_order" : 21
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 21,
+    "fields": {
+      "roadsegment" : 21,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 21,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.996648 40.747823,-73.996196 40.74844))",
+      "gid" :  137,
+      "path_order" : 22
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 22,
+    "fields": {
+      "roadsegment" : 22,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 22,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.996196 40.74844,-73.995749 40.749052))",
+      "gid" : 5940,
+      "path_order" : 23
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 23,
+    "fields": {
+      "roadsegment" : 23,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 23,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.995749 40.749052,-73.995299 40.749671))",
+      "gid" : 1208,
+      "path_order" : 24
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 24,
+    "fields": {
+      "roadsegment" : 24,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 24,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.995299 40.749671,-73.994844 40.750293))",
+      "gid" : 5979,
+      "path_order" : 25
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 25,
+    "fields": {
+      "roadsegment" : 25,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 25,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.994844 40.750293,-73.994329 40.750999))",
+      "gid" : 7707,
+      "path_order" : 26
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 26,
+    "fields": {
+      "roadsegment" : 26,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 26,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.994329 40.750999,-73.993948 40.751522))",
+      "gid" : 2381,
+      "path_order" : 27
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 27,
+    "fields": {
+      "roadsegment" : 27,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 27,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.993948 40.751522,-73.993464 40.75219))",
+      "gid" : 1137,
+      "path_order" : 28
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 28,
+    "fields": {
+      "roadsegment" : 28,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 28,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.993464 40.75219,-73.992979 40.752854))",
+      "gid" : 9293,
+      "path_order" : 29
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 29,
+    "fields": {
+      "roadsegment" : 29,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 29,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.992979 40.752854,-73.992528 40.753474))",
+      "gid" : 3471,
+      "path_order" : 30
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 30,
+    "fields": {
+      "roadsegment" : 30,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 30,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.992528 40.753474,-73.992079 40.754091))",
+      "gid" : 6394,
+      "path_order" : 31
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 31,
+    "fields": {
+      "roadsegment" : 31,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 31,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.992079 40.754091,-73.991633 40.754707))",
+      "gid" : 3819,
+      "path_order" : 32
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 32,
+    "fields": {
+      "roadsegment" : 32,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 32,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.991633 40.754707,-73.991177 40.75533))",
+      "gid" : 7509,
+      "path_order" : 33
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 33,
+    "fields": {
+      "roadsegment" : 33,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 33,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.991177 40.75533,-73.990726 40.755951))",
+      "gid" : 2774,
+      "path_order" : 34
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 34,
+    "fields": {
+      "roadsegment" : 34,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 34,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.990726 40.755951,-73.990276 40.756567))",
+      "gid" : 8617,
+      "path_order" : 35
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 35,
+    "fields": {
+      "roadsegment" : 35,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 35,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.990276 40.756567,-73.989791 40.757234))",
+      "gid" : 5050,
+      "path_order" : 36
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 36,
+    "fields": {
+      "roadsegment" : 36,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 36,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.989791 40.757234,-73.989297 40.757907))",
+      "gid" : 5049,
+      "path_order" : 37
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 37,
+    "fields": {
+      "roadsegment" : 37,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 37,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.989297 40.757907,-73.988842 40.758533))",
+      "gid" : 5048,
+      "path_order" : 38
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 38,
+    "fields": {
+      "roadsegment" : 38,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 38,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.988842 40.758533,-73.988391 40.759164))",
+      "gid" : 8497,
+      "path_order" : 39
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 39,
+    "fields": {
+      "roadsegment" : 39,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 39,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.988391 40.759164,-73.987927 40.759791))",
+      "gid" : 8490,
+      "path_order" : 40
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 40,
+    "fields": {
+      "roadsegment" : 40,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 40,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.987927 40.759791,-73.987475 40.760405))",
+      "gid" :  334,
+      "path_order" : 41
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 41,
+    "fields": {
+      "roadsegment" : 41,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 41,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.987475 40.760405,-73.987015 40.761038))",
+      "gid" : 7401,
+      "path_order" : 42
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 42,
+    "fields": {
+      "roadsegment" : 42,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 42,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.987015 40.761038,-73.986561 40.76166))",
+      "gid" : 6267,
+      "path_order" : 43
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 43,
+    "fields": {
+      "roadsegment" : 43,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 43,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.986561 40.76166,-73.986104 40.76229))",
+      "gid" : 1457,
+      "path_order" : 44
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 44,
+    "fields": {
+      "roadsegment" : 44,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 44,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.986104 40.76229,-73.985647 40.762915))",
+      "gid" : 1456,
+      "path_order" : 45
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 45,
+    "fields": {
+      "roadsegment" : 45,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 45,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.985647 40.762915,-73.985192 40.763543))",
+      "gid" :  335,
+      "path_order" : 46
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 46,
+    "fields": {
+      "roadsegment" : 46,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 46,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.985192 40.763543,-73.984734 40.76417))",
+      "gid" : 7400,
+      "path_order" : 47
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 47,
+    "fields": {
+      "roadsegment" : 47,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 47,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.984734 40.76417,-73.984283 40.764792))",
+      "gid" : 8492,
+      "path_order" : 48
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 48,
+    "fields": {
+      "roadsegment" : 48,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 48,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.984283 40.764792,-73.983822 40.765418))",
+      "gid" : 8545,
+      "path_order" : 49
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 49,
+    "fields": {
+      "roadsegment" : 49,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 49,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.983822 40.765418,-73.983367 40.766045))",
+      "gid" : 7394,
+      "path_order" : 50
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 50,
+    "fields": {
+      "roadsegment" : 50,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 50,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.983367 40.766045,-73.982877 40.766715))",
+      "gid" : 5037,
+      "path_order" : 51
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 51,
+    "fields": {
+      "roadsegment" : 51,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 51,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.982877 40.766715,-73.98238 40.7674))",
+      "gid" : 7395,
+      "path_order" : 52
+    }
+  },
+  { 
+    "model": "tracker.RouteSegment",
+    "pk" : 52,
+    "fields": {
+      "roadsegment" : 52,
+      "route" : "M20 Uptown"
+    }
+  },
+  { 
+    "model": "tracker.RoadSegment",
+    "pk" : 52,
+    "fields": {
+      "road" : 1,
+      "geometry" : "MULTILINESTRING((-73.98238 40.7674,-73.982152 40.767681))",
+      "gid" : 3659,
+      "path_order" : 53
     }
   },
   { "model": "tracker.Bus",
