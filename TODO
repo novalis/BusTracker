@@ -24,3 +24,9 @@ ordering.
 estimate times.
 
 (5) warn when bus data is very out-of-date
+
+(6) decide on normalized vs denormalized geometry for routes.
+
+normalized: cleaner
+denormalized: many route calculations more efficient; we have to do work
+to define routes anyway.
