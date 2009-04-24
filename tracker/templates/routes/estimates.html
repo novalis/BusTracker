@@ -16,7 +16,7 @@
     <tr>
       <td>{{ bus.id }}</td>
       <td>{{ bus.est|localdatetime }}</td>
-      <td>{{ bus.location }}</td>
+      <td>{{ bus.location|reverse_geocode_intersection }}</td>
     </tr>
     {% endif %}
   {% endfor %}

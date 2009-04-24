@@ -10,6 +10,7 @@ TODO:
     (iii) that gives us a gid.  For the "and", we figure out
           what end we're closest to, and we use st_intersects with st_startpoint
           or st_endpoint to find the cross-street.  
+    (iv) Or we could just use a web service. -- DONE
 
 (3) represent routes as a set of route segments. -- DONE
 

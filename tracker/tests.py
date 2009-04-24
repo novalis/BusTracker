@@ -72,7 +72,14 @@ class UpdateTestCase(TestCase):
                          { 'lat': '40.766735', 
                            'long' : '-73.983093',
                            'time' : '1239644900',
-                           'address' : "8 Ave and W 57 St",
+                           'address' : "8 Ave and W 56 St",
                            })
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('2009-04-13' in response.content)
+
+        #this location is the bus's last seen location; 
+        #the time parameter, above, does not eliminate observations
+        #of the bus after that time.
+        self.assertTrue('W 57 St' in response.content)
+        self.assertTrue('8 Ave' in response.content)
