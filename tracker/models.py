@@ -12,6 +12,10 @@ class Road(models.Model):
 class RoadSegment(models.Model):
     """Represents one segment of a road -- 8 Ave between W 28 St and
     W 29 St, for instance"""
+
+    class Meta:
+        ordering = ["path_order"]
+
     gid = models.IntegerField(primary_key=True)
     geometry = models.GeometryField()
     road = models.ForeignKey(Road)
@@ -25,6 +29,9 @@ class Route(models.Model):
         return "<Route ('%s')>" % self.name
     
 class RouteSegment(models.Model):
+
+    class Meta:
+        ordering = ["path_order"]
     roadsegment = models.ForeignKey(RoadSegment)
     route = models.ForeignKey(Route)
     path_order = models.IntegerField()
