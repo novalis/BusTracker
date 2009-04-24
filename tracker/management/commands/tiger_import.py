@@ -6,6 +6,7 @@ from optparse import make_option, OptionParser
 from tracker.models import *
 
 class Tiger(models.Model):
+    """Tiger import burning bright, in the forests of the night..."""
     gid = models.IntegerField(primary_key=True)
     statefp = models.CharField(max_length=2)
     countyfp = models.CharField(max_length=3)
@@ -92,5 +93,4 @@ FROM
 tracker_roadsegment
 WHERE 
 tracker_roadsegment.road_id = tracker_road.name)""")
-        row = cursor.fetchone()
-        return row[0]
+

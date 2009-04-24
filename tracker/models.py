@@ -19,7 +19,7 @@ class RoadSegment(models.Model):
 
 class Route(models.Model):
     name = models.CharField(max_length=200, primary_key=True) #M20 Uptown
-    geometry = models.GeometryField() #denormalized
+    geometry = models.GeometryField(null=True) #denormalized
 
     def __unicode__(self):
         return "<Route ('%s')>" % self.name

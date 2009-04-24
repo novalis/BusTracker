@@ -30,6 +30,7 @@ class Command(BaseCommand):
             if 'route' in segment:
                 name = segment['route']
                 route = Route(name = name)
+                route.save()
                 route.routesegment_set.all().delete()
                 if name.startswith("M"):
                     borough = ", Manhattan"
@@ -67,4 +68,13 @@ class Command(BaseCommand):
                     route_segment = RouteSegment(route=route, roadsegment=segment)
                     route_segment.save()
 
-#todo: update route geometry
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute(
+"""UPDATE tracker_route SET geometry=(select st_linemerge(st_union(tracker_roadsegment.geometry))
+FROM 
+tracker_roadsegment, tracker_routesegment
+WHERE 
+tracker_routesegment.route_id = tracker_route.name AND
+tracker_routesegment.roadsegment_id = tracker_roadsegment.gid
+)""")
