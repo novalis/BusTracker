@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 RouteSegment(roadsegment = segment, route=route).save()
             else:
                 from_road = find_road(segment['from'] + borough)
-                to_road = Road.objects.get(name=segment['to'] + borough)
+                to_road = find_road(segment['to'] + borough)
 
                 for segment in road.roadsegment_set.all():
                     if segment.geometry.intersects(from_road.geometry):
