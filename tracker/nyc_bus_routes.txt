@@ -8,3 +8,21 @@ On: Columbus Cir, GID: 5502
 
 On: Central Park W, From: Columbus Cir, To: W 66 St
 On: W 66 St, From: Central Park W, To: Broadway
+
+Route: M1 Downtown
+On: 7 Ave, From: W 147 St, To: W 146 St
+On: W 146 St, From: 7 Ave, To: Esplanade Gardens Plz
+On: Esplanade Gardens Plz, From: W 146 St, To: W 145 St
+On: Lenox Ave, From: W 145 St, To: W 139 St
+On: W 139 St, From: Lenox Ave, To: 5 Ave
+On: 5 Ave, From: W 139 St, To: W 124 St
+On: W 124 St, From: 5 Ave, To: Mount Morris Park W
+On: Mount Morris Park W, From: W 124 St, To: W 120 St
+On: W 120 St, From: Mount Morris Park W, To: 5 Ave
+On: 5 Ave, From: W 120 St, To: E 40 St
+On: E 40 St, From: 5 Ave, To: Park Ave
+On: Park Ave, From: E 40 St, To: E 32 St
+On: Park Ave S, From: E 32 St, To: E 17 St
+On: Union Sq E, From: E 17 St, To: Broadway
+On: Broadway, From: Union Sq E, To: State St
+
