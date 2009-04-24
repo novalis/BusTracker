@@ -84,3 +84,13 @@ class Command(BaseCommand):
                 segment.path_order = i
                 segment.save()
             
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute(
+"""UPDATE tracker_road SET geometry=(select st_linemerge(st_union(tracker_roadsegment.geometry))
+FROM 
+tracker_roadsegment
+WHERE 
+tracker_roadsegment.road_id = tracker_road.name)""")
+        row = cursor.fetchone()
+        return row[0]
