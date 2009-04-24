@@ -30,6 +30,7 @@ class Command(BaseCommand):
             if 'route' in segment:
                 name = segment['route']
                 route = Route(name = name)
+                route.routesegment_set.all().delete()
                 if name.startswith("M"):
                     borough = ", Manhattan"
 
