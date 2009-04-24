@@ -34,7 +34,7 @@ class Command(BaseCommand):
                 route.routesegment_set.all().delete()
                 if name.startswith("M"):
                     borough = ", Manhattan"
-
+                path_order = 0
                 continue
 
             def find_road(road_name):
@@ -51,22 +51,96 @@ class Command(BaseCommand):
                 #some roadsegments must be chosen by GID because the
                 #roadsegment ordering system does not work for circles
                 segment = road.roadsegment_set.get(gid=int(segment['gid']))
-                RouteSegment(roadsegment = segment, route=route).save()
+                RouteSegment(roadsegment = segment, route=route, path_order = path_order).save()
+                path_order += 1
             else:
                 from_road = find_road(segment['from'] + borough)
                 to_road = find_road(segment['to'] + borough)
 
+                #There are 2 road segments of on_segment which 
+                #intersect from_road: the one before and 
+                #the one after.  Likewise for to_road.
+                #We ultimately want the inner segments:
+                #consider "8 Ave between 57 St and 55 St"
+
+                #         |
+                #         |
+                #         |
+                # 57 st   |8
+                #---------+--------
+                #        *|A
+                #        *|v
+                # 56 st  *|e
+                #---------+--------
+                #        *|
+                #        *|
+                # 55 st  *|
+                #---------+--------
+                #         |
+                #         |
+                #         |
+                #
+                # all four segments of 8 ave shown here intersect one of 55 or
+                # 57 st, but we only want the two marked with *
+                                
+                from_segments = []
+                to_segments = []
+
+                #fixme: this could be done in sql more efficiently
                 for segment in road.roadsegment_set.all():
                     if segment.geometry.intersects(from_road.geometry):
-                        from_order = segment.path_order
+                        from_segments.append(segment)
                     if segment.geometry.intersects(to_road.geometry):
-                        to_order = segment.path_order
-                if from_order > to_order:
-                    from_order, to_order = to_order, from_order
-                
-                for segment in road.roadsegment_set.filter(path_order__gte=from_order, path_order__lt=to_order):
-                    route_segment = RouteSegment(route=route, roadsegment=segment)
+                        to_segments.append(segment)
+
+                if not len(from_segments):
+                    print >>sys.stderr, "%s does not intersect %s" % (road.name, from_road.name)
+                    sys.exit(0)
+                if not len(to_segments):
+                    print >>sys.stderr, "%s does not intersect %s" % (road.name, to_road.name)
+                    sys.exit(0)
+
+                if from_segments[0].path_order == to_segments[0].path_order:
+                    route_segment = RouteSegment(route=route, roadsegment=from_segments[0], path_order = path_order)
                     route_segment.save()
+                    path_order += 1
+                    
+                elif from_segments[0].path_order < to_segments[0].path_order:
+                    #we're going up in road segment path_order
+                    from_path_order = from_segments[0].path_order
+                    if len(from_segments) > 1:
+                        if from_segments[1].path_order > from_segments[0].path_order:
+                            from_path_order = from_segments[1].path_order
+
+                    to_path_order = to_segments[0].path_order
+                    if len(to_segments) > 1:
+                        if to_segments[1].path_order < to_segments[0].path_order:
+                            to_path_order = to_segments[1].path_order
+
+
+                
+                    for segment in road.roadsegment_set.filter(path_order__gte=from_path_order, path_order__lte=to_path_order):
+                        route_segment = RouteSegment(route=route, roadsegment=segment, path_order = path_order)
+                        route_segment.save()
+                        path_order += 1
+                else:
+                    #we're going down in road segment path_order
+                    from_path_order = from_segments[0].path_order
+                    if len(from_segments) > 1:
+                        if from_segments[1].path_order < from_segments[0].path_order:
+                            from_path_order = from_segments[1].path_order
+
+                    to_path_order = to_segments[0].path_order
+                    if len(to_segments) > 1:
+                        if to_segments[1].path_order > to_segments[0].path_order:
+                            to_path_order = to_segments[1].path_order
+
+
+                
+                    for segment in road.roadsegment_set.filter(path_order__lte=from_path_order, path_order__gte=to_path_order):
+                        route_segment = RouteSegment(route=route, roadsegment=segment, path_order = path_order)
+                        route_segment.save()
+                        path_order += 1
 
         from django.db import connection
         cursor = connection.cursor()

@@ -27,6 +27,7 @@ class Route(models.Model):
 class RouteSegment(models.Model):
     roadsegment = models.ForeignKey(RoadSegment)
     route = models.ForeignKey(Route)
+    path_order = models.IntegerField()
 
 class Bus(models.Model):
     """A particular physical bus"""
