@@ -2,10 +2,11 @@ from datetime import datetime
 from django.contrib.gis.geos import Point
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-
 from tracker.models import *
 
 import django.templatetags #for the side-effects of doing so
+import settings
+import urllib
 
 def index(request):
 
@@ -30,17 +31,22 @@ def update(request, bus_id):
 
     return HttpResponse("ok")
 
-def locate(request, route_name):
-    #find the nearest bus to you that has (probably) not reached you.
-
-    route = Route.objects.get(name = route_name)
-    location = Point(float(request.REQUEST['long']), float(request.REQUEST['lat']))
-
-    if 'time' in request.REQUEST:
-        time = datetime.utcfromtimestamp(float(request.REQUEST['time']))
+# from http://www.djangosnippets.org/snippets/293/
+def geocode(location):
+    key = settings.GOOGLE_API_KEY
+    output = "csv"
+    location = urllib.quote_plus(location)
+    request = "http://maps.google.com/maps/geo?q=%s&output=%s&key=%s" % (location, output, key)
+    data = urllib.urlopen(request).read()
+    dlist = data.split(',')
+    if dlist[0] == '200':
+        return (float(dlist[2]), float(dlist[3]))
     else:
-        time = datetime.utcnow()
+        return None
 
+def _locate(route_name, time, long, lat):
+    route = Route.objects.get(name = route_name)
+    location = Point(long, lat)
     buses = []
     for bus in route.bus_set.all():
         bus.est = bus.estimated_arrival_time(location, time=time)
@@ -51,3 +57,22 @@ def locate(request, route_name):
             
     return render_to_response('routes/estimates.html', {'buses': buses})
 
+def locate_by_address(request, route_name):
+    if 'time' in request.REQUEST:
+        time = datetime.utcfromtimestamp(float(request.REQUEST['time']))
+    else:
+        time = datetime.utcnow()
+
+    long, lat = geocode(request.REQUEST['address'])
+    return _locate(route_name, time, long, lat)
+
+
+def locate(request, route_name):
+    #find the nearest bus to you that has (probably) not reached you.
+
+    if 'time' in request.REQUEST:
+        time = datetime.utcfromtimestamp(float(request.REQUEST['time']))
+    else:
+        time = datetime.utcnow()
+
+    return _locate(route_name, time, float(request.REQUEST['long']), float(request.REQUEST['lat']))

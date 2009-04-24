@@ -2,7 +2,7 @@ TODO:
 
 (1) Input routes for all NYC buses -- or at least the one we're tracking
 (2) Geocode and reverse geocode all locations
-  (a) geocoding for input can use google
+  (a) geocoding for input can use google -- DONE
   (b) geocoding for output can use street information from tiger:
     (i) a route is an ordered set of street segments
     (ii) we localize to which segment we're on, using min(st_distance(...)) and 
@@ -23,10 +23,10 @@ ordering.
 
 (4) using the number of intersections and bus stops to better
 estimate times.
-
+w
 (5) warn when bus data is very out-of-date
 
-(6) decide on normalized vs denormalized geometry for routes.
+(6) decide on normalized vs denormalized geometry for routes. -- DONE, chose normalized.
 
 normalized: cleaner
 denormalized: many route calculations more efficient; we have to do work

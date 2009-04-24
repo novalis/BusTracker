@@ -61,3 +61,18 @@ class UpdateTestCase(TestCase):
         #and there's not an estimate for the bus if we ask too late
         self.assertEqual(response.status_code, 200)
         self.assertFalse('2009-04-13' in response.content)
+
+    def test_estimate_geocode(self):
+
+        assert BusObservation.objects.all().count() > 3
+
+        c = Client()
+
+        response = c.get('/tracker/M20 Uptown/locate_by_address', 
+                         { 'lat': '40.766735', 
+                           'long' : '-73.983093',
+                           'time' : '1239644900',
+                           'address' : "8 Ave and W 57 St",
+                           })
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('2009-04-13' in response.content)

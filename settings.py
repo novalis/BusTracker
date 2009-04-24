@@ -85,3 +85,5 @@ INSTALLED_APPS = (
 POSTGIS_SQL_PATH = '/usr/share/postgresql-8.3-postgis/'
 POSTGIS_TEMPLATE = 'postgis_template'
 TEST_RUNNER = 'django.contrib.gis.tests.run_tests'
+
+GOOGLE_API_KEY = 'ABQIAAAAy1M4-2D9YTinQivTIXdOqhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSnkt1RYxoC2uByaejpBBnSN-RsWg'
