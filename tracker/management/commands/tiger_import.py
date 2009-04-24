@@ -5,6 +5,8 @@ from django.core.management.base import BaseCommand
 from optparse import make_option, OptionParser
 from tracker.models import *
 
+import re
+
 class Tiger(models.Model):
     """Tiger import burning bright, in the forests of the night..."""
     gid = models.IntegerField(primary_key=True)
@@ -37,6 +39,20 @@ class Tiger(models.Model):
 
 countyfp_to_borough = {'061' : 'Manhattan'}
 
+number_st_re = re.compile("((?:[NSEW] )?\d+)(?:st|nd|rd|th)? (Ave|St)(.*)")
+def normalize_street_name(fullname):
+    """Tiger data has inconsistencies -- 25th St vs 26 St, or 
+    7 Ave vs 7th Ave.  We can't fix them all, but at least we 
+    can fix the numbered streets and avenues."""
+
+    match = number_st_re.match(fullname)
+    if match:
+        return "%s %s%s" % (match.group(1), match.group(2), match.group(3))
+    else:
+        return fullname
+
+
+
 class Command(BaseCommand):
     help = "Imports tiger data from the table provided into the tracker tables."
 
@@ -54,7 +70,9 @@ class Command(BaseCommand):
             if not tiger_seg.fullname:
                 continue #riding through the city on a road with no name...
 
-            road = Road(name = tiger_seg.fullname + ", " + borough)
+            fullname = normalize_street_name(tiger_seg.fullname)
+            
+            road = Road(name = fullname + ", " + borough)
             road.save()
             seg = RoadSegment(gid=tiger_seg.gid, geometry=tiger_seg.the_geom, road=road, path_order=-1)
             seg.save() 
