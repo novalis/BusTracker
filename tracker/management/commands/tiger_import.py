@@ -45,19 +45,19 @@ class Command(BaseCommand):
 
         tiger_segs = Tiger.objects.filter(roadflg='Y')
 
-         print "Importing from tiger data.  %d road segments to import" % len(tiger_segs)
-         for i, tiger_seg in enumerate(tiger_segs):
-             borough = countyfp_to_borough[tiger_seg.countyfp]
-             if i and i % 500 == 0:
-                 print "finished %d" % i
-             if not tiger_seg.fullname:
-                 continue #riding through the city on a road with no name...
+        print "Importing from tiger data.  %d road segments to import" % len(tiger_segs)
+        for i, tiger_seg in enumerate(tiger_segs):
+            borough = countyfp_to_borough[tiger_seg.countyfp]
+            if i and i % 500 == 0:
+                print "finished %d" % i
+            if not tiger_seg.fullname:
+                continue #riding through the city on a road with no name...
 
-             road = Road(name = tiger_seg.fullname + ", " + borough)
-             road.save()
-             seg = RoadSegment(gid=tiger_seg.gid, geometry=tiger_seg.the_geom, road=road, path_order=-1)
-             seg.save() 
-
+            road = Road(name = tiger_seg.fullname + ", " + borough)
+            road.save()
+            seg = RoadSegment(gid=tiger_seg.gid, geometry=tiger_seg.the_geom, road=road, path_order=-1)
+            seg.save() 
+            
         #now, set path order for each road
 
         for road in Road.objects.all():
