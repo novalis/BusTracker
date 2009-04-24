@@ -4,13 +4,15 @@ from django.contrib.gis.db import models
 class Road(models.Model):
     """An entire road -- 8 Ave, for instance"""
     name = models.CharField(max_length=120, primary_key=True)
-    #Some roads (the BQE, say) will appear in multiple
-    #boroughs, and will be treated as multiple roads
+    geometry = models.GeometryField(null=True)
+    #Name is road_name, borough.  Some roads (the BQE, say) will
+    #appear in multiple boroughs, and will be treated as multiple
+    #roads
 
 class RoadSegment(models.Model):
     """Represents one segment of a road -- 8 Ave between W 28 St and
     W 29 St, for instance"""
-    gid = models.IntegerField()
+    gid = models.IntegerField(primary_key=True)
     geometry = models.GeometryField()
     road = models.ForeignKey(Road)
     path_order = models.IntegerField()

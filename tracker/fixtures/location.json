@@ -8,27 +8,23 @@
   },
   {
     "model": "tracker.Road",
-    "pk" : 1,
-    "fields": {
-      "name" : "8 Ave",
-      "borough" : "Manhattan"
-    }
+    "pk" : "8 Ave, Manhattan",
+    "fields": {}
   },
   { 
     "model": "tracker.RouteSegment",
     "pk" : 53,
     "fields": {
-      "roadsegment" : 53,
+      "roadsegment" : 8509,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 53,
+    "pk" : 8509,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.005854 40.736534,-74.005539 40.736916))",
-      "gid" : 8509,
       "path_order" : 1
     }
   },
@@ -36,17 +32,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 1,
     "fields": {
-      "roadsegment" : 1,
+      "roadsegment" : 5062,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 1,
+    "pk" : 5062,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.005539 40.736916,-74.00483 40.737548))",
-      "gid" : 5062,
       "path_order" : 2
     }
   },
@@ -54,17 +49,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 2,
     "fields": {
-      "roadsegment" : 2,
+      "roadsegment" : 6289,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 2,
+    "pk" : 6289,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.00483 40.737548,-74.004175 40.738134))",
-      "gid" : 6289,
       "path_order" : 3
     }
   },
@@ -72,17 +66,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 3,
     "fields": {
-      "roadsegment" : 3,
+      "roadsegment" : 5066,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 3,
+    "pk" : 5066,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.004175 40.738134,-74.003861 40.738395))",
-      "gid" : 5066,
       "path_order" : 4
     }
   },
@@ -90,17 +83,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 4,
     "fields": {
-      "roadsegment" : 4,
+      "roadsegment" : 2677,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 4,
+    "pk" : 2677,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.003861 40.738395,-74.003446 40.738756))",
-      "gid" : 2677,
       "path_order" : 5
     }
   },
@@ -108,17 +100,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 5,
     "fields": {
-      "roadsegment" : 5,
+      "roadsegment" : 3837,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 5,
+    "pk" : 3837,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.003446 40.738756,-74.003083 40.739077))",
-      "gid" : 3837,
       "path_order" : 6
     }
   },
@@ -126,17 +117,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 6,
     "fields": {
-      "roadsegment" : 6,
+      "roadsegment" : 142,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 6,
+    "pk" : 142,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.003083 40.739077,-74.002789 40.739396))",
-      "gid" :  142,
       "path_order" : 7
     }
   },
@@ -144,17 +134,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 7,
     "fields": {
-      "roadsegment" : 7,
+      "roadsegment" : 6088,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 7,
+    "pk" : 6088,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.002789 40.739396,-74.002523 40.739753))",
-      "gid" : 6088,
       "path_order" : 8
     }
   },
@@ -162,17 +151,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 8,
     "fields": {
-      "roadsegment" : 8,
+      "roadsegment" : 132,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 8,
+    "pk" : 132,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.002523 40.739753,-74.002019 40.740444))",
-      "gid" :  132,
       "path_order" : 9
     }
   },
@@ -180,17 +168,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 9,
     "fields": {
-      "roadsegment" : 9,
+      "roadsegment" : 1282,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 9,
+    "pk" : 1282,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.002019 40.740444,-74.001555 40.74108))",
-      "gid" : 1282,
       "path_order" : 10
     }
   },
@@ -198,17 +185,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 10,
     "fields": {
-      "roadsegment" : 10,
+      "roadsegment" : 6078,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 10,
+    "pk" : 6078,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.001555 40.74108,-74.001129 40.741668))",
-      "gid" : 6078,
       "path_order" : 11
     }
   },
@@ -216,17 +202,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 11,
     "fields": {
-      "roadsegment" : 11,
+      "roadsegment" : 7219,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 11,
+    "pk" : 7219,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.001129 40.741668,-74.000703 40.742254))",
-      "gid" : 7219,
       "path_order" : 12
     }
   },
@@ -234,17 +219,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 12,
     "fields": {
-      "roadsegment" : 12,
+      "roadsegment" : 7221,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 12,
+    "pk" : 7221,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.000703 40.742254,-74.000275 40.742839))",
-      "gid" : 7221,
       "path_order" : 13
     }
   },
@@ -252,17 +236,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 13,
     "fields": {
-      "roadsegment" : 13,
+      "roadsegment" : 3632,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 13,
+    "pk" : 3632,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-74.000275 40.742839,-73.999848 40.743425))",
-      "gid" : 3632,
       "path_order" : 14
     }
   },
@@ -270,17 +253,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 14,
     "fields": {
-      "roadsegment" : 14,
+      "roadsegment" : 3633,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 14,
+    "pk" : 3633,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.999848 40.743425,-73.999422 40.744009))",
-      "gid" : 3633,
       "path_order" : 15
     }
   },
@@ -288,17 +270,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 15,
     "fields": {
-      "roadsegment" : 15,
+      "roadsegment" : 4846,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 15,
+    "pk" : 4846,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.999422 40.744009,-73.998972 40.74463))",
-      "gid" : 4846,
       "path_order" : 16
     }
   },
@@ -306,17 +287,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 16,
     "fields": {
-      "roadsegment" : 16,
+      "roadsegment" : 2486,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 16,
+    "pk" : 2486,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.998972 40.74463,-73.998486 40.745294))",
-      "gid" : 2486,
       "path_order" : 17
     }
   },
@@ -324,17 +304,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 17,
     "fields": {
-      "roadsegment" : 17,
+      "roadsegment" : 8327,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 17,
+    "pk" : 8327,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.998486 40.745294,-73.998009 40.745952))",
-      "gid" : 8327,
       "path_order" : 18
     }
   },
@@ -342,17 +321,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 18,
     "fields": {
-      "roadsegment" : 18,
+      "roadsegment" : 6082,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 18,
+    "pk" : 6082,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.998009 40.745952,-73.997552 40.746581))",
-      "gid" : 6082,
       "path_order" : 19
     }
   },
@@ -360,17 +338,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 19,
     "fields": {
-      "roadsegment" : 19,
+      "roadsegment" : 6083,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 19,
+    "pk" : 6083,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.997552 40.746581,-73.997099 40.747205))",
-      "gid" : 6083,
       "path_order" : 20
     }
   },
@@ -378,17 +355,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 20,
     "fields": {
-      "roadsegment" : 20,
+      "roadsegment" : 8328,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 20,
+    "pk" : 8328,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.997099 40.747205,-73.996648 40.747823))",
-      "gid" : 8328,
       "path_order" : 21
     }
   },
@@ -396,17 +372,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 21,
     "fields": {
-      "roadsegment" : 21,
+      "roadsegment" : 137,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 21,
+    "pk" : 137,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.996648 40.747823,-73.996196 40.74844))",
-      "gid" :  137,
       "path_order" : 22
     }
   },
@@ -414,17 +389,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 22,
     "fields": {
-      "roadsegment" : 22,
+      "roadsegment" : 5940,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 22,
+    "pk" : 5940,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.996196 40.74844,-73.995749 40.749052))",
-      "gid" : 5940,
       "path_order" : 23
     }
   },
@@ -432,17 +406,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 23,
     "fields": {
-      "roadsegment" : 23,
+      "roadsegment" : 1208,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 23,
+    "pk" : 1208,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.995749 40.749052,-73.995299 40.749671))",
-      "gid" : 1208,
       "path_order" : 24
     }
   },
@@ -450,17 +423,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 24,
     "fields": {
-      "roadsegment" : 24,
+      "roadsegment" : 5979,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 24,
+    "pk" : 5979,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.995299 40.749671,-73.994844 40.750293))",
-      "gid" : 5979,
       "path_order" : 25
     }
   },
@@ -468,17 +440,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 25,
     "fields": {
-      "roadsegment" : 25,
+      "roadsegment" : 7707,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 25,
+    "pk" : 7707,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.994844 40.750293,-73.994329 40.750999))",
-      "gid" : 7707,
       "path_order" : 26
     }
   },
@@ -486,17 +457,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 26,
     "fields": {
-      "roadsegment" : 26,
+      "roadsegment" : 2381,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 26,
+    "pk" : 2381,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.994329 40.750999,-73.993948 40.751522))",
-      "gid" : 2381,
       "path_order" : 27
     }
   },
@@ -504,17 +474,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 27,
     "fields": {
-      "roadsegment" : 27,
+      "roadsegment" : 1137,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 27,
+    "pk" : 1137,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.993948 40.751522,-73.993464 40.75219))",
-      "gid" : 1137,
       "path_order" : 28
     }
   },
@@ -522,17 +491,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 28,
     "fields": {
-      "roadsegment" : 28,
+      "roadsegment" : 9293,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 28,
+    "pk" : 9293,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.993464 40.75219,-73.992979 40.752854))",
-      "gid" : 9293,
       "path_order" : 29
     }
   },
@@ -540,17 +508,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 29,
     "fields": {
-      "roadsegment" : 29,
+      "roadsegment" : 3471,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 29,
+    "pk" : 3471,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.992979 40.752854,-73.992528 40.753474))",
-      "gid" : 3471,
       "path_order" : 30
     }
   },
@@ -558,17 +525,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 30,
     "fields": {
-      "roadsegment" : 30,
+      "roadsegment" : 6394,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 30,
+    "pk" : 6394,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.992528 40.753474,-73.992079 40.754091))",
-      "gid" : 6394,
       "path_order" : 31
     }
   },
@@ -576,17 +542,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 31,
     "fields": {
-      "roadsegment" : 31,
+      "roadsegment" : 3819,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 31,
+    "pk" : 3819,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.992079 40.754091,-73.991633 40.754707))",
-      "gid" : 3819,
       "path_order" : 32
     }
   },
@@ -594,17 +559,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 32,
     "fields": {
-      "roadsegment" : 32,
+      "roadsegment" : 7509,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 32,
+    "pk" : 7509,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.991633 40.754707,-73.991177 40.75533))",
-      "gid" : 7509,
       "path_order" : 33
     }
   },
@@ -612,17 +576,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 33,
     "fields": {
-      "roadsegment" : 33,
+      "roadsegment" : 2774,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 33,
+    "pk" : 2774,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.991177 40.75533,-73.990726 40.755951))",
-      "gid" : 2774,
       "path_order" : 34
     }
   },
@@ -630,17 +593,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 34,
     "fields": {
-      "roadsegment" : 34,
+      "roadsegment" : 8617,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 34,
+    "pk" : 8617,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.990726 40.755951,-73.990276 40.756567))",
-      "gid" : 8617,
       "path_order" : 35
     }
   },
@@ -648,17 +610,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 35,
     "fields": {
-      "roadsegment" : 35,
+      "roadsegment" : 5050,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 35,
+    "pk" : 5050,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.990276 40.756567,-73.989791 40.757234))",
-      "gid" : 5050,
       "path_order" : 36
     }
   },
@@ -666,17 +627,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 36,
     "fields": {
-      "roadsegment" : 36,
+      "roadsegment" : 5049,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 36,
+    "pk" : 5049,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.989791 40.757234,-73.989297 40.757907))",
-      "gid" : 5049,
       "path_order" : 37
     }
   },
@@ -684,17 +644,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 37,
     "fields": {
-      "roadsegment" : 37,
+      "roadsegment" : 5048,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 37,
+    "pk" : 5048,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.989297 40.757907,-73.988842 40.758533))",
-      "gid" : 5048,
       "path_order" : 38
     }
   },
@@ -702,17 +661,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 38,
     "fields": {
-      "roadsegment" : 38,
+      "roadsegment" : 8497,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 38,
+    "pk" : 8497,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.988842 40.758533,-73.988391 40.759164))",
-      "gid" : 8497,
       "path_order" : 39
     }
   },
@@ -720,17 +678,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 39,
     "fields": {
-      "roadsegment" : 39,
+      "roadsegment" : 8490,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 39,
+    "pk" : 8490,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.988391 40.759164,-73.987927 40.759791))",
-      "gid" : 8490,
       "path_order" : 40
     }
   },
@@ -738,17 +695,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 40,
     "fields": {
-      "roadsegment" : 40,
+      "roadsegment" : 334,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 40,
+    "pk" : 334,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.987927 40.759791,-73.987475 40.760405))",
-      "gid" :  334,
       "path_order" : 41
     }
   },
@@ -756,17 +712,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 41,
     "fields": {
-      "roadsegment" : 41,
+      "roadsegment" : 7401,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 41,
+    "pk" : 7401,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.987475 40.760405,-73.987015 40.761038))",
-      "gid" : 7401,
       "path_order" : 42
     }
   },
@@ -774,17 +729,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 42,
     "fields": {
-      "roadsegment" : 42,
+      "roadsegment" : 6267,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 42,
+    "pk" : 6267,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.987015 40.761038,-73.986561 40.76166))",
-      "gid" : 6267,
       "path_order" : 43
     }
   },
@@ -792,17 +746,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 43,
     "fields": {
-      "roadsegment" : 43,
+      "roadsegment" : 1457,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 43,
+    "pk" : 1457,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.986561 40.76166,-73.986104 40.76229))",
-      "gid" : 1457,
       "path_order" : 44
     }
   },
@@ -810,17 +763,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 44,
     "fields": {
-      "roadsegment" : 44,
+      "roadsegment" : 1456,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 44,
+    "pk" : 1456,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.986104 40.76229,-73.985647 40.762915))",
-      "gid" : 1456,
       "path_order" : 45
     }
   },
@@ -828,17 +780,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 45,
     "fields": {
-      "roadsegment" : 45,
+      "roadsegment" : 335,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 45,
+    "pk" : 335,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.985647 40.762915,-73.985192 40.763543))",
-      "gid" :  335,
       "path_order" : 46
     }
   },
@@ -846,17 +797,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 46,
     "fields": {
-      "roadsegment" : 46,
+      "roadsegment" : 7400,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 46,
+    "pk" : 7400,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.985192 40.763543,-73.984734 40.76417))",
-      "gid" : 7400,
       "path_order" : 47
     }
   },
@@ -864,17 +814,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 47,
     "fields": {
-      "roadsegment" : 47,
+      "roadsegment" : 8492,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 47,
+    "pk" : 8492,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.984734 40.76417,-73.984283 40.764792))",
-      "gid" : 8492,
       "path_order" : 48
     }
   },
@@ -882,17 +831,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 48,
     "fields": {
-      "roadsegment" : 48,
+      "roadsegment" : 8545,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 48,
+    "pk" : 8545,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.984283 40.764792,-73.983822 40.765418))",
-      "gid" : 8545,
       "path_order" : 49
     }
   },
@@ -900,17 +848,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 49,
     "fields": {
-      "roadsegment" : 49,
+      "roadsegment" : 7394,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 49,
+    "pk" : 7394,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.983822 40.765418,-73.983367 40.766045))",
-      "gid" : 7394,
       "path_order" : 50
     }
   },
@@ -918,17 +865,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 50,
     "fields": {
-      "roadsegment" : 50,
+      "roadsegment" : 5037,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 50,
+    "pk" : 5037,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.983367 40.766045,-73.982877 40.766715))",
-      "gid" : 5037,
       "path_order" : 51
     }
   },
@@ -936,17 +882,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 51,
     "fields": {
-      "roadsegment" : 51,
+      "roadsegment" : 7395,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 51,
+    "pk" : 7395,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.982877 40.766715,-73.98238 40.7674))",
-      "gid" : 7395,
       "path_order" : 52
     }
   },
@@ -954,17 +899,16 @@
     "model": "tracker.RouteSegment",
     "pk" : 52,
     "fields": {
-      "roadsegment" : 52,
+      "roadsegment" : 3659,
       "route" : "M20 Uptown"
     }
   },
   { 
     "model": "tracker.RoadSegment",
-    "pk" : 52,
+    "pk" : 3659,
     "fields": {
-      "road" : 1,
+      "road" : "8 Ave, Manhattan",
       "geometry" : "MULTILINESTRING((-73.98238 40.7674,-73.982152 40.767681))",
-      "gid" : 3659,
       "path_order" : 53
     }
   },
