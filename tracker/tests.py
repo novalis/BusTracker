@@ -33,7 +33,7 @@ class UpdateTestCase(TestCase):
 
         c = Client()
 
-        response = c.post('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
+        response = c.get('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
                                                           'long' : '-73.983093',
                                                           'time' : '1239644900',
                                                           }
@@ -42,7 +42,7 @@ class UpdateTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('2009-04-13' in response.content)
 
-        response = c.post('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
+        response = c.get('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
                                                           'long' : '-73.983093',
                                                           'time' : '1239645900',
                                                           }
@@ -52,7 +52,7 @@ class UpdateTestCase(TestCase):
         self.assertTrue('2009-04-13' in response.content)
 
 
-        response = c.post('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
+        response = c.get('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
                                                           'long' : '-73.983093',
                                                           'time' : '1239650000',
                                                           }
