@@ -16,7 +16,8 @@
     "pk" : 53,
     "fields": {
       "roadsegment" : 8509,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 1
     }
   },
   { 
@@ -33,7 +34,8 @@
     "pk" : 1,
     "fields": {
       "roadsegment" : 5062,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 2
     }
   },
   { 
@@ -50,7 +52,8 @@
     "pk" : 2,
     "fields": {
       "roadsegment" : 6289,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 3
     }
   },
   { 
@@ -67,7 +70,8 @@
     "pk" : 3,
     "fields": {
       "roadsegment" : 5066,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 4
     }
   },
   { 
@@ -84,7 +88,8 @@
     "pk" : 4,
     "fields": {
       "roadsegment" : 2677,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 5
     }
   },
   { 
@@ -101,7 +106,8 @@
     "pk" : 5,
     "fields": {
       "roadsegment" : 3837,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 6
     }
   },
   { 
@@ -118,7 +124,8 @@
     "pk" : 6,
     "fields": {
       "roadsegment" : 142,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 7
     }
   },
   { 
@@ -135,7 +142,8 @@
     "pk" : 7,
     "fields": {
       "roadsegment" : 6088,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 8
     }
   },
   { 
@@ -152,7 +160,8 @@
     "pk" : 8,
     "fields": {
       "roadsegment" : 132,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 9
     }
   },
   { 
@@ -169,7 +178,8 @@
     "pk" : 9,
     "fields": {
       "roadsegment" : 1282,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 10
     }
   },
   { 
@@ -186,7 +196,8 @@
     "pk" : 10,
     "fields": {
       "roadsegment" : 6078,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 11
     }
   },
   { 
@@ -203,7 +214,8 @@
     "pk" : 11,
     "fields": {
       "roadsegment" : 7219,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 12
     }
   },
   { 
@@ -220,7 +232,8 @@
     "pk" : 12,
     "fields": {
       "roadsegment" : 7221,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 14
     }
   },
   { 
@@ -237,7 +250,8 @@
     "pk" : 13,
     "fields": {
       "roadsegment" : 3632,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 14
     }
   },
   { 
@@ -254,7 +268,8 @@
     "pk" : 14,
     "fields": {
       "roadsegment" : 3633,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 15
     }
   },
   { 
@@ -271,7 +286,8 @@
     "pk" : 15,
     "fields": {
       "roadsegment" : 4846,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 16
     }
   },
   { 
@@ -288,7 +304,8 @@
     "pk" : 16,
     "fields": {
       "roadsegment" : 2486,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 17
     }
   },
   { 
@@ -305,7 +322,8 @@
     "pk" : 17,
     "fields": {
       "roadsegment" : 8327,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 18
     }
   },
   { 
@@ -322,7 +340,8 @@
     "pk" : 18,
     "fields": {
       "roadsegment" : 6082,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 19
     }
   },
   { 
@@ -339,7 +358,8 @@
     "pk" : 19,
     "fields": {
       "roadsegment" : 6083,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 20
     }
   },
   { 
@@ -356,7 +376,8 @@
     "pk" : 20,
     "fields": {
       "roadsegment" : 8328,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 21
     }
   },
   { 
@@ -373,7 +394,8 @@
     "pk" : 21,
     "fields": {
       "roadsegment" : 137,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 22
     }
   },
   { 
@@ -390,7 +412,8 @@
     "pk" : 22,
     "fields": {
       "roadsegment" : 5940,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 23
     }
   },
   { 
@@ -407,7 +430,8 @@
     "pk" : 23,
     "fields": {
       "roadsegment" : 1208,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 24
     }
   },
   { 
@@ -424,7 +448,8 @@
     "pk" : 24,
     "fields": {
       "roadsegment" : 5979,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 25
     }
   },
   { 
@@ -441,7 +466,8 @@
     "pk" : 25,
     "fields": {
       "roadsegment" : 7707,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 26
     }
   },
   { 
@@ -458,7 +484,8 @@
     "pk" : 26,
     "fields": {
       "roadsegment" : 2381,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 27
     }
   },
   { 
@@ -475,7 +502,8 @@
     "pk" : 27,
     "fields": {
       "roadsegment" : 1137,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 28
     }
   },
   { 
@@ -492,7 +520,8 @@
     "pk" : 28,
     "fields": {
       "roadsegment" : 9293,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 29
     }
   },
   { 
@@ -509,7 +538,8 @@
     "pk" : 29,
     "fields": {
       "roadsegment" : 3471,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 30
     }
   },
   { 
@@ -526,7 +556,8 @@
     "pk" : 30,
     "fields": {
       "roadsegment" : 6394,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 31
     }
   },
   { 
@@ -543,7 +574,8 @@
     "pk" : 31,
     "fields": {
       "roadsegment" : 3819,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 32
     }
   },
   { 
@@ -560,7 +592,8 @@
     "pk" : 32,
     "fields": {
       "roadsegment" : 7509,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 33
     }
   },
   { 
@@ -577,7 +610,8 @@
     "pk" : 33,
     "fields": {
       "roadsegment" : 2774,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 34
     }
   },
   { 
@@ -594,7 +628,8 @@
     "pk" : 34,
     "fields": {
       "roadsegment" : 8617,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 35
     }
   },
   { 
@@ -611,7 +646,8 @@
     "pk" : 35,
     "fields": {
       "roadsegment" : 5050,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 36
     }
   },
   { 
@@ -628,7 +664,8 @@
     "pk" : 36,
     "fields": {
       "roadsegment" : 5049,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 37
     }
   },
   { 
@@ -645,7 +682,8 @@
     "pk" : 37,
     "fields": {
       "roadsegment" : 5048,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 38
     }
   },
   { 
@@ -662,7 +700,8 @@
     "pk" : 38,
     "fields": {
       "roadsegment" : 8497,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 39
     }
   },
   { 
@@ -679,7 +718,8 @@
     "pk" : 39,
     "fields": {
       "roadsegment" : 8490,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 40
     }
   },
   { 
@@ -696,7 +736,8 @@
     "pk" : 40,
     "fields": {
       "roadsegment" : 334,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 41
     }
   },
   { 
@@ -713,7 +754,8 @@
     "pk" : 41,
     "fields": {
       "roadsegment" : 7401,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 42
     }
   },
   { 
@@ -730,7 +772,8 @@
     "pk" : 42,
     "fields": {
       "roadsegment" : 6267,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 43
     }
   },
   { 
@@ -747,7 +790,8 @@
     "pk" : 43,
     "fields": {
       "roadsegment" : 1457,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 44
     }
   },
   { 
@@ -764,7 +808,8 @@
     "pk" : 44,
     "fields": {
       "roadsegment" : 1456,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 45
     }
   },
   { 
@@ -781,7 +826,8 @@
     "pk" : 45,
     "fields": {
       "roadsegment" : 335,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 46
     }
   },
   { 
@@ -798,7 +844,8 @@
     "pk" : 46,
     "fields": {
       "roadsegment" : 7400,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 47
     }
   },
   { 
@@ -815,7 +862,8 @@
     "pk" : 47,
     "fields": {
       "roadsegment" : 8492,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 48
     }
   },
   { 
@@ -832,7 +880,8 @@
     "pk" : 48,
     "fields": {
       "roadsegment" : 8545,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 49
     }
   },
   { 
@@ -849,7 +898,8 @@
     "pk" : 49,
     "fields": {
       "roadsegment" : 7394,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 50
     }
   },
   { 
@@ -866,7 +916,8 @@
     "pk" : 50,
     "fields": {
       "roadsegment" : 5037,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 51
     }
   },
   { 
@@ -883,7 +934,8 @@
     "pk" : 51,
     "fields": {
       "roadsegment" : 7395,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 52
     }
   },
   { 
@@ -900,7 +952,8 @@
     "pk" : 52,
     "fields": {
       "roadsegment" : 3659,
-      "route" : "M20 Uptown"
+      "route" : "M20 Uptown",
+      "path_order" : 53
     }
   },
   { 
