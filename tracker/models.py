@@ -8,6 +8,7 @@ class Road(models.Model):
     #Name is road_name, borough.  Some roads (the BQE, say) will
     #appear in multiple boroughs, and will be treated as multiple
     #roads
+    objects = models.GeoManager()
 
 class RoadSegment(models.Model):
     """Represents one segment of a road -- 8 Ave between W 28 St and
@@ -20,21 +21,25 @@ class RoadSegment(models.Model):
     geometry = models.GeometryField()
     road = models.ForeignKey(Road)
     path_order = models.IntegerField()
+    objects = models.GeoManager()
 
 class Route(models.Model):
     name = models.CharField(max_length=200, primary_key=True) #M20 Uptown
     geometry = models.GeometryField(null=True) #denormalized
+    objects = models.GeoManager()    
 
     def __unicode__(self):
         return "<Route ('%s')>" % self.name
-    
+
 class RouteSegment(models.Model):
 
     class Meta:
         ordering = ["path_order"]
+
     roadsegment = models.ForeignKey(RoadSegment)
     route = models.ForeignKey(Route)
     path_order = models.IntegerField()
+    objects = models.GeoManager()
 
 class Bus(models.Model):
     """A particular physical bus"""
@@ -49,9 +54,14 @@ class Bus(models.Model):
         return last.location
 
     def estimated_arrival_time(self, target_location, time=None):
+        #estimated arrival time is a function of average speed in
+        #decimal degrees per second, remaining distance, average speed
+        #in number of intersections per second, and remaining
+        #intersections.
+
 
         #The target location is a point, but needs to be a distance along the route.
-        target_location = location_along_route(target_location, self.route)
+        target_distance = distance_along_route(target_location, self.route)
 
         #Find out when the bus started moving.  
         #This is when the distance along the route (a) is > 0.01
@@ -59,32 +69,66 @@ class Bus(models.Model):
 
         for observation in observations:
             if observation.distance > 0.01:
-                start_location, start_time = observation.distance, observation.time
+                start_location, start_distance, start_time = observation.location, observation.distance, observation.time
                 break
         else:
             #the bus has not yet moved
             return None
 
-        #The bus's last observed location
+        #The bus's last observed distance
         last = observations.order_by('-time')[0]
-        last_location, last_time = last.distance, last.time
+        last_distance, last_time = last.distance, last.time
 
-        if last_location <= start_location or last_time <= start_time:
+        if last_distance <= start_distance or last_time <= start_time:
             #the bus has not moved or has moved backwards
             #this means no arrival estimate is possible for this bus.
             return None
         
-        rate = (last_location - start_location) / (last_time - start_time).seconds
+        journey_time = (last_time - start_time).seconds
+
+        rate = (last_distance - start_distance) / journey_time
         if not time:
             now = datetime.utcnow()
         else:
             now = time
-        d = target_location - last_location
+        d = target_distance - last_distance
 
-        return last_time + timedelta(0, d / rate)
+        estimate_from_distance = d / rate
+
+        def find_nearest_route_segment(route, location):
+            """Find which segment of a route a location is nearest to."""
+            nearby_segments = route.routesegment_set.filter(roadsegment__geometry__dwithin=(location, 0.002))
+            nearest_segment=None
+            best_dist = 100000000000
+            for segment in nearby_segments:
+                dist = segment.roadsegment.geometry.distance(location)
+                if dist < best_dist:
+                    best_dist = dist
+                    nearest_segment = segment
+            assert nearest_segment
+            return nearest_segment
+
+        start_segment = find_nearest_route_segment(self.route, start_location)
+        last_segment = find_nearest_route_segment(self.route, last.location)
+        target_segment = find_nearest_route_segment(self.route, target_location)
+
+        total_segments = last_segment.path_order - start_segment.path_order
+        if total_segments > 0:
+
+            segments_per_second = float(total_segments) / journey_time
+            
+            remaining_segments = target_segment.path_order - last_segment.path_order
+
+            estimate_from_intersections = remaining_segments / segments_per_second
+
+            seconds = (estimate_from_distance + estimate_from_intersections) / 2
+        else:
+            seconds = estimate_from_distance
+
+        return last_time + timedelta(0, seconds)
 
 
-def location_along_route(location, route):
+def distance_along_route(location, route):
     from django.db import connection
     cursor = connection.cursor()
     location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
