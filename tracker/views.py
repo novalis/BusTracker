@@ -63,7 +63,7 @@ def locate_by_address(request, route_name):
     else:
         time = datetime.utcnow()
 
-    long, lat = geocode(request.REQUEST['address'])
+    lat, long = geocode(request.REQUEST['address'])
     return _locate(route_name, time, long, lat)
 
 
