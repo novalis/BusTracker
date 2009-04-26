@@ -57,7 +57,13 @@ def _locate(route_name, time, long, lat):
             
     return render_to_response('routes/estimates.html', {'buses': buses})
 
-def locate_by_address(request, route_name):
+def show_locate_by_address(request):
+
+    routes = Route.objects.all()
+    return render_to_response('routes/show_locate_by_address.html', {'routes': routes})
+
+def locate_by_address(request):
+    route_name = request.REQUEST['route_name']
     if 'time' in request.REQUEST:
         time = datetime.utcfromtimestamp(float(request.REQUEST['time']))
     else:
@@ -67,7 +73,8 @@ def locate_by_address(request, route_name):
     return _locate(route_name, time, long, lat)
 
 
-def locate(request, route_name):
+def locate(request):
+    route_name = request.REQUEST['route_name']
     #find the nearest bus to you that has (probably) not reached you.
 
     if 'time' in request.REQUEST:

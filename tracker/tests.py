@@ -33,29 +33,35 @@ class UpdateTestCase(TestCase):
 
         c = Client()
 
-        response = c.get('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
-                                                          'long' : '-73.983093',
-                                                          'time' : '1239644900',
-                                                          }
+        response = c.get('/tracker/locate', 
+                         { 'route_name' : 'M20 Uptown',
+                           'lat': '40.766735', 
+                           'long' : '-73.983093',
+                           'time' : '1239644900',
+                           }
                           )
         #there's an estimate for the bus on this day
         self.assertEqual(response.status_code, 200)
         self.assertTrue('2009-04-13' in response.content)
 
-        response = c.get('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
-                                                          'long' : '-73.983093',
-                                                          'time' : '1239645900',
-                                                          }
+        response = c.get('/tracker/locate', 
+                         { 'route_name' : 'M20 Uptown',
+                           'lat': '40.766735', 
+                           'long' : '-73.983093',
+                           'time' : '1239645900',
+                           }
                           )
         #there's an estimate for the bus on this day, after the first bus has passed 
         self.assertEqual(response.status_code, 200)
         self.assertTrue('2009-04-13' in response.content)
 
 
-        response = c.get('/tracker/M20 Uptown/locate', { 'lat': '40.766735', 
-                                                          'long' : '-73.983093',
-                                                          'time' : '1239650000',
-                                                          }
+        response = c.get('/tracker/locate', 
+                         { 'route_name' : 'M20 Uptown',
+                           'lat': '40.766735', 
+                           'long' : '-73.983093',
+                           'time' : '1239650000',
+                           }
                           )
 
         #and there's not an estimate for the bus if we ask too late
@@ -68,8 +74,9 @@ class UpdateTestCase(TestCase):
 
         c = Client()
 
-        response = c.get('/tracker/M20 Uptown/locate_by_address', 
-                         { 'lat': '40.766735', 
+        response = c.get('/tracker/locate_by_address', 
+                         { 'route_name' : 'M20 Uptown',
+                           'lat': '40.766735', 
                            'long' : '-73.983093',
                            'time' : '1239644900',
                            'address' : "8 Ave and W 56 St",
