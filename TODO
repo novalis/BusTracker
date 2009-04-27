@@ -22,9 +22,9 @@ and there.  I guess "between" means "compute the segment that we're on",
 "compute the segment the target is on", and use the route's segment
 ordering.
 
-(4) using the number of intersections and bus stops to better
+(4) using the number of intersections (DOne0 and bus stops to better
 estimate times.
-w
+
 (5) warn when bus data is very out-of-date
 
 (6) decide on normalized vs denormalized geometry for routes. -- DONE, chose normalized.
@@ -32,3 +32,21 @@ w
 normalized: cleaner
 denormalized: many route calculations more efficient; we have to do work
 to define routes anyway.
+
+(7) various testing:
+
+(a) given a set of observations, generate estimates as-of various time
+points.
+
+(b) how accurate are the estimates?
+
+(c) are paths correct?
+
+(8) Demo: gather real data for M6 bus, at least one run.  Show route
+on a map with time points.  Have a slider representing query time, 
+which shows only data points as-of that time.  A dropdown list of bus stops.
+
+Select a bus stop and a query time; the bus stop shows up on the map, and
+the time estimate and true arrival time are shown.  
+
+(9) Improve estimate of arrival time.  Use neural nets.
