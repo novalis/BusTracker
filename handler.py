@@ -5,6 +5,7 @@ Based on suggestions from
 http://paste.lisp.org/display/59757
 and
 http://blog.ianbicking.org/2007/10/10/workingenv-is-dead-long-live-virtualenv/
+By Paul Winkler
 """
 
 import os
