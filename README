@@ -1,0 +1,3 @@
+./manage.py syncdb
+./manage.py tiger_import [tablename] # where tablename is the name of a table containing tiger/line data for New York County
+./manage.py create_bus_route tracker/nyc_bus_routes.txt
