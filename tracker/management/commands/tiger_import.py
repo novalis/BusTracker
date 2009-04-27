@@ -74,6 +74,7 @@ class Command(BaseCommand):
             
             road = Road(name = fullname + ", " + borough)
             road.save()
+
             seg = RoadSegment(gid=tiger_seg.gid, geometry=tiger_seg.the_geom, road=road, path_order=-1)
             seg.save() 
             
@@ -102,7 +103,8 @@ class Command(BaseCommand):
             for i, segment in enumerate(segments):
                 segment.path_order = i
                 segment.save()
-            
+
+        print "Denormalizing road geometry"
         from django.db import connection
         cursor = connection.cursor()
         cursor.execute(
