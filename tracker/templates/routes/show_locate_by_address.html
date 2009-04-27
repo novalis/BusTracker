@@ -1,0 +1,9 @@
+<form action="/tracker/locate_by_address">
+Where are you?  <input type="text" name="address"><br/>
+What bus do you want?  <select name="route_name">
+{% for route in routes %}
+<option value="{{route.name}}">{{route.name}}</option>
+{% endfor %}
+</select>
+<input type="submit" name="Submit" value="Submit">
+</form>
