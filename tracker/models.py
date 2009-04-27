@@ -59,13 +59,17 @@ class Bus(models.Model):
         #in number of intersections per second, and remaining
         #intersections.
 
+        if not time:
+            now = datetime.utcnow()
+        else:
+            now = time
 
         #The target location is a point, but needs to be a distance along the route.
         target_distance = distance_along_route(target_location, self.route)
 
         #Find out when the bus started moving.  
         #This is when the distance along the route (a) is > 0.01
-        observations = self.busobservation_set.all().order_by('time')
+        observations = self.busobservation_set.filter(time__lte = now).order_by('time')
 
         for observation in observations:
             if observation.distance > 0.01:
@@ -87,10 +91,7 @@ class Bus(models.Model):
         journey_time = (last_time - start_time).seconds
 
         rate = (last_distance - start_distance) / journey_time
-        if not time:
-            now = datetime.utcnow()
-        else:
-            now = time
+
         d = target_distance - last_distance
 
         estimate_from_distance = d / rate
