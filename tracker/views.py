@@ -14,18 +14,23 @@ def index(request):
     return render_to_response('routes/index.html', {'routes': routes})
 
 
-def update(request, bus_id):
-
+def update(request):
     if not request.method == "POST":
         return HttpResponse("Bad method", status=405)
-    
-    route = Route.objects.get(name=request.REQUEST['route'])
+
+
+    #note: keys 'username' and 'report' are artifacts of the general nature
+    #of the test app.  They will be replaced by sensible keys later.
+
+    bus_id = request.REQUEST['username']    
+    route = Route.objects.get(name=request.REQUEST['report'])
+
     bus = Bus(id=bus_id, route=route)
     bus.save()
 
-
-    client_time = datetime.utcfromtimestamp(int(request.REQUEST['time']))
-    location = Point(float(request.REQUEST['long']), float(request.REQUEST['lat']))
+    client_time = datetime.strptime(request.REQUEST['date'].strip(), "%Y-%m-%dT%H:%M:%SZ")
+    print client_time
+    location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
     obs = BusObservation(bus=bus, location=location, time=client_time)
     obs.save()
 

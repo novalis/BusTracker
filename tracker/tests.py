@@ -11,17 +11,18 @@ class UpdateTestCase(TestCase):
     def test_update_location(self):
 
         c = Client()
-        response = c.post('/tracker/5/update', {'route': 'M20 Uptown', 
-                                                'lat': '40.737606', 
-                                                'long' : '-74.006393',
-                                                'time' : '1000000000'})
+        response = c.post('/tracker/update', {'username' : '5',
+                                              'report': 'M20 Uptown', 
+                                              'lat': '40.737606', 
+                                              'lng' : '-74.006393',
+                                              'date' : '2009-04-23T05:06:07Z'})
         assert response.status_code == 200
 
         response = c.get('/tracker/')
         self.assertTrue('M20 Uptown' in response.content)
 
         bus = Bus.objects.get(id=5)
-        observations = bus.busobservation_set.filter(time=datetime.utcfromtimestamp(1000000000))
+        observations = bus.busobservation_set.filter(time=datetime.strptime("2009-04-23T05:06:07Z", '%Y-%m-%dT%H:%M:%SZ'))
         self.assertEqual(len(observations), 1)
         observation = observations[0]
         self.assertAlmostEqual(observation.location.x, -74.006393)
