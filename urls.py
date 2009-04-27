@@ -5,6 +5,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/tracker'}),
+
     (r'^tracker/', include('BusTracker.tracker.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
