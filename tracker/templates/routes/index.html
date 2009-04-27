@@ -11,7 +11,7 @@
   {% for route in routes %}
   <tr>
     <td>{{ route.name }}</td>
-    <td>{{ route.buses|length }}</td>
+    <td>{{ route.bus_set.all|length }}</td>
   </tr>
   {% endfor %}
 </table>
