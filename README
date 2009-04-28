@@ -1,5 +1,13 @@
 Edit settings.py to point to a database which has been set up for
-postgis.
+postgis. 
+
+If you are doing development or testing locally, you should set
+LOCAL_DEVELOPMENT = True in setting.py. You should also set MEDIA_ROOT =
+'/path/to/BusTracker/tracker/static/' so that the static files (e.g.,
+JavaScript) will be served correctly. (For production servers,
+LOCAL_DEVELOPMENT should be False and your webserver should be configured to
+serve the files in BusTracker/tracker/static under
+YOUR_DOMAIN.COM/tracker/static.)
 
 [table_name] is the name of a table to hold Tiger data.  Download the 
 2007 Tiger data from:
