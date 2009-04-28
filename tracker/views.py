@@ -7,6 +7,7 @@ from tracker.models import *
 import django.templatetags #for the side-effects of doing so
 import settings
 import urllib
+import tracker.templatetags #to catch import errors
 
 def index(request):
 
