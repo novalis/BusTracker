@@ -15,6 +15,12 @@ def index(request):
     return render_to_response('routes/index.html', {'routes': routes})
 
 
+def kml(request):
+    bus_id = request.REQUEST['bus_id']
+    observations = BusObservation.objects.filter(bus_id=bus_id)
+    return render_to_response('routes/kml.kml', {'observations': observations})
+
+
 def update(request):
     if not request.method == "POST":
         return HttpResponse("Bad method", status=405)
