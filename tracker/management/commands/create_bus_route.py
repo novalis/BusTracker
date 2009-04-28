@@ -50,7 +50,12 @@ class Command(BaseCommand):
             if 'gid' in segment:
                 #some roadsegments must be chosen by GID because the
                 #roadsegment ordering system does not work for circles
-                segment = road.roadsegment_set.get(gid=int(segment['gid']))
+                try:
+                    segment = road.roadsegment_set.get(gid=int(segment['gid']))
+                except RoadSegment.DoesNotExist:
+                    print >>sys.stdout, "No such gid %s" % (segment['gid'])
+                    sys.exit(1)
+
                 RouteSegment(roadsegment = segment, route=route, path_order = path_order).save()
                 path_order += 1
             else:

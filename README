@@ -2,11 +2,14 @@ Edit settings.py to point to a database which has been set up for
 postgis.
 
 [table_name] is the name of a table to hold Tiger data.  Download the 
-Tiger data from:
-http://www2.census.gov/cgi-bin/shapefiles/county-files?county=36061
+2007 Tiger data from:
+http://www.census.gov/cgi-bin/geo/shapefiles/county-files?county=36061
+
+You need the 2007 data because GIDs have changed between 2007 and
+later years, and bus routes may depend on certain GIDs
 
 
-$ shp2pgsql tl_2008_36061_edges.shp -s 4326 [table_name]|psql -d [database_name]
+$ shp2pgsql fe_2007_36061_edges.shp -s 4326 [table_name]|psql -d [database_name]
 
 $ ./manage.py syncdb
 $ ./manage.py tiger_import [table_name] 
