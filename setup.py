@@ -29,6 +29,8 @@ setup(
     install_requires=[
       "Django>=1.0.2",
       "pytz",
+      "psycopg2",
+      "simplejson",
       ],
     packages=find_packages(),
     include_package_data=True,
