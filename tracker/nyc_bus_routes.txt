@@ -26,3 +26,27 @@ On: Park Ave S, From: E 32 St, To: E 17 St
 On: Union Sq E, From: E 17 St, To: Broadway
 On: Broadway, From: Union Sq E, To: State St
 
+Route: M6 Downtown
+On: Central Park S, From: 6 Ave, To: 7 Ave
+On: 7 Ave, From: Central Park S, To: Broadway
+On: Broadway, From: 7 Ave, To: E 17 St
+On: E 17 St, From: Broadway, To: Union Sq E
+On: Union Sq E, From: E 17 St, To: Broadway
+On: Broadway, From: Union Sq E, To: State St
+On: State St, From: Broadway, To: State Street Plz
+On: State Street Plz, GID: 495
+On: Water St, From: New York Plz, To: Broad St
+On: Broad St, From: Water St, To: South St
+
+Route: M6 Uptown
+
+
+On: South St, From: Broad St, To: Whitehall St
+On: Whitehall St, From: South St, To: State St
+On: State St, From: Whitehall St, To: Battery Pl
+On: Battery Pl, From: State St, To: Greenwich St
+On: Greenwich St, From: Battery Pl, To: Trinity Pl
+On: Trinity Pl, From: Greenwich St, To: Church St
+On: Church St, From: Trinity Pl, To: 6 Ave
+On: 6 Ave, From: Church St, To: Central Park S
+
