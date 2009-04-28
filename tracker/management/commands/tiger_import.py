@@ -68,6 +68,7 @@ class Command(BaseCommand):
                 else: 
                     road_geometry = segment.geometry
 
+            assert road_geometry, "road %s has no geometry" % road.name
             extent = road_geometry.extent
             x_extent = abs(road_geometry.extent[0] - road_geometry.extent[2])
             y_extent = abs(road_geometry.extent[1] - road_geometry.extent[3])
