@@ -44,7 +44,8 @@ class Command(BaseCommand):
         print "Importing from tiger data.  %d road segments to import" % len(tiger_segs)
         for i, tiger_seg in enumerate(tiger_segs):
             if not tiger_seg.countyfp in countyfp_to_borough:
-                print "Not import ing %s, because it's in unknown county %s" % (tiger_seg.fullname, tiger_seg.countyfp)
+                print "Not importing %s, because it's in unknown county %s" % (tiger_seg.fullname, tiger_seg.countyfp)
+                continue
             borough = countyfp_to_borough[tiger_seg.countyfp]
             if i and i % 500 == 0:
                 print "finished %d" % i
