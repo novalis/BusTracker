@@ -1,3 +1,15 @@
-./manage.py syncdb
-./manage.py tiger_import [tablename] # where tablename is the name of a table containing tiger/line data for New York County
-./manage.py create_bus_route tracker/nyc_bus_routes.txt
+Edit settings.py to point to a database which has been set up for
+postgis.
+
+[table_name] is the name of a table to hold Tiger data.  Download the 
+Tiger data from:
+http://www2.census.gov/cgi-bin/shapefiles/county-files?county=36061
+
+
+$ shp2pgsql tl_2008_36061_edges.shp -s 4326 [table_name]|psql -d [database_name]
+
+$ ./manage.py syncdb
+$ ./manage.py tiger_import [table_name] 
+$ ./manage.py create_bus_route tracker/nyc_bus_routes.txt
+
+You may now drop [table_name], if you like.
