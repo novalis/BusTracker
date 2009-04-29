@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.test import TestCase
 from django.test.client import Client
 from tracker.views import update
@@ -102,3 +102,36 @@ class UpdateTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue('-74.005859, 40.737423' in response.content)
+
+    def test_estimate_accuracy(self):
+        """Test the accuracy of the estimation algorithm.  It uses
+        the M6 dataset, a record of two bus trips on the M6 bus.
+
+        Estimates are taken one minute, two minutes, ten minutes, and
+        twenty minutes before arrival at each observation.
+        """
+
+        intervals =[timedelta(0, x) for x in (60, 120, 600, 1200)]
+
+        #todo: run the M6 route
+        #route = Route.objects.get(name="M6 Downtown")
+        route = Route.objects.get(name="M20 Uptown")
+
+        for bus in route.bus_set.all():
+            observations = list(bus.busobservation_set.all())
+            first_observation_time = observations[0].time
+
+            total_diff = 0
+            n_samples = 0
+            for observation in observations:
+                for interval in intervals:
+                    estimate_time = observation.time - interval
+                    if estimate_time > first_observation_time:
+                        estimated_time = bus.estimated_arrival_time(observation.location, estimate_time)
+                        if estimated_time:
+                            diff = abs((estimated_time - observation.time).seconds)
+                            total_diff += diff * diff
+                            n_samples += 1
+
+        print "Divergence for this data set: %s" % (total_diff / n_samples)
+
