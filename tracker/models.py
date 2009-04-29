@@ -96,7 +96,14 @@ class Bus(models.Model):
 
         def find_nearest_route_segment(route, location):
             """Find which segment of a route a location is nearest to."""
-            nearby_segments = route.routesegment_set.filter(roadsegment__geometry__dwithin=(location, 0.002))
+            radius = 0.002
+            nearby_segments = []
+            while radius < 0.064 and not nearby_segments:
+                nearby_segments = list(route.routesegment_set.filter(roadsegment__geometry__dwithin=(location, radius)))
+                radius *= 2
+                
+            assert nearby_segments, "no segment on %s near %d, %d" % (route.name, location.x, location.y)
+
             nearest_segment=None
             best_dist = 100000000000
             for segment in nearby_segments:
@@ -104,7 +111,7 @@ class Bus(models.Model):
                 if dist < best_dist:
                     best_dist = dist
                     nearest_segment = segment
-            assert nearest_segment
+
             return nearest_segment
 
         start_segment = find_nearest_route_segment(self.route, start_location)
@@ -173,4 +180,5 @@ class BusObservation(models.Model):
         return "<Observation of %s at %s at %s >" % (self.bus, self.location, self.time)
 
 
-    
+    def distance_along_route(self):
+        return distance_along_route(self.location, self.bus.route)
