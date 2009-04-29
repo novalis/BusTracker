@@ -1,5 +1,23 @@
 #time-slider {
+margin: 0.8em;
+float: left;
+width: 900px;
+}
+
+#pause-play-btn {
+display: block;
+float: left;
+padding: 0.3em;
 margin: 0.5em;
+border: 1px solid #1484e6;
+color: #1484e6;
+font-weight: bold;
+text-decoration: none;
+}
+
+#pause-play-btn:hover {
+background-color: #1484e6;
+color: white;
 }
 
 #map {

@@ -9,6 +9,7 @@
         <script type="text/javascript" src="static/js/demo_map.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
+            $('#pause-play-btn').hide();
             createMap('map'); 
         });
         </script>
@@ -21,6 +22,7 @@
             <input type="button" id="load-btn" value="Load Data" />
         </form>
         <div id="map"></div>
+        <a href="#" id="pause-play-btn">Play</a>
         <div id="time-slider"></div>
     </body>
 </html>

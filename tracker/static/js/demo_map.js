@@ -36,29 +36,60 @@ function loadBusKml(kmlUrl, name) {
     var layer = new OpenLayers.Layer.GML(name, kmlUrl, layerOptions);
     layer.events.register('loadend', layer, function() {
         this.map.zoomToExtent(this.getDataExtent()); 
+        //TODO Move all this stuff that doesn't belong in loadBusKml
         var busData = []
-        // Store references to the features so we have them if they're removed
-        // from the map
+        // Store references to the features so we have them after they're
+        // removed from the map
         for (var i=0; i<layer.features.length; i++) {
             busData[i] = layer.features[i];
         }
+        layer.removeFeatures(layer.features);
+        
         function refreshBusData() {
             var val = $(this).slider('value');
-            // TODO: Make less dumb (not sure if this necessary removes all the
-            // features it should. May also make more sense to toggle styles
-            // instead?)
-            layer.removeFeatures(busData.slice(val));
-            layer.addFeatures(busData.slice(0,val));
+            // TODO: Add optional arg for adding/removing appropriate features
+            // when the slider is dragged (may make sense to bucket features
+            // and have a mapping to e.g., secs)
+            layer.addFeatures(busData[val]);
         }
         $('#time-slider').slider({
-            max: busData.length,
+            max: busData.length-1,
             range: 'min',
             value: 0,
             slide: refreshBusData,
             change: refreshBusData
         });
+        $('#pause-play-btn').show().click(function() {
+            // TODO: Fix ugly hack of using global timer
+            if (this.innerHTML == 'Play') {
+                this.innerHTML = 'Pause';
+                var startVal = $('#time-slider').slider('value');
+                timer = animateBusData(startVal);
+            } else {
+                if (this.innerHTML == 'Reset') {
+                    $('#time-slider').slider('value', 0);
+                    layer.removeFeatures(layer.features);
+                }
+                this.innerHTML = 'Play';
+                clearInterval(timer);
+            }
+        });
     })
     map.addLayer(layer);
 
     return layer;
+}
+
+function animateBusData(startVal) {
+    var slider = $('#time-slider');
+    slider.slider('value', startVal);
+    var timer = setInterval(function() {
+        if (slider.slider('value') < slider.slider('option', 'max')) {
+            slider.slider('value', slider.slider('value') + 1);
+        } else {
+            clearInterval(timer);
+            $('#pause-play-btn').get(0).innerHTML = 'Reset';
+        }
+    }, 2);
+    return timer;
 }
