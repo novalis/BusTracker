@@ -98,6 +98,8 @@ class Bus(models.Model):
             """Find which segment of a route a location is nearest to."""
             radius = 0.002
             nearby_segments = []
+            #we use dwithin and exponential backoff because dwithin can use
+            #the spatial index
             while radius < 0.064 and not nearby_segments:
                 nearby_segments = list(route.routesegment_set.filter(roadsegment__geometry__dwithin=(location, radius)))
                 radius *= 2
