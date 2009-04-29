@@ -89,9 +89,7 @@ class Bus(models.Model):
             return None
         
         journey_time = (last_time - start_time).seconds
-
         rate = (last_distance - start_distance) / journey_time
-
         d = target_distance - last_distance
 
         estimate_from_distance = d / rate
