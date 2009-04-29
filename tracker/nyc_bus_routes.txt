@@ -35,14 +35,9 @@ On: Union Sq E, From: E 17 St, To: Broadway
 On: Broadway, From: Union Sq E, To: State St
 On: State St, From: Broadway, To: State Street Plz
 On: State Street Plz, GID: 495
-On: Water St, From: New York Plz, To: Broad St
-On: Broad St, From: Water St, To: South St
 
 Route: M6 Uptown
 
-
-On: South St, From: Broad St, To: Whitehall St
-On: Whitehall St, From: South St, To: State St
 On: State St, From: Whitehall St, To: Battery Pl
 On: Battery Pl, From: State St, To: Greenwich St
 On: Greenwich St, From: Battery Pl, To: Trinity Pl

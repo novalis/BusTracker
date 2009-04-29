@@ -36,7 +36,7 @@ def update(request):
     bus.save()
 
     client_time = datetime.strptime(request.REQUEST['date'].strip(), "%Y-%m-%dT%H:%M:%SZ")
-    print client_time
+
     location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
     obs = BusObservation(bus=bus, location=location, time=client_time)
     obs.save()

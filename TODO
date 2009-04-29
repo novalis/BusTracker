@@ -50,3 +50,9 @@ Select a bus stop and a query time; the bus stop shows up on the map, and
 the time estimate and true arrival time are shown.  
 
 (9) Improve estimate of arrival time.  Use neural nets.
+
+(10) test is sensitive to number of points; fix this
+
+(11) only collect two times per points: arrival, departure
+
+(12) provide map-matched points via kml
