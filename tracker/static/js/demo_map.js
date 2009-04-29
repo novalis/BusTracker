@@ -35,6 +35,9 @@ function loadBusKml(kmlUrl, name) {
         projection: new OpenLayers.Projection('EPSG:4326'),
     };
     var layer = new OpenLayers.Layer.GML(name, kmlUrl, layerOptions);
+    layer.events.register('loadend', layer, function() {
+        this.map.zoomToExtent(this.getDataExtent()); 
+    })
     map.addLayer(layer);
 
     return layer;
