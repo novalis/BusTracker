@@ -17,7 +17,7 @@ def index(request):
 
 def kml(request):
     bus_id = request.REQUEST['bus_id']
-    observations = BusObservation.objects.filter(bus_id=bus_id)
+    observations = BusObservation.objects.filter(bus=bus_id)
     return render_to_response('routes/kml.kml', {'observations': observations})
 
 
