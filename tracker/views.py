@@ -95,3 +95,7 @@ def locate(request):
         time = datetime.utcnow()
 
     return _locate(route_name, time, float(request.REQUEST['long']), float(request.REQUEST['lat']))
+
+def map(request):
+    
+    return render_to_response('routes/map.html')
