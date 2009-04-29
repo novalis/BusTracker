@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
 # Hack to serve static files for development
 # http://oebfare.com/blog/2007/dec/31/django-and-static-files/
-if settings.LOCAL_DEVELOPMENT:
+if hasattr(settings, 'MEDIA_ROOT'):
     urlpatterns += patterns('django.views',
     url(r"static/(?P<path>.*)/$", "static.serve", {
             "document_root": settings.MEDIA_ROOT,
