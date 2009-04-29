@@ -91,3 +91,14 @@ class UpdateTestCase(TestCase):
         #of the bus after that time.
         self.assertTrue('W 57 St' in response.content)
         self.assertTrue('8 Ave' in response.content)
+
+    def test_kml(self):
+        
+        c = Client()
+
+        response = c.get('/tracker/kml', 
+                         { 'bus_id' : '2' })
+
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('-74.005859, 40.737423' in response.content)
