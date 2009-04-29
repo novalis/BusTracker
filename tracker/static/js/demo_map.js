@@ -24,7 +24,6 @@ function createMap(map_id) {
     $('#load-btn').click(function() {
         var bus_id = $('#bus-id').get(0).value;
         var kmlUrl = 'kml?bus_id=' + bus_id;
-        console.log(kmlUrl);
         loadBusKml(kmlUrl, 'bus ' + bus_id);
     });
 }
@@ -37,6 +36,27 @@ function loadBusKml(kmlUrl, name) {
     var layer = new OpenLayers.Layer.GML(name, kmlUrl, layerOptions);
     layer.events.register('loadend', layer, function() {
         this.map.zoomToExtent(this.getDataExtent()); 
+        var busData = []
+        // Store references to the features so we have them if they're removed
+        // from the map
+        for (var i=0; i<layer.features.length; i++) {
+            busData[i] = layer.features[i];
+        }
+        function refreshBusData() {
+            var val = $(this).slider('value');
+            // TODO: Make less dumb (not sure if this necessary removes all the
+            // features it should. May also make more sense to toggle styles
+            // instead?)
+            layer.removeFeatures(busData.slice(val));
+            layer.addFeatures(busData.slice(0,val));
+        }
+        $('#time-slider').slider({
+            max: busData.length,
+            range: 'min',
+            value: 0,
+            slide: refreshBusData,
+            change: refreshBusData
+        });
     })
     map.addLayer(layer);
 
