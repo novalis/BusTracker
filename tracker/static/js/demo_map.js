@@ -23,20 +23,35 @@ function createMap(map_id) {
 
     $('#load-btn').click(function() {
         var bus_id = $('#bus-id').get(0).value;
-        var kmlUrl = 'kml?bus_id=' + bus_id;
-        loadBusKml(kmlUrl, 'bus ' + bus_id);
+        var url = 'kml?bus_id=' + bus_id;
+        loadBusData(url, 'bus ' + bus_id);
+    });
+    $('#load-route-btn').click(function() {
+        var route_id = $('#route-select').get(0).value;
+        var url = 'route_kml?route_id=' + escape(route_id);
+        var layer = loadKml(url, route_id);
+        layer.events.register('loadend', layer, function() {
+            map.zoomToExtent(layer.getDataExtent());
+        });
     });
 }
 
-function loadBusKml(kmlUrl, name) {
+function loadKml(url, name) {
     var layerOptions = {
         format: OpenLayers.Format.KML,
         projection: new OpenLayers.Projection('EPSG:4326'),
     };
-    var layer = new OpenLayers.Layer.GML(name, kmlUrl, layerOptions);
+    var layer = new OpenLayers.Layer.GML(name, url, layerOptions);
+    map.addLayers([layer]);
+
+    return layer;
+}
+
+function loadBusData(url, name) {
+    var layer = loadKml(url, name); 
     layer.events.register('loadend', layer, function() {
         this.map.zoomToExtent(this.getDataExtent()); 
-        //TODO Move all this stuff that doesn't belong in loadBusKml
+        //TODO Move all this stuff that doesn't belong in loadBusData
         var busData = []
         // Store references to the features so we have them after they're
         // removed from the map
@@ -75,7 +90,6 @@ function loadBusKml(kmlUrl, name) {
             }
         });
     })
-    map.addLayer(layer);
 
     return layer;
 }
