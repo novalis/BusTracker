@@ -17,9 +17,16 @@
 
     <body>
         <form>
-            <label for="bus_id">Bus ID:</label>
+            <label for="bus-id">Bus ID:</label>
             <input type="text" name="bus-id" id="bus-id" />
             <input type="button" id="load-btn" value="Load Data" />
+            <label for="route-select">Route:</label>
+            <select name="route-select" id="route-select">
+                {% for route in routes %}
+                <option value="{{ route }}">{{ route }}</option>
+                {% endfor %}
+            </select>
+            <input type="button" id="load-route-btn" value="Show Route" />
         </form>
         <div id="map"></div>
         <a href="#" id="pause-play-btn">Play</a>

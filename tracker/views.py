@@ -20,6 +20,10 @@ def kml(request):
     observations = BusObservation.objects.filter(bus=bus_id)
     return render_to_response('routes/kml.kml', {'observations': observations})
 
+def route_kml(request):
+    route_id = request.REQUEST['route_id']
+    route_geoms = [rs.roadsegment.geometry for rs in RouteSegment.objects.filter(route=route_id)]
+    return render_to_response('routes/route_kml.kml', {'route_geoms': route_geoms, 'route_id': route_id})
 
 def update(request):
     if not request.method == "POST":
@@ -97,5 +101,5 @@ def locate(request):
     return _locate(route_name, time, float(request.REQUEST['long']), float(request.REQUEST['lat']))
 
 def map(request):
-    
-    return render_to_response('routes/map.html')
+    routes = [route.name for route in Route.objects.all()]
+    return render_to_response('routes/map.html', {'routes': routes})
