@@ -42,8 +42,15 @@ def update(request):
     client_time = datetime.strptime(request.REQUEST['date'].strip(), "%Y-%m-%dT%H:%M:%SZ")
 
     location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
-    obs = BusObservation(bus=bus, location=location, time=client_time)
-    obs.save()
+
+    possible_observations = bus.busobservation_set.order_by('-time')[:2]
+    if (len(possible_observations) == 2 and 
+        possible_observations[0].location == location and 
+        possible_observations[1].location == location):
+        possible_observations[0].time = client_time
+    else:
+        obs = BusObservation(bus=bus, location=location, time=client_time)
+        obs.save()
 
     return HttpResponse("ok")
 

@@ -134,3 +134,26 @@ class UpdateTestCase(TestCase):
         assert n_samples, "There must be at least one bus observation in the fixtures."
         print "Divergence for this data set: %s" % (total_diff / n_samples)
 
+    def test_observation_smashing(self):
+        
+        c = Client()
+        response = c.post('/tracker/update', {'username' : '8',
+                                              'report': 'M20 Uptown', 
+                                              'lat': '40.0', 
+                                              'lng' : '-74.0',
+                                              'date' : '2009-04-24T00:00:00Z'})
+        response = c.post('/tracker/update', {'username' : '8',
+                                              'report': 'M20 Uptown', 
+                                              'lat': '40.0', 
+                                              'lng' : '-74.0',
+                                              'date' : '2009-04-24T00:00:01Z'})
+        response = c.post('/tracker/update', {'username' : '8',
+                                              'report': 'M20 Uptown', 
+                                              'lat': '40.0', 
+                                              'lng' : '-74.0',
+                                              'date' : '2009-04-24T00:00:02Z'})
+
+        response = c.get('/tracker/kml', 
+                         { 'bus_id' : '8' })
+
+        self.assertContains(response, '-74.0', count=2)

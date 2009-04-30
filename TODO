@@ -51,9 +51,9 @@ the time estimate and true arrival time are shown.
 
 (9) Improve estimate of arrival time.  Use neural nets.
 
-(10) test is sensitive to number of points; fix this
+(10) test is sensitive to number of points; fix this -- no it's not (DONE).
 
-(11) only collect two times per points: arrival, departure
+(11) only collect two times per points: arrival, departure -- DONE
 
 (12) provide map-matched points via kml
 
