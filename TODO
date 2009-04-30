@@ -56,3 +56,5 @@ the time estimate and true arrival time are shown.
 (11) only collect two times per points: arrival, departure
 
 (12) provide map-matched points via kml
+
+(13) FIX: why are sql commands at end of management commands not executed?
