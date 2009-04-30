@@ -99,6 +99,12 @@ class Command(BaseCommand):
                     if segment.geometry.intersects(to_road.geometry):
                         to_segments.append(segment)
 
+                if len(from_segments) > 2:
+                    print "Warning: there is a fork in %s at %s (and all forks share the same name). You probably want to specify a better endpoint" % (road.name, from_road.name)
+
+                if len(to_segments) > 2:
+                    print "Warning: there is a fork in %s at %s (and all forks share the same name).. You probably want to specify a better endpoint" % (road.name, to_road.name)
+
                 if not len(from_segments):
                     print >>sys.stderr, "%s does not intersect %s" % (road.name, from_road.name)
                     sys.exit(0)
@@ -107,7 +113,7 @@ class Command(BaseCommand):
                     sys.exit(0)
 
                 if from_segments[0].path_order == to_segments[0].path_order:
-                    #ther's only one segment, so direction doesn't matter
+                    #there's only one segment, so direction doesn't matter
                     route_segment = RouteSegment(route=route, roadsegment=from_segments[0], path_order = path_order)
                     route_segment.save()
                     path_order += 1
