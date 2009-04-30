@@ -43,6 +43,7 @@ class RouteSegment(models.Model):
 
 class Bus(models.Model):
     """A particular physical bus"""
+    id = models.IntegerField(primary_key=True)
     route = models.ForeignKey(Route) #the route it is traveling on (if any)
 
     def __unicode__(self):
