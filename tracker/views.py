@@ -22,8 +22,8 @@ def kml(request):
 
 def route_kml(request):
     route_id = request.REQUEST['route_id']
-    route_geoms = [rs.roadsegment.geometry for rs in RouteSegment.objects.filter(route=route_id)]
-    return render_to_response('routes/route_kml.kml', {'route_geoms': route_geoms, 'route_id': route_id})
+    route = Route.objects.filter(name=route_id).all()[0]
+    return render_to_response('routes/route_kml.kml', {'route': route})
 
 def update(request):
     if not request.method == "POST":
