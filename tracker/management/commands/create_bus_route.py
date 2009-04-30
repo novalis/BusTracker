@@ -28,6 +28,7 @@ class Command(BaseCommand):
                 segment[key.lower()] = value
 
             if 'route' in segment:
+                #Start a new route
                 name = segment['route']
                 route = Route(name = name)
                 route.save()
@@ -106,6 +107,7 @@ class Command(BaseCommand):
                     sys.exit(0)
 
                 if from_segments[0].path_order == to_segments[0].path_order:
+                    #ther's only one segment, so direction doesn't matter
                     route_segment = RouteSegment(route=route, roadsegment=from_segments[0], path_order = path_order)
                     route_segment.save()
                     path_order += 1
@@ -124,7 +126,7 @@ class Command(BaseCommand):
 
 
                 
-                    for segment in road.roadsegment_set.filter(path_order__gte=from_path_order, path_order__lte=to_path_order):
+                    for segment in road.roadsegment_set.filter(path_order__gte=from_path_order, path_order__lte=to_path_order).order_by("path_order"):
                         route_segment = RouteSegment(route=route, roadsegment=segment, path_order = path_order)
                         route_segment.save()
                         path_order += 1
@@ -142,7 +144,7 @@ class Command(BaseCommand):
 
 
                 
-                    for segment in road.roadsegment_set.filter(path_order__lte=from_path_order, path_order__gte=to_path_order):
+                    for segment in road.roadsegment_set.filter(path_order__lte=from_path_order, path_order__gte=to_path_order).order_by("-path_order"):
                         route_segment = RouteSegment(route=route, roadsegment=segment, path_order = path_order)
                         route_segment.save()
                         path_order += 1
