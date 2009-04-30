@@ -6,7 +6,7 @@ from tracker.models import *
 
 
 class UpdateTestCase(TestCase):
-    fixtures = ['location.json']
+    fixtures = ['location.json', 'm6.json']
 
     def test_update_location(self):
 
@@ -113,16 +113,15 @@ class UpdateTestCase(TestCase):
 
         intervals =[timedelta(0, x) for x in (60, 120, 600, 1200)]
 
-        #todo: run the M6 route
-        #route = Route.objects.get(name="M6 Downtown")
-        route = Route.objects.get(name="M20 Uptown")
+        route = Route.objects.get(name="M6 Downtown")
+
+        total_diff = 0
+        n_samples = 0
 
         for bus in route.bus_set.all():
             observations = list(bus.busobservation_set.all())
             first_observation_time = observations[0].time
 
-            total_diff = 0
-            n_samples = 0
             for observation in observations:
                 for interval in intervals:
                     estimate_time = observation.time - interval
@@ -132,6 +131,6 @@ class UpdateTestCase(TestCase):
                             diff = abs((estimated_time - observation.time).seconds)
                             total_diff += diff * diff
                             n_samples += 1
-
+        assert n_samples, "There must be at least one bus observation in the fixtures."
         print "Divergence for this data set: %s" % (total_diff / n_samples)
 
