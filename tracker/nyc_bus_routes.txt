@@ -32,8 +32,13 @@ On: 7 Ave, From: Central Park S, To: Broadway
 On: Broadway, From: 7 Ave, To: E 17 St
 On: E 17 St, From: Broadway, To: Union Sq E
 On: Union Sq E, From: E 17 St, To: Broadway
-On: Broadway, From: Union Sq E, To: State St
-On: State St, From: Broadway, To: State Street Plz
+On: Broadway, From: Union Sq E, To: Exchange Aly
+On: Broadway, GID: 3767
+On: Broadway, GID: 7330
+On: Broadway, GID: 3754
+On: State St, From: Broadway, To: Pearl St
+On: State St, GID: 8419
+On: State St, GID: 8679
 On: State Street Plz, GID: 495
 
 Route: M6 Uptown
