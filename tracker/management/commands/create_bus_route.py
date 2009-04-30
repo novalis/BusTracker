@@ -155,7 +155,7 @@ class Command(BaseCommand):
                         route_segment.save()
                         path_order += 1
 
-        from django.db import connection
+        from django.db import connection, transaction
         cursor = connection.cursor()
         cursor.execute(
 """UPDATE tracker_route SET geometry=(select st_linemerge(st_union(tracker_roadsegment.geometry))
@@ -165,3 +165,4 @@ WHERE
 tracker_routesegment.route_id = tracker_route.name AND
 tracker_routesegment.roadsegment_id = tracker_roadsegment.gid
 )""")
+        transaction.commit_unless_managed()

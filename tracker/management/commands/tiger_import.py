@@ -88,7 +88,7 @@ class Command(BaseCommand):
                 segment.save()
 
         print "Denormalizing road geometry"
-        from django.db import connection
+        from django.db import connection, transaction
         cursor = connection.cursor()
         cursor.execute(
 """UPDATE tracker_road SET geometry=(select st_linemerge(st_union(tracker_roadsegment.geometry))
@@ -96,4 +96,4 @@ FROM
 tracker_roadsegment
 WHERE 
 tracker_roadsegment.road_id = tracker_road.name)""")
-
+        transaction.commit_unless_managed()
