@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from django.contrib.gis.db import models
+from math import sqrt
 
 class Road(models.Model):
     """An entire road -- 8 Ave, for instance"""
@@ -84,8 +85,8 @@ class Bus(models.Model):
         last = observations.order_by('-time')[0]
         last_distance, last_time = last.distance, last.time
 
-        if last_distance <= start_distance or last_time <= start_time:
-            #the bus has not moved or has moved backwards
+        if last_distance - start_distance < 0.1 or last_time <= start_time:
+            #the bus has not moved enough or has moved backwards
             #this means no arrival estimate is possible for this bus.
             return None
         
@@ -121,19 +122,21 @@ class Bus(models.Model):
         last_segment = find_nearest_route_segment(self.route, last.location)
         target_segment = find_nearest_route_segment(self.route, target_location)
 
-        total_segments = last_segment.path_order - start_segment.path_order
-        if total_segments > 0:
+        passed_segments = last_segment.path_order - start_segment.path_order
 
-            segments_per_second = float(total_segments) / journey_time
+        #only start using intersections once we have gone a few blocks
+        if passed_segments > 2 and start_segment.path_order > last_segment.path_order > target_segment.path_order:
+
+            segments_per_second = float(passed_segments) / journey_time
             
-            remaining_segments = target_segment.path_order - last_segment.path_order
+            remaining_segments = target_segment.path_order - last_segment.path_order            
 
             estimate_from_intersections = remaining_segments / segments_per_second
 
-            seconds = (estimate_from_distance + estimate_from_intersections) / 2
+            seconds = sqrt(estimate_from_distance * estimate_from_intersections) 
         else:
             seconds = estimate_from_distance
-
+        
         return last_time + timedelta(0, seconds)
 
 
