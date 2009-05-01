@@ -2,12 +2,8 @@
 <kml xmlns="http://earth.google.com/kml/2.2">
 <Document>
     <Placemark>
-        <name>{{ route_id }}</name>
-        <MultiGeometry>
-        {% for route_geom in route_geoms %}
-            {{ route_geom.kml|safe }}
-        {% endfor %}
-        </MultiGeometry>
+        <name>{{ route.name }}</name>
+        {{ route.geometry.kml|safe }}
     </Placemark>
 </Document>
 </kml>
