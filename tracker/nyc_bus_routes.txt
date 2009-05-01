@@ -3,8 +3,8 @@ On: 8 Ave, From: W 12 St, To: Columbus Cir
 
 On: Columbus Cir, GID: 8345
 On: Columbus Cir, GID: 3670
-On: Columbus Cir, GID: 3670
 On: Columbus Cir, GID: 5502
+On: Columbus Cir, GID: 4194 
 
 On: Central Park W, From: Columbus Cir, To: W 66 St
 On: W 66 St, From: Central Park W, To: Broadway
