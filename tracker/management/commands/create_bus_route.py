@@ -165,4 +165,22 @@ WHERE
 tracker_routesegment.route_id = tracker_route.name AND
 tracker_routesegment.roadsegment_id = tracker_roadsegment.gid
 )""")
+
+        for route in Route.objects.all():
+            #st_linemerge does not take order into account.  Merged routes need to have their 
+            #points ordered in the same order as path_order.
+            last_segment = route.routesegment_set.all().order_by("-path_order")[0].roadsegment.geometry
+            route_start = route.geometry.coords[0]
+            if isinstance(route_start[0], tuple):
+                route_start = route_start[0]
+
+            for coord in last_segment.coords:
+                if isinstance(coord[0], tuple):
+                    #is this ever not true?
+                    coord = coord[0]
+                if coord == route_start:
+                    cursor = connection.cursor()
+                    cursor.execute("UPDATE tracker_route SET geometry=st_reverse(geometry) where name = %s", [route.name])
+                    break
+
         transaction.commit_unless_managed()
