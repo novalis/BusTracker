@@ -73,8 +73,12 @@ class Bus(models.Model):
         #This is when the distance along the route (a) is > 0.01
         observations = self.busobservation_set.filter(time__lte = now).order_by('time')
 
+        start_distance = None
         for observation in observations:
-            if observation.distance > 0.01:
+            if not start_distance:
+                start_distance = observation.distance
+                continue
+            if observation.distance - start_distance > 0.01:
                 start_location, start_distance, start_time = observation.location, observation.distance, observation.time
                 break
         else:
