@@ -13,6 +13,9 @@ function createMap(map_id) {
         {
             layers: 'openstreetmap',
             format: 'image/png',
+        },
+        {
+            transitionEffect: 'resize',
         }
     );
 
