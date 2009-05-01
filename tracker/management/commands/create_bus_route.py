@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # Imports tiger data from the table provided on the command-line into the tracker tables.
 
+from django.contrib.gis.geos.geometries import LineString
 from django.core.management.base import BaseCommand
 from optparse import make_option, OptionParser
 from tracker.models import *
@@ -167,6 +168,10 @@ tracker_routesegment.roadsegment_id = tracker_roadsegment.gid
 )""")
 
         for route in Route.objects.all():
+            if not isinstance(route.geometry, LineString):
+                print """Route %s is not a LineString (it's a %s).  
+This probably means that there's a gap in the route.""" % (route.name, type(route.geometry))
+
             #st_linemerge does not take order into account.  Merged routes need to have their 
             #points ordered in the same order as path_order.
             last_segment = route.routesegment_set.all().order_by("-path_order")[0].roadsegment.geometry
