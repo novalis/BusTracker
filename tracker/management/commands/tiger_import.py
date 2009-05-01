@@ -2,7 +2,6 @@
 # Imports tiger data from the table provided on the command-line into the tracker tables.
 
 from django.core.management.base import BaseCommand
-from optparse import make_option, OptionParser
 from tracker.models import *
 
 import re

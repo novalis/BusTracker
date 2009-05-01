@@ -119,6 +119,9 @@ class UpdateTestCase(TestCase):
         total_diff = 0
         n_samples = 0
 
+        max_diff = 0
+        worst_spot = None
+
         for bus in route.bus_set.all():
             observations = list(bus.busobservation_set.all())
             first_observation_time = observations[0].time
@@ -136,11 +139,14 @@ class UpdateTestCase(TestCase):
                             else:
                                 diff = (observation.time - estimated_time).seconds
 
-
+                            if diff > max_diff:
+                                max_diff = diff
+                                worst_spot = observation.location
                             total_diff += diff * diff
                             n_samples += 1
         assert n_samples, "There must be at least one bus observation in the fixtures."
         print "Divergence for this data set: %s" % sqrt(total_diff / n_samples)
+        print "Worst error: %s, at %s, %s" % (max_diff, worst_spot.x, worst_spot.y)
 
     def test_observation_smashing(self):
         

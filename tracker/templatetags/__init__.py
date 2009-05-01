@@ -2,6 +2,7 @@ from django.template import Library, add_to_builtins
 from simplejson import loads
 
 import settings
+import sys
 import urllib
 
 register = Library()
