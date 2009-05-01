@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from django.test import TestCase
 from django.test.client import Client
+from math import sqrt
 from tracker.views import update
 from tracker.models import *
 
@@ -128,11 +129,18 @@ class UpdateTestCase(TestCase):
                     if estimate_time > first_observation_time:
                         estimated_time = bus.estimated_arrival_time(observation.location, estimate_time)
                         if estimated_time:
-                            diff = abs((estimated_time - observation.time).seconds)
+                            #absolute value of difference; can't use
+                            #abs because datetime subtraction is broken.
+                            if estimated_time > observation.time:
+                                diff = (estimated_time - observation.time).seconds
+                            else:
+                                diff = (observation.time - estimated_time).seconds
+
+
                             total_diff += diff * diff
                             n_samples += 1
         assert n_samples, "There must be at least one bus observation in the fixtures."
-        print "Divergence for this data set: %s" % (total_diff / n_samples)
+        print "Divergence for this data set: %s" % sqrt(total_diff / n_samples)
 
     def test_observation_smashing(self):
         
