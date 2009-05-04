@@ -116,7 +116,7 @@ class UpdateTestCase(TestCase):
 
         route = Route.objects.get(name="M6 Downtown")
 
-        total_diff = 0
+        total_diff_squared = 0
         n_samples = 0
 
         max_diff = 0
@@ -142,10 +142,12 @@ class UpdateTestCase(TestCase):
                             if diff > max_diff:
                                 max_diff = diff
                                 worst_spot = observation.location
-                            total_diff += diff * diff
+                                #import pdb;pdb.set_trace()
+                            total_diff_squared += diff * diff
+
                             n_samples += 1
         assert n_samples, "There must be at least one bus observation in the fixtures."
-        print "Divergence for this data set: %s" % sqrt(total_diff / n_samples)
+        print "Divergence for this data set: %s" % sqrt(total_diff_squared / n_samples)
         print "Worst error: %s, at %s, %s" % (max_diff, worst_spot.x, worst_spot.y)
 
     def test_observation_smashing(self):

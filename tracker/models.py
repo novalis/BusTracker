@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 from django.contrib.gis.db import models
 from math import sqrt
 
+import time
+
 class Road(models.Model):
     """An entire road -- 8 Ave, for instance"""
     name = models.CharField(max_length=120, primary_key=True)
@@ -32,6 +34,7 @@ class Route(models.Model):
     def __unicode__(self):
         return "<Route ('%s')>" % self.name
 
+
 class RouteSegment(models.Model):
 
     class Meta:
@@ -41,6 +44,29 @@ class RouteSegment(models.Model):
     route = models.ForeignKey(Route)
     path_order = models.IntegerField()
     objects = models.GeoManager()
+
+
+def find_nearest_route_segment(route, location):
+    """Find which segment of a route a location is nearest to."""
+    radius = 0.002
+    nearby_segments = []
+    #we use dwithin and exponential backoff because dwithin can use
+    #the spatial index
+    while radius < 0.064 and not nearby_segments:
+        nearby_segments = list(route.routesegment_set.filter(roadsegment__geometry__dwithin=(location, radius)))
+        radius *= 2
+
+    assert nearby_segments, "no segment on %s near %d, %d" % (route.name, location.x, location.y)
+
+    nearest_segment=None
+    best_dist = 100000000000
+    for segment in nearby_segments:
+        dist = segment.roadsegment.geometry.distance(location)
+        if dist < best_dist:
+            best_dist = dist
+            nearest_segment = segment
+
+    return nearest_segment
 
 class Bus(models.Model):
     """A particular physical bus"""
@@ -100,28 +126,6 @@ class Bus(models.Model):
 
         estimate_from_distance = d / rate
 
-        def find_nearest_route_segment(route, location):
-            """Find which segment of a route a location is nearest to."""
-            radius = 0.002
-            nearby_segments = []
-            #we use dwithin and exponential backoff because dwithin can use
-            #the spatial index
-            while radius < 0.064 and not nearby_segments:
-                nearby_segments = list(route.routesegment_set.filter(roadsegment__geometry__dwithin=(location, radius)))
-                radius *= 2
-                
-            assert nearby_segments, "no segment on %s near %d, %d" % (route.name, location.x, location.y)
-
-            nearest_segment=None
-            best_dist = 100000000000
-            for segment in nearby_segments:
-                dist = segment.roadsegment.geometry.distance(location)
-                if dist < best_dist:
-                    best_dist = dist
-                    nearest_segment = segment
-
-            return nearest_segment
-
         start_segment = find_nearest_route_segment(self.route, start_location)
         last_segment = find_nearest_route_segment(self.route, last.location)
         target_segment = find_nearest_route_segment(self.route, target_location)
@@ -140,8 +144,64 @@ class Bus(models.Model):
             seconds = sqrt(estimate_from_distance * estimate_from_intersections) 
         else:
             seconds = estimate_from_distance
+
+        seconds = estimate_from_distance
         
         return last_time + timedelta(0, seconds)
+
+    def neural_train(self):
+        from tracker.bpnn import NN
+        self.nn = NN(3, 4, 1)
+        training_data = []
+        
+        observations = list(self.busobservation_set.all().order_by('time'))
+
+        start_distance = None
+        for observation in observations:
+            if not start_distance:
+                start_distance = observation.distance
+                continue
+            if observation.distance - start_distance > 0.01:
+                start_location, start_distance, start_time = observation.location, observation.distance, observation.time
+                break
+
+        #The target location is a point, but needs to be a distance along the route.
+        for i, observation in enumerate(observations):
+            for j in range(2):
+                target_location = observations[i + j]
+
+                target_distance = distance_along_route(target_location, self.route)
+
+                target_segment = find_nearest_route_segment(self.route, target_location)
+
+
+                current_distance = distance_along_route(observation.location, self.route)
+                remaining_distance = target_distance - current_distance
+                average_speed = current_distance / (observation.time - start_time)
+
+                current_segment = find_nearest_route_segment(self.route, observation.location)
+                remaining_intersections = current_segment - target_segment
+
+                output = (observation.time - start_time).seconds
+                training_data.append([[remaining_distance, average_speed, remaining_intersections], [output]])
+        nn.train(training_data)
+
+    def neural_estimate(self, location, time):
+        if not time:
+            now = datetime.utcnow()
+        else:
+            now = time
+
+        target_distance = distance_along_route(target_location, self.route)
+
+
+        remaining_distance = target_distance - current_distance
+        average_speed = current_distance / (observation.time - start_time)
+        
+        current_segment = find_nearest_route_segment(self.route, observation.location)
+        remaining_intersections = current_segment - target_segment
+
+        self.nn.update(
 
 
 def distance_along_route(location, route):
