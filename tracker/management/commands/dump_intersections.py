@@ -29,19 +29,21 @@ class Command(BaseCommand):
 
             center_of_intersection = on_segment.geometry.intersection(next_segment.geometry)
 
-            import pdb;pdb.set_trace()
 
             if center_of_intersection.empty:
                 print "error: no intersection at %s, %s" % (on_segment.road.name, next_segment.road.name)
                 sys.exit(1)
 
-            if on_segment.road == next_segment.road:
+            if on_segment.road_id == next_segment.road_id:
                 intersecting_segs = RoadSegment.objects.filter(geometry__intersects = center_of_intersection)
+                intersection = None
                 for seg in intersecting_segs:                    
-                    if seg.road != on_segment.road:
+                    if seg.road_id != on_segment.road_id:
                         intersection = "%s and %s" % (on_segment.road.name, seg.road.name)
-                intersection = "uh-oh"
-                print center_of_intersection, intersecting_segs
+                        break
+
+                if intersection == None:
+                    continue #this should only happen at forks
                 
             else:
                 #turn or road name change
@@ -52,5 +54,5 @@ class Command(BaseCommand):
             intersections.append({'intersection' : intersection, 
                                   'lng' : center_of_intersection.coords[0],
                                   'lat' : center_of_intersection.coords[1]})
-        #print dumps(intersections)
-        print intersections
+
+        print dumps(intersections)
