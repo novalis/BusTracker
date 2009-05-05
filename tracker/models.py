@@ -11,6 +11,9 @@ class Road(models.Model):
     #roads
     objects = models.GeoManager()
 
+    def __unicode__(self):
+        return "'%s'" % self.name
+
 class RoadSegment(models.Model):
     """Represents one segment of a road -- 8 Ave between W 28 St and
     W 29 St, for instance"""
@@ -24,13 +27,16 @@ class RoadSegment(models.Model):
     path_order = models.IntegerField()
     objects = models.GeoManager()
 
+    def __unicode__(self):
+        return "'%s (%d)'" % (self.road_id, self.path_order)
+
 class Route(models.Model):
     name = models.CharField(max_length=200, primary_key=True) #M20 Uptown
     geometry = models.GeometryField(null=True) #denormalized
     objects = models.GeoManager()    
 
     def __unicode__(self):
-        return "<Route ('%s')>" % self.name
+        return "'%s'" % self.name
 
 class RouteSegment(models.Model):
 
@@ -41,6 +47,27 @@ class RouteSegment(models.Model):
     route = models.ForeignKey(Route)
     path_order = models.IntegerField()
     objects = models.GeoManager()
+
+    def __unicode__(self):
+        return "'%s (%d)'" % (self.route_id, self.path_order)
+
+class BusStop(models.Model):
+    class Meta:
+        ordering = ["path_order"]
+
+    route = models.ForeignKey(Route)
+    path_order = models.IntegerField()
+    location = models.PointField()
+
+class Trip(models.Model):
+    route = models.ForeignKey(Route)
+    start_time = models.DateTimeField()
+
+class StopTime(models.Model):
+    trip = models.ForeignKey(Trip)
+    busstop = models.ForeignKey(BusStop)
+    time = models.DateTimeField()
+
 
 class Bus(models.Model):
     """A particular physical bus"""
