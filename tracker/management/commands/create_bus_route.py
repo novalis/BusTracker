@@ -171,6 +171,15 @@ tracker_routesegment.roadsegment_id = tracker_roadsegment.gid
             if not isinstance(route.geometry, LineString):
                 print """Route %s is not a LineString (it's a %s).  
 This probably means that there's a gap in the route.""" % (route.name, type(route.geometry))
+                last_seg = None
+                for seg in route.routesegment_set.all():
+                    if not last_seg:
+                        last_seg = seg
+                        continue
+
+                    if not last_seg.roadsegment.geometry.intersects(seg.roadsegment.geometry):
+                        print "gap between %s and %s" % (last_seg.roadsegment.road.name, seg.roadsegment.road.name)
+                    last_seg = seg
 
             #st_linemerge does not take order into account.  Merged routes need to have their 
             #points ordered in the same order as path_order.
