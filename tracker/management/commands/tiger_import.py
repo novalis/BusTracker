@@ -17,6 +17,10 @@ class Tiger(models.Model):
 
 countyfp_to_borough = {'061' : 'Manhattan'}
 
+rename_gids = {7903 : 'Grand Army Plz', 
+               4543 : 'Park Ave S'
+               }
+
 number_st_re = re.compile("((?:[NSEW] )?\d+)(?:st|nd|rd|th)? (Ave|St)(.*)")
 def normalize_street_name(fullname):
     """Tiger data has inconsistencies -- 25th St vs 26 St, or 
@@ -28,8 +32,6 @@ def normalize_street_name(fullname):
         return "%s %s%s" % (match.group(1), match.group(2), match.group(3))
     else:
         return fullname
-
-
 
 class Command(BaseCommand):
     help = "Imports tiger data from the table provided into the tracker tables."
@@ -51,7 +53,10 @@ class Command(BaseCommand):
             if not tiger_seg.fullname:
                 continue #riding through the city on a road with no name...
 
-            fullname = normalize_street_name(tiger_seg.fullname)
+            if tiger_seg.gid in rename_gids:
+                fullname = rename_gids[tiger_seg.gid]
+            else:
+                fullname = normalize_street_name(tiger_seg.fullname)
             
             road = Road(name = fullname + ", " + borough)
             road.save()
