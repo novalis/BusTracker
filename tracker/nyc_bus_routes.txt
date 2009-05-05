@@ -43,10 +43,25 @@ On: State Street Plz, GID: 495
 
 Route: M6 Uptown
 
-On: State St, From: Whitehall St, To: Battery Pl
+On: State Street Plz, GID: 495
+On: State St, GID: 8679
+On: State St, GID: 8419
+On: State St, From: Pearl St, To: Battery Pl
 On: Battery Pl, From: State St, To: Greenwich St
 On: Greenwich St, From: Battery Pl, To: Trinity Pl
 On: Trinity Pl, From: Greenwich St, To: Church St
 On: Church St, From: Trinity Pl, To: 6 Ave
-On: 6 Ave, From: Church St, To: Central Park S
+On: 6 Ave, From: Church St, To: Watts St
+On: 6 Ave, GID: 5157
+On: 6 Ave, GID: 1577
+On: 6 Ave, GID: 7487
+On: 6 Ave, GID: 6372
+On: 6 Ave, From: Vandam St, To: Charlton St
+On: 6 Ave, GID: 7482
+On: 6 Ave, GID: 1572
+On: 6 Ave, GID: 5626
+On: 6 Ave, GID: 1562
+On: 6 Ave, GID: 5089
+On: 6 Ave, GID: 7476
+On: 6 Ave, From: Minetta Ln, To: Central Park S
 
