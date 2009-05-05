@@ -178,7 +178,7 @@ This probably means that there's a gap in the route.""" % (route.name, type(rout
                         continue
 
                     if not last_seg.roadsegment.geometry.intersects(seg.roadsegment.geometry):
-                        print "gap between %s and %s" % (last_seg.roadsegment.road.name, seg.roadsegment.road.name)
+                        print "gap between %s and %s" % (last_seg.roadsegment, seg.roadsegment)
                     last_seg = seg
 
             #st_linemerge does not take order into account.  Merged routes need to have their 
