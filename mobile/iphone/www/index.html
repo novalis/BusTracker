@@ -32,22 +32,23 @@
     });
         
     function send_location_update(loc) {
-        var d = new Date(loc.timestamp*1000);
+        var d = new Date(loc.timestamp);
         var date_str = d.formatDate("Y-m-d%TH%:i%:s%Z");
         var url = $('#server-url')[0].value;
         var bus_id = $('#bus-id')[0].value;
         var route = $('#route-select')[0].value;
+        var accuracy = loc.accuracy ? loc.accuracy : {};
         var data = {
             username: bus_id, // TODO: replace username and report with sensible names
             report: route,
             date: date_str,
             lat: loc.latitude,
             lng: loc.longitude,
-            horizontal_accuracy: loc.accuracy.horizontal,
-            vertical_accuracy: loc.accuracy.vertical,
-            speed: loc.speed,
+            velocity: loc.velocity,
             altitude: loc.altitude,
-            course: loc.course
+            heading: loc.heading,
+            horizontal_accuracy: accuracy.horizontal,
+            vertical_accuracy: accuracy.vertical
         };
         $.ajax({
             url: url,
@@ -55,7 +56,7 @@
             type: 'POST',
             error: function(request, textStatus, error) {
                 navigator.notification.alert(textStatus);
-            }
+            },
         });
     }
 
