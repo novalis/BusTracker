@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>BusTracker</title>
+    <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="formatDate.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+
+    $(document).ready(function() {
+        set_default_form_values();
+
+        var watch_id;
+        // What is a reasonable value for the frequency? Phonegap defaults to 10000
+        var options = {
+            frequency: 5000,
+        };
+        $('#tracking-btn').click(function() {
+            if (this.innerHTML == "Start Tracking") {
+                this.innerHTML = "Stop Tracking";
+                watch_id = navigator.geolocation.watchPosition(send_location_update, function(error) {/* called if action times out? */ }, options);
+            } else {
+                this.innerHTML = "Start Tracking";
+                navigator.geolocation.clearWatch(watch_id);
+            }
+        });
+    });
+        
+    function send_location_update(loc) {
+        var d = new Date(loc.timestamp*1000);
+        var date_str = d.formatDate("Y-m-d%TH%:i%:s%Z");
+        var url = $('#server-url')[0].value;
+        var bus_id = $('#bus-id')[0].value;
+        var route = $('#route-select')[0].value;
+        var data = {
+            username: bus_id, // TODO: replace username and report with sensible names
+            report: route,
+            date: date_str,
+            lat: loc.latitude,
+            lng: loc.longitude,
+            horizontal_accuracy: loc.accuracy.horizontal,
+            vertical_accuracy: loc.accuracy.vertical,
+            speed: loc.speed,
+            altitude: loc.altitude,
+            course: loc.course
+        };
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            error: function(request, textStatus, error) {
+                navigator.notification.alert(textStatus);
+            }
+        });
+    }
+
+    function set_default_form_values() {
+        // Replace this with a call to the server to get a list of the bus routes
+        var bus_routes = ['M1 Downtown', 'M6 Uptown', 'M6 Downtown', 'M20 Uptown'];
+
+        for (var i=0; i<bus_routes.length; i++) {
+            var option = document.createElement('option');
+            var label = document.createTextNode(bus_routes[i]);
+            option.value = bus_routes[i];
+            option.appendChild(label);
+            $('#route-select').append(option);
+        }
+    }
+
+    function getLocation() {
+      navigator.notification.activityStart();
+      var suc = function(p){
+        debug.log(p.latitude + " " + p.longitude);
+        navigator.notification.activityStop();
+      };
+      navigator.geolocation.getCurrentPosition(suc,fail);
+    }
+    
+
+    function preventBehavior(e) { 
+      e.preventDefault(); 
+    };
+
+    PhoneGap.addConstructor(function(){
+      document.addEventListener("touchmove", preventBehavior, false);
+      uicontrols.setToolBarTitle("BusTracker");
+    });
+    
+    </script>
+  </head>
+  <body id="stage" class="theme">
+      <div id="Page1">
+        <form>
+            <label for="server-url">Server</label>
+            <input type="text" name="server-url" id="server-url" value="http://10.50.11.222:8000/tracker/update" />
+            <br />
+            <label for="bus-id">Bus ID</label>
+            <input type="text" name="bus-id" id="bus-id" />
+            <br />
+            <label for="route-select">Route</label>
+            <select name="route-select" id="route-select"</select>
+        </form>
+        <a href="#" id="tracking-btn" class="btn large">Start Tracking</a>
+      </div>
+  </body>
+</html>
