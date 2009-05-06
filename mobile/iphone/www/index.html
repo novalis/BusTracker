@@ -15,10 +15,9 @@
     $(document).ready(function() {
         set_default_form_values();
 
-        var watch_id;
-        // What is a reasonable value for the frequency? Phonegap defaults to 10000
+        // What is a reasonable value for the frequency?
         var options = {
-            frequency: 5000,
+            frequency: 10000,
         };
         $('#tracking-btn').click(function() {
             if (this.innerHTML == "Start Tracking") {
