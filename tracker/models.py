@@ -208,14 +208,38 @@ class BusObservation(models.Model):
     bus = models.ForeignKey(Bus)
     location = models.PointField()
     time = models.DateTimeField()
+    course = models.FloatField(null=True)
+    speed = models.FloatField(null=True)
+    altitude = models.FloatField(null=True)
+    horizontal_accuracy = models.FloatField(null=True)
+    vertical_accuracy = models.FloatField(null=True)
+    class Meta:
+        ordering = ["time"]
+
+    def __unicode__(self):
+        
+        return "%s at %s at %s" % (self.bus, self.location, self.time)
+
+
+    def distance_along_route(self):
+        return distance_along_route(self.location, self.bus.route)
+
+
+
+class IntersectionObservation(models.Model):
+    """A human observation of a bus"""
+    objects = BusObservationManager()
+    bus = models.ForeignKey(Bus)
+    location = models.PointField()
+    time = models.DateTimeField()
+    intersection = models.CharField(max_length=120)
 
     class Meta:
         ordering = ["time"]
 
     def __unicode__(self):
         
-        return "<Observation of %s at %s at %s >" % (self.bus, self.location, self.time)
-
+        return "%s at %s at %s" % (self.bus, self.location, self.time)
 
     def distance_along_route(self):
         return distance_along_route(self.location, self.bus.route)
