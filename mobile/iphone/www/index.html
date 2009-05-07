@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>BusTracker</title>
+    <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="iPhoneUI.css" type="text/css" media="screen" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="formatDate.js"></script>
+    <script type="text/javascript" charset="utf-8" src="intersections.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+
+    $(document).ready(function() {
+        set_default_form_values();
+
+        // What is a reasonable value for the frequency?
+        var options = {
+            frequency: 10000,
+        };
+        $('#tracking-btn').click(function() {
+            if (this.innerHTML == "Start Tracking") {
+                this.innerHTML = "Stop Tracking";
+                watch_id = navigator.geolocation.watchPosition(send_location_update, function(error) {/* called if action times out? */ }, options);
+            } else {
+                if (confirm("Are you sure you want to stop tracking?")) {
+                    this.innerHTML = "Start Tracking";
+                    navigator.geolocation.clearWatch(watch_id);
+                }
+            }
+        });
+
+        
+        intersection_idx = 0;
+        just_clicked = false;
+        $('#intersection-btn').click(function() {
+            // Avoid accidental doubletaps
+            if (just_clicked) {
+                return;
+            } else {
+                just_clicked = true;
+                $(this).fadeTo('fast', 0.33);
+                setTimeout(function() {
+                    just_clicked = false;
+                    $('#intersection-btn').fadeTo('fast',1);
+                }, 1500);
+            }
+            var route = $('#route-select')[0].value;
+            var intersections = intersections_for_route[route];
+            if (intersection_idx < intersections.length) {
+                var loc = {
+                    lat: intersections[intersection_idx]['lat'],
+                    lng: intersections[intersection_idx]['lng'],
+                    intersection: intersections[intersection_idx]['intersection']
+                };
+                send_location_update(loc);
+                // click means we're at intersection_idx, so advance
+                // and get ready for the next intersection.
+                intersection_idx++;
+                this.innerHTML = intersections[intersection_idx]['intersection'];
+            } else {
+                this.innerHTML = 'End of route';
+            }
+        });
+    });
+        
+    function send_location_update(loc) {
+        var url = $('#server-url')[0].value;
+        var bus_id = $('#bus-id')[0].value;
+        var route = $('#route-select')[0].value;
+        var data = {
+            username: bus_id, // TODO: replace username and report with sensible names
+            report: route,
+        };
+        if (loc.intersection) { 
+            // Update from user clicking the intersection btn
+            var timestamp = new Date(); // current time
+            data['intersection'] = loc.intersection;
+            data['lat'] = loc['lat'];
+            data['lng'] = loc['lng'];
+        } else {
+            // Update from GPS
+            var timestamp = new Date(loc.timestamp);
+            var accuracy = loc.accuracy ? loc.accuracy : {};
+            data['horizontal_accuracy'] = accuracy.horizontal;
+            data['vertical_accuracy'] = accuracy.vertical;
+            data['speed'] = loc.velocity;
+            data['altitude'] = loc.altitude;
+            data['heading'] = loc.heading;
+            data['lat'] = loc.latitude;
+            data['lng'] = loc.longitude;
+        }
+        data['date'] = timestamp.formatDate("Y-m-d%TH%:i%:s%Z");
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            error: function(request, textStatus, error) {
+                navigator.notification.alert(textStatus);
+            },
+        });
+    }
+
+    function set_default_form_values() {
+        // get route/intersection data from server instead of js file?
+        for (var route in intersections_for_route) {
+            var option = document.createElement('option');
+            var label = document.createTextNode(route);
+            option.value = route;
+            option.appendChild(label);
+            $('#route-select').append(option);
+        }
+
+        $('#server-url')[0].value = 'http://10.50.11.222:8000/tracker/update';
+        var intersection = intersections_for_route[$('#route-select')[0].value][0]['intersection'];
+        $('#intersection-btn')[0].innerHTML = intersection;
+    }
+
+    function preventBehavior(e) { 
+      e.preventDefault(); 
+    };
+
+    PhoneGap.addConstructor(function(){
+      document.addEventListener("touchmove", preventBehavior, false);
+      uicontrols.setToolBarTitle("BusTracker");
+    });
+    
+    </script>
+  </head>
+  <body id="stage" class="theme">
+    <dl class="edgeToEdge formFields">
+        <form>
+            <dt>
+                <label for="server-url">Server</label>
+            </dt>
+            <dd>
+                <input type="text" name="server-url" id="server-url" />
+            </dd>
+            <dt>
+                <label for="bus-id">Bus ID</label>
+            </dt>
+            <dd>
+                <input type="text" name="bus-id" id="bus-id" />
+            </dd>
+            <dt>
+                <label for="route-select">Route</label>
+            </dt>
+            <dd class="last">
+                <select name="route-select" id="route-select"</select>
+            </dd>
+        </form>
+        <a href="#" id="tracking-btn" class="btn large">Start Tracking</a>
+        <a href="#" id="intersection-btn" class="btn large">intersection</a>
+    </dl>
+  </body>
+</html>
