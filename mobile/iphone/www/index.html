@@ -76,13 +76,11 @@
     }
 
     function set_default_form_values() {
-        // Replace this with a call to the server to get a list of the bus routes
-        var bus_routes = ['M1 Downtown', 'M6 Uptown', 'M6 Downtown', 'M20 Uptown'];
-
-        for (var i=0; i<bus_routes.length; i++) {
+        // get route/intersection data from server instead of js file?
+        for (var route in intersections_for_route) {
             var option = document.createElement('option');
-            var label = document.createTextNode(bus_routes[i]);
-            option.value = bus_routes[i];
+            var label = document.createTextNode(route);
+            option.value = route;
             option.appendChild(label);
             $('#route-select').append(option);
         }
