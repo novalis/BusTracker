@@ -190,14 +190,15 @@ class BusObservationManager(models.GeoManager):
     def get_query_set(self):
         return super(BusObservationManager, self).get_query_set().extra(select={
             'distance': """
-SELECT st_line_locate_point(route.geometry, tracker_busobservation.location) 
+SELECT st_line_locate_point(route.geometry, %s.location) 
 FROM 
 tracker_bus as bus, 
 tracker_route as route
 WHERE 
-tracker_busobservation.bus_id = bus.id AND
+%s.bus_id = bus.id AND
 bus.route_id = route.name
-"""})
+""" % (self.model._meta.db_table,
+       self.model._meta.db_table)})
 
 
 
@@ -233,6 +234,7 @@ class IntersectionObservation(models.Model):
     location = models.PointField()
     time = models.DateTimeField()
     intersection = models.CharField(max_length=120)
+    distance = models.FloatField(null=True)
 
     class Meta:
         ordering = ["time"]
@@ -241,5 +243,10 @@ class IntersectionObservation(models.Model):
         
         return "%s at %s at %s" % (self.bus, self.location, self.time)
 
+    def save(self):
+        if not self.distance:
+            self.distance = self.distance_along_route()
+        super(IntersectionObservation, self).save()
+    
     def distance_along_route(self):
         return distance_along_route(self.location, self.bus.route)
