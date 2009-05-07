@@ -44,7 +44,7 @@ def update(request):
     location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
 
     if 'intersection' in request.REQUEST:
-        obs = IntersectionObservation(bus=bus, location=location, time=client_tie, intersection = request.REQUEST['intersection'])
+        obs = IntersectionObservation(bus=bus, location=location, time=client_time, intersection = request.REQUEST['intersection'])
         obs.save()
     else:
 
@@ -55,7 +55,14 @@ def update(request):
             possible_observations[0].time = client_time
         else:
             extra_field_names = ['speed', 'course', 'horizontal_accuracy', 'vertical_accuracy', 'altitude']
-            extra_fields = dict((x, request.REQUEST.get(x)) for x in extra_field_names)
+            extra_fields = {}
+            for x in extra_field_names:
+                value = request.REQUEST.get(x)
+                try:
+                    value = float(value)
+                    extra_fields[x] = value
+                except ValueError:
+                    continue
             obs = BusObservation(bus=bus, location=location, time=client_time, **extra_fields)
                                        
             obs.save()
