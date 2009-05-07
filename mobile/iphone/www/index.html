@@ -6,6 +6,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>BusTracker</title>
     <link rel="stylesheet" href="master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="iPhoneUI.css" type="text/css" media="screen" charset="utf-8">
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8" src="jquery-1.3.2.js"></script>
     <script type="text/javascript" charset="utf-8" src="formatDate.js"></script>
@@ -116,19 +117,29 @@
     </script>
   </head>
   <body id="stage" class="theme">
-      <div id="Page1">
+    <dl class="edgeToEdge formFields">
         <form>
-            <label for="server-url">Server</label>
-            <input type="text" name="server-url" id="server-url" />
-            <br />
-            <label for="bus-id">Bus ID</label>
-            <input type="text" name="bus-id" id="bus-id" />
-            <br />
-            <label for="route-select">Route</label>
-            <select name="route-select" id="route-select"</select>
+            <dt>
+                <label for="server-url">Server</label>
+            </dt>
+            <dd>
+                <input type="text" name="server-url" id="server-url" />
+            </dd>
+            <dt>
+                <label for="bus-id">Bus ID</label>
+            </dt>
+            <dd>
+                <input type="text" name="bus-id" id="bus-id" />
+            </dd>
+            <dt>
+                <label for="route-select">Route</label>
+            </dt>
+            <dd class="last">
+                <select name="route-select" id="route-select"</select>
+            </dd>
         </form>
         <a href="#" id="tracking-btn" class="btn large">Start Tracking</a>
         <a href="#" id="intersection-btn" class="btn large">intersection</a>
-      </div>
+    </dl>
   </body>
 </html>
