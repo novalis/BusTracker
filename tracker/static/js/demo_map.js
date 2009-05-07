@@ -40,6 +40,7 @@ function createMap(map_id) {
 }
 
 function loadKml(url, name) {
+
     var layerOptions = {
         format: OpenLayers.Format.KML,
         projection: new OpenLayers.Projection('EPSG:4326'),
@@ -50,8 +51,44 @@ function loadKml(url, name) {
     return layer;
 }
 
+
+
+function loadBusKml(url, name) {
+    var styleMap = new OpenLayers.StyleMap({
+            fillOpacity: 0.2,
+            pointRadius: 5,
+            
+        });
+           
+    var lookup = {
+        '#tracker_busobservation': {fillColor: "green"},
+        '#tracker_intersectionobservation': {fillColor: "red",
+                                             fillOpacity: 1.0,
+                                             pointRadius: 10,},
+    }
+ 
+            
+    var context = function(feature) {
+        return feature.attributes;
+    }
+    
+    styleMap.addUniqueValueRules("default", "styleUrl", lookup, context);
+
+    var layerOptions = {
+        format: OpenLayers.Format.KML,
+        projection: new OpenLayers.Projection('EPSG:4326'),
+        extractAttributes: true,
+        styleMap: styleMap
+    };
+    var layer = new OpenLayers.Layer.GML(name, url, layerOptions);
+    map.addLayers([layer]);
+
+    return layer;
+}
+
+
 function loadBusData(url, name) {
-    var layer = loadKml(url, name); 
+    var layer = loadBusKml(url, name); 
     layer.events.register('loadend', layer, function() {
         this.map.zoomToExtent(this.getDataExtent()); 
         //TODO Move all this stuff that doesn't belong in loadBusData

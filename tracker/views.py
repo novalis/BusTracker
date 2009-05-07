@@ -17,7 +17,12 @@ def index(request):
 
 def kml(request):
     bus_id = request.REQUEST['bus_id']
-    observations = BusObservation.objects.filter(bus=bus_id)
+    observations = list(BusObservation.objects.filter(bus=bus_id))
+    intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
+
+    observations += intersection_observations
+    observations.sort(key=lambda obs: obs.time)
+    
     return render_to_response('routes/kml.kml', {'observations': observations})
 
 def route_kml(request):

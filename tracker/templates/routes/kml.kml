@@ -3,6 +3,7 @@
 <Document>
 {% for observation in observations %}
   <Placemark>
+    <styleUrl>#{{ observation|style_for_observation }}</styleUrl>
 		<name>
 			{{ observation.time|localdatetime }}
 		</name>
