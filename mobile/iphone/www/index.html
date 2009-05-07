@@ -9,6 +9,7 @@
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8" src="jquery-1.3.2.js"></script>
     <script type="text/javascript" charset="utf-8" src="formatDate.js"></script>
+    <script type="text/javascript" charset="utf-8" src="intersections.js"></script>
 
     <script type="text/javascript" charset="utf-8">
 
@@ -70,6 +71,8 @@
             option.appendChild(label);
             $('#route-select').append(option);
         }
+
+        $('#server-url')[0].value = 'http://10.50.11.222:8000/tracker/update';
     }
 
     function getLocation() {
@@ -97,7 +100,7 @@
       <div id="Page1">
         <form>
             <label for="server-url">Server</label>
-            <input type="text" name="server-url" id="server-url" value="http://10.50.11.222:8000/tracker/update" />
+            <input type="text" name="server-url" id="server-url" />
             <br />
             <label for="bus-id">Bus ID</label>
             <input type="text" name="bus-id" id="bus-id" />
@@ -106,6 +109,7 @@
             <select name="route-select" id="route-select"</select>
         </form>
         <a href="#" id="tracking-btn" class="btn large">Start Tracking</a>
+        <a href="#" id="intersection-btn" class="btn large">intersection</a>
       </div>
   </body>
 </html>
