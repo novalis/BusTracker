@@ -26,8 +26,10 @@
                 this.innerHTML = "Stop Tracking";
                 watch_id = navigator.geolocation.watchPosition(send_location_update, function(error) {/* called if action times out? */ }, options);
             } else {
-                this.innerHTML = "Start Tracking";
-                navigator.geolocation.clearWatch(watch_id);
+                if (confirm("Are you sure you want to stop tracking?")) {
+                    this.innerHTML = "Start Tracking";
+                    navigator.geolocation.clearWatch(watch_id);
+                }
             }
         });
 
