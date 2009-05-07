@@ -35,7 +35,19 @@
 
         
         intersection_idx = 0;
+        just_clicked = false;
         $('#intersection-btn').click(function() {
+            // Avoid accidental doubletaps
+            if (just_clicked) {
+                return;
+            } else {
+                just_clicked = true;
+                $(this).fadeTo('fast', 0.33);
+                setTimeout(function() {
+                    just_clicked = false;
+                    $('#intersection-btn').fadeTo('fast',1);
+                }, 1500);
+            }
             var route = $('#route-select')[0].value;
             var intersections = intersections_for_route[route];
             if (intersection_idx < intersections.length) {
