@@ -58,6 +58,8 @@ def update(request):
             extra_fields = {}
             for x in extra_field_names:
                 value = request.REQUEST.get(x)
+                if not value:
+                    continue
                 try:
                     value = float(value)
                     extra_fields[x] = value
