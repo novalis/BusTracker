@@ -17,7 +17,12 @@ def index(request):
 
 def kml(request):
     bus_id = request.REQUEST['bus_id']
-    observations = BusObservation.objects.filter(bus=bus_id)
+    observations = list(BusObservation.objects.filter(bus=bus_id))
+    intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
+
+    observations += intersection_observations
+    observations.sort(key=lambda obs: obs.time)
+    
     return render_to_response('routes/kml.kml', {'observations': observations})
 
 def route_kml(request):
@@ -43,14 +48,31 @@ def update(request):
 
     location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
 
-    possible_observations = bus.busobservation_set.order_by('-time')[:2]
-    if (len(possible_observations) == 2 and 
-        possible_observations[0].location == location and 
-        possible_observations[1].location == location):
-        possible_observations[0].time = client_time
-    else:
-        obs = BusObservation(bus=bus, location=location, time=client_time)
+    if 'intersection' in request.REQUEST:
+        obs = IntersectionObservation(bus=bus, location=location, time=client_time, intersection = request.REQUEST['intersection'])
         obs.save()
+    else:
+
+        possible_observations = bus.busobservation_set.order_by('-time')[:2]
+        if (len(possible_observations) == 2 and 
+            possible_observations[0].location == location and 
+            possible_observations[1].location == location):
+            possible_observations[0].time = client_time
+        else:
+            extra_field_names = ['speed', 'course', 'horizontal_accuracy', 'vertical_accuracy', 'altitude']
+            extra_fields = {}
+            for x in extra_field_names:
+                value = request.REQUEST.get(x)
+                if not value:
+                    continue
+                try:
+                    value = float(value)
+                    extra_fields[x] = value
+                except ValueError:
+                    continue
+            obs = BusObservation(bus=bus, location=location, time=client_time, **extra_fields)
+                                       
+            obs.save()
 
     return HttpResponse("ok")
 

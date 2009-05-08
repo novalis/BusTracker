@@ -171,3 +171,16 @@ class UpdateTestCase(TestCase):
                          { 'bus_id' : '8' })
 
         self.assertContains(response, '-74.0', count=2)
+
+    def test_intersection_observation(self):
+                
+        c = Client()
+        response = c.post('/tracker/update', {'username' : '8',
+                                              'report': 'M20 Uptown', 
+                                              'intersection' : '8 Ave and 37 St',
+                                              'lat': '40.754076', 
+                                              'lng' : '-73.992051',
+                                              'date' : '2009-04-24T00:00:00Z'})
+
+        for io in IntersectionObservation.objects.all():
+            self.assertTrue(0 < io.distance < 1)

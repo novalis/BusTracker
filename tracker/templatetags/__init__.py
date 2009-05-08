@@ -35,3 +35,8 @@ def reverse_geocode_intersection(point):
     
 
 add_to_builtins('tracker.templatetags')
+
+
+@register.filter
+def style_for_observation(observation):
+    return observation._meta.db_table
