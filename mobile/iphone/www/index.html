@@ -45,6 +45,10 @@
                 $(this).fadeTo('fast', 0.33);
                 setTimeout(function() {
                     just_clicked = false;
+                    // click means we're at intersection_idx, so advance
+                    // and get ready for the next intersection.
+                    intersection_idx++;
+                    $('#intersection-btn')[0].innerHTML = intersections[intersection_idx]['intersection'];
                     $('#intersection-btn').fadeTo('fast',1);
                 }, 1500);
             }
@@ -57,12 +61,6 @@
                     intersection: intersections[intersection_idx]['intersection']
                 };
                 send_location_update(loc);
-                // click means we're at intersection_idx, so advance
-                // and get ready for the next intersection.
-                intersection_idx++;
-                this.innerHTML = intersections[intersection_idx]['intersection'];
-            } else {
-                this.innerHTML = 'End of route';
             }
         });
     });
