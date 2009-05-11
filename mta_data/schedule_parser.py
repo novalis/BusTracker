@@ -127,3 +127,12 @@ tripdesc_format = LineFormat(
     FieldDef('route_name_again_4', 5),
     FieldDef('UNKNOWN_23', 8, numeric = True),
 )
+
+#0123456789012345678901
+#314c6700052700D ST   E
+tripstop_format = LineFormat(
+    FieldDef("UNKNOWN_1", 14, hex),
+    FieldDef("type", 2), #D = depart?, T = timed?, A = arrive?
+    FieldDef("UNKNOWN_2", 5), #ST or SN -- anything else?
+    FieldDef("UNKNOWN_3", 1),
+)
