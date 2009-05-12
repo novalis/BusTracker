@@ -79,7 +79,8 @@ INSTALLED_APPS = (
 #    'django.contrib.sites',
     'django.contrib.gis',
     'django.contrib.admin',
-    'BusTracker.tracker'
+    'BusTracker.tracker',
+    'BusTracker.mta_data',
 )
 
 POSTGIS_SQL_PATH = '/usr/share/postgresql-8.3-postgis/'
