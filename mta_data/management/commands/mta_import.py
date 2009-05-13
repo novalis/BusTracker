@@ -121,10 +121,10 @@ trip_format = LineFormat(
     FieldDef('UNKNOWN_4', 9, hex=True),  
     FieldDef('UNKNOWN_5', 9),  #I only hypothesize that this field is not part of the prev or next
     FieldDef('UNKNOWN_6', 1, numeric = True),
-    FieldDef('route_name', 5, strip_underscore=True),
+    FieldDef('route_name_again_1', 5, strip_underscore=True),
     FieldDef('UNKNOWN_7', 5, numeric = True, strip_underscore=True), 
     FieldDef('UNKNOWN_8', 3), #another hypothetical-dark-matter-type field
-    FieldDef('route_name_again_1', 5),
+    FieldDef('route_name_again_2', 5),
     FieldDef('UNKNOWN_9', 24), 
     FieldDef('UNKNOWN_10', 1),
     FieldDef('headsign_id', 5, numeric = True),
@@ -137,10 +137,10 @@ trip_format = LineFormat(
     FieldDef('UNKNOWN_18', 5),
     FieldDef('UNKNOWN_19', 2, numeric = True),
     FieldDef('UNKNOWN_20', 3), #dark matter
-    FieldDef('route_name_again_2', 5),
+    FieldDef('route_name_again_3', 5),
     FieldDef('UNKNOWN_21', 9, numeric = True),
     FieldDef('UNKNOWN_22', 6, numeric = True),
-    FieldDef('route_name_again_3', 5),
+    FieldDef('route_name', 5), #this is the actual route name for this trip -- see s4898 for an example
     FieldDef('UNKNOWN_23', 6),
     FieldDef('UNKNOWN_24', 3, numeric = True),
     FieldDef('route_name_again_4', 5),
