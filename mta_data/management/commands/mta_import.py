@@ -117,8 +117,9 @@ trip_format = LineFormat(
     FieldDef("start_minutes", 6, numeric=True),
     FieldDef('direction', 2), #NSEW only, I think.
     FieldDef('UNKNOWN_2', 2, numeric=True), 
-    FieldDef('UNKNOWN_3', 3, hex=True), 
-    FieldDef('UNKNOWN_4', 9, hex=True),  
+    FieldDef('start_stop', 4, hex=True), 
+    FieldDef('UNKNOWN_4', 2, hex=True),  
+    FieldDef('end_minutes', 6, numeric=True),  
     FieldDef('UNKNOWN_5', 9),  #I only hypothesize that this field is not part of the prev or next
     FieldDef('UNKNOWN_6', 1, numeric = True),
     FieldDef('route_name_again_1', 5, strip_underscore=True),
