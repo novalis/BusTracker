@@ -182,9 +182,14 @@ def parse_schedule_file(path):
     match = filename_re.match(filename)
 
     if not match:
-        print filename
-        import pdb;pdb.set_trace()
+        print >>sys.stdout, "could not parse filename %s" % filename
+
     route = match.groupdict()
+
+    if route['day_of_week'] == 'wkd.open':
+        route['day_of_week'] = 'wko'
+    if route['day_of_week'] == 'wkd.closed':
+        route['day_of_week'] = 'wkc'
 
     route['original_filename'] = filename
 
@@ -228,7 +233,7 @@ class Command(BaseCommand):
         files = os.listdir(dirname)
 
         def store(route):
-            filename = "%s%s.%s.%s.json" % (route['borough'], route['route_no'], route.get('holiday', 'normal'), route['day_of_week'])
+            filename = "%s%s.%s.json" % (route['borough'], route['route_no'], route['day_of_week'])
             path = os.path.join(outdir, filename)
             if os.path.exists(path):
                 import pdb;pdb.set_trace()
@@ -245,7 +250,8 @@ class Command(BaseCommand):
                 subdirname = os.path.join(dirname, filename)
                 files = os.listdir(subdirname)
                 for filename in files:
-                    if filename.startswith('stif'):
+                    #schools are necessarily closed on holidays, so I have no idea why there are open data sets.
+                    if filename.startswith('stif') and filename.endswith('.closed'):
                         route = parse_schedule_file(os.path.join(subdirname, filename))
-                        route['holiday'] = holiday_abbrev
+                        route['day_of_week'] = holiday_abbrev
                         store(route)

@@ -18,7 +18,7 @@ class BusStop(models.Model):
 
 class Trip(models.Model):
     route = models.ForeignKey(Route)
-    day_of_week = models.CharField(max_length=3) #sat, sun, wkd, xme, xmd, nye, nyd  (christmas eve, day, new year's eve, day)
+    day_of_week = models.CharField(max_length=3) #sat, sun, wko, wkc, xme, xmd, nye, nyd  (weekday when school is open, weekday when school is closed, christmas eve, day, new year's eve, day)
     start_time = models.TimeField()
 
 class TripStop(models.Model):
