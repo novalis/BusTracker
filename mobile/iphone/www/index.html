@@ -82,14 +82,13 @@
         } else {
             // Update from GPS
             var timestamp = new Date(loc.timestamp);
-            var accuracy = loc.accuracy ? loc.accuracy : {};
-            data['horizontal_accuracy'] = accuracy.horizontal;
-            data['vertical_accuracy'] = accuracy.vertical;
             data['speed'] = loc.velocity;
             data['altitude'] = loc.altitude;
             data['heading'] = loc.heading;
             data['lat'] = loc.latitude;
             data['lng'] = loc.longitude;
+            data['horizontal_accuracy'] = loc.accuracy.horizontal;
+            data['vertical_accuracy'] = loc.accuracy.vertical;
         }
         data['date'] = timestamp.formatDate("Y-m-d%TH%:i%:s%Z");
         $.ajax({
