@@ -23,8 +23,8 @@ class FieldDef:
 class LineFormat:
     def __init__(self, name, *fields):
         self.name = name
-        self.fields = fields
-        self.fields.insert(0, Field('record_type', 2, numeric=True))
+        self.fields = list(fields)
+        self.fields.insert(0, FieldDef('record_type', 2, numeric=True))
 
     @property
     def width(self):
@@ -157,6 +157,7 @@ trip_format = LineFormat(
 #0123456789012345678901
 #314c6700052700D ST   E
 tripstop_format = LineFormat(
+    'tripstop',
     FieldDef("stop_id", 4, hex=True),
     FieldDef("UNKNOWN_2", 2), 
     FieldDef("minutes", 6, numeric=True),
@@ -170,6 +171,7 @@ tripstop_format = LineFormat(
 #351060    M06       MIDTOWN 59 ST via 6 AV
 
 headsign_format = LineFormat(
+    'headsign',
     FieldDef("headsign_id", 5, numeric=True), 
     FieldDef("UNKNOWN_2", 3),
     FieldDef("route_id", 5), 
@@ -216,7 +218,6 @@ def parse_schedule_file(path):
             route['trips'].append(trip)
         elif len(line) == tripstop_format.width:
             stop = tripstop_format.parse(line)
-            #fixme: associate stop id with box id or some other location id
             trip['stops'].append(stop) 
         elif len(line) == headsign_format.width:
             route['headsigns'].append(headsign_format.parse(line))
