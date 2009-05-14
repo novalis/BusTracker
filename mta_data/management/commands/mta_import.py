@@ -28,7 +28,8 @@ class MTARoute(models.Model):
 
 fix_direction = {
     'Bx14' : {'W' : 'S', 'E' : 'N'},
-    'S54' : {'E' : 'S'},
+    'S74' : {'E' : 'S', 'W' : 'N'},
+    'S54' : {'E' : 'S'}, #one bogus entry
 
 }
 
@@ -59,6 +60,9 @@ def process_route(route_rec, mta_routes, name):
             continue
         #fix up bogus direction information
         direction = trip_rec['direction']
+        if not direction:
+            print "no direction for %s" % name
+            import pdb;pdb.set_trace()
         if name in fix_direction:
             fix = fix_direction[name]
             if direction in fix:
@@ -122,9 +126,9 @@ class Command(BaseCommand):
                         print "route %s has no entry in shapes." % name
                         import pdb;pdb.set_trace()
                         continue
-                    for name in names:
 
-                        if name == 'S98':
+                    for name in names:
+                        if name == 'S48':
                             #there's no route for the westbound S98, so we use
                             #the S48 routes, which are the same but for stops
                             search_name = 'S48'
