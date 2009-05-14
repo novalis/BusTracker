@@ -1,0 +1,18 @@
+S98 has no westbound route in shapefile. -- FIXED
+
+S 61 has no E and S91 has no W route in shapefiles.  two Es for express (
+
+bx14 has mixed-up directions (n/s vs e/w) -- FIXED
+
+Q48: What does the direction "L" mean?  q48 appears to not be a big loop...
+
+M14: Some go along ave A, some ave D -- but there are 5 routes in the
+schedule data (all with wrong headsigns?) and 6 in the map.  6 is the
+correct number according to the printed schedule -- A or D, west or
+east, A with or without stop at w village/abington sq.  Also, route 
+data has 4 westbound vs 2 eastbound routes, but schedule is 3/3(?)
+
+
+m22, b49, m21, b8, b70 have no directions?
+
+I need 

@@ -5,6 +5,7 @@ class Route(models.Model):
     """A route (in one direction)"""
     name = models.CharField(max_length=5, primary_key=True) #borough, number, x
     geometry = models.GeometryField(null=True) #from MTA's shapefile
+    direction = models.CharField(max_length = 1) #NSEW
     objects = models.GeoManager()
 
     def __unicode__(self):
@@ -23,7 +24,6 @@ class Trip(models.Model):
     #christmas eve, day, new year's eve, day
     day_of_week = models.CharField(max_length=3)
     start_time = models.TimeField()
-    direction = models.CharField(max_length = 1) #NSEW
 
 class TripStop(models.Model):
     trip = models.ForeignKey(Trip)

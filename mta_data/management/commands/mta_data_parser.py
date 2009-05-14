@@ -21,8 +21,10 @@ class FieldDef:
         return "<FieldDef ('%s', %d)>" % (self.name, self.width)
 
 class LineFormat:
-    def __init__(self, *fields):
-        self.fields = fields
+    def __init__(self, name, *fields):
+        self.name = name
+        self.fields = list(fields)
+        self.fields.insert(0, FieldDef('record_type', 2, numeric=True))
 
     @property
     def width(self):
@@ -61,7 +63,8 @@ class LineFormat:
 #11UP  M 0025X 11ULMER PARK              GRAND CENTRAL - WALL STR409057   240 S TA  20081013  
 
 route_format = LineFormat(
-    FieldDef('route_id', 6),
+    "route",
+    FieldDef('depot_short', 4),
     FieldDef('borough', 2),
     FieldDef('route_no', 4, numeric=True),
     FieldDef('route_name_flag', 1),
@@ -73,7 +76,7 @@ route_format = LineFormat(
     FieldDef('UNKNOWN_4', 2), 
     FieldDef('UNKNOWN_5', 2), 
     FieldDef('UNKNOWN_6', 9), #looks like a date in YYYYMMDD format?
-    FieldDef('REMAINDER', 4)
+    FieldDef('REMAINDER', 4),
 )
 
 #there's a list of these staring at the second line.  It appears that
@@ -84,7 +87,7 @@ route_format = LineFormat(
 #15169bBRIGHTON BEACH AV     CONEY ISLAND AV       000000000000B  BBCIA    N    40578014 -73959770 300012
 
 stop_format = LineFormat(
-    FieldDef('UNKNOWN_1', 2, hex=True),
+    "stop",
     FieldDef('stop_id', 4, hex=True),
     FieldDef('street1', 22),
     FieldDef('street2', 22),
@@ -110,7 +113,7 @@ stop_format = LineFormat(
 #21f9d 00031500W 1447c100034700       201SBS12_0037   SBS12                        S8127 N N                7270 GH    8745788    201  SBS12 00036000   13  SBS12    201  SBS12 00031300
 
 trip_format = LineFormat(
-    FieldDef('UNKNOWN_0', 2, hex=True),
+    "trip",
     FieldDef('stop_id', 4, hex=True),
     FieldDef("UNKNOWN_1", 2), 
     FieldDef("start_minutes", 6, numeric=True),
@@ -154,7 +157,7 @@ trip_format = LineFormat(
 #0123456789012345678901
 #314c6700052700D ST   E
 tripstop_format = LineFormat(
-    FieldDef("UNKNOWN_1", 2), 
+    'tripstop',
     FieldDef("stop_id", 4, hex=True),
     FieldDef("UNKNOWN_2", 2), 
     FieldDef("minutes", 6, numeric=True),
@@ -168,7 +171,7 @@ tripstop_format = LineFormat(
 #351060    M06       MIDTOWN 59 ST via 6 AV
 
 headsign_format = LineFormat(
-    FieldDef("UNKNOWN_1", 2, numeric=True), 
+    'headsign',
     FieldDef("headsign_id", 5, numeric=True), 
     FieldDef("UNKNOWN_2", 3),
     FieldDef("route_id", 5), 
@@ -215,7 +218,6 @@ def parse_schedule_file(path):
             route['trips'].append(trip)
         elif len(line) == tripstop_format.width:
             stop = tripstop_format.parse(line)
-            #fixme: associate stop id with box id or some other location id
             trip['stops'].append(stop) 
         elif len(line) == headsign_format.width:
             route['headsigns'].append(headsign_format.parse(line))
