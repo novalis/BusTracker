@@ -1,7 +1,7 @@
 from datetime import time
 from django.contrib.gis.geos import Point
 from django.core.management.base import BaseCommand
-from django.db import transaction
+from django.db import transaction, connection
 from mta_data_parser import parse_schedule_dir
 from mta_data.models import *
 from simplejson import dumps
@@ -111,6 +111,9 @@ gid = %%s""" % table_name
 def process_route(route_rec, mta_routes, name, table_name):
     print "importing", name
 
+    _route_by_stops_cache.clear() #multiple routes will rarely have
+                                  #the same stops.
+
     #store routes
     routes_by_direction = {}
     for mta_route in mta_routes:
@@ -195,6 +198,8 @@ class Command(BaseCommand):
                 #fixme: need to worry about weird bus names with ABCD
                 #on the end
 
+                connection.queries[:] = [] #clear out cruft stored by debug mode
+                
                 if route_rec['route_name_flag'] == 'X':
                     #express buses
                     borough = 'X'
