@@ -47,8 +47,8 @@ def process_route(route_rec, mta_routes, name):
 
     bus_stops = {}
     for stop_rec in route_rec['stops']:
-        geometry = Point(stop_rec['longitude'] / 100000.0,
-                         stop_rec['latitude'] / 100000.0)
+        geometry = Point(stop_rec['longitude'] / 1000000.0,
+                         stop_rec['latitude'] / 1000000.0)
         location = "%s at %s" % (stop_rec['street1'], stop_rec['street2'])
         stop = BusStop(box_no = stop_rec['box_no'], 
                        location = location,
