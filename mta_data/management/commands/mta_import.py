@@ -20,9 +20,10 @@ def time_from_centiminutes(centiminutes):
 
 
 class MTARoute(models.Model):
-    id = models.IntegerField(primary_key=True)
+    gid = models.IntegerField(primary_key=True)
     rt_dir = models.CharField(max_length=1)
     route = models.CharField(max_length=16)
+    path = models.CharField(max_length=2)
     the_geom = models.GeometryField()
 
 
@@ -33,18 +34,95 @@ fix_direction = {
 
 }
 
-def process_route(route_rec, mta_routes, name):
+use_alternate_route_geom = {
+    'S98' : 'S48',
+    'S90' : 'S40',
+    'S96' : 'S46',
+    'S98' : 'S48',
+    'S92' : 'S62',
+
+}
+
+extra_names = {
+    'S61' : 'S91',
+    'S91' : 'S61'
+}
+
+#from Bob Ippolito at 
+#http://bob.pythonmac.org/archives/2005/03/04/frozendict/
+class frozendict(dict):
+    __slots__ = ('_hash',)
+    def __hash__(self):
+        rval = getattr(self, '_hash', None)
+        if rval is None:
+            rval = self._hash = hash(frozenset(self.iteritems()))
+        return rval
+
+def freeze(obj):
+    if isinstance(obj, dict):
+        for k in obj:
+            obj[k] = freeze(obj[k])
+        return frozendict(obj)
+    elif isinstance(obj, list):
+        for i in range(len(obj)):
+            obj[i] = freeze(obj[i])
+        return tuple(obj)
+    else:
+        return obj
+
+
+_route_by_stops_cache = {}
+def find_route_by_stops(candidate_routes, stops, table_name):
+    key = freeze([candidate_routes, stops, table_name])
+    if key in _route_by_stops_cache:
+        return _route_by_stops_cache[key]
+
+    best_route = None
+    best_dist = 100000000000000
+    sql = """SELECT st_distance(the_geom, %%s) 
+FROM 
+%s
+WHERE 
+gid = %%s""" % table_name
+
+    for route in candidate_routes:
+        total_dist = 0
+        for stop in stops:
+            from django.db import connection
+            cursor = connection.cursor()
+            #fixme: is there any way to just pass the stop's geometry
+            #directly?
+            location = "SRID=4326;POINT(%s %s)" % (stop.geometry.x,
+                                                   stop.geometry.y)
+            cursor.execute(sql, (location, route.gid))
+            row = cursor.fetchone()
+            total_dist += row[0]
+        if total_dist < best_dist:
+            best_dist = total_dist
+            best_route = route
+
+    _route_by_stops_cache[key] = best_route
+    return best_route
+
+def process_route(route_rec, mta_routes, name, table_name):
     print "importing", name
+
+    #store routes
     routes_by_direction = {}
     for mta_route in mta_routes:
         direction = mta_route.rt_dir
         geometry = mta_route.the_geom
-        route = Route(name = name, 
+        route = Route(gid = mta_route.gid,
+                      name = name, 
                       geometry = geometry,
-                      direction = direction)
+                      direction = direction,
+                      path = mta_route.path)
         route.save()
-        routes_by_direction[direction] = route
+        if direction not in routes_by_direction:
+            routes_by_direction[direction] = []
+        routes_by_direction[direction].append(route)
 
+    #store bus stops
     bus_stops = {}
     for stop_rec in route_rec['stops']:
         geometry = Point(stop_rec['longitude'] / 1000000.0,
@@ -71,18 +149,24 @@ def process_route(route_rec, mta_routes, name):
                 direction = fix[direction]
 
         try:
-            route = routes_by_direction[direction]
+            routes = routes_by_direction[direction]
         except KeyError:
             print "Could not find a route for direction %s on line %s (directions are %s)" % (
                 direction, name, 
                 routes_by_direction.keys())
-            import pdb;pdb.set_trace()
             continue
+
+        if len(routes) == 1:
+            route = routes[0]
+        else:
+            stops = [bus_stops[tripstop['stop_id']] for tripstop in trip_rec['stops']]
+            route = find_route_by_stops(routes, stops, table_name)
 
         trip = Trip(route = route, 
                     start_time = time_from_centiminutes(trip_rec['start_minutes']),
                     day_of_week = route_rec['day_of_week'])
         trip.save()
+
         start_time = trip_rec['start_minutes']
         for trip_stop_rec in trip_rec['stops']:
             trip_stop = TripStop(trip = trip,
@@ -120,10 +204,7 @@ class Command(BaseCommand):
                     continue
 
                 mta_routes = list(MTARoute.objects.filter(route = name))
-                if len(mta_routes) > 2:
-                    print "route %s is too complicated -- no way to match path names to trips yet" % name
-                    continue #too complicated
-                elif len(mta_routes) == 0:
+                if len(mta_routes) == 0:
                     #it's probably a multiroute file.  
                     trips = route_rec['trips']
                     names = set(trip['route_name'] for trip in trips if trip['route_name'])
@@ -133,19 +214,22 @@ class Command(BaseCommand):
                         continue
 
                     for name in names:
-                        if name == 'S48':
-                            #there's no route for the westbound S98, so we use
-                            #the S48 routes, which are the same but for stops
-                            search_name = 'S48'
+                        if name in use_alternate_route_geom:
+                            search_name = use_alternate_route_geom[name]
                         else:
                             search_name = name
-
-                        mta_routes = list(MTARoute.objects.filter(route = search_name))
-                        process_route(route_rec, mta_routes, name)
+                            
+                        if name in extra_names:
+                            extra_name = extra_names[name]
+                            mta_routes = list(MTARoute.objects.get(Q(route = search_name) | Q(route = extra_name)))
+                        else:
+                            mta_routes = list(MTARoute.objects.filter(route = search_name))
+                        process_route(route_rec, mta_routes, name, route_table_name)
 
                 else:
-                    process_route(route_rec, mta_routes, name)
-                transaction.commit()
+                    process_route(route_rec, mta_routes, name, route_table_name)
+
+            transaction.commit()
         except Exception, e:
-            #import pdb;pdb.set_trace()        
+            import pdb;pdb.set_trace()        
             raise

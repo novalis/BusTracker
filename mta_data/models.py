@@ -3,9 +3,12 @@ from django.contrib.gis.db import models
 
 class Route(models.Model):
     """A route (in one direction)"""
-    name = models.CharField(max_length=5, primary_key=True) #borough, number, x
-    geometry = models.GeometryField(null=True) #from MTA's shapefile
+    gid = models.IntegerField(primary_key=True) #gid from shapefile
+    name = models.CharField(max_length=5) #borough, number
+    geometry = models.GeometryField() 
     direction = models.CharField(max_length = 1) #NSEW
+    path = models.CharField(max_length = 2, null=True)
+    headsign = models.CharField(max_length = 64, null=True)
     objects = models.GeoManager()
 
     def __unicode__(self):
