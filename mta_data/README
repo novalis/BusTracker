@@ -4,7 +4,7 @@ There's also many zip files with schedule data in a funky fixed-width format.
 1. There is inconsistent filename case in the route 1zip files.  You'll
 want to convert everything to lowercase with:
 
-$ rename 'tr/A-Z/a-z/'
+$ rename 'tr/A-Z/a-z/' *
 
 2. The data is in a weird projection.  Import it as that projection:
 
