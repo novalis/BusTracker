@@ -73,6 +73,10 @@ def freeze(obj):
 
 _route_by_stops_cache = {}
 def find_route_by_stops(candidate_routes, stops, table_name):
+    """This is brutal -- it matches a set of route paths against a
+    known set of bus stops to choose the route path which falls
+    nearest to the trip."""
+
     key = freeze([candidate_routes, stops, table_name])
     if key in _route_by_stops_cache:
         return _route_by_stops_cache[key]
