@@ -198,7 +198,8 @@ class Command(BaseCommand):
                 #fixme: need to worry about weird bus names with ABCD
                 #on the end
 
-                connection.queries[:] = [] #clear out cruft stored by debug mode
+                connection.queries[:] = [] #clear out cruft stored by
+                                           #debug mode
                 
                 if route_rec['route_name_flag'] == 'X':
                     #express buses
