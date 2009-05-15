@@ -55,6 +55,8 @@ def process_route(route_rec, mta_routes, name):
                        geometry = geometry)
         stop.save()
         bus_stops[stop_rec['stop_id']] = stop
+
+    #store trips
     for trip_rec in route_rec['trips']:
         if trip_rec['route_name'] != name:
             continue
@@ -90,7 +92,7 @@ def process_route(route_rec, mta_routes, name):
 
 
             trip_stop.save()
-
+    #fixme: set headsigns based on path mapping
 
 class Command(BaseCommand):
     """Import mta schedule and route data into DB.  Assume route data is 
@@ -102,7 +104,6 @@ class Command(BaseCommand):
         MTARoute._meta.db_table = route_table_name
         try:
             for route_rec in parse_schedule_dir(dirname):
-                #fixme: need to handle s4898                 
                 #fixme: need to worry about weird bus names with ABCD
                 #on the end
 
@@ -113,6 +114,10 @@ class Command(BaseCommand):
                     borough = route_rec['borough'].title()
                 name = "%s%s" % (borough, 
                                    route_rec['route_no'])
+
+                if name == 'Q48':
+                    print "Don't know how to handle loop routes yet"
+                    continue
 
                 mta_routes = list(MTARoute.objects.filter(route = name))
                 if len(mta_routes) > 2:
