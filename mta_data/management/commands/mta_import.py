@@ -29,17 +29,20 @@ class MTARoute(models.Model):
 
 fix_direction = {
     'Bx14' : {'W' : 'S', 'E' : 'N'},
-    'S74' : {'E' : 'S', 'W' : 'N'},
+    'S74' : {'E' : 'S', 'W' : 'N'}, #fixme: check this
     'S54' : {'E' : 'S'}, #one bogus entry
-
+    'M31' : {'W' : 'S', 'E' :'N'},
+    
 }
 
 use_alternate_route_geom = {
-    'S98' : 'S48',
+    'S89' : 'S59',
     'S90' : 'S40',
+    'S92' : 'S62',
+    'S94' : 'S44',
     'S96' : 'S46',
     'S98' : 'S48',
-    'S92' : 'S62',
+    'S98' : 'S48',
 
 }
 
@@ -110,6 +113,11 @@ gid = %%s""" % table_name
 
 def process_route(route_rec, mta_routes, name, table_name):
     print "importing", name
+
+    if name == 'B3K':
+        #as a non-stop bus, there is no point
+        #in tracking this.
+        return
 
     _route_by_stops_cache.clear() #multiple routes will rarely have
                                   #the same stops.
@@ -231,7 +239,7 @@ class Command(BaseCommand):
                             
                         if name in extra_names:
                             extra_name = extra_names[name]
-                            mta_routes = list(MTARoute.objects.get(Q(route = search_name) | Q(route = extra_name)))
+                            mta_routes = list(MTARoute.objects.filter(models.Q(route = search_name) | models.Q(route = extra_name)))
                         else:
                             mta_routes = list(MTARoute.objects.filter(route = search_name))
                         process_route(route_rec, mta_routes, name, route_table_name)
