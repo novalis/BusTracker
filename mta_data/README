@@ -8,7 +8,7 @@ $ rename 'tr/A-Z/a-z/' *
 
 2. The data is in a weird projection.  Import it as that projection:
 
-$ shp2pgsql -s 2263 -d  nyc\ bus\ routes\ \(2004-09\)-lk-060427 mta_bus_routes|psql [database_name]
+$ shp2pgsql -S -s 2263 -d  nyc\ bus\ routes\ \(2004-09\)-lk-060427 mta_bus_routes|psql [database_name]
 
 3. Now, convert the data to 4326:
 
