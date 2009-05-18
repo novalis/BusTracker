@@ -43,7 +43,8 @@ use_alternate_route_geom = {
     'S96' : 'S46',
     'S98' : 'S48',
     'S98' : 'S48',
-
+    'S98' : 'S48',
+    'X17' : 'X17J', #but what about all the other X17 routes?
 }
 
 extra_names = {
