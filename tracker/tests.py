@@ -13,14 +13,14 @@ class UpdateTestCase(TestCase):
 
         c = Client()
         response = c.post('/tracker/update', {'username' : '5',
-                                              'report': 'M20 Uptown', 
+                                              'report': 'M20 N', 
                                               'lat': '40.737606', 
                                               'lng' : '-74.006393',
                                               'date' : '2009-04-23T05:06:07Z'})
         assert response.status_code == 200
 
         response = c.get('/tracker/')
-        self.assertTrue('M20 Uptown' in response.content)
+        self.assertTrue('M20' in response.content)
 
         bus = Bus.objects.get(id=5)
         observations = bus.busobservation_set.filter(time=datetime.strptime("2009-04-23T05:06:07Z", '%Y-%m-%dT%H:%M:%SZ'))
@@ -36,7 +36,7 @@ class UpdateTestCase(TestCase):
         c = Client()
 
         response = c.get('/tracker/locate', 
-                         { 'route_name' : 'M20 Uptown',
+                         { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
                            'time' : '1239644900',
@@ -47,7 +47,7 @@ class UpdateTestCase(TestCase):
         self.assertTrue('2009-04-13' in response.content)
 
         response = c.get('/tracker/locate', 
-                         { 'route_name' : 'M20 Uptown',
+                         { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
                            'time' : '1239645900',
@@ -59,7 +59,7 @@ class UpdateTestCase(TestCase):
 
 
         response = c.get('/tracker/locate', 
-                         { 'route_name' : 'M20 Uptown',
+                         { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
                            'time' : '1239650000',
@@ -77,7 +77,7 @@ class UpdateTestCase(TestCase):
         c = Client()
 
         response = c.get('/tracker/locate_by_address', 
-                         { 'route_name' : 'M20 Uptown',
+                         { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
                            'time' : '1239644900',
@@ -98,11 +98,11 @@ class UpdateTestCase(TestCase):
         c = Client()
 
         response = c.get('/tracker/kml', 
-                         { 'bus_id' : '2' })
+                         { 'bus_id' : 7 })
 
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('-74.005859, 40.737423' in response.content)
+        self.assertTrue('-74.01255, 40.702404' in response.content)
 
     def test_estimate_accuracy(self):
         """Test the accuracy of the estimation algorithm.  It uses
@@ -114,7 +114,7 @@ class UpdateTestCase(TestCase):
 
         intervals =[timedelta(0, x) for x in (60, 120, 600, 1200)]
 
-        route = Route.objects.get(name="M6 Downtown")
+        route = Route.objects.get(name="M6", direction="S")
 
         total_diff = 0
         n_samples = 0
@@ -152,17 +152,17 @@ class UpdateTestCase(TestCase):
         
         c = Client()
         response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 Uptown', 
+                                              'report': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:00Z'})
         response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 Uptown', 
+                                              'report': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:01Z'})
         response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 Uptown', 
+                                              'report': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:02Z'})
@@ -176,10 +176,10 @@ class UpdateTestCase(TestCase):
                 
         c = Client()
         response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 Uptown', 
-                                              'intersection' : '8 Ave and 37 St',
-                                              'lat': '40.754076', 
-                                              'lng' : '-73.992051',
+                                              'report': 'M20 N', 
+                                              'intersection' : '6 Ave and 37 St',
+                                              'lat': '40.742899', 
+                                              'lng' : '-73.992799',
                                               'date' : '2009-04-24T00:00:00Z'})
 
         for io in IntersectionObservation.objects.all():

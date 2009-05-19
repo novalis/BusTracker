@@ -234,6 +234,9 @@ holidays = {'Christmas' : 'xmd', 'Christmas Eve' : 'xme',
 def parse_schedule_dir(dirname):
     files = os.listdir(dirname)
     for filename in files:
+        if 'b_0666' in filename:
+            continue #there is no B666 bus, so I have no idea why
+                     #there is data for it
         if filename.startswith('stif'):
             route = parse_schedule_file(os.path.join(dirname, filename))
             yield route

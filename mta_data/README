@@ -4,11 +4,11 @@ There's also many zip files with schedule data in a funky fixed-width format.
 1. There is inconsistent filename case in the route 1zip files.  You'll
 want to convert everything to lowercase with:
 
-$ rename 'tr/A-Z/a-z/'
+$ rename 'tr/A-Z/a-z/' *
 
 2. The data is in a weird projection.  Import it as that projection:
 
-$ shp2pgsql -s 2263 -d  nyc\ bus\ routes\ \(2004-09\)-lk-060427 mta_bus_routes|psql [database_name]
+$ shp2pgsql -S -s 2263 -d  nyc\ bus\ routes\ \(2004-09\)-lk-060427 mta_bus_routes|psql [database_name]
 
 3. Now, convert the data to 4326:
 

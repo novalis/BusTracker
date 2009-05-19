@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 import sys
 
 class Command(BaseCommand):
-    help = "Imports tiger data from the table provided into the tracker tables."
+    help = "Reverse geocode a point"
 
     def handle(self, lng, lat, **kw):
         lng = lng.strip(",")

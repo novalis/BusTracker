@@ -1,81 +1,24 @@
 from datetime import datetime, timedelta
 from django.contrib.gis.db import models
 from math import sqrt
-
-class Road(models.Model):
-    """An entire road -- 8 Ave, for instance"""
-    name = models.CharField(max_length=120, primary_key=True)
-    geometry = models.GeometryField(null=True)
-    #Name is road_name, borough.  Some roads (the BQE, say) will
-    #appear in multiple boroughs, and will be treated as multiple
-    #roads
-    objects = models.GeoManager()
-
-    def __unicode__(self):
-        return "'%s'" % self.name
-
-class RoadSegment(models.Model):
-    """Represents one segment of a road -- 8 Ave between W 28 St and
-    W 29 St, for instance"""
-
-    class Meta:
-        ordering = ["path_order"]
-
-    gid = models.IntegerField(primary_key=True)
-    geometry = models.GeometryField()
-    road = models.ForeignKey(Road)
-    path_order = models.IntegerField()
-    objects = models.GeoManager()
-
-    def __unicode__(self):
-        return "'%s (%d)'" % (self.road_id, self.path_order)
-
-class Route(models.Model):
-    name = models.CharField(max_length=200, primary_key=True) #M20 Uptown
-    geometry = models.GeometryField(null=True) #denormalized
-    objects = models.GeoManager()    
-
-    def __unicode__(self):
-        return "'%s'" % self.name
-
-class RouteSegment(models.Model):
-
-    class Meta:
-        ordering = ["path_order"]
-
-    roadsegment = models.ForeignKey(RoadSegment)
-    route = models.ForeignKey(Route)
-    path_order = models.IntegerField()
-    objects = models.GeoManager()
-
-    def __unicode__(self):
-        return "'%s (%d)'" % (self.route_id, self.path_order)
-
-class BusStop(models.Model):
-    class Meta:
-        ordering = ["path_order"]
-
-    route = models.ForeignKey(Route)
-    path_order = models.IntegerField()
-    location = models.PointField()
-
-class Trip(models.Model):
-    route = models.ForeignKey(Route)
-    start_time = models.DateTimeField()
-
-class StopTime(models.Model):
-    trip = models.ForeignKey(Trip)
-    busstop = models.ForeignKey(BusStop)
-    time = models.DateTimeField()
-
+from mta_data.models import *
 
 class Bus(models.Model):
     """A particular physical bus"""
     id = models.IntegerField(primary_key=True)
     route = models.ForeignKey(Route) #the route it is traveling on (if any)
+    trip = models.ForeignKey(Trip)
+    total_dwell_time = models.IntegerField(default=0)
+    n_dwells = models.IntegerField(default=0)
+
+    def average_dwell_time(self):
+        if self.n_dwells:
+            return self.total_dwell_time / self.n_dwells
+        else:
+            return -1
 
     def __unicode__(self):
-        return "<Bus (%d) on route %s>" % (self.id, self.route.name)
+        return "<Bus (%d) on route %s %s (path %s)>" % (self.id, self.route.name, self.route.path, self.route.direction)
 
     @property
     def location(self):
@@ -127,47 +70,12 @@ class Bus(models.Model):
 
         estimate_from_distance = d / rate
 
-        def find_nearest_route_segment(route, location):
-            """Find which segment of a route a location is nearest to."""
-            radius = 0.002
-            nearby_segments = []
-            #we use dwithin and exponential backoff because dwithin can use
-            #the spatial index
-            while radius < 0.064 and not nearby_segments:
-                nearby_segments = list(route.routesegment_set.filter(roadsegment__geometry__dwithin=(location, radius)))
-                radius *= 2
-                
-            assert nearby_segments, "no segment on %s near %d, %d" % (route.name, location.x, location.y)
+        #todo: create an estimate from dwell time
 
-            nearest_segment=None
-            best_dist = 100000000000
-            for segment in nearby_segments:
-                dist = segment.roadsegment.geometry.distance(location)
-                if dist < best_dist:
-                    best_dist = dist
-                    nearest_segment = segment
+        #I guess that's average dwell time * n of remaining stops, plus
+        #some fudge factor for travel time
 
-            return nearest_segment
-
-        start_segment = find_nearest_route_segment(self.route, start_location)
-        last_segment = find_nearest_route_segment(self.route, last.location)
-        target_segment = find_nearest_route_segment(self.route, target_location)
-
-        passed_segments = last_segment.path_order - start_segment.path_order
-
-        #only start using intersections once we have gone a few blocks
-        if passed_segments > 2 and start_segment.path_order > last_segment.path_order > target_segment.path_order:
-
-            segments_per_second = float(passed_segments) / journey_time
-            
-            remaining_segments = target_segment.path_order - last_segment.path_order            
-
-            estimate_from_intersections = remaining_segments / segments_per_second
-
-            seconds = sqrt(estimate_from_distance * estimate_from_intersections) 
-        else:
-            seconds = estimate_from_distance
-        
+        seconds = estimate_from_distance
         return last_time + timedelta(0, seconds)
 
 
@@ -176,11 +84,11 @@ def distance_along_route(location, route):
     cursor = connection.cursor()
     location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
     cursor.execute(
-"""SELECT st_line_locate_point(tracker_route.geometry, %s) 
+"""SELECT st_line_locate_point(mta_data_route.geometry, %s) 
 FROM 
-tracker_route
+mta_data_route
 WHERE 
-tracker_route.name = %s""", (location, route.name))
+mta_data_route.gid = %s""", (location, route.gid))
     row = cursor.fetchone()
     return row[0]
         
@@ -193,10 +101,10 @@ class BusObservationManager(models.GeoManager):
 SELECT st_line_locate_point(route.geometry, %s.location) 
 FROM 
 tracker_bus as bus, 
-tracker_route as route
+mta_data_route as route
 WHERE 
 %s.bus_id = bus.id AND
-bus.route_id = route.name
+bus.route_id = route.gid
 """ % (self.model._meta.db_table,
        self.model._meta.db_table)})
 
@@ -208,14 +116,24 @@ class BusObservation(models.Model):
     objects = BusObservationManager()
     bus = models.ForeignKey(Bus)
     location = models.PointField()
+    distance = models.FloatField(null=True)
     time = models.DateTimeField()
+
+    #extra GPS fields
     course = models.FloatField(null=True)
     speed = models.FloatField(null=True)
     altitude = models.FloatField(null=True)
     horizontal_accuracy = models.FloatField(null=True)
     vertical_accuracy = models.FloatField(null=True)
+
     class Meta:
         ordering = ["time"]
+
+    def save(self):
+        if not self.distance:
+            self.distance = self.distance_along_route()
+        super(BusObservation, self).save()
+
 
     def __unicode__(self):
         
