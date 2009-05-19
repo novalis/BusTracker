@@ -262,6 +262,8 @@ class Command(BaseCommand):
                 else:
                     process_route(route_rec, mta_routes, name, route_table_name)
 
+            #if we don't commit after every route, we run out of
+            #memory.
             transaction.commit()
         except Exception, e:
             #turning off autocommit breaks exception display
