@@ -4,9 +4,6 @@ from django.core.management.base import BaseCommand
 from django.db import transaction, connection
 from mta_data_parser import parse_schedule_dir
 from mta_data.models import *
-from simplejson import dumps
-
-import os
 
 def time_from_centiminutes(centiminutes):
     #the MTA's day is longer than 24 hours, but that needn't bother us
