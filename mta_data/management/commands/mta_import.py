@@ -115,11 +115,6 @@ gid = %%s""" % table_name
 def process_route(route_rec, mta_routes, name, table_name):
     print "importing", name
 
-    if name == 'B3K':
-        #as a non-stop bus, there is no point
-        #in tracking this.
-        return
-
     _route_by_stops_cache.clear() #multiple routes will rarely have
                                   #the same stops.
 
@@ -235,6 +230,10 @@ class Command(BaseCommand):
 
                 if name == 'Q48':
                     print "Don't know how to handle loop routes yet"
+                    continue
+                if name == 'B3K':
+                    #as a non-stop bus, there is no point
+                    #in tracking this.
                     continue
 
                 mta_routes = list(MTARoute.objects.filter(route = name))
