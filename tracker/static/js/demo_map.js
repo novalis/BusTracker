@@ -7,7 +7,7 @@ function createMap(map_id) {
         numZoomLevels: 20,
     };
     map = new OpenLayers.Map('map', options);
-    /*var baseMap = new OpenLayers.Layer.WMS(
+    var baseMap = new OpenLayers.Layer.WMS(
         'OpenStreetMap',
         'http://demo.opengeo.org/geoserver_openstreetmap/gwc/service/wms',
         {
@@ -17,8 +17,7 @@ function createMap(map_id) {
         {
             transitionEffect: 'resize',
         }
-    ); */
-    var baseMap = new OpenLayers.Layer.Google('streets', {numZoomLevels: 20, sphericalMercator: true});
+    );
 
     map.addLayers([baseMap]);
     var center = new OpenLayers.LonLat(-73.99, 40.76); // Center of the universe
@@ -58,7 +57,6 @@ function loadBusKml(url, name) {
     var styleMap = new OpenLayers.StyleMap({
             fillOpacity: 0.2,
             pointRadius: 5,
-            
         });
            
     var lookup = {
