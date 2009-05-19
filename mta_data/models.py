@@ -27,11 +27,43 @@ class Trip(models.Model):
     #christmas eve, day, new year's eve, day
     day_of_week = models.CharField(max_length=3)
     start_time = models.TimeField()
+    
+    class Meta:
+        unique_together = ('route', 'start_time', 'day_of_week')
+
+    def __unicode__(self):
+        return "%s for %s starting at %s" % (unicode(self.route), self.day_of_week, self.start_time)
+
+def distance_along_route(location, route):
+    from django.db import connection
+    cursor = connection.cursor()
+    location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
+    cursor.execute(
+"""SELECT st_line_locate_point(mta_data_route.geometry, %s) 
+FROM 
+mta_data_route
+WHERE 
+mta_data_route.name = %s""", (location, route.name))
+    row = cursor.fetchone()
+    return row[0]
 
 class TripStop(models.Model):
     trip = models.ForeignKey(Trip)
     seconds_after_start = models.IntegerField()
     bus_stop = models.ForeignKey(BusStop)
     type = models.CharField(max_length=1) #D, T, or A for start, middle, and end stops
+    distance = models.FloatField(null=True)
+
+    def save(self):
+        if not self.distance:
+            self.distance = self.distance_along_route()
+        super(TripStop, self).save()
+
+
+    def __unicode__(self):        
+        return "%s on %s at %s" % (self.bus_stop.geometry, unicode(self.trip), self.seconds_after_stop)
+
+    def distance_along_route(self):
+        return distance_along_route(self.bus_stop.geometry, self.trip.route)
 
 

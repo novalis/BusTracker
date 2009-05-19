@@ -9,9 +9,9 @@ from simplejson import dumps
 import os
 
 def time_from_centiminutes(centiminutes):
-    #the MTA's day starts at some non-midnight time, but that needn't
-    #bother us so long as we are sure never to use absolute times any
-    #time subtraction might be required
+    #the MTA's day is longer than 24 hours, but that needn't bother us
+    #so long as we are sure never to use absolute times any time
+    #subtraction might be required
     hours = (centiminutes / 6000) % 24 
     minutes = (centiminutes % 6000) / 100
 
@@ -178,9 +178,24 @@ def process_route(route_rec, mta_routes, name, table_name):
             stops = [bus_stops[tripstop['stop_id']] for tripstop in trip_rec['stops']]
             route = find_route_by_stops(routes, stops, table_name)
 
-        trip = Trip(route = route, 
-                    start_time = time_from_centiminutes(trip_rec['start_minutes']),
-                    day_of_week = route_rec['day_of_week'])
+        start_time = time_from_centiminutes(trip_rec['start_minutes'])
+
+        #fixme: this code is excretable and justified only by
+        #Django's lack of composite primary keys.
+
+        #note that this loses data about cases where multiple buses
+        #appear to genuinely come at the same time -- mostly to take
+        #kids home from school
+
+        trips = list(Trip.objects.filter(route = route, 
+                                         start_time = start_time,
+                                         day_of_week = route_rec['day_of_week']))
+        if len(trips):
+            trip = trips[0]
+        else:
+            trip = Trip(route = route, 
+                        start_time = start_time,
+                        day_of_week = route_rec['day_of_week'])
         trip.save()
 
         start_time = trip_rec['start_minutes']
@@ -250,5 +265,7 @@ class Command(BaseCommand):
 
             transaction.commit()
         except Exception, e:
-            import pdb;pdb.set_trace()        
+            import traceback
+            traceback.print_exc()
+            import pdb;pdb.set_trace()
             raise

@@ -2,12 +2,16 @@ from datetime import datetime
 from django.contrib.gis.geos import Point
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.utils.datastructures import SortedDict
 from tracker.models import *
 
 import django.templatetags #for the side-effects of doing so
 import settings
 import urllib
 import tracker.templatetags #to catch import errors
+
+#75 m / 1 decimal degree
+STOP_FUDGE = 0.0000676
 
 def index(request):
 
@@ -27,8 +31,9 @@ def kml(request):
 
 def route_kml(request):
     route_id = request.REQUEST['route_id']
-    route = Route.objects.filter(name=route_id).all()[0]
+    route = Route.objects.filter(gid=route_id).all()[0]
     return render_to_response('routes/route_kml.kml', {'route': route})
+
 
 def update(request):
     if not request.method == "POST":
@@ -39,12 +44,30 @@ def update(request):
     #of the test app.  They will be replaced by sensible keys later.
 
     bus_id = request.REQUEST['username']    
-    route = Route.objects.get(name=request.REQUEST['report'])
+    
+    name, direction, path = _parse_route_name(request.REQUEST['report'])
 
-    bus = Bus(id=bus_id, route=route)
-    bus.save()
+    route = Route.objects.get(name=name, direction=direction, path=path)
+
+    #figure out what trip we are on by assuming it is the trip
+    #starting closest to now.
 
     client_time = datetime.strptime(request.REQUEST['date'].strip(), "%Y-%m-%dT%H:%M:%SZ")
+
+    bus_candidates = (Bus.objects.filter(id=bus_id)[:1])
+    if len(bus_candidates):
+        bus = bus_candidates[0]
+    else:
+        #fixme: day of week
+        trip = Trip.objects.extra(
+            select = SortedDict([
+                    ('start_error', 'abs(extract(epoch from start_time - %s))')
+                    ]),  
+            select_params = (client_time.time(),)
+            ).order_by('start_error')[0]
+    
+        bus = Bus(id=bus_id, route=route, trip=trip)
+        bus.save()
 
     location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
 
@@ -70,10 +93,39 @@ def update(request):
                     extra_fields[x] = value
                 except ValueError:
                     continue
+
             obs = BusObservation(bus=bus, location=location, time=client_time, **extra_fields)
                                        
             obs.save()
+            
+            #fixme: this WILL NOT WORK until observation distances are
+            #nondescending.
 
+            #figure out dwell information
+            route_length = route.geometry.length #fixme: denorm this
+            stop_fudge = STOP_FUDGE / route_length
+
+            prev_bus_stop = TripStop.objects.filter(
+                trip=bus.trip, 
+                distance__lte=obs.distance + stop_fudge * route_length
+                ).order_by('distance')[:1]
+
+            if len(prev_bus_stop):
+                prev_bus_stop = prev_bus_stop[0]
+
+                try:
+                    prev_observation = obs.get_prev_by_time()
+                    if prev_observation.distance + stop_fudge <= prev_bus_stop.distance:
+                        #this is our first post-stop observation
+
+                        #find the observation that was before the stop.
+                        before_stop_observation = BusObservation.objects.filter(
+                            distance__lte=prev_bus_stop - stop_fudge
+                            )[0]
+                        bus.total_dwell_time += (client_time - before_stop_observation.time).seconds
+                        bus.n_dwells += 1
+                except BusObservation.DoesNotExist:
+                    pass
     return HttpResponse("ok")
 
 # from http://www.djangosnippets.org/snippets/293/
@@ -89,8 +141,18 @@ def geocode(location):
     else:
         return None
 
+def _parse_route_name(route_name):
+    route_parts = route_name.split(" ")
+    name, direction = route_parts[:2]
+    if len(route_parts) == 3:
+        path = route_parts[2]
+    else:
+        path = None
+    return name, direction, path
+
 def _locate(route_name, time, long, lat):
-    route = Route.objects.get(name = route_name)
+    name, direction, path = _parse_route_name(route_name)
+    route = Route.objects.get(name = name, direction = direction, path = path)
     location = Point(long, lat)
     buses = []
     for bus in route.bus_set.all():
