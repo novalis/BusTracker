@@ -264,6 +264,7 @@ class Command(BaseCommand):
 
             transaction.commit()
         except Exception, e:
+            #turning off autocommit breaks exception display
             import traceback
             traceback.print_exc()
             import pdb;pdb.set_trace()
