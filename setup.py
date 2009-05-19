@@ -31,6 +31,7 @@ setup(
       "pytz",
       "psycopg2",
       "simplejson",
+      "transitfeed",
       ],
     packages=find_packages(),
     include_package_data=True,
