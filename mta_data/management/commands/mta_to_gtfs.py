@@ -44,9 +44,13 @@ class Command(BaseCommand):
 
 
                 #fixme: split multiroutes
+
                 #add the route itself
+                long_name = route_rec["street_name"]
+                if long_name.startswith(name):
+                    long_name = long_name[len(name):].strip()
                 route = feed.AddRoute(short_name=name, 
-                                      long_name=route_rec["street_name"],
+                                      long_name=long_name,
                                       route_type="Bus")
 
 
