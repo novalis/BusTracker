@@ -1,7 +1,18 @@
 from django.core.management.base import BaseCommand
 from mta_data_parser import parse_schedule_dir
-from mta_import import find_route_by_stops
+from mta_import import find_route_by_stops, time_from_centiminutes
 import transitfeed
+
+def google_time_from_centiminutes(centiminutes):
+    #the MTA's day is longer than 24 hours, but that needn't bother us
+    #so long as we are sure never to use absolute times any time
+    #subtraction might be required
+    hours = (centiminutes / 6000)
+    minutes = (centiminutes % 6000) / 100
+
+    seconds = ((centiminutes % 6000) - minutes * 100) * 60 / 100
+    return "%02d:%02d:%02d" % (hours, minutes, seconds)
+
 
 
 class Command(BaseCommand):
@@ -17,6 +28,7 @@ class Command(BaseCommand):
             stop_name_to_id = {}
 
             for route_rec in parse_schedule_dir(dirname):
+
                 if route_rec['route_name_flag'] == 'X':
                     #express buses
                     borough = 'X'
@@ -25,20 +37,20 @@ class Command(BaseCommand):
                 name = "%s%s" % (borough, 
                                    route_rec['route_no'])
 
+                print name
                 if name == 'Q48':
                     print "Don't know how to handle loop routes yet"
                     continue
 
 
+                #fixme: split multiroutes
                 #add the route itself
                 route = feed.AddRoute(short_name=name, 
                                       long_name=route_rec["street_name"],
                                       route_type="Bus")
 
 
-                #figure out the schedule
-                #FIXME:WRONG
-                schedule = route.GetSchedule(route_rec['day_of_week'])
+                period = feed.GetServicePeriod(route_rec['day_of_week'].upper())
 
                 stop_hexid_to_stop = {}
                 #add all stops
@@ -80,17 +92,19 @@ class Command(BaseCommand):
 
                 #now trips
                 for trip_rec in route_rec['trips']:
-                    headsign = headsigns[trip_rec['headsign_id']]
-                    trip = route.AddTrip(schedule, 
-                                         headsign=headsign)
+                    hid = trip_rec['headsign_id']
+                    headsign = headsigns.get(hid)
+                    trip = route.AddTrip(feed, 
+                                         headsign, 
+                                         service_period=period)
                     for tripstop_rec in trip_rec['stops']:
                         stop_id = tripstop_rec['stop_id']
-                        stop_time = time_from_centiminutes(tripstop_rec['minutes'])
+                        stop_time = google_time_from_centiminutes(tripstop_rec['minutes'])
                         trip.AddStopTime(stop_hexid_to_stop[stop_id], 
                                          stop_time=stop_time)
 
-            schedule.Validate()
-            schedule.WriteGoogleTransitFeed('mta_data/out.zip')
+            feed.Validate()
+            feed.WriteGoogleTransitFeed('mta_data/out.zip')
         except Exception, e:
             import traceback
             traceback.print_exc()
