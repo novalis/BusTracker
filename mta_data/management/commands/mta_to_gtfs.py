@@ -92,6 +92,9 @@ class Command(BaseCommand):
 
                 #now trips
                 for trip_rec in route_rec['trips']:
+                    if trip_rec['UNKNOWN_1'].startswith('-'):
+                        #these trips are bogus -- their stops are out-of-order.
+                        continue
                     hid = trip_rec['headsign_id']
                     headsign = headsigns.get(hid)
                     trip = route.AddTrip(feed, 
