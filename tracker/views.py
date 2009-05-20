@@ -102,7 +102,7 @@ def update(request):
             #nondescending.
 
             #figure out dwell information
-            route_length = route.geometry.length #fixme: denorm this
+            route_length = route.length
             stop_fudge = STOP_FUDGE / route_length
 
             prev_bus_stop = TripStop.objects.filter(

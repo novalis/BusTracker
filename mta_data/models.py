@@ -9,7 +9,13 @@ class Route(models.Model):
     direction = models.CharField(max_length = 1) #NSEW
     path = models.CharField(max_length = 2, null=True)
     headsign = models.CharField(max_length = 64, null=True)
+    length = models.FloatField(null=True)
     objects = models.GeoManager()
+
+    def save(self):
+        if not self.length:
+            self.length = self.geometry.length
+        super(Route, self).save()
 
     def __unicode__(self):
         return "'%s'" % self.name
