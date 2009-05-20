@@ -2,3 +2,5 @@
 *~
 BusTracker.egg-info
 settings.py
+.*.sw?
+tmp/
