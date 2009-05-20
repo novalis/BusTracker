@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
     def handle(self, dirname, **kw):
 
-        feed = transitfeed.Loader("mta_data/gtfs.zip").Load() #base data
+        feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load() #base data
 
         try:
             #capture multiple stops with different box ids
