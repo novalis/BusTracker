@@ -31,9 +31,7 @@ def kml(request):
     return render_to_response('routes/kml.kml', {'observations': observations})
 
 def route_kml(request):
-    name = request.REQUEST['name']
-    direction = request.REQUEST['direction']
-    route = Route.objects.filter(name=name, direction=direction).all()[0]
+    route = _route_by_name(request.REQUEST['route'])
     return render_to_response('routes/route_kml.kml', {'route': route})
 
 @transaction.commit_on_success
@@ -42,7 +40,7 @@ def update(request):
         return HttpResponse("Bad method", status=405)
 
     bus_id = request.REQUEST['bus_id']    
-
+    
     route = _route_by_name(request.REQUEST['route'])
 
     #figure out what trip we are on by assuming it is the trip
@@ -196,5 +194,5 @@ def locate(request):
     return _locate(route_name, time, float(request.REQUEST['long']), float(request.REQUEST['lat']))
 
 def map(request):
-    routes = ["%s %s" % (route.name, route.direction)  for route in Route.objects.all()]
+    routes = [route.route_name() for route in Route.objects.all()]
     return render_to_response('routes/map.html', {'routes': routes})
