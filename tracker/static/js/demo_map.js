@@ -30,11 +30,9 @@ function createMap(map_id) {
         loadBusData(url, 'bus ' + bus_id);
     });
     $('#load-route-btn').click(function() {
-        var route_id = $('#route-select').get(0).value;
-        var name = route_id.split(" ")[0];
-        var direction = route_id.split(" ")[1];
-        var url = 'route_kml?name=' + name + '&direction=' + direction;
-        var layer = loadKml(url, route_id);
+        var route = $('#route-select').get(0).value;
+        var url = 'route_kml?route=' + route;
+        var layer = loadKml(url, route);
         layer.events.register('loadend', layer, function() {
             map.zoomToExtent(layer.getDataExtent());
         });
