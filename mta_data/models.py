@@ -12,6 +12,9 @@ class Route(models.Model):
     length = models.FloatField(null=True)
     objects = models.GeoManager()
 
+    class Meta:
+        ordering = ["name", "direction", "path"]
+
     def save(self):
         if not self.length:
             self.length = self.geometry.length
