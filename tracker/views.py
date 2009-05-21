@@ -30,8 +30,9 @@ def kml(request):
     return render_to_response('routes/kml.kml', {'observations': observations})
 
 def route_kml(request):
-    route_id = request.REQUEST['route_id']
-    route = Route.objects.filter(gid=route_id).all()[0]
+    name = request.REQUEST['name']
+    direction = request.REQUEST['direction']
+    route = Route.objects.filter(name=name, direction=direction).all()[0]
     return render_to_response('routes/route_kml.kml', {'route': route})
 
 
@@ -192,5 +193,5 @@ def locate(request):
     return _locate(route_name, time, float(request.REQUEST['long']), float(request.REQUEST['lat']))
 
 def map(request):
-    routes = [route.name for route in Route.objects.all()]
+    routes = ["%s %s" % (route.name, route.direction)  for route in Route.objects.all()]
     return render_to_response('routes/map.html', {'routes': routes})

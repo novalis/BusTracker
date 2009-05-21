@@ -1,0 +1,112 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span>  * This class exposes mobile phone interface controls to JavaScript, such as
+<span class='line'>  3</span>  * native tab and tool bars, etc.
+<span class='line'>  4</span>  * @constructor
+<span class='line'>  5</span>  */</span><span class="WHIT">
+<span class='line'>  6</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">UIControls</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  7</span> </span><span class="WHIT">    </span><span class="NAME">this.tabBarTag</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  8</span> </span><span class="WHIT">    </span><span class="NAME">this.tabBarCallbacks</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 10</span> 
+<span class='line'> 11</span> </span><span class="COMM">/**
+<span class='line'> 12</span>  * Create a native tab bar that can have tab buttons added to it which can respond to events.
+<span class='line'> 13</span>  */</span><span class="WHIT">
+<span class='line'> 14</span> </span><span class="NAME">UIControls.prototype.createTabBar</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 15</span> 
+<span class='line'> 16</span> </span><span class="COMM">/**
+<span class='line'> 17</span>  * Show a tab bar.  The tab bar has to be created first.
+<span class='line'> 18</span>  * @param {Object} [options] Options indicating how the tab bar should be shown:
+<span class='line'> 19</span>  * - \c height integer indicating the height of the tab bar (default: \c 49)
+<span class='line'> 20</span>  * - \c position specifies whether the tab bar will be placed at the \c top or \c bottom of the screen (default: \c bottom)
+<span class='line'> 21</span>  */</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="NAME">UIControls.prototype.showTabBar</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 23</span> 
+<span class='line'> 24</span> </span><span class="COMM">/**
+<span class='line'> 25</span>  * Hide a tab bar.  The tab bar has to be created first.
+<span class='line'> 26</span>  */</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="NAME">UIControls.prototype.hideTabBar</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">animate</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 28</span> 
+<span class='line'> 29</span> </span><span class="COMM">/**
+<span class='line'> 30</span>  * Create a new tab bar item for use on a previously created tab bar.  Use ::showTabBarItems to show the new item on the tab bar.
+<span class='line'> 31</span>  *
+<span class='line'> 32</span>  * If the supplied image name is one of the labels listed below, then this method will construct a tab button
+<span class='line'> 33</span>  * using the standard system buttons.  Note that if you use one of the system images, that the \c title you supply will be ignored.
+<span class='line'> 34</span>  *
+<span class='line'> 35</span>  * &lt;b>Tab Buttons&lt;/b>
+<span class='line'> 36</span>  *   - tabButton:More
+<span class='line'> 37</span>  *   - tabButton:Favorites
+<span class='line'> 38</span>  *   - tabButton:Featured
+<span class='line'> 39</span>  *   - tabButton:TopRated
+<span class='line'> 40</span>  *   - tabButton:Recents
+<span class='line'> 41</span>  *   - tabButton:Contacts
+<span class='line'> 42</span>  *   - tabButton:History
+<span class='line'> 43</span>  *   - tabButton:Bookmarks
+<span class='line'> 44</span>  *   - tabButton:Search
+<span class='line'> 45</span>  *   - tabButton:Downloads
+<span class='line'> 46</span>  *   - tabButton:MostRecent
+<span class='line'> 47</span>  *   - tabButton:MostViewed
+<span class='line'> 48</span>  * @param {String} name internal name to refer to this tab by
+<span class='line'> 49</span>  * @param {String} [title] title text to show on the tab, or null if no text should be shown
+<span class='line'> 50</span>  * @param {String} [image] image filename or internal identifier to show, or null if now image should be shown
+<span class='line'> 51</span>  * @param {Object} [options] Options for customizing the individual tab item
+<span class='line'> 52</span>  *  - \c badge value to display in the optional circular badge on the item; if null or unspecified, the badge will be hidden
+<span class='line'> 53</span>  */</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="NAME">UIControls.prototype.createTabBarItem</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">name</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">label</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">image</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 55</span> 
+<span class='line'> 56</span> </span><span class="COMM">/**
+<span class='line'> 57</span>  * Update an existing tab bar item to change its badge value.
+<span class='line'> 58</span>  * @param {String} name internal name used to represent this item when it was created
+<span class='line'> 59</span>  * @param {Object} options Options for customizing the individual tab item
+<span class='line'> 60</span>  *  - \c badge value to display in the optional circular badge on the item; if null or unspecified, the badge will be hidden
+<span class='line'> 61</span>  */</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="NAME">UIControls.prototype.updateTabBarItem</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">name</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 63</span> 
+<span class='line'> 64</span> </span><span class="COMM">/**
+<span class='line'> 65</span>  * Show previously created items on the tab bar
+<span class='line'> 66</span>  * @param {String} arguments... the item names to be shown
+<span class='line'> 67</span>  * @param {Object} [options] dictionary of options, notable options including:
+<span class='line'> 68</span>  *  - \c animate indicates that the items should animate onto the tab bar
+<span class='line'> 69</span>  * @see createTabBarItem
+<span class='line'> 70</span>  * @see createTabBar
+<span class='line'> 71</span>  */</span><span class="WHIT">
+<span class='line'> 72</span> </span><span class="NAME">UIControls.prototype.showTabBarItems</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">tabs</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 73</span> 
+<span class='line'> 74</span> </span><span class="COMM">/**
+<span class='line'> 75</span>  * Manually select an individual tab bar item, or nil for deselecting a currently selected tab bar item.
+<span class='line'> 76</span>  * @param {String} tabName the name of the tab to select, or null if all tabs should be deselected
+<span class='line'> 77</span>  * @see createTabBarItem
+<span class='line'> 78</span>  * @see showTabBarItems
+<span class='line'> 79</span>  */</span><span class="WHIT">
+<span class='line'> 80</span> </span><span class="NAME">UIControls.prototype.selectTabBarItem</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">tab</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 81</span> 
+<span class='line'> 82</span> </span><span class="COMM">/**
+<span class='line'> 83</span>  * Function called when a tab bar item has been selected.
+<span class='line'> 84</span>  * @param {Number} tag the tag number for the item that has been selected
+<span class='line'> 85</span>  */</span><span class="WHIT">
+<span class='line'> 86</span> </span><span class="NAME">UIControls.prototype.tabBarItemSelected</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">tag</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="KEYW">typeof</span><span class="PUNC">(</span><span class="NAME">this.tabBarCallbacks</span><span class="PUNC">[</span><span class="NAME">tag</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="STRN">'function'</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 88</span> </span><span class="WHIT">        </span><span class="NAME">this.tabBarCallbacks</span><span class="PUNC">[</span><span class="NAME">tag</span><span class="PUNC">]</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 90</span> 
+<span class='line'> 91</span> </span><span class="COMM">/**
+<span class='line'> 92</span>  * Create a toolbar.
+<span class='line'> 93</span>  */</span><span class="WHIT">
+<span class='line'> 94</span> </span><span class="NAME">UIControls.prototype.createToolBar</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 95</span> 
+<span class='line'> 96</span> </span><span class="COMM">/**
+<span class='line'> 97</span>  * Function called when a tab bar item has been selected.
+<span class='line'> 98</span>  * @param {String} title the title to set within the toolbar
+<span class='line'> 99</span>  */</span><span class="WHIT">
+<span class='line'>100</span> </span><span class="NAME">UIControls.prototype.setToolBarTitle</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">title</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>101</span> 
+<span class='line'>102</span> </span><span class="NAME">PhoneGap.addConstructor</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>103</span> </span><span class="WHIT">    </span><span class="NAME">window.uicontrols</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">UIControls</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>105</span> </span></pre></body></html>
