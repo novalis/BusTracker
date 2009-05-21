@@ -139,7 +139,7 @@ class Command(BaseCommand):
                         trip.AddStopTime(stop_hexid_to_stop[stop_id], 
                                          stop_time=stop_time)
 
-                feed.Validate()
+            feed.Validate()
             feed.WriteGoogleTransitFeed('mta_data/out.zip')
         except Exception, e:
             import traceback
