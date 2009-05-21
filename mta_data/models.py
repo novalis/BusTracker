@@ -76,7 +76,7 @@ class TripStop(models.Model):
 
 
     def __unicode__(self):        
-        return "%s on %s at %s" % (self.bus_stop.geometry, unicode(self.trip), self.seconds_after_stop)
+        return "%s on %s at %s" % (self.bus_stop.geometry, unicode(self.trip), self.seconds_after_start)
 
     def distance_along_route(self):
         return distance_along_route(self.bus_stop.geometry, self.trip.route)
