@@ -12,8 +12,8 @@ class UpdateTestCase(TestCase):
     def test_update_location(self):
 
         c = Client()
-        response = c.post('/tracker/update', {'username' : '5',
-                                              'report': 'M20 N', 
+        response = c.post('/tracker/update', {'bus_id' : '5',
+                                              'route': 'M20 N', 
                                               'lat': '40.737606', 
                                               'lng' : '-74.006393',
                                               'date' : '2009-04-23T05:06:07Z'})
@@ -151,18 +151,18 @@ class UpdateTestCase(TestCase):
     def test_observation_smashing(self):
         
         c = Client()
-        response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 N', 
+        response = c.post('/tracker/update', {'bus_id' : '8',
+                                              'route': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:00Z'})
-        response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 N', 
+        response = c.post('/tracker/update', {'bus_id' : '8',
+                                              'route': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:01Z'})
-        response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 N', 
+        response = c.post('/tracker/update', {'bus_id' : '8',
+                                              'route': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:02Z'})
@@ -175,8 +175,8 @@ class UpdateTestCase(TestCase):
     def test_intersection_observation(self):
                 
         c = Client()
-        response = c.post('/tracker/update', {'username' : '8',
-                                              'report': 'M20 N', 
+        response = c.post('/tracker/update', {'bus_id' : '8',
+                                              'route': 'M20 N', 
                                               'intersection' : '6 Ave and 37 St',
                                               'lat': '40.742899', 
                                               'lng' : '-73.992799',
