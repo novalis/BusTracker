@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib.gis.geos import Point
+from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.utils.datastructures import SortedDict
@@ -35,7 +36,7 @@ def route_kml(request):
     route = Route.objects.filter(name=name, direction=direction).all()[0]
     return render_to_response('routes/route_kml.kml', {'route': route})
 
-
+@transaction.commit_on_success
 def update(request):
     if not request.method == "POST":
         return HttpResponse("Bad method", status=405)
