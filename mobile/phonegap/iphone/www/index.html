@@ -68,10 +68,13 @@
     function send_location_update(loc) {
         var url = $('#server-url')[0].value;
         var bus_id = $('#bus-id')[0].value;
-        var route = $('#route-select')[0].value;
+        var route_parts = $('#route-select')[0].value.split(' ');
+        var name = route_parts[0];
+        var direction = route_parts[1];
         var data = {
-            username: bus_id, // TODO: replace username and report with sensible names
-            report: route,
+            bus_id: bus_id,
+            name: name,
+            direction: direction,
         };
         if (loc.intersection) { 
             // Update from user clicking the intersection btn

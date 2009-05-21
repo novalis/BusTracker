@@ -40,13 +40,10 @@ def update(request):
     if not request.method == "POST":
         return HttpResponse("Bad method", status=405)
 
-
-    #note: keys 'username' and 'report' are artifacts of the general nature
-    #of the test app.  They will be replaced by sensible keys later.
-
-    bus_id = request.REQUEST['username']    
-    
-    name, direction, path = _parse_route_name(request.REQUEST['report'])
+    bus_id = request.REQUEST['bus_id']    
+    path = request.REQUEST.get('path', None)
+    name = request.REQUEST['name']
+    direction = request.REQUEST['direction']
 
     route = Route.objects.get(name=name, direction=direction, path=path)
 
@@ -141,15 +138,6 @@ def geocode(location):
         return (float(dlist[2]), float(dlist[3]))
     else:
         return None
-
-def _parse_route_name(route_name):
-    route_parts = route_name.split(" ")
-    name, direction = route_parts[:2]
-    if len(route_parts) == 3:
-        path = route_parts[2]
-    else:
-        path = None
-    return name, direction, path
 
 def _locate(route_name, time, long, lat):
     name, direction, path = _parse_route_name(route_name)
