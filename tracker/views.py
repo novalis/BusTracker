@@ -134,12 +134,6 @@ def geocode(location):
     else:
         return None
 
-def _route_name(route):
-    if route.path:
-        return "%s %s %s" % (route.name, route.direction, route.path)
-    else:
-        return "%s %s" % (route.name, route.direction)
-
 def _parse_route_name(route_name):
     route_parts = route_name.split(" ")
     name, direction = route_parts[:2]
@@ -199,5 +193,5 @@ def locate(request):
     return _locate(route_name, time, float(request.REQUEST['long']), float(request.REQUEST['lat']))
 
 def map(request):
-    routes = [_route_name(route) for route in Route.objects.all()]
+    routes = [route.route_name() for route in Route.objects.all()]
     return render_to_response('routes/map.html', {'routes': routes})
