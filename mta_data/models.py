@@ -12,10 +12,19 @@ class Route(models.Model):
     length = models.FloatField(null=True)
     objects = models.GeoManager()
 
+    class Meta:
+        ordering = ["name", "direction", "path"]
+
     def save(self):
         if not self.length:
             self.length = self.geometry.length
         super(Route, self).save()
+
+    def route_name(self):
+        if self.path:
+            return "%s %s %s" % (self.name, self.direction, self.path)
+        else:
+            return "%s %s" % (self.name, self.direction)
 
     def __unicode__(self):
         return "'%s'" % self.name

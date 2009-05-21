@@ -20,7 +20,7 @@ rename_location = {
 'NARROWS ROAD S at FINGERBOARD RD' : 'NARROWS RD S at FINGERBOARD RD',
 }
 
-def route_for_trip(feed, name, trip_rec, headsign):
+def route_for_trip(feed, trip_rec, headsign):
     route_id = trip_rec['headsign_id']
 
     if route_id in feed.routes:
@@ -29,7 +29,7 @@ def route_for_trip(feed, name, trip_rec, headsign):
     #create the route
     long_name = headsign + ' ' + trip_rec['direction']
     route = transitfeed.Route(route_id=route_id,
-                             short_name=name, 
+                             short_name=trip_rec['route_name'], 
                              long_name=long_name,
                              route_type="Bus")
     feed.AddRouteObject(route)
@@ -128,7 +128,7 @@ class Command(BaseCommand):
                     hid = trip_rec['headsign_id']
                     headsign = headsigns.get(hid, long_name)
 
-                    route = route_for_trip(feed, name, trip_rec, headsign)
+                    route = route_for_trip(feed, trip_rec, headsign)
 
                     trip = route.AddTrip(feed, 
                                          headsign, 

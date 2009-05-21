@@ -41,11 +41,8 @@ def update(request):
         return HttpResponse("Bad method", status=405)
 
     bus_id = request.REQUEST['bus_id']    
-    path = request.REQUEST.get('path', None)
-    name = request.REQUEST['name']
-    direction = request.REQUEST['direction']
 
-    route = Route.objects.get(name=name, direction=direction, path=path)
+    route = _route_by_name(request.REQUEST['route'])
 
     #figure out what trip we are on by assuming it is the trip
     #starting closest to now.
@@ -139,9 +136,26 @@ def geocode(location):
     else:
         return None
 
-def _locate(route_name, time, long, lat):
+def _parse_route_name(route_name):
+    route_parts = route_name.split(" ")
+    name, direction = route_parts[:2]
+    if len(route_parts) == 3:
+        path = route_parts[2]
+    else:
+        path = None
+    return name, direction, path
+
+def _route_by_name(route_name):
     name, direction, path = _parse_route_name(route_name)
-    route = Route.objects.get(name = name, direction = direction, path = path)
+    if path:
+        route = Route.objects.get(name = name, direction = direction, path=path)
+    else:
+        route = Route.objects.get(name = name, direction = direction)        
+    return route
+
+def _locate(route_name, time, long, lat):
+    route = _route_by_name(route_name)
+    
     location = Point(long, lat)
     buses = []
     for bus in route.bus_set.all():

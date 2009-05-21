@@ -2,7 +2,7 @@
 Where are you?  <input type="text" name="address"><br/>
 What bus do you want?  <select name="route_name">
 {% for route in routes %}
-<option value="{{route.name}}">{{route.name}}</option>
+<option value="{{route.route_name}}">{{route.route_name}}</option>
 {% endfor %}
 </select>
 <input type="submit" name="Submit" value="Submit">
