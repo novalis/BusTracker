@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
         try:
             #capture multiple stops with different box ids
-            stop_name_to_id = {}
+            stop_name_to_stop = {}
 
             for route_rec in parse_schedule_dir(dirname):
 
@@ -80,22 +80,24 @@ class Command(BaseCommand):
 
                     #check for duplicate box ids
                     box_no = str(stop_rec['box_no'])
-                    if location in stop_name_to_id:
-                        box_no = stop_name_to_id[location]
-                    else:
-                        stop_name_to_id[location] = box_no
-
-                    #now, try to find a nearby stop
+                    stop_id = stop_rec['stop_id']
+                    if location in stop_name_to_stop:
+                        stop_hexid_to_stop[stop_id] = stop_name_to_stop[location]
+                        continue
 
                     lat = stop_rec['latitude'] / 1000000.0
                     lng = stop_rec['longitude'] / 1000000.0
+
+                    #special case for QVDEP:
+                    if location == 'Queens Village Depot':
+                        lat, lng = 40.726711 -73.734779
 
                     #not in NYC area
                     if not (-72 > lng > -75) or not (41 > lat > 39):
                         print "bad lat, lng", lat, lng
                         import pdb;pdb.set_trace()
                         
-
+                    #now, try to find a nearby stop
                     nearest = feed.GetNearestStops(lat, lng, 1)
                     if len(nearest) and not ' LANE ' in nearest[0].stop_name:
                         #sometimes bus stops really are like 1 m away because 
@@ -105,7 +107,8 @@ class Command(BaseCommand):
                         nearest = None
 
                     if nearest and abs(nearest.stop_lat - lat) + abs(nearest.stop_lon - lng) < 0.00001:
-                        stop_hexid_to_stop[stop_rec['stop_id']] = nearest
+                        stop_hexid_to_stop[stop_id] = nearest
+                        stop_name_to_stop[location] = nearest
                     else:
                         stop = transitfeed.Stop(
                                 lng=lng,
@@ -114,8 +117,8 @@ class Command(BaseCommand):
                                 name=location
                                 )
                         feed.AddStopObject(stop)
-                        stop_hexid_to_stop[stop_rec['stop_id']] = stop
-            
+                        stop_hexid_to_stop[stop_id] = stop
+                        stop_name_to_stop[location] = stop                                    
                 #figure out headsigns
 
                 headsigns = dict((sign['headsign_id'], sign['headsign']) for sign in route_rec['headsigns'])
