@@ -17,6 +17,12 @@ class Route(models.Model):
             self.length = self.geometry.length
         super(Route, self).save()
 
+    def route_name(self):
+        if self.path:
+            return "%s %s %s" % (self.name, self.direction, self.path)
+        else:
+            return "%s %s" % (self.name, self.direction)
+
     def __unicode__(self):
         return "'%s'" % self.name
 
