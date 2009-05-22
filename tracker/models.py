@@ -116,7 +116,7 @@ class BusObservation(models.Model):
     objects = BusObservationManager()
     bus = models.ForeignKey(Bus)
     location = models.PointField()
-    distance = models.FloatField(null=True)
+    distance = models.FloatField(null=True, db_index=True)
     time = models.DateTimeField()
 
     #extra GPS fields
@@ -125,6 +125,9 @@ class BusObservation(models.Model):
     altitude = models.FloatField(null=True)
     horizontal_accuracy = models.FloatField(null=True)
     vertical_accuracy = models.FloatField(null=True)
+
+    class Meta:
+        unique_together = ('bus', 'time')
 
     class Meta:
         ordering = ["time"]
