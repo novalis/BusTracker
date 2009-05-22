@@ -118,7 +118,7 @@ trip_format = LineFormat(
     FieldDef("UNKNOWN_1", 2), 
     FieldDef("start_minutes", 6, numeric=True),
     FieldDef('direction', 2), #NSEW only, I think.
-    FieldDef('UNKNOWN_2', 2, numeric=True), 
+    FieldDef('trip_type', 2, numeric=True),  #1 = normal; anything else = to/from depot?
     FieldDef('start_stop', 4, hex=True), 
     FieldDef('UNKNOWN_4', 2, hex=True),  
     FieldDef('end_minutes', 6, numeric=True),  
