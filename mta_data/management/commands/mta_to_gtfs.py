@@ -43,11 +43,19 @@ class Command(BaseCommand):
 
         feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load() #base data
 
+        borough = None
+
         try:
             #capture multiple stops with different box ids
             stop_name_to_stop = {}
 
             for route_rec in parse_schedule_dir(dirname):
+                if borough != route_rec['borough']:
+                    if borough:
+                        feed.Validate()
+                        feed.WriteGoogleTransitFeed('mta_data/%s.zip' % borough)
+                        feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()                        
+                        borough = route_rec['borough']
 
                 if route_rec['route_name_flag'] == 'X':
                     #express buses
@@ -143,7 +151,7 @@ class Command(BaseCommand):
                                          stop_time=stop_time)
 
             feed.Validate()
-            feed.WriteGoogleTransitFeed('mta_data/out.zip')
+            feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
         except Exception, e:
             import traceback
             traceback.print_exc()

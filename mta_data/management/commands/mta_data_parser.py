@@ -233,6 +233,7 @@ holidays = {'Christmas' : 'xmd', 'Christmas Eve' : 'xme',
 
 def parse_schedule_dir(dirname):
     files = os.listdir(dirname)
+    files.sort()
     for filename in files:
         if 'b_0666' in filename:
             continue #there is no B666 bus, so I have no idea why
