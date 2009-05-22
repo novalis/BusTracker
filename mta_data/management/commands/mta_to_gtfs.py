@@ -54,7 +54,6 @@ class Command(BaseCommand):
 
                 #gtfs files are organized by borough (not bus prefix)
                 if current_borough != route_rec['borough']:
-                    print "Switching to %s" % route_rec['borough']
                     if current_borough:
                         feed.Validate()
                         feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
