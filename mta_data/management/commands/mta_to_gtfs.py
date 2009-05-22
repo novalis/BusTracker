@@ -18,7 +18,7 @@ rename_location = {
 'NARROWS ROAD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
 'NARROWS RD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
 'NARROWS ROAD S at FINGERBOARD RD' : 'NARROWS RD S at FINGERBOARD RD',
-'AVE U at GERRITSEN AV' : 'AVE U at GERRITSEN AV',
+'AVE U at GERRITSEN AV' : 'AV U at GERRITSEN AV',
 }
 
 def route_for_trip(feed, trip_rec, headsign):
@@ -51,6 +51,8 @@ class Command(BaseCommand):
             stop_name_to_stop = {}
 
             for route_rec in parse_schedule_dir(dirname):
+
+                #gtfs files are organized by borough (not bus prefix)
                 if borough != route_rec['borough']:
                     if borough:
                         feed.Validate()
