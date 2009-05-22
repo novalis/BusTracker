@@ -56,7 +56,7 @@ class Command(BaseCommand):
                 if borough != route_rec['borough']:
                     if borough:
                         feed.Validate()
-                        feed.WriteGoogleTransitFeed('mta_data/%s.zip' % borough)
+                        feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
                         feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()                        
                         borough = route_rec['borough']
                         stop_name_to_stop = {}
