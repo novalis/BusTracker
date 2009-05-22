@@ -44,7 +44,7 @@ class Command(BaseCommand):
 
         feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load() #base data
 
-        borough = None
+        current_borough = None
 
         try:
             #capture multiple stops with different box ids
@@ -53,13 +53,14 @@ class Command(BaseCommand):
             for route_rec in parse_schedule_dir(dirname):
 
                 #gtfs files are organized by borough (not bus prefix)
-                if borough != route_rec['borough']:
-                    if borough:
+                if current_borough != route_rec['borough']:
+                    print "Switching to %s" % route_rec['borough']
+                    if current_borough:
                         feed.Validate()
                         feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
                         feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()                        
-                        borough = route_rec['borough']
                         stop_name_to_stop = {}
+                    current_borough = route_rec['borough']
 
                 if route_rec['route_name_flag'] == 'X':
                     #express buses
