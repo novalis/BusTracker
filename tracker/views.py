@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib.gis.geos import Point
+from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.utils.datastructures import SortedDict
@@ -33,7 +34,7 @@ def route_kml(request):
     route = _route_by_name(request.REQUEST['route'])
     return render_to_response('routes/route_kml.kml', {'route': route})
 
-
+@transaction.commit_on_success
 def update(request):
     if not request.method == "POST":
         return HttpResponse("Bad method", status=405)
@@ -107,7 +108,7 @@ def update(request):
                 prev_bus_stop = prev_bus_stop[0]
 
                 try:
-                    prev_observation = obs.get_prev_by_time()
+                    prev_observation = obs.get_previous_by_time(bus=bus)
                     if prev_observation.distance + stop_fudge <= prev_bus_stop.distance:
                         #this is our first post-stop observation
 

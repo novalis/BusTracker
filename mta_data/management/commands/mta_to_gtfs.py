@@ -18,6 +18,7 @@ rename_location = {
 'NARROWS ROAD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
 'NARROWS RD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
 'NARROWS ROAD S at FINGERBOARD RD' : 'NARROWS RD S at FINGERBOARD RD',
+'AVE U at GERRITSEN AV' : 'AV U at GERRITSEN AV',
 }
 
 def route_for_trip(feed, trip_rec, headsign):
@@ -43,11 +44,22 @@ class Command(BaseCommand):
 
         feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load() #base data
 
+        current_borough = None
+
         try:
             #capture multiple stops with different box ids
             stop_name_to_stop = {}
 
             for route_rec in parse_schedule_dir(dirname):
+
+                #gtfs files are organized by borough (not bus prefix)
+                if current_borough != route_rec['borough']:
+                    if current_borough:
+                        feed.Validate()
+                        feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
+                        feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()                        
+                        stop_name_to_stop = {}
+                    current_borough = route_rec['borough']
 
                 if route_rec['route_name_flag'] == 'X':
                     #express buses
@@ -116,7 +128,6 @@ class Command(BaseCommand):
                                 stop_id=box_no,
                                 name=location
                                 )
-                        feed.AddStopObject(stop)
                         stop_hexid_to_stop[stop_id] = stop
                         stop_name_to_stop[location] = stop                                    
                 #figure out headsigns
@@ -125,6 +136,9 @@ class Command(BaseCommand):
 
                 #now trips
                 for trip_rec in route_rec['trips']:
+                    if trip_rec['trip_type'] > 1:
+                        #these are trips to/from the depot
+                        continue
                     if trip_rec['UNKNOWN_1'].startswith('-'):
                         #these trips are bogus -- their stops are out-of-order.
                         continue
@@ -139,11 +153,14 @@ class Command(BaseCommand):
                     for tripstop_rec in trip_rec['stops']:
                         stop_id = tripstop_rec['stop_id']
                         stop_time = google_time_from_centiminutes(tripstop_rec['minutes'])
-                        trip.AddStopTime(stop_hexid_to_stop[stop_id], 
+                        stop = stop_hexid_to_stop[stop_id]
+                        if not stop.stop_id in feed.stops:
+                            feed.AddStopObject(stop)
+                        trip.AddStopTime(stop,
                                          stop_time=stop_time)
 
             feed.Validate()
-            feed.WriteGoogleTransitFeed('mta_data/out.zip')
+            feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
         except Exception, e:
             import traceback
             traceback.print_exc()
