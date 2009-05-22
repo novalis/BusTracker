@@ -49,6 +49,24 @@ extra_names = {
     'S91' : 'S61'
 }
 
+# Some (but not all) of the data has leading zeros in the route names.
+fix_leading_zeros = {
+    'Q01' : 'Q1',
+    'Q02' : 'Q2',
+    'Q03' : 'Q3',
+    'Q04' : 'Q4',
+    'Q05' : 'Q5',
+    'M01' : 'M1',
+    'M02' : 'M2',
+    'M03' : 'M3',
+    'M04' : 'M4',
+    'M05' : 'M5',
+    'M06' : 'M6',
+    'M07' : 'M7',
+    'M08' : 'M8',
+    'M09' : 'M9',
+}
+
 #from Bob Ippolito at 
 #http://bob.pythonmac.org/archives/2005/03/04/frozendict/
 class frozendict(dict):
@@ -144,6 +162,8 @@ def process_route(route_rec, mta_routes, name, table_name):
 
     #store trips
     for trip_rec in route_rec['trips']:
+        if trip_rec['route_name'] in fix_leading_zeros:
+            trip_rec['route_name'] = fix_leading_zeros[trip_rec['route_name']]
         if trip_rec['route_name'] != name:
             continue
         #fix up bogus direction information
