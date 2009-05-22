@@ -108,7 +108,7 @@ def update(request):
                 prev_bus_stop = prev_bus_stop[0]
 
                 try:
-                    prev_observation = obs.get_prev_by_time()
+                    prev_observation = obs.get_previous_by_time(bus=bus)
                     if prev_observation.distance + stop_fudge <= prev_bus_stop.distance:
                         #this is our first post-stop observation
 
