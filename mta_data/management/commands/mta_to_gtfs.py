@@ -29,11 +29,21 @@ def route_for_trip(feed, trip_rec, headsign):
 
     #create the route
     long_name = headsign + ' ' + trip_rec['direction']
+    short_name = trip_rec['route_name']
     route = transitfeed.Route(route_id=route_id,
-                             short_name=trip_rec['route_name'], 
+                             short_name=short_name, 
                              long_name=long_name,
                              route_type="Bus")
     feed.AddRouteObject(route)
+
+    if short_name.startswith("X"):
+        fare_id = 'express'
+    elif short_name.startswith('SBS'):
+        fare_id = 'sbs'
+    else:
+        fare_id = 'regular'
+
+    feed.AddFareRuleObject(transitfeed.FareRule(fare_id, route_id))
     return route
 
 class Command(BaseCommand):

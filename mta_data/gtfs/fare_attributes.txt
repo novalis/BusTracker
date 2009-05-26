@@ -1,0 +1,4 @@
+fare_id,price,currency_type,payment_method,transfers,transfer_duration
+regular,2,USD,0,1,7200
+sbs,2,USD,1,2,7200
+express,5,USD,0,1,7200
