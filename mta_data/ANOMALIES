@@ -21,9 +21,8 @@ Q44: special schedule for monday nights needs to be reflected in gtfs/our data
 
 The following route names are not as expected (which means the trips with these names are not currently being imported):
 
-Skipping BX3 (expected Bx4)
-Skipping SBS12 (expected Bx12)
 Skipping BX25 (expected Bx26)
+Skipping SBS12 (expected Bx12)
 Skipping M14AD (expected M14)
 Skipping Q20B (expected Q20)
 Skipping Q20A (expected Q20)

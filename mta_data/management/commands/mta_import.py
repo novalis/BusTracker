@@ -66,7 +66,7 @@ fix_leading_zeros = {
     'M08' : 'M8',
     'M09' : 'M9',
     'BX03' : 'BX3',
-    'BX04' : 'BX3',
+    'BX04' : 'BX4',
     'BX05' : 'BX5',
     'BX06' : 'BX6',
     'BX07' : 'BX7',
