@@ -65,6 +65,13 @@ fix_leading_zeros = {
     'M07' : 'M7',
     'M08' : 'M8',
     'M09' : 'M9',
+    'BX03' : 'BX3',
+    'BX04' : 'BX3',
+    'BX05' : 'BX5',
+    'BX06' : 'BX6',
+    'BX07' : 'BX7',
+    'BX08' : 'BX8',
+    'BX09' : 'BX9',
 }
 
 #from Bob Ippolito at 
@@ -162,9 +169,12 @@ def process_route(route_rec, mta_routes, name, table_name):
 
     #store trips
     for trip_rec in route_rec['trips']:
+        trip_rec['route_name'] = trip_rec['route_name'].upper() # Make sure Bx22 vs. BX22 does not cause us trouble
         if trip_rec['route_name'] in fix_leading_zeros:
             trip_rec['route_name'] = fix_leading_zeros[trip_rec['route_name']]
-        if trip_rec['route_name'] != name:
+        if trip_rec['route_name'] != name.upper():
+            if trip_rec['route_name']:
+                print "Skipping %s (expected %s)" % (trip_rec['route_name'], name)
             continue
         #fix up bogus direction information
         direction = trip_rec['direction']
