@@ -1,7 +1,9 @@
 from django.core.management.base import BaseCommand
 from mta_data_parser import parse_schedule_dir
 from mta_import import find_route_by_stops, time_from_centiminutes
+import os
 import transitfeed
+from zipfile import ZipFile
 
 def google_time_from_centiminutes(centiminutes):
     #the MTA's day is longer than 24 hours, but that needn't bother us
@@ -46,11 +48,22 @@ def route_for_trip(feed, trip_rec, headsign):
     feed.AddFareRuleObject(transitfeed.FareRule(fare_id, route_id))
     return route
 
+def save_base_gtfs(gtfs_dir):
+
+    gtfs_file = os.path.dirname(gtfs_dir) + "/gtfs.zip"
+    zip = ZipFile(gtfs_file, "w")
+    for filename in os.listdir(gtfs_dir):
+        if filename.endswith(".txt"):
+            zip.write(os.path.join(gtfs_dir, filename), os.path.basename(filename))
+    zip.close()
+
 class Command(BaseCommand):
     """Import mta schedule and route data into DB.  Assume route data is 
     truth for matters of directionality"""
 
     def handle(self, dirname, **kw):
+
+        save_base_gtfs("mta_data/gtfs")
 
         feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load() #base data
 
