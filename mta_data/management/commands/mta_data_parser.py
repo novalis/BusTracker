@@ -233,14 +233,13 @@ holidays = {'Christmas' : 'xmd', 'Christmas Eve' : 'xme',
 
 def parse_schedule_dir(dirname):
     files = os.listdir(dirname)
-    files.sort()
+    use_files = []
     for filename in files:
         if 'b_0666' in filename:
             continue #there is no B666 bus, so I have no idea why
                      #there is data for it
         if filename.startswith('stif'):
-            route = parse_schedule_file(os.path.join(dirname, filename))
-            yield route
+            use_files.append((filename, dirname, None))
         elif filename in holidays:
             holiday_abbrev = holidays[filename]
             subdirname = os.path.join(dirname, filename)
@@ -248,7 +247,11 @@ def parse_schedule_dir(dirname):
             for filename in files:
                 #schools are necessarily closed on holidays, so I have no idea why there are open data sets.
                 if filename.startswith('stif') and filename.endswith('.closed'):
-                    route = parse_schedule_file(os.path.join(subdirname, filename))
-                    route['day_of_week'] = holiday_abbrev
-                    yield route
+                    use_files.append((filename, subdirname, holiday_abbrev))
                     
+    use_files.sort()
+    for filename, dirname, day_of_week in use_files:
+        route = parse_schedule_file(os.path.join(dirname, filename))
+        if day_of_week:
+            route['day_of_week'] = holiday_abbrev
+        yield route
