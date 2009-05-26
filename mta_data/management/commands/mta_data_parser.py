@@ -195,7 +195,7 @@ def parse_schedule_file(path):
     if route['day_of_week'] == 'wkd.closed':
         route['day_of_week'] = 'wkc'
 
-    route['original_filename'] = filename
+    route['original_filename'] = path
 
     f = open(path)
     line = f.readline().strip('\r\n')
