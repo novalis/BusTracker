@@ -263,30 +263,24 @@ class Command(BaseCommand):
                     #in tracking this.
                     continue
 
-                mta_routes = list(MTARoute.objects.filter(route = name))
-                if len(mta_routes) == 0:
-                    #it's probably a multiroute file.  
-                    trips = route_rec['trips']
-                    names = set(trip['route_name'] for trip in trips if trip['route_name'])
-                    if len(names) == 0:
-                        print "route %s has no entry in shapes." % name
-                        import pdb;pdb.set_trace()
-                        continue
+                trips = route_rec['trips']
+                names = set(trip['route_name'] for trip in trips if trip['route_name'])
+                if len(names) == 0:
+                    print "route %s has no entry in shapes." % name
+                    import pdb;pdb.set_trace()
+                    continue
 
-                    for name in names:
-                        if name in use_alternate_route_geom:
-                            search_name = use_alternate_route_geom[name]
-                        else:
-                            search_name = name
+                for name in names:
+                    if name in use_alternate_route_geom:
+                        search_name = use_alternate_route_geom[name]
+                    else:
+                        search_name = name
                             
-                        if name in extra_names:
-                            extra_name = extra_names[name]
-                            mta_routes = list(MTARoute.objects.filter(models.Q(route = search_name) | models.Q(route = extra_name)))
-                        else:
-                            mta_routes = list(MTARoute.objects.filter(route = search_name))
-                        process_route(route_rec, mta_routes, name, route_table_name)
-
-                else:
+                    if name in extra_names:
+                        extra_name = extra_names[name]
+                        mta_routes = list(MTARoute.objects.filter(models.Q(route = search_name) | models.Q(route = extra_name)))
+                    else:
+                        mta_routes = list(MTARoute.objects.filter(route = search_name))
                     process_route(route_rec, mta_routes, name, route_table_name)
 
             #if we don't commit after every route, we run out of
