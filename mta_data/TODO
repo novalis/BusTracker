@@ -1,0 +1,6 @@
+Plan: 
+
+(1) have GTFS import route shapes from shapefiles
+(2) have mta_import import data from GTFS
+(3) figure out route names better than Google does (M14 AD)
+(4) use dates to find trip in models.py
