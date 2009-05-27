@@ -59,12 +59,11 @@ extra_names = {
     'S92' : 'S62',
     'S94' : 'S44',
     'S96' : 'S46',
-    'S98' : 'S48',
-    'S98' : 'S48',
+    'S48' : 'S98',
     'S98' : 'S48',
     'X17' : 'X17J', #but what about all the other X17 routes?
     'S61' : 'S91',
-    'S91' : 'S61'
+    'S91' : 'S61',
 }
 
 
@@ -74,6 +73,8 @@ fix_direction = {
     'S54' : {'E' : 'S'}, #one bogus entry
     'M31' : {'W' : 'S', 'E' :'N'},
     'Bx5' : {'E' : 'N', 'W' : 'S'},
+    'S74' : {'E' : 'N', 'W' : 'S'},
+    'S84' : {'E' : 'N', 'W' : 'S'},
 }
 
 fix_leading_zeros = {
@@ -151,7 +152,7 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
     return shape
 
 def route_for_trip(feed, trip_rec, headsign):
-    route_id = trip_rec['headsign_id']
+    route_id = str(trip_rec['headsign_id'])
 
     if route_id in feed.routes:
         return feed.routes[route_id]
@@ -302,6 +303,10 @@ class Command(BaseCommand):
                     rname = fix_leading_zeros.get(rname, rname)
                     nameq |= models.Q(route__iexact = rname)
 
+                    if rname in extra_names and extra_names[rname] not in names:
+                        nameq |= models.Q(route__iexact = extra_names[rname])
+
+
                 shapes = list(MTARoute.objects.filter(nameq))
 
                 shapes_by_direction = {}
@@ -337,9 +342,10 @@ class Command(BaseCommand):
                         stops.append(stop)
 
                     #find the appropriate shape from the shapefiles
+                    trip_route_name = trip_rec['route_name']
                     direction = trip_rec['direction']
-                    if name in fix_direction:
-                        direction = fix_direction[name].get(direction, direction)
+                    if trip_route_name in fix_direction:
+                        direction = fix_direction[trip_route_name].get(direction, direction)
                     shapes = shapes_by_direction.get(direction)
 
                     trip.shape_id = find_shape_by_stops(feed, shapes, stops, route_table_name).shape_id
