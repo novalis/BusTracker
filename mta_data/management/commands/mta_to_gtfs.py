@@ -111,15 +111,16 @@ gid = %%s""" % table_name
             best_dist = total_dist
             best_route = route
 
-    _shape_by_stops_cache[key] = best_route
     try:
-        shape = feed.GetShape(best_route.gid)
+        shape = feed.GetShape(str(best_route.gid))
     except KeyError:
-        shape = transitfeed.Shape(best_route.gid)
+        shape = transitfeed.Shape(str(best_route.gid))
         for point in best_route.the_geom.coords:
             shape.AddPoint(point[0], point[1])
 
         feed.AddShapeObject(shape)
+
+    _shape_by_stops_cache[key] = shape
     return shape
 
 def route_for_trip(feed, trip_rec, headsign):
