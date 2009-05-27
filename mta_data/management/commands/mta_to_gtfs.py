@@ -1,9 +1,17 @@
 from django.core.management.base import BaseCommand
 from mta_data_parser import parse_schedule_dir
-from mta_import import find_route_by_stops, time_from_centiminutes
+from mta_data.models import *
 import os
 import transitfeed
 from zipfile import ZipFile
+
+rename_location = {
+'BROADWAY at 207 ST' : 'BROADWAY at W 207 ST',
+'NARROWS ROAD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
+'NARROWS RD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
+'NARROWS ROAD S at FINGERBOARD RD' : 'NARROWS RD S at FINGERBOARD RD',
+'AVE U at GERRITSEN AV' : 'AV U at GERRITSEN AV',
+}
 
 def google_time_from_centiminutes(centiminutes):
     #the MTA's day is longer than 24 hours, but that needn't bother us
@@ -15,13 +23,104 @@ def google_time_from_centiminutes(centiminutes):
     seconds = ((centiminutes % 6000) - minutes * 100) * 60 / 100
     return "%02d:%02d:%02d" % (hours, minutes, seconds)
 
-rename_location = {
-'BROADWAY at 207 ST' : 'BROADWAY at W 207 ST',
-'NARROWS ROAD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
-'NARROWS RD S at FINGERBOARD ROAD' : 'NARROWS RD S at FINGERBOARD RD',
-'NARROWS ROAD S at FINGERBOARD RD' : 'NARROWS RD S at FINGERBOARD RD',
-'AVE U at GERRITSEN AV' : 'AV U at GERRITSEN AV',
+class MTARoute(models.Model):
+    gid = models.IntegerField(primary_key=True)
+    rt_dir = models.CharField(max_length=1)
+    route = models.CharField(max_length=16)
+    path = models.CharField(max_length=2)
+    the_geom = models.GeometryField()
+
+
+#from Bob Ippolito at 
+#http://bob.pythonmac.org/archives/2005/03/04/frozendict/
+class frozendict(dict):
+    __slots__ = ('_hash',)
+    def __hash__(self):
+        rval = getattr(self, '_hash', None)
+        if rval is None:
+            rval = self._hash = hash(frozenset(self.iteritems()))
+        return rval
+
+def freeze(obj):
+    if isinstance(obj, dict):
+        for k in obj:
+            obj[k] = freeze(obj[k])
+        return frozendict(obj)
+    elif isinstance(obj, list):
+        for i in range(len(obj)):
+            obj[i] = freeze(obj[i])
+        return tuple(obj)
+    else:
+        return obj
+
+extra_names = {
+    'S89' : 'S59',
+    'S90' : 'S40',
+    'S92' : 'S62',
+    'S94' : 'S44',
+    'S96' : 'S46',
+    'S98' : 'S48',
+    'S98' : 'S48',
+    'S98' : 'S48',
+    'X17' : 'X17J', #but what about all the other X17 routes?
+    'S61' : 'S91',
+    'S91' : 'S61'
 }
+
+
+fix_direction = {
+    'Bx14' : {'W' : 'S', 'E' : 'N'},
+    'S74' : {'E' : 'S', 'W' : 'N'}, #fixme: check this
+    'S54' : {'E' : 'S'}, #one bogus entry
+    'M31' : {'W' : 'S', 'E' :'N'},
+    
+}
+
+
+_shape_by_stops_cache = {}
+def find_shape_by_stops(feed, candidate_routes, stops, table_name):
+    """This is brutal -- it matches a set of route paths against a
+    known set of bus stops to choose the route path which falls
+    nearest to the trip."""
+
+    key = freeze([candidate_routes, stops, table_name])
+    if key in _shape_by_stops_cache:
+        return _shape_by_stops_cache[key]
+
+    best_route = None
+    best_dist = 100000000000000
+    sql = """SELECT st_distance(the_geom, %%s) 
+FROM 
+%s
+WHERE 
+gid = %%s""" % table_name
+
+    from django.db import connection
+    for route in candidate_routes:
+        total_dist = 0
+        for stop in stops:
+            cursor = connection.cursor()
+            #fixme: is there any way to just pass the stop's geometry
+            #directly?
+            location = "SRID=4326;POINT(%s %s)" % (stop.stop_lat,
+                                                   stop.stop_lon)
+            cursor.execute(sql, (location, route.gid))
+            row = cursor.fetchone()
+            total_dist += row[0]
+        if total_dist < best_dist:
+            best_dist = total_dist
+            best_route = route
+
+    _shape_by_stops_cache[key] = best_route
+    try:
+        shape = feed.GetShape(best_route.gid)
+    except KeyError:
+        shape = transitfeed.Shape(best_route.gid)
+        for point in best_route.the_geom.coords:
+            shape.AddPoint(point[0], point[1])
+
+        feed.AddShapeObject(shape)
+    return shape
 
 def route_for_trip(feed, trip_rec, headsign):
     route_id = trip_rec['headsign_id']
@@ -61,7 +160,9 @@ class Command(BaseCommand):
     """Import mta schedule and route data into DB.  Assume route data is 
     truth for matters of directionality"""
 
-    def handle(self, dirname, **kw):
+    def handle(self, dirname, route_table_name, **kw):
+
+        MTARoute._meta.db_table = route_table_name
 
         save_base_gtfs("mta_data/gtfs")
 
@@ -73,8 +174,8 @@ class Command(BaseCommand):
             #capture multiple stops with different box ids
             stop_name_to_stop = {}
 
+            last_route = None
             for route_rec in parse_schedule_dir(dirname):
-
                 #gtfs files are organized by borough (not bus prefix)
                 if current_borough != route_rec['borough']:
                     if current_borough:
@@ -96,6 +197,10 @@ class Command(BaseCommand):
                 if name == 'Q48':
                     print "Don't know how to handle loop routes yet"
                     continue
+
+                if last_route != name:
+                    _shape_by_stops_cache.clear()
+                    last_route = name
 
                 long_name = route_rec["street_name"]
                 if long_name.startswith(name):
@@ -170,9 +275,8 @@ class Command(BaseCommand):
 
                     route = route_for_trip(feed, trip_rec, headsign)
 
-                    trip = route.AddTrip(feed, 
-                                         headsign, 
-                                         service_period=period)
+                    trip = route.AddTrip(feed, headsign, service_period=period)
+                    stops = []
                     for tripstop_rec in trip_rec['stops']:
                         stop_id = tripstop_rec['stop_id']
                         stop_time = google_time_from_centiminutes(tripstop_rec['minutes'])
@@ -181,6 +285,17 @@ class Command(BaseCommand):
                             feed.AddStopObject(stop)
                         trip.AddStopTime(stop,
                                          stop_time=stop_time)
+                        stops.append(stop)
+
+                    #find the appropriate shape from the shapefiles
+                    extra_name = extra_names.get(name)
+                    direction = fix_direction.get(trip_rec['direction'], trip_rec['direction'])
+                    shapes = list(MTARoute.objects.filter(
+                            models.Q(rt_dir = direction) & (
+                                models.Q(route = name) | 
+                                models.Q(route = extra_name))))
+                    trip.shape_id = find_shape_by_stops(feed, shapes, stops, route_table_name)
+
 
             feed.Validate()
             feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
