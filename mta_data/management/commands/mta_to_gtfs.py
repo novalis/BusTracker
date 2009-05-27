@@ -288,7 +288,9 @@ class Command(BaseCommand):
 
                     #find the appropriate shape from the shapefiles
                     extra_name = extra_names.get(name)
-                    direction = fix_direction.get(trip_rec['direction'], trip_rec['direction'])
+                    direction = trip_rec['direction']
+                    if name in fix_direction:
+                        direction = fix_direction[name].get(direction, direction)
                     shapes = list(MTARoute.objects.filter(
                             models.Q(rt_dir = direction) & (
                                 models.Q(route = name) | 
