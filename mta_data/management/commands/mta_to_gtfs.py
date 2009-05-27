@@ -208,8 +208,6 @@ class Command(BaseCommand):
                     long_name = long_name[len(name):].strip()
 
 
-                #fixme: split multiroutes
-                    
                 period = feed.GetServicePeriod(route_rec['day_of_week'].upper())
 
                 stop_hexid_to_stop = {}
