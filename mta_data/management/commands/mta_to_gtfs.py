@@ -230,7 +230,7 @@ class Command(BaseCommand):
 
                     #special case for QVDEP:
                     if location == 'Queens Village Depot':
-                        lat, lng = 40.726711 -73.734779
+                        lat, lng = 40.726711, -73.734779
 
                     #not in NYC area
                     if not (-72 > lng > -75) or not (41 > lat > 39):
