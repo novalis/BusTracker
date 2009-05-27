@@ -235,9 +235,6 @@ def parse_schedule_dir(dirname):
     files = os.listdir(dirname)
     use_files = []
     for filename in files:
-        if 'b_0666' in filename:
-            continue #there is no B666 bus, so I have no idea why
-                     #there is data for it
         if filename.startswith('stif'):
             use_files.append((filename, dirname, None))
         elif filename in holidays:
@@ -251,6 +248,10 @@ def parse_schedule_dir(dirname):
                     
     use_files.sort()
     for filename, dirname, day_of_week in use_files:
+        if 'b_0666' in filename or 'b_0333' in filename:
+            continue #there is no B666 or B333 bus, so I have no idea why
+                     #there is data for them
+
         route = parse_schedule_file(os.path.join(dirname, filename))
         if day_of_week:
             route['day_of_week'] = holiday_abbrev
