@@ -266,10 +266,18 @@ class Command(BaseCommand):
                 headsigns = dict((sign['headsign_id'], sign['headsign']) for sign in route_rec['headsigns'])
 
                 #get possible shapes
-                extra_name = extra_names.get(name)
-                shapes = list(MTARoute.objects.filter(
-                        models.Q(route = name) | 
-                        models.Q(route = extra_name)))
+                names = set()
+                if name in extra_names:
+                    names.add(extra_names[name])
+
+                for trip_rec in route_rec['trips']:
+                    names.add(trip_rec['route_name'])
+
+                nameq = models.Q(route = name)
+                for name in names:
+                    nameq |= models.Q(route__iexact = name)
+
+                shapes = list(MTARoute.objects.filter(nameq))
 
                 shapes_by_direction = {}
                 for shape in shapes:
