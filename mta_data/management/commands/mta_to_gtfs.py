@@ -73,7 +73,7 @@ fix_direction = {
     'S74' : {'E' : 'S', 'W' : 'N'}, #fixme: check this
     'S54' : {'E' : 'S'}, #one bogus entry
     'M31' : {'W' : 'S', 'E' :'N'},
-    
+    'Bx5' : {'E' : 'N', 'W' : 'S'},
 }
 
 
