@@ -102,8 +102,8 @@ gid = %%s""" % table_name
             cursor = connection.cursor()
             #fixme: is there any way to just pass the stop's geometry
             #directly?
-            location = "SRID=4326;POINT(%s %s)" % (stop.stop_lat,
-                                                   stop.stop_lon)
+            location = "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
+                                                   stop.stop_lat)
             cursor.execute(sql, (location, route.gid))
             row = cursor.fetchone()
             total_dist += row[0]
@@ -116,7 +116,7 @@ gid = %%s""" % table_name
     except KeyError:
         shape = transitfeed.Shape(str(best_route.gid))
         for point in best_route.the_geom.coords:
-            shape.AddPoint(point[0], point[1])
+            shape.AddPoint(point[1], point[0])
 
         feed.AddShapeObject(shape)
 
