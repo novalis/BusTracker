@@ -76,6 +76,29 @@ fix_direction = {
     'Bx5' : {'E' : 'N', 'W' : 'S'},
 }
 
+fix_leading_zeros = {
+    'Q01' : 'Q1',
+    'Q02' : 'Q2',
+    'Q03' : 'Q3',
+    'Q04' : 'Q4',
+    'Q05' : 'Q5',
+    'M01' : 'M1',
+    'M02' : 'M2',
+    'M03' : 'M3',
+    'M04' : 'M4',
+    'M05' : 'M5',
+    'M06' : 'M6',
+    'M07' : 'M7',
+    'M08' : 'M8',
+    'M09' : 'M9',
+    'BX03' : 'BX3',
+    'BX04' : 'BX4',
+    'BX05' : 'BX5',
+    'BX06' : 'BX6',
+    'BX07' : 'BX7',
+    'BX08' : 'BX8',
+    'BX09' : 'BX9',
+}
 
 _shape_by_stops_cache = {}
 def find_shape_by_stops(feed, candidate_routes, stops, table_name):
@@ -271,11 +294,13 @@ class Command(BaseCommand):
                     names.add(extra_names[name])
 
                 for trip_rec in route_rec['trips']:
-                    names.add(trip_rec['route_name'])
+                    route_name = trip_rec['route_name']
+                    names.add(route_name)
 
                 nameq = models.Q(route = name)
-                for name in names:
-                    nameq |= models.Q(route__iexact = name)
+                for rname in names:
+                    rname = fix_leading_zeros.get(rname, rname)
+                    nameq |= models.Q(route__iexact = rname)
 
                 shapes = list(MTARoute.objects.filter(nameq))
 
