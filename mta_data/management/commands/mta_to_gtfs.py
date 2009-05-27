@@ -87,29 +87,33 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
     if key in _shape_by_stops_cache:
         return _shape_by_stops_cache[key]
 
-    best_route = None
-    best_dist = 100000000000000
-    sql = """SELECT st_distance(the_geom, %%s) 
-FROM 
-%s
-WHERE 
-gid = %%s""" % table_name
+    if len(candidate_routes) == 1:
+        best_route = candidate_routes[0]
+    else:
+        best_route = None
+        best_dist = 100000000000000
+        sql = """SELECT st_distance(the_geom, %%s) 
+    FROM 
+    %s
+    WHERE 
+    gid = %%s""" % table_name
 
-    from django.db import connection
-    for route in candidate_routes:
-        total_dist = 0
-        for stop in stops:
-            cursor = connection.cursor()
-            #fixme: is there any way to just pass the stop's geometry
-            #directly?
-            location = "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
-                                                   stop.stop_lat)
-            cursor.execute(sql, (location, route.gid))
-            row = cursor.fetchone()
-            total_dist += row[0]
-        if total_dist < best_dist:
-            best_dist = total_dist
-            best_route = route
+        from django.db import connection
+
+        for route in candidate_routes:
+            total_dist = 0
+            for stop in stops:
+                cursor = connection.cursor()
+                #fixme: is there any way to just pass the stop's geometry
+                #directly?
+                location = "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
+                                                       stop.stop_lat)
+                cursor.execute(sql, (location, route.gid))
+                row = cursor.fetchone()
+                total_dist += row[0]
+            if total_dist < best_dist:
+                best_dist = total_dist
+                best_route = route
 
     try:
         shape = feed.GetShape(str(best_route.gid))
@@ -261,6 +265,19 @@ class Command(BaseCommand):
 
                 headsigns = dict((sign['headsign_id'], sign['headsign']) for sign in route_rec['headsigns'])
 
+                #get possible shapes
+                extra_name = extra_names.get(name)
+                shapes = list(MTARoute.objects.filter(
+                        models.Q(route = name) | 
+                        models.Q(route = extra_name)))
+
+                shapes_by_direction = {}
+                for shape in shapes:
+                    if not shape.rt_dir in shapes_by_direction:
+                        shapes_by_direction[shape.rt_dir] = []
+                    shapes_by_direction[shape.rt_dir].append(shape)
+                del shapes
+
                 #now trips
                 for trip_rec in route_rec['trips']:
                     if trip_rec['trip_type'] > 1:
@@ -287,15 +304,12 @@ class Command(BaseCommand):
                         stops.append(stop)
 
                     #find the appropriate shape from the shapefiles
-                    extra_name = extra_names.get(name)
                     direction = trip_rec['direction']
                     if name in fix_direction:
                         direction = fix_direction[name].get(direction, direction)
-                    shapes = list(MTARoute.objects.filter(
-                            models.Q(rt_dir = direction) & (
-                                models.Q(route = name) | 
-                                models.Q(route = extra_name))))
-                    trip.shape_id = find_shape_by_stops(feed, shapes, stops, route_table_name)
+                    shapes = shapes_by_direction.get(direction)
+
+                    trip.shape_id = find_shape_by_stops(feed, shapes, stops, route_table_name).shape_id
 
 
             feed.Validate()
