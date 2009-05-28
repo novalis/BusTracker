@@ -187,9 +187,14 @@ def save_base_gtfs(gtfs_dir):
     zip.close()
 
 def init_q48():
+    #the shape for the Q48 is one long loop, instead of three separate
+    #routes: one for west, one for east from midnight - 6 am, and one
+    #for east during the day.  This corrects it.
+
     q48 = list(MTARoute.objects.filter(route='Q48'))
     if len(q48) > 1:
-        return #assume we have already loaded proper directions
+        return #assume that if there's more than one shape, we have
+               #already run this function
 
     shape = q48[0]
     coords = list(shape.the_geom.coords)
