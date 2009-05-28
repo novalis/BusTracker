@@ -1,3 +1,4 @@
+from django.contrib.gis.geos import LineString
 from django.core.management.base import BaseCommand
 from mta_data_parser import parse_schedule_dir
 from mta_data.models import *
@@ -185,6 +186,32 @@ def save_base_gtfs(gtfs_dir):
             zip.write(os.path.join(gtfs_dir, filename), os.path.basename(filename))
     zip.close()
 
+def init_q48():
+    q48 = list(MTARoute.objects.filter(route='Q48'))
+    if len(q48) > 1:
+        return #assume we have already loaded proper directions
+
+    shape = q48[0]
+    coords = list(shape.the_geom.coords)
+    if len(coords) != 725:
+        raise ValueError("Failed to import q48: wrong size")
+        
+    on_94_st = [
+        (40.77293, -73.87637), (40.77261, -73.87643), 
+        (40.77114, -73.87607), (40.77011, -73.87608), 
+        (40.77005, -73.87601), (40.76976, -73.87603), 
+        (40.76901, -73.87639), (40.76807, -73.87624), 
+        ]
+
+
+    MTARoute(gid=10705, rt_dir='W', route='Q48', path='WW',
+             the_geom = LineString(coords[:502])).save()
+    MTARoute(gid=10706, rt_dir='E', route='Q48', path='ED',
+             the_geom = LineString(coords[502:])).save()
+    MTARoute(gid=10707, rt_dir='E', route='Q48', path='EN',
+             the_geom = LineString(coords[502:524] + coords[458:411:-1] + on_94_st + coords[565:])).save()
+
+
 class Command(BaseCommand):
     """Import mta schedule and route data into DB.  Assume route data is 
     truth for matters of directionality"""
@@ -192,6 +219,8 @@ class Command(BaseCommand):
     def handle(self, dirname, route_table_name, **kw):
 
         MTARoute._meta.db_table = route_table_name
+
+        init_q48()
 
         save_base_gtfs("mta_data/gtfs")
 
@@ -223,9 +252,6 @@ class Command(BaseCommand):
                                    route_rec['route_no'])
 
                 print name
-                if name == 'Q48':
-                    print "Don't know how to handle loop routes yet"
-                    continue
 
                 if last_route != name:
                     _shape_by_stops_cache.clear()
