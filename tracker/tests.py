@@ -10,16 +10,14 @@ class UpdateTestCase(TestCase):
     fixtures = ['location.json', 'm6.json']
 
     def test_update_location(self):
-
-        c = Client()
-        response = c.post('/tracker/update', {'bus_id' : '5',
+        response = self.client.post('/tracker/update', {'bus_id' : '5',
                                               'route': 'M20 N', 
                                               'lat': '40.737606', 
                                               'lng' : '-74.006393',
                                               'date' : '2009-04-23T05:06:07Z'})
         assert response.status_code == 200
 
-        response = c.get('/tracker/')
+        response = self.client.get('/tracker/')
         self.assertTrue('M20' in response.content)
 
         bus = Bus.objects.get(id=5)
@@ -33,9 +31,7 @@ class UpdateTestCase(TestCase):
 
         assert BusObservation.objects.all().count() > 3
 
-        c = Client()
-
-        response = c.get('/tracker/locate', 
+        response = self.client.get('/tracker/locate', 
                          { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
@@ -46,7 +42,7 @@ class UpdateTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('2009-04-13' in response.content)
 
-        response = c.get('/tracker/locate', 
+        response = self.client.get('/tracker/locate', 
                          { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
@@ -58,7 +54,7 @@ class UpdateTestCase(TestCase):
         self.assertTrue('2009-04-13' in response.content)
 
 
-        response = c.get('/tracker/locate', 
+        response = self.client.get('/tracker/locate', 
                          { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
@@ -74,9 +70,7 @@ class UpdateTestCase(TestCase):
 
         assert BusObservation.objects.all().count() > 3
 
-        c = Client()
-
-        response = c.get('/tracker/locate_by_address', 
+        response = self.client.get('/tracker/locate_by_address', 
                          { 'route_name' : 'M20 N',
                            'lat': '40.766735', 
                            'long' : '-73.983093',
@@ -95,9 +89,7 @@ class UpdateTestCase(TestCase):
 
     def test_kml(self):
         
-        c = Client()
-
-        response = c.get('/tracker/kml', 
+        response = self.client.get('/tracker/kml', 
                          { 'bus_id' : 7 })
 
 
@@ -150,32 +142,30 @@ class UpdateTestCase(TestCase):
 
     def test_observation_smashing(self):
         
-        c = Client()
-        response = c.post('/tracker/update', {'bus_id' : '8',
+        response = self.client.post('/tracker/update', {'bus_id' : '8',
                                               'route': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:00Z'})
-        response = c.post('/tracker/update', {'bus_id' : '8',
+        response = self.client.post('/tracker/update', {'bus_id' : '8',
                                               'route': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:01Z'})
-        response = c.post('/tracker/update', {'bus_id' : '8',
+        response = self.client.post('/tracker/update', {'bus_id' : '8',
                                               'route': 'M20 N', 
                                               'lat': '40.0', 
                                               'lng' : '-74.0',
                                               'date' : '2009-04-24T00:00:02Z'})
 
-        response = c.get('/tracker/kml', 
+        response = self.client.get('/tracker/kml', 
                          { 'bus_id' : '8' })
 
         self.assertContains(response, '-74.0', count=2)
 
     def test_intersection_observation(self):
                 
-        c = Client()
-        response = c.post('/tracker/update', {'bus_id' : '8',
+        response = self.client.post('/tracker/update', {'bus_id' : '8',
                                               'route': 'M20 N', 
                                               'intersection' : '6 Ave and 37 St',
                                               'lat': '40.742899', 
