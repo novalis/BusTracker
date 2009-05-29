@@ -137,19 +137,12 @@ def geocode(location):
 
 def _parse_route_name(route_name):
     route_parts = route_name.split(" ")
-    name, direction = route_parts[:2]
-    if len(route_parts) == 3:
-        path = route_parts[2]
-    else:
-        path = None
-    return name, direction, path
+    name, direction = route_parts
+    return name, direction
 
 def _route_by_name(route_name):
-    name, direction, path = _parse_route_name(route_name)
-    if path:
-        route = Route.objects.get(name = name, direction = direction, path=path)
-    else:
-        route = Route.objects.get(name = name, direction = direction)        
+    name, direction = _parse_route_name(route_name)
+    route = Route.objects.get(name = name, direction = direction)        
     return route
 
 def _locate(route_name, time, long, lat):

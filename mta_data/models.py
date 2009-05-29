@@ -7,13 +7,12 @@ class Route(models.Model):
     name = models.CharField(max_length=5) #borough, number
     geometry = models.GeometryField() 
     direction = models.CharField(max_length = 1) #NSEW
-    path = models.CharField(max_length = 2, null=True)
     headsign = models.CharField(max_length = 64, null=True)
     length = models.FloatField(null=True)
     objects = models.GeoManager()
 
     class Meta:
-        ordering = ["name", "direction", "path"]
+        ordering = ["name", "direction", "name"]
 
     def save(self):
         if not self.length:
@@ -21,10 +20,7 @@ class Route(models.Model):
         super(Route, self).save()
 
     def route_name(self):
-        if self.path:
-            return "%s %s %s" % (self.name, self.direction, self.path)
-        else:
-            return "%s %s" % (self.name, self.direction)
+        return "%s %s" % (self.name, self.direction)
 
     def __unicode__(self):
         return "'%s'" % self.name
