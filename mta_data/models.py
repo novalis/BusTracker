@@ -12,7 +12,7 @@ class Route(models.Model):
     objects = models.GeoManager()
 
     class Meta:
-        ordering = ["name", "direction", "name"]
+        ordering = ["name", "direction", "headsign"]
 
     def save(self):
         if not self.length:
