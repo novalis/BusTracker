@@ -141,7 +141,7 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
                 best_dist = total_dist
                 best_route = route
                 multi_best = False
-            elif total_dist == best_dist and route.geometry != best_route.geometry:
+            elif total_dist == best_dist and route.the_geom != best_route.the_geom:
                 multi_best = True
 
         if candidate_routes[0].route == 'Q48':
