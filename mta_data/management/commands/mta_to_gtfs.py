@@ -127,6 +127,7 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
 
         for route in candidate_routes:
             total_dist = 0
+            multi_best = False
             for stop in stops:
                 cursor = connection.cursor()
                 #fixme: is there any way to just pass the stop's geometry
@@ -139,6 +140,20 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
             if total_dist < best_dist:
                 best_dist = total_dist
                 best_route = route
+                multi_best = False
+            elif total_dist == best_dist:
+                multi_best = True
+
+        if candidate_routes[0].route == 'Q48':
+            #this is a total hack, the Q48 is in general a total hack
+            if len(stops) == 22:
+                for route in candidate_routes:
+                    if route.gid == 10707:
+                        best_route = route
+            
+        elif multi_best:
+            print "Multiple best routes for %s %s" % (route.route, route.rt_dir)
+
 
     try:
         shape = feed.GetShape(str(best_route.gid))
@@ -202,19 +217,18 @@ def init_q48():
         raise ValueError("Failed to import q48: wrong size")
         
     on_94_st = [
-        (40.77293, -73.87637), (40.77261, -73.87643), 
-        (40.77114, -73.87607), (40.77011, -73.87608), 
-        (40.77005, -73.87601), (40.76976, -73.87603), 
-        (40.76901, -73.87639), (40.76807, -73.87624), 
+        (-73.87637, 40.77293), (-73.87643, 40.77261), 
+        (-73.87607, 40.77114), (-73.87608, 40.77011), 
+        (-73.87601, 40.77005), (-73.87603, 40.76976), 
+        (-73.87639, 40.76901), (-73.87624, 40.76807), 
         ]
-
 
     MTARoute(gid=10705, rt_dir='W', route='Q48', path='WW',
              the_geom = LineString(coords[:502])).save()
     MTARoute(gid=10706, rt_dir='E', route='Q48', path='ED',
              the_geom = LineString(coords[502:])).save()
     MTARoute(gid=10707, rt_dir='E', route='Q48', path='EN',
-             the_geom = LineString(coords[502:524] + coords[458:411:-1] + on_94_st + coords[565:])).save()
+             the_geom = LineString(coords[502:524] + coords[458:410:-1] + on_94_st + coords[565:])).save()
 
 
 class Command(BaseCommand):
