@@ -18,7 +18,7 @@ class Bus(models.Model):
             return -1
 
     def __unicode__(self):
-        return "<Bus (%d) on route %s %s (path %s)>" % (self.id, self.route.name, self.route.path, self.route.direction)
+        return "<Bus (%d) on route %s %s>" % (self.id, self.route.name, self.route.direction)
 
     @property
     def location(self):
