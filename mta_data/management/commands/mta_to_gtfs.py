@@ -31,7 +31,32 @@ class MTARoute(models.Model):
     path = models.CharField(max_length=2)
     the_geom = models.GeometryField()
 
+    def dump_kml(self):
+        f = open("/tmp/%s.kml" % self.gid, "w")
+        coords = self.the_geom.coords
 
+        print >>f, """<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+"""
+        for i, (x, y) in enumerate(coords):
+            print>>f,  """
+             <Placemark>
+                <name>
+			%d
+                </name>
+                <Point>
+			<coordinates>%f, %f</coordinates>
+		</Point>
+              </Placemark>
+""" % (i, x, y)
+            
+        print >>f, """</Document>
+</kml>
+"""
+        f.close()
+        print "dumped %s" % self.gid
+            
 #from Bob Ippolito at 
 #http://bob.pythonmac.org/archives/2005/03/04/frozendict/
 class frozendict(dict):
