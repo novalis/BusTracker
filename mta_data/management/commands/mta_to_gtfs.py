@@ -1,4 +1,4 @@
-from django.contrib.gis.geos import LineString
+from django.contrib.gis.geos import LineString, Point
 from django.core.management.base import BaseCommand
 from mta_data_parser import parse_schedule_dir
 from mta_data.models import *
@@ -50,13 +50,13 @@ class MTARoute(models.Model):
 		</Point>
               </Placemark>
 """ % (i, x, y)
-            
+
         print >>f, """</Document>
 </kml>
 """
         f.close()
         print "dumped %s" % self.gid
-            
+
 #from Bob Ippolito at 
 #http://bob.pythonmac.org/archives/2005/03/04/frozendict/
 class frozendict(dict):
@@ -137,57 +137,88 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
     if key in _shape_by_stops_cache:
         return _shape_by_stops_cache[key]
 
-    if len(candidate_routes) == 1:
-        best_route = candidate_routes[0]
-    else:
-        best_route = None
-        best_dist = 100000000000000
-        sql = """SELECT st_distance(the_geom, %%s) 
-    FROM 
-    %s
-    WHERE 
-    gid = %%s""" % table_name
+    best_route = None
+    best_dist = 100000000000000
 
-        from django.db import connection
+    #routes are sorted by length, because we want to use the shortest
+    #route that matches the points.
+    for route in sorted(candidate_routes, key=lambda route:route.the_geom.length):
+        total_dist = 0
+        for stop in stops:
+            total_dist += route.the_geom.distance(Point(stop.stop_lon, stop.stop_lat))
+        if total_dist < best_dist:
+            best_dist = total_dist
+            best_route = route
 
-        for route in candidate_routes:
-            total_dist = 0
-            multi_best = False
-            for stop in stops:
-                cursor = connection.cursor()
-                #fixme: is there any way to just pass the stop's geometry
-                #directly?
-                location = "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
-                                                       stop.stop_lat)
-                cursor.execute(sql, (location, route.gid))
-                row = cursor.fetchone()
-                total_dist += row[0]
-            if total_dist < best_dist:
-                best_dist = total_dist
-                best_route = route
-                multi_best = False
-            elif total_dist == best_dist and route.the_geom != best_route.the_geom:
-                multi_best = True
-
-        if candidate_routes[0].route == 'Q48':
-            #this is a total hack, the Q48 is in general a total hack
-            if len(stops) == 22:
-                for route in candidate_routes:
-                    if route.gid == 10707:
-                        best_route = route
-            
-        elif multi_best:
-            print "Multiple best routes for %s %s" % (route.route, route.rt_dir)
+    if candidate_routes[0].route == 'Q48':
+        #this is a total hack; the Q48 is in general a total hack
+        if len(stops) == 22:
+            for route in candidate_routes:
+                if route.gid == 10707:
+                    best_route = route
 
 
-    try:
-        shape = feed.GetShape(str(best_route.gid))
-    except KeyError:
-        shape = transitfeed.Shape(str(best_route.gid))
+    #figure out if the set of stops is shorter than the best route
+    #(the bus stops or ends in the middle of the route) and if so,
+    #cut the route down.
+
+    from django.db import connection
+    cursor = connection.cursor()
+
+    sql = """SELECT st_line_locate_point(the_geom, %%s) 
+FROM 
+%s
+WHERE 
+gid = %%s""" % table_name
+    def stop_geometry(stop):
+        return "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
+                                           stop.stop_lat)
+    cursor.execute(sql, (stop_geometry(stops[0]),
+                         route.gid))
+    start_location = cursor.fetchone()[0]
+    cursor.execute(sql, (stop_geometry(stops[-1]),
+                         route.gid))
+    end_location = cursor.fetchone()[0]
+
+    if start_location > end_location:
+        print "Backwards route %s" % route
+        import pdb;pdb.set_trace()
+
+    if end_location - start_location < 0.98:
+        #create a new shape for the short route
+        i = 0
+        while 1:
+            new_gid = str(best_route.gid * 100 + 20000 + i)
+            i += 1
+            try:
+                feed.GetShape(str(new_gid))
+            except:
+                break
+
+        shape = transitfeed.Shape(new_gid)
+
+        sql = """select st_line_locate_point(%s, %s)"""
+        #while a binary search for start and end would probably be
+        #faster, it assumes that the shapes are correctly plotted in
+        #ascending order, which they appear not to be.
         for point in best_route.the_geom.coords:
-            shape.AddPoint(point[1], point[0])
+            cursor.execute(sql, (best_route.the_geom.ewkt, "SRID=4326;POINT(%s %s)" % point))
+            distance = cursor.fetchone()[0]
+            if start_location <= distance:
+                if distance <= end_location:
+                    shape.AddPoint(point[1], point[0])
+                else:
+                    break
 
-        feed.AddShapeObject(shape)
+    else: #not a too-short route
+        try:
+            shape = feed.GetShape(str(best_route.gid))
+        except KeyError:
+            shape = transitfeed.Shape(str(best_route.gid))
+            for point in best_route.the_geom.coords:
+                shape.AddPoint(point[1], point[0])
+
+            feed.AddShapeObject(shape)
 
     _shape_by_stops_cache[key] = shape
     return shape
@@ -202,7 +233,7 @@ def route_for_trip(feed, trip_rec, headsign):
     long_name = headsign + ' ' + trip_rec['direction']
     short_name = trip_rec['route_name']
     route = transitfeed.Route(route_id=route_id,
-                             short_name=short_name, 
+                             short_name=short_name,
                              long_name=long_name,
                              route_type="Bus")
     feed.AddRouteObject(route)
@@ -240,12 +271,12 @@ def init_q48():
     coords = list(shape.the_geom.coords)
     if len(coords) != 725:
         raise ValueError("Failed to import q48: wrong size")
-        
+
     on_94_st = [
-        (-73.87637, 40.77293), (-73.87643, 40.77261), 
-        (-73.87607, 40.77114), (-73.87608, 40.77011), 
-        (-73.87601, 40.77005), (-73.87603, 40.76976), 
-        (-73.87639, 40.76901), (-73.87624, 40.76807), 
+        (-73.87637, 40.77293), (-73.87643, 40.77261),
+        (-73.87607, 40.77114), (-73.87608, 40.77011),
+        (-73.87601, 40.77005), (-73.87603, 40.76976),
+        (-73.87639, 40.76901), (-73.87624, 40.76807),
         ]
 
     MTARoute(gid=10705, rt_dir='W', route='Q48', path='WW',
@@ -257,7 +288,7 @@ def init_q48():
 
 
 class Command(BaseCommand):
-    """Import mta schedule and route data into DB.  Assume route data is 
+    """Transform mta schedule and route data to GTFS.  Assume route data is 
     truth for matters of directionality"""
 
     def handle(self, dirname, route_table_name, **kw):
@@ -283,7 +314,7 @@ class Command(BaseCommand):
                     if current_borough:
                         feed.Validate()
                         feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
-                        feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()                        
+                        feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()
                         stop_name_to_stop = {}
                     current_borough = route_rec['borough']
 
@@ -333,7 +364,7 @@ class Command(BaseCommand):
                     if not (-72 > lng > -75) or not (41 > lat > 39):
                         print "bad lat, lng", lat, lng
                         import pdb;pdb.set_trace()
-                        
+
                     #now, try to find a nearby stop
                     nearest = feed.GetNearestStops(lat, lng, 1)
                     if len(nearest) and not ' LANE ' in nearest[0].stop_name:
@@ -354,7 +385,8 @@ class Command(BaseCommand):
                                 name=location
                                 )
                         stop_hexid_to_stop[stop_id] = stop
-                        stop_name_to_stop[location] = stop                                    
+                        stop_name_to_stop[location] = stop
+
                 #figure out headsigns
 
                 headsigns = dict((sign['headsign_id'], sign['headsign']) for sign in route_rec['headsigns'])
