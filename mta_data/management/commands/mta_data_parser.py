@@ -249,8 +249,11 @@ def parse_schedule_dir(dirname):
     use_files.sort()
     for filename, dirname, day_of_week in use_files:
         if 'b_0666' in filename or 'b_0333' in filename:
-            continue #there is no B666 or B333 bus, so I have no idea why
-                     #there is data for them
+            continue #there is no B666 or B333 bus -- these are
+                     #shuttle buses that don't make stops.  There is
+                     #no route data for them, so we won't include
+                     #them.
+                     
 
         route = parse_schedule_file(os.path.join(dirname, filename))
         if day_of_week:
