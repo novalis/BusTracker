@@ -9,7 +9,7 @@ function createMap(map_id) {
     map = new OpenLayers.Map('map', options);
     var baseMap = new OpenLayers.Layer.WMS(
         'OpenStreetMap',
-        'http://demo.opengeo.org/geoserver_openstreetmap/gwc/service/wms',
+        'http://maps.opengeo.org/geoserver/gwc/service/wms',
         {
             layers: 'openstreetmap',
             format: 'image/png',
