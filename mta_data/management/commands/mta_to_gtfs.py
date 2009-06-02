@@ -248,8 +248,8 @@ gid = %%s""" % table_name
             new_gid = str(best_route.gid * 100 + 20000 + i)
             i += 1
             try:
-                feed.GetShape(str(new_gid))
-            except:
+                feed.GetShape(new_gid)
+            except KeyError:
                 break
 
         shape = transitfeed.Shape(new_gid)
