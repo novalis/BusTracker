@@ -267,6 +267,7 @@ gid = %%s""" % table_name
                 else:
                     break
 
+        feed.AddShapeObject(shape)
     else: #not a too-short route
         try:
             shape = feed.GetShape(str(best_route.gid))
