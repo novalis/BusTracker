@@ -248,8 +248,8 @@ gid = %%s""" % table_name
             new_gid = str(best_route.gid * 100 + 20000 + i)
             i += 1
             try:
-                feed.GetShape(str(new_gid))
-            except:
+                feed.GetShape(new_gid)
+            except KeyError:
                 break
 
         shape = transitfeed.Shape(new_gid)
@@ -265,8 +265,10 @@ gid = %%s""" % table_name
                 if distance <= end_location:
                     shape.AddPoint(point[1], point[0])
                 else:
-                    break
+                    #break
+                    pass
 
+        feed.AddShapeObject(shape)
     else: #not a too-short route
         try:
             shape = feed.GetShape(str(best_route.gid))
