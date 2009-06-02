@@ -1,10 +1,12 @@
 from django.contrib.gis.geos import LineString, Point
 from django.core.management.base import BaseCommand
+from math import sqrt
 from mta_data_parser import parse_schedule_dir
 from mta_data.models import *
+from zipfile import ZipFile
+
 import os
 import transitfeed
-from zipfile import ZipFile
 
 rename_location = {
 'BROADWAY at 207 ST' : 'BROADWAY at W 207 ST',
