@@ -160,23 +160,29 @@ def st_line_locate_point(linestring, p):
         len2=dx*dx+dy*dy
         r=((p[0]-p0[0])*dx+(p[1]-p0[1])*dy)/len2
 
-        if 0 <= r <= 1:
-            dist = dist_line_point(p0, p1, p)
-            if dist < best_dist:
-                best_dist = dist
+        if r < 0:
+            r = 0
+            dist = (p0[0] - p[0]) ** 2 + (p0[1] - p[1]) ** 2
+        elif r > 1:
+            r = 1
+            dist = (p1[0] - p[0]) ** 2 + (p1[1] - p[1]) ** 2
 
-                found = r
-                before_length += after_length + seg_length
-                after_length = 0
-                seg_length = this_length
+        else:
+            dist = dist_line_point(p0, p1, p)
+            
+        if dist < best_dist:
+            best_dist = dist
+
+            found = r
+            before_length += after_length + seg_length
+            after_length = 0
+            seg_length = this_length
         else:
             if found is None:
                 before_length += this_length
             else:
                 after_length += this_length
 
-    if not found:
-        return 0
     total_length = before_length + seg_length + after_length
     before_r = before_length / total_length
     seg_r = seg_length / total_length
@@ -219,26 +225,12 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
     #(the bus stops or ends in the middle of the route) and if so,
     #cut the route down.
 
-    from django.db import connection
-    cursor = connection.cursor()
+    start_location = st_line_locate_point(best_route.the_geom, (stops[0].stop_lon, stops[0].stop_lat))
 
-    sql = """SELECT st_line_locate_point(the_geom, %%s) 
-FROM 
-%s
-WHERE 
-gid = %%s""" % table_name
-    def stop_geometry(stop):
-        return "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
-                                           stop.stop_lat)
-    cursor.execute(sql, (stop_geometry(stops[0]),
-                         route.gid))
-    start_location = cursor.fetchone()[0]
-    cursor.execute(sql, (stop_geometry(stops[-1]),
-                         route.gid))
-    end_location = cursor.fetchone()[0]
+    end_location = st_line_locate_point(best_route.the_geom, (stops[-1].stop_lon, stops[-1].stop_lat))
 
     if start_location > end_location:
-        print "Backwards route %s" % route
+        print "Backwards route %s" % route.gid
         import pdb;pdb.set_trace()
 
     if end_location - start_location < 0.98:
@@ -257,6 +249,11 @@ gid = %%s""" % table_name
         #while a binary search for start and end would probably be
         #faster, it assumes that the shapes are correctly plotted in
         #ascending order, which they appear not to be.
+
+        #also, this doesn't split the line segments that span the
+        #start and end of the route, which is basically OK because
+        #routes are very overdetermined in the MTA data, so the
+        #resulting path is very close.
         for point in best_route.the_geom.coords:
 
             distance = st_line_locate_point(best_route.the_geom, point)

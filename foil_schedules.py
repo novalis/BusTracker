@@ -4,30 +4,29 @@ from mechanize import Browser
 import datetime
 import smtplib
 
+email_address = "novalis@openplans.org"
 
-def send_mail(to, subject, body):
+def send_mail(subject, body):
     # Set up a MIMEText object (it's a dictionary)
     msg = MIMEText(body)  
-    # You can use add_header or set headers directly ...
+
     msg['Subject'] = subject
-    msg['From'] = "novalis@openplans.org"
+    msg['From'] = email_address
     msg['To'] = to
-    # Establish an SMTP object and connect to your mail server
+
     s = smtplib.SMTP()
     s.connect("localhost")
-    # Send the email - real from, real to, extra headers and content ...
-    s.sendmail("novalis@novalis.org", to, msg.as_string())
+    s.sendmail(email_address, email_address, msg.as_string())
     s.close()
 
 urls = {'nyct' : 'http://mta-nyc2.custhelp.com/cgi-bin/mta_nyc2.cfg/php/enduser/ask.php?p_prod_lvl1=70&p_prod_lvl2=72&p_cat_lvl1=35', 
         'mta_bus' : 'http://mta-nyc2.custhelp.com/cgi-bin/mta_nyc2.cfg/php/enduser/ask.php?p_prod_lvl1=70&p_prod_lvl2=78&p_cat_lvl1=35'}
 
-prod_lvl_2 = {'nyct' : 72,
-              'mta_bus' : 78}
+prod_lvl_2 = {'nyct' : '72',
+              'mta_bus' : '78'}
 
 form1 = dict(
-    p_prod_lvl1='70',
-    p_userid='novalis@openplans.org',
+    p_userid=email_address,
     p_icf_183='David Turner',
     p_icf_184='The Open Planning Project',
     p_icf_185='349 W 12th St #3',
@@ -60,7 +59,7 @@ rather than getting a CD in the mail.
 
 br = Browser()
 br.set_handle_robots(False)
-r(datetime.date.today())
+today = str(datetime.date.today())
 
 for agency, url in urls.items():
 
@@ -69,29 +68,28 @@ for agency, url in urls.items():
 
     for k, v in form1.items():
         br[k] = v
-    br['prod_lvl_2'] = prod_lvl_2[agency] #this is done with JS so we
-                                          #must simulate it manually.
+
+    #this is done with JS so we must simulate it manually.
+    #this is horrible, but the JS is evil, so...
+    value = prod_lvl_2[agency]
+    br.form.find_control('p_prod_lvl2').items[-1].__dict__['value'] = value
+    br.form.find_control('p_prod_lvl2').items[-1].__dict__['label'] = value
+    br.form.find_control('p_prod_lvl2').items[-1].__dict__['name'] = value
+    br['p_prod_lvl2'] = [value]     
 
     response2 = br.submit()
-    success = response3.read()
+    success = response2.read()
 
     f = open('%s_%s_response2.html' % (agency, today), "w")
     f.write(success)
     f.close()
-    br.select_form(name="_main")
-    response3 = br.submit()
 
-    success = response3.read()
-    today_str = st
-    f = open('%s_%s_response3.html' % (agency, today), "w")
-    f.write(success)
-    f.close()
     if not 'The reference number' in success:
-        send_mail(owner, 'Failed MTA request for %s' % agency, 
+        send_mail('Failed MTA request for %s' % agency, 
 """
 We couldn't send a FOIL request to the MTA. The details are in 
-%s_%s_response3.html
+%s_%s_response2.html
 """ % (agency, today))
-        pass
 
-    import pdb;pdb.set_trace()
+
+
