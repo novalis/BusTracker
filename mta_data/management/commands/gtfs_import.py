@@ -11,12 +11,12 @@ def process_route(feed, gtfs_route):
     long_name = gtfs_route.route_long_name[:-2] #chop off direction
     name = gtfs_route.route_short_name
 
-    for trip in gtfs_route.trips:
+    for gtfs_trip in gtfs_route.trips:
         route = list(Route.objects.filter(gid=gtfs_route.route_id))
         if route:
             route = route[0]
         else:
-            shape = feed.GetShape(trip.shape_id)
+            shape = feed.GetShape(gtfs_trip.shape_id)
             geometry = LineString([point[:2] for point in shape.points])
             route = Route(gid = gtfs_route.route_id,
                           name = name, 
@@ -25,33 +25,51 @@ def process_route(feed, gtfs_route):
                           direction = direction)
             route.save()
 
-        import pdb;pdb.set_trace()
-        trip = Trip(route=route, day_of_week=trip.service_id, start_time=trip.stops[0].stop_time)
-        trip.save()
-        start = trip.stops[0].stop_time
-        for stop in trip.stops:
-            print stop
-            import pdb;pdb.set_trace()
-            #bus_stop = BusStop(box_no = stop.box_id, location=stop.location,
-            #                   geometry=x)
+        stop_times = gtfs_trip.GetStopTimes()
+        start = stop_times[0].arrival_secs
+        hours = start / 3600
+        minutes = (start / 60) % 60
+        seconds =  (start / 3600) % 60
+        day_later = False
+        if hours >= 24:
+            hours -= 24
+            start -= 86400
+            day_later = True
 
-            from django.db import connection
+        start_time = time(hours, minutes, seconds)
+        trip = list(Trip.objects.filter(route=route, day_of_week=gtfs_trip.service_id, start_time=start_time))
+        if trip:
+            trip = trip[0]
+        else:
+            trip = Trip(route=route, day_of_week=gtfs_trip.service_id, start_time=start_time)
+            trip.save()
+        start = start
+        for stop_time in stop_times:
+            stop = stop_time.stop
+            bus_stop = BusStop(box_no = stop_time.stop_id, 
+                               location=stop.stop_name,
+                               geometry=Point(stop.stop_lon, stop.stop_lat))
+            bus_stop.save()
             cursor = connection.cursor()
             #fixme: is there any way to just pass the stop's geometry
             #directly?
             location = "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
                                                    stop.stop_lat)
-            sql = """SELECT st_line_locate_point(the_geom, %%s) 
+            sql = """SELECT st_line_locate_point(geometry, %s) 
         FROM 
         mta_data_route
         WHERE 
-        gid = %%s""" % table_name
+        gid = %s"""
             cursor.execute(sql, (location, route.gid))
             row = cursor.fetchone()
             distance = row[0]
-            TripStop(trip = trip, seconds_after_start = stop.stop_time - start,
-                     bus_stop = bus_stop, distance = distance)
-
+            arrival_secs = stop_time.arrival_secs
+            if day_later:
+                arrival_secs -= 86400
+            ts = TripStop(trip = trip, 
+                          seconds_after_start = arrival_secs - start,
+                          bus_stop = bus_stop, distance = distance)
+            ts.save()
 
 class Command(BaseCommand):
     """Import mta schedule and route data from GTFS into DB."""
