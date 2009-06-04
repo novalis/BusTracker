@@ -20,7 +20,12 @@ alter table mta_bus_routes add constraint enforce_srid_the_geom check (srid(the_
 
 ./manage.py mta_extract [dir containing schedule zip files -- probably surface-bus]
 
-5. Import the schedule and route data
+5. Convert the schedule and route data to gtfs
 
-./maange.py mta_import [dir containing schedule data] [table name for shape data: mta_bus_routes]
+./manage.py mta_to_gtfs [dir containing schedule data] [table name for shape data: mta_bus_routes]
+
+6. Import the GTFS
+
+./manage.py gtfs_import mta_data/bus-[borough].zip 
+(for each borough)
 
