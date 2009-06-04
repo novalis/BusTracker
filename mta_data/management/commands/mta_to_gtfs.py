@@ -369,7 +369,7 @@ class Command(BaseCommand):
                 if current_borough != route_rec['borough']:
                     if current_borough:
                         feed.Validate()
-                        feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
+                        feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % current_borough)
                         feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()
                         stop_name_to_stop = {}
                     current_borough = route_rec['borough']
@@ -510,7 +510,7 @@ class Command(BaseCommand):
 
 
             feed.Validate()
-            feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % borough)
+            feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % current_borough)
         except Exception, e:
             import traceback
             traceback.print_exc()
