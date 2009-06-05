@@ -22,8 +22,9 @@ def send_mail(subject, body):
 urls = {'mtahq' : 'http://mta-nyc2.custhelp.com/cgi-bin/mta_nyc2.cfg/php/enduser/ask.php?p_prod_lvl1=70&p_prod_lvl2=71&p_cat_lvl1=35'}
 
 prod_lvl_2 = {'nyct' : '72',
-              'mta_bus' : '78'
-              'mtaqh' : '71'}
+              'mta_bus' : '78',
+              'mtaqh' : '71',
+              }
 
 form1 = dict(
     p_userid=email_address,
