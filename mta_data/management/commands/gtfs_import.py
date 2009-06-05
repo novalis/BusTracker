@@ -77,7 +77,7 @@ class Command(BaseCommand):
     @transaction.commit_manually
     def handle(self, gtfs_file, **kw):
         try:
-            feed = transitfeed.Loader(gtfs_file, memory_db=True).Load()
+            feed = transitfeed.Loader(gtfs_file, memory_db=False).Load()
 
             for stop_id, stop in feed.stops.items():
                 bus_stop = BusStop(box_no=stop_id, location=stop.stop_name,
