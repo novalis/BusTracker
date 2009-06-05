@@ -19,11 +19,11 @@ def send_mail(subject, body):
     s.sendmail(email_address, email_address, msg.as_string())
     s.close()
 
-urls = {'nyct' : 'http://mta-nyc2.custhelp.com/cgi-bin/mta_nyc2.cfg/php/enduser/ask.php?p_prod_lvl1=70&p_prod_lvl2=72&p_cat_lvl1=35', 
-        'mta_bus' : 'http://mta-nyc2.custhelp.com/cgi-bin/mta_nyc2.cfg/php/enduser/ask.php?p_prod_lvl1=70&p_prod_lvl2=78&p_cat_lvl1=35'}
+urls = {'mtahq' : 'http://mta-nyc2.custhelp.com/cgi-bin/mta_nyc2.cfg/php/enduser/ask.php?p_prod_lvl1=70&p_prod_lvl2=71&p_cat_lvl1=35'}
 
 prod_lvl_2 = {'nyct' : '72',
-              'mta_bus' : '78'}
+              'mta_bus' : '78'
+              'mtaqh' : '71'}
 
 form1 = dict(
     p_userid=email_address,
