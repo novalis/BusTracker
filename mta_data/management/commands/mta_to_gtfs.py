@@ -314,9 +314,9 @@ def save_base_gtfs(gtfs_dir):
     zip.close()
 
 def init_q48():
-    #the shape for the Q48 is one long loop, instead of three separate
-    #routes: one for west, one for east from midnight - 6 am, and one
-    #for east during the day.  This corrects it.
+    """the shape for the Q48 is one long loop, instead of three separate
+    routes: one for west, one for east from midnight - 6 am, and one
+    for east during the day.  This corrects it."""
 
     q48 = list(MTARoute.objects.filter(route='Q48'))
     if len(q48) > 1:
@@ -341,7 +341,6 @@ def init_q48():
              the_geom = LineString(coords[502:])).save()
     MTARoute(gid=10707, rt_dir='E', route='Q48', path='EN',
              the_geom = LineString(coords[502:524] + coords[458:410:-1] + on_94_st + coords[565:])).save()
-
 
 class Command(BaseCommand):
     """Transform mta schedule and route data to GTFS.  Assume route data is 
