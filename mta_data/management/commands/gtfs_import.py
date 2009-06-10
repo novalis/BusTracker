@@ -1,8 +1,9 @@
 from datetime import time
 from django.contrib.gis.geos import LineString, Point
 from django.core.management.base import BaseCommand
-from django.db import transaction, connection
+from django.db import transaction, reset_queries
 from mta_data.models import *
+from mta_to_gtfs import st_line_locate_point
 
 import transitfeed
 
@@ -11,10 +12,12 @@ def process_route(feed, gtfs_route):
     long_name = gtfs_route.route_long_name[:-2] #chop off direction
     name = gtfs_route.route_short_name
 
+    reset_queries()
     for gtfs_trip in gtfs_route.trips:
         route = list(Route.objects.filter(gid=gtfs_route.route_id))
         if route:
             route = route[0]
+            geometry = route.geometry
         else:
             shape = feed.GetShape(gtfs_trip.shape_id)
             geometry = LineString([point[:2] for point in shape.points])
@@ -42,33 +45,18 @@ def process_route(feed, gtfs_route):
             trip = trip[0]
         else:
             trip = Trip(route=route, day_of_week=gtfs_trip.service_id, start_time=start_time)
-            trip.save()
+            trip.save(force_insert=True)
         start = start
         for stop_time in stop_times:
             stop = stop_time.stop
-            bus_stop = BusStop(box_no = stop_time.stop_id, 
-                               location=stop.stop_name,
-                               geometry=Point(stop.stop_lon, stop.stop_lat))
-            bus_stop.save()
-            cursor = connection.cursor()
-            #fixme: is there any way to just pass the stop's geometry
-            #directly?
-            location = "SRID=4326;POINT(%s %s)" % (stop.stop_lon,
-                                                   stop.stop_lat)
-            sql = """SELECT st_line_locate_point(geometry, %s) 
-        FROM 
-        mta_data_route
-        WHERE 
-        gid = %s"""
-            cursor.execute(sql, (location, route.gid))
-            row = cursor.fetchone()
-            distance = row[0]
+            bus_stop = BusStop.objects.get(box_no = stop_time.stop_id)
+            #distance = st_line_locate_point(geometry, (stop.stop_lon, stop.stop_lat))
             arrival_secs = stop_time.arrival_secs
             if day_later:
                 arrival_secs -= 86400
             ts = TripStop(trip = trip, 
                           seconds_after_start = arrival_secs - start,
-                          bus_stop = bus_stop, distance = distance)
+                          bus_stop = bus_stop, distance = -1)
             ts.save()
 
 class Command(BaseCommand):
@@ -82,6 +70,7 @@ class Command(BaseCommand):
             for stop_id, stop in feed.stops.items():
                 bus_stop = BusStop(box_no=stop_id, location=stop.stop_name,
                                    geometry=Point(stop.stop_lat, stop.stop_lon))
+                bus_stop.save()
             transaction.commit()
             for route_id, route in sorted(feed.routes.items()):
                 process_route(feed, route)
