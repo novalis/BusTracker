@@ -258,5 +258,5 @@ def parse_schedule_dir(dirname):
 
         route = parse_schedule_file(os.path.join(dirname, filename))
         if day_of_week:
-            route['day_of_week'] = holiday_abbrev
+            route['day_of_week'] = day_of_week
         yield route
