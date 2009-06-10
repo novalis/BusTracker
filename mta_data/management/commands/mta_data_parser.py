@@ -242,7 +242,8 @@ def parse_schedule_dir(dirname):
             subdirname = os.path.join(dirname, filename)
             files = os.listdir(subdirname)
             for filename in files:
-                #schools are necessarily closed on holidays, so I have no idea why there are open data sets.
+                #schools are necessarily closed on holidays, so I have
+                #no idea why there are open data sets.
                 if filename.startswith('stif') and filename.endswith('.closed'):
                     use_files.append((filename, subdirname, holiday_abbrev))
                     
