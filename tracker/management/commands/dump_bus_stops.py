@@ -36,6 +36,6 @@ class Command(BaseCommand):
                     'lng': bus_stop.geometry.x,
                 })
         
-            bus_stops_by_route[route.route_name()] = bus_stop_data
+            bus_stops_by_route[route.route_full_name()] = bus_stop_data
 
         print dumps(bus_stops_by_route)

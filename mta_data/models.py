@@ -22,6 +22,9 @@ class Route(models.Model):
     def route_name(self):
         return "%s %s" % (self.name, self.direction)
 
+    def route_full_name(self):
+        return "%s %s %s" % (self.name, self.direction, self.headsign)
+
     def __unicode__(self):
         return "'%s'" % self.name
 
@@ -59,6 +62,9 @@ mta_data_route.name = %s""", (location, route.name))
     return row[0]
 
 class TripStop(models.Model):
+    class Meta:
+        ordering = ["seconds_after_start"]
+
     trip = models.ForeignKey(Trip)
     seconds_after_start = models.IntegerField()
     bus_stop = models.ForeignKey(BusStop)
