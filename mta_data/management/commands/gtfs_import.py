@@ -32,7 +32,7 @@ def process_route(feed, gtfs_route):
         start = stop_times[0].arrival_secs
         hours = start / 3600
         minutes = (start / 60) % 60
-        seconds =  (start / 3600) % 60
+        seconds =  start % 60
         day_later = False
         if hours >= 24:
             hours -= 24
