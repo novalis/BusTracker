@@ -128,6 +128,7 @@ fix_leading_zeros = {
     'BX08' : 'BX8',
     'BX09' : 'BX9',
 }
+loop_routes = set(['B74'])
 
 def dist_line_point(A, B, p):
     #CGAlgorithms::distancePointLine comp.graphics.algorthim FAQ via GEOS
@@ -233,7 +234,11 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
         print "Backwards route %s" % route.gid
         import pdb;pdb.set_trace()
 
-    if end_location - start_location < 0.98:
+    if end_location - start_location < 0.98 and best_route.route not in loop_routes:
+        if end_location - start_location < 0.05:
+            print """"This is a very short route segment. Is it a 
+miscategorized loop?  Route: %s, first and last: %s, %s""" % (
+                best_route.route, stops[0].location, stops[-1].location)
         #create a new shape for the short route
         i = 0
         while 1:
