@@ -64,7 +64,6 @@ def process_route(feed, gtfs_route):
         trip = list(Trip.objects.filter(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time))
         if trip:
             print "This trip seems to exist.  That shoudn't happen."
-#            import pdb;pdb.set_trace()
             trip = trip[0]
         else:
             trip = Trip(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time)
