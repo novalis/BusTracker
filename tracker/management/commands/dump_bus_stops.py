@@ -14,7 +14,12 @@ class Command(BaseCommand):
 
     def handle(self, route_name=None, route_direction=None, route_path=None, **kw):
         if route_name:
-            routes = Route.objects.filter(name=route_name, direction=route_direction, path=route_path)
+            k = dict(name = route_name)
+            if route_direction:
+                k['direction'] = route_direction
+            if route_path:
+                k['path'] = route_path
+            routes = Route.objects.filter(**k)
         else:
             routes = Route.objects.all()
 
