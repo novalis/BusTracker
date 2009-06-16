@@ -6,7 +6,6 @@ from mta_data.models import *
 class Bus(models.Model):
     """A particular physical bus"""
     id = models.IntegerField(primary_key=True)
-    route = models.ForeignKey(Route) #the route it is traveling on (if any)
     trip = models.ForeignKey(Trip)
     total_dwell_time = models.IntegerField(default=0)
     n_dwells = models.IntegerField(default=0)
@@ -18,7 +17,7 @@ class Bus(models.Model):
             return -1
 
     def __unicode__(self):
-        return "<Bus (%d) on route %s %s>" % (self.id, self.route.name, self.route.direction)
+        return "<Bus (%d) on route %s %s>" % (self.id, self.trip.route.name, self.trip.route.direction)
 
     @property
     def location(self):
@@ -37,7 +36,7 @@ class Bus(models.Model):
             now = time
 
         #The target location is a point, but needs to be a distance along the route.
-        target_distance = distance_along_route(target_location, self.route)
+        target_distance = distance_along_route(target_location, self.trip.shape)
 
         #Find out when the bus started moving.  
         #This is when the distance along the route (a) is > 0.01
@@ -59,7 +58,7 @@ class Bus(models.Model):
         last = observations.order_by('-time')[0]
         last_distance, last_time = last.distance, last.time
 
-        if last_distance - start_distance < 0.1 or last_time <= start_time:
+        if last_distance - start_distance < 0.02 or last_time <= start_time:
             #the bus has not moved enough or has moved backwards
             #this means no arrival estimate is possible for this bus.
             return None
@@ -79,16 +78,16 @@ class Bus(models.Model):
         return last_time + timedelta(0, seconds)
 
 
-def distance_along_route(location, route):
+def distance_along_route(location, shape):
     from django.db import connection
     cursor = connection.cursor()
     location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
     cursor.execute(
-"""SELECT st_line_locate_point(mta_data_route.geometry, %s) 
+"""SELECT st_line_locate_point(mta_data_shape.geometry, %s) 
 FROM 
-mta_data_route
+mta_data_shape
 WHERE 
-mta_data_route.gid = %s""", (location, route.gid))
+mta_data_shape.gid = %s""", (location, shape.gid))
     row = cursor.fetchone()
     return row[0]
         
@@ -98,13 +97,15 @@ class BusObservationManager(models.GeoManager):
     def get_query_set(self):
         return super(BusObservationManager, self).get_query_set().extra(select={
             'distance': """
-SELECT st_line_locate_point(route.geometry, %s.location) 
+SELECT st_line_locate_point(shape.geometry, %s.location) 
 FROM 
 tracker_bus as bus, 
-mta_data_route as route
+mta_data_trip as trip, 
+mta_data_shape as shape
 WHERE 
 %s.bus_id = bus.id AND
-bus.route_id = route.gid
+bus.trip_id = trip.id AND
+trip.shape_id = shape.gid
 """ % (self.model._meta.db_table,
        self.model._meta.db_table)})
 
@@ -144,7 +145,7 @@ class BusObservation(models.Model):
 
 
     def distance_along_route(self):
-        return distance_along_route(self.location, self.bus.route)
+        return distance_along_route(self.location, self.bus.trip.shape)
 
 
 
@@ -170,4 +171,4 @@ class IntersectionObservation(models.Model):
         super(IntersectionObservation, self).save()
     
     def distance_along_route(self):
-        return distance_along_route(self.location, self.bus.route)
+        return distance_along_route(self.location, self.bus.trip.shape)

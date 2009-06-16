@@ -7,26 +7,47 @@ from mta_to_gtfs import st_line_locate_point
 
 import transitfeed
 
+stop_cache = {}
 def process_route(feed, gtfs_route):
     direction = gtfs_route.route_long_name[-1]
     long_name = gtfs_route.route_long_name[:-2] #chop off direction
     name = gtfs_route.route_short_name
 
     reset_queries()
+    route_cache = {}
+    shape_cache = {}
     for gtfs_trip in gtfs_route.trips:
-        route = list(Route.objects.filter(gid=gtfs_route.route_id))
-        if route:
-            route = route[0]
-            geometry = route.geometry
+        #find or create route and shape
+        route_id = gtfs_route.route_id
+        if route_id in route_cache:
+            route = route_cache[route_id]
         else:
-            shape = feed.GetShape(gtfs_trip.shape_id)
-            geometry = LineString([point[:2] for point in shape.points])
-            route = Route(gid = gtfs_route.route_id,
-                          name = name, 
-                          geometry = geometry,
-                          headsign = long_name,
-                          direction = direction)
-            route.save()
+            route = list(Route.objects.filter(gid=route_id))
+            if route:
+                route = route[0]
+            else:
+                route = Route(gid = route_id,
+                              name = name, 
+                              headsign = long_name,
+                              direction = direction)
+                route.save()
+            route_cache[route_id] = route
+
+        shape_id = gtfs_trip.shape_id
+        if shape_id in shape_cache:
+            shape = shape_cache[shape_id]
+        else:
+            shape = list(Shape.objects.filter(gid=shape_id))
+            if shape:
+                shape = shape[0]
+                geometry = shape.geometry
+            else:
+                gtfs_shape = feed.GetShape(shape_id)
+                geometry = LineString([point[:2] for point in gtfs_shape.points])
+                shape = Shape(gid=shape_id,
+                              geometry=geometry)
+                shape.save()
+            shape_cache[shape_id] = shape
 
         stop_times = gtfs_trip.GetStopTimes()
         start = stop_times[0].arrival_secs
@@ -40,16 +61,19 @@ def process_route(feed, gtfs_route):
             day_later = True
 
         start_time = time(hours, minutes, seconds)
-        trip = list(Trip.objects.filter(route=route, day_of_week=gtfs_trip.service_id, start_time=start_time))
+        trip = list(Trip.objects.filter(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time))
         if trip:
+            print "This trip seems to exist.  That shoudn't happen."
+#            import pdb;pdb.set_trace()
             trip = trip[0]
         else:
-            trip = Trip(route=route, day_of_week=gtfs_trip.service_id, start_time=start_time)
+            trip = Trip(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time)
             trip.save(force_insert=True)
         start = start
+
         for stop_time in stop_times:
             stop = stop_time.stop
-            bus_stop = BusStop.objects.get(box_no = stop_time.stop_id)
+            bus_stop = stop_cache[stop_time.stop_id]
             #distance = st_line_locate_point(geometry, (stop.stop_lon, stop.stop_lat))
             arrival_secs = stop_time.arrival_secs
             if day_later:
@@ -71,6 +95,7 @@ class Command(BaseCommand):
                 bus_stop = BusStop(box_no=stop_id, location=stop.stop_name,
                                    geometry=Point(stop.stop_lat, stop.stop_lon))
                 bus_stop.save()
+                stop_cache[stop_id] = bus_stop
             transaction.commit()
             for route_id, route in sorted(feed.routes.items()):
                 process_route(feed, route)

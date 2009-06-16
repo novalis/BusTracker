@@ -114,7 +114,7 @@ class UpdateTestCase(TestCase):
         max_diff = 0
         worst_spot = None
 
-        for bus in route.bus_set.all():
+        for bus in Bus.objects.filter(trip__route = route):
             observations = list(bus.busobservation_set.all())
             first_observation_time = observations[0].time
 

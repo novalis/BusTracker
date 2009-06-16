@@ -44,26 +44,32 @@ def update(request):
     route = _route_by_name(request.REQUEST['route'])
 
     #figure out what trip we are on by assuming it is the trip
-    #starting closest to now.
+    #starting closest to here and now.
 
     client_time = datetime.strptime(request.REQUEST['date'].strip(), "%Y-%m-%dT%H:%M:%SZ")
 
     bus_candidates = (Bus.objects.filter(id=bus_id)[:1])
-    if len(bus_candidates):
-        bus = bus_candidates[0]
-    else:
-        #fixme: day of week
-        trip = Trip.objects.extra(
-            select = SortedDict([
-                    ('start_error', 'abs(extract(epoch from start_time - %s))')
-                    ]),  
-            select_params = (client_time.time(),)
-            ).order_by('start_error')[0]
-    
-        bus = Bus(id=bus_id, route=route, trip=trip)
-        bus.save()
 
     location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
+
+    if len(bus_candidates):
+        bus = bus_candidates[0]
+        trip = bus.trip
+    else:
+        #fixme: day of week
+        location_sql = "SRID=4326;POINT(%s %s)" % (request.REQUEST['lng'], request.REQUEST['lat'])
+        trip = Trip.objects.filter(route = route).extra(
+            tables=['mta_data_shape'],
+            select = SortedDict([
+                    ('start_error', 'abs(extract(epoch from start_time - %s))'),
+                    ('shape_error', 'st_distance(st_startpoint(mta_data_shape.geometry), %s)')
+                    ]),  
+            select_params = (client_time.time(), location_sql)
+            ).order_by('start_error')[0]
+    
+        bus = Bus(id=bus_id, trip=trip)
+        bus.save()
+
 
     if 'intersection' in request.REQUEST:
         obs = IntersectionObservation(bus=bus, location=location, time=client_time, intersection = request.REQUEST['intersection'])
@@ -96,7 +102,7 @@ def update(request):
             #nondescending.
 
             #figure out dwell information
-            route_length = route.length
+            route_length = trip.shape.length
             stop_fudge = STOP_FUDGE / route_length
 
             prev_bus_stop = TripStop.objects.filter(
@@ -147,10 +153,9 @@ def _route_by_name(route_name):
 
 def _locate(route_name, time, long, lat):
     route = _route_by_name(route_name)
-    
     location = Point(long, lat)
     buses = []
-    for bus in route.bus_set.all():
+    for bus in Bus.objects.filter(trip__route=route):
         bus.est = bus.estimated_arrival_time(location, time=time)
 
         if bus.est and bus.est > time:
