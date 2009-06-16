@@ -31,7 +31,7 @@ class Command(BaseCommand):
             except IndexError:
                 print "Skipping %s because it does not have any trips" % route.route_name()
                 continue # why don't some routes have trips?
-            bus_stops = [ts.bus_stop for ts in trip.tripstop_set.order_by('-seconds_after_start')]
+            bus_stops = [ts.bus_stop for ts in trip.tripstop_set.order_by('seconds_after_start')]
             bus_stop_data = []
             
             for bus_stop in bus_stops:
