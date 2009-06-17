@@ -4,7 +4,7 @@ function createMap(map_id) {
         projection: 'EPSG:900913',
         maxExtent: bounds,
         maxResolution: 156543.03390625,
-        numZoomLevels: 20,
+        numZoomLevels: 20
     };
     map = new OpenLayers.Map('map', options);
     var baseMap = new OpenLayers.Layer.WMS(
@@ -12,10 +12,10 @@ function createMap(map_id) {
         'http://maps.opengeo.org/geowebcache/service/wms',
         {
             layers: 'openstreetmap',
-            format: 'image/png',
+            format: 'image/png'
         },
         {
-            transitionEffect: 'resize',
+            transitionEffect: 'resize'
         }
     );
 
@@ -43,7 +43,7 @@ function loadKml(url, name) {
 
     var layerOptions = {
         format: OpenLayers.Format.KML,
-        projection: new OpenLayers.Projection('EPSG:4326'),
+        projection: new OpenLayers.Projection('EPSG:4326')
     };
     var layer = new OpenLayers.Layer.GML(name, url, layerOptions);
     map.addLayers([layer]);
@@ -56,14 +56,14 @@ function loadKml(url, name) {
 function loadBusKml(url, name) {
     var styleMap = new OpenLayers.StyleMap({
             fillOpacity: 0.2,
-            pointRadius: 5,
+            pointRadius: 5
         });
            
     var lookup = {
         '#tracker_busobservation': {fillColor: "green"},
         '#tracker_intersectionobservation': {fillColor: "red",
                                              fillOpacity: 1.0,
-                                             pointRadius: 10,},
+                                             pointRadius: 10}
     }
  
             
