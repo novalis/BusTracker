@@ -11,6 +11,7 @@ import gtk
 import urllib
 import sqlite3
 import time
+import dbus
 
 def init_gps():
     global gps_instance
@@ -34,11 +35,16 @@ def send_observation(lat, lng, intersection = None):
     location_db.execute("insert into location(latitude, longitude, time, route, bus_id, intersection) values (?, ?, ?, ?, ?, ?)", (float(lat), float(lng), int(now.strftime("%s")), data['route'], int(data['bus_id']), intersection or ''))
     location_db.commit()
 
-    u = urllib.urlopen(url_field.get_text(), urllib.urlencode(data))
-    response = u.read()
-    u.close()
-    server_indicator.set_text("%s... at %s" % (response[:20], datetime.now()))
-    
+    def send_to_server():
+        try:
+            u = urllib.urlopen(url_field.get_text(), urllib.urlencode(data))
+            response = u.read()
+            u.close()
+            server_indicator.set_text("%s... at %s" % (response[:20], datetime.now()))
+        except Exception, e:
+            print "Some sort of error sending: %s" % e
+            pass #errors sending are no problem
+    start_new_thread(send_to_server, ())
 
 def quit_main_loop(*dump):
     gtk.main_quit()
@@ -169,6 +175,17 @@ intersection text
 
     db.commit()
 
+def getDbusObject (bus, busname , objectpath , interface):
+    dbusObject = bus.get_object(busname, objectpath)
+    return dbus.Interface(dbusObject, dbus_interface=interface)
+
+
+#enable wifi
+system_bus = dbus.SystemBus()
+wifi = getDbusObject (system_bus, "org.freesmartphone.odeviced", "/org/freesmartphone/Device/PowerControl/WiFi", "org.freesmartphone.Device.PowerControl")
+wifi.SetPower(True)
+
+
 
 init_gps()
 location_db = sqlite3.connect('location.db')
@@ -182,6 +199,11 @@ win.set_title("Locator")
 win.set_default_size(480,640)
 
 layout = gtk.VBox()
+
+stop_button = gtk.Button("[bus stop]")
+stop_button.set_sensitive(False)
+layout.add(stop_button)
+stop_button.connect('pressed', found_stop)
 
 valid_indicator = gtk.Label("gps not initialized")
 layout.add(valid_indicator)
@@ -210,14 +232,6 @@ layout.add(route_field)
 start_button = gtk.Button("Start tracking")
 layout.add(start_button)
 start_button.connect('pressed', start_tracking)
-
-stop_button = gtk.Button("[bus stop]")
-stop_button.set_sensitive(False)
-layout.add(stop_button)
-stop_button.connect('pressed', found_stop)
-
-
-
 
 win.add (layout)
 
