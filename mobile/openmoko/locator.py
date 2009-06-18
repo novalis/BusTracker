@@ -183,6 +183,11 @@ win.set_default_size(480,640)
 
 layout = gtk.VBox()
 
+stop_button = gtk.Button("[bus stop]")
+stop_button.set_sensitive(False)
+layout.add(stop_button)
+stop_button.connect('pressed', found_stop)
+
 valid_indicator = gtk.Label("gps not initialized")
 layout.add(valid_indicator)
 
@@ -210,14 +215,6 @@ layout.add(route_field)
 start_button = gtk.Button("Start tracking")
 layout.add(start_button)
 start_button.connect('pressed', start_tracking)
-
-stop_button = gtk.Button("[bus stop]")
-stop_button.set_sensitive(False)
-layout.add(stop_button)
-stop_button.connect('pressed', found_stop)
-
-
-
 
 win.add (layout)
 
