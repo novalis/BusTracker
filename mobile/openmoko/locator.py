@@ -11,6 +11,7 @@ import gtk
 import urllib
 import sqlite3
 import time
+import dbus
 
 def init_gps():
     global gps_instance
@@ -168,6 +169,17 @@ intersection text
 )""")
 
     db.commit()
+
+def getDbusObject (bus, busname , objectpath , interface):
+    dbusObject = bus.get_object(busname, objectpath)
+    return dbus.Interface(dbusObject, dbus_interface=interface)
+
+
+#enable wifi
+system_bus = dbus.SystemBus()
+wifi = getDbusObject (system_bus, "org.freesmartphone.odeviced", "/org/freesmartphone/Device/PowerControl/WiFi", "org.freesmartphone.Device.PowerControl")
+wifi.SetPower(True)
+
 
 
 init_gps()
