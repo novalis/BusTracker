@@ -35,11 +35,16 @@ def send_observation(lat, lng, intersection = None):
     location_db.execute("insert into location(latitude, longitude, time, route, bus_id, intersection) values (?, ?, ?, ?, ?, ?)", (float(lat), float(lng), int(now.strftime("%s")), data['route'], int(data['bus_id']), intersection or ''))
     location_db.commit()
 
-    u = urllib.urlopen(url_field.get_text(), urllib.urlencode(data))
-    response = u.read()
-    u.close()
-    server_indicator.set_text("%s... at %s" % (response[:20], datetime.now()))
-    
+    def send_to_server():
+        try:
+            u = urllib.urlopen(url_field.get_text(), urllib.urlencode(data))
+            response = u.read()
+            u.close()
+            server_indicator.set_text("%s... at %s" % (response[:20], datetime.now()))
+        except Exception, e:
+            print "Some sort of error sending: %s" % e
+            pass #errors sending are no problem
+    start_new_thread(send_to_server, ())
 
 def quit_main_loop(*dump):
     gtk.main_quit()
