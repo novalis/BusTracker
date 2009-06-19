@@ -142,7 +142,7 @@ def geocode(location):
         return None
 
 def _parse_route_name(route_name):
-    route_parts = route_name.split(" ", 3)
+    route_parts = route_name.split(" ", 2)
     parts = route_parts
     return parts
 
