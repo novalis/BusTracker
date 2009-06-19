@@ -42,26 +42,31 @@ class Command(BaseCommand):
         route = Route.objects.get(name=route_name, direction=direction)
 
         #figure out what trip we are on by assuming it is the trip
-        #starting closest to now.
+        #starting closest to here and now.
 
         client_time = observation.time
 
         bus_candidates = (Bus.objects.filter(id=bus_id)[:1])
-        if len(bus_candidates):
-            bus = bus_candidates[0]
-        else:
-            #fixme: day of week
-            trip = Trip.objects.extra(
-                select = SortedDict([
-                        ('start_error', 'abs(extract(epoch from start_time - %s))')
-                        ]),  
-                select_params = (client_time.time(),)
-                ).order_by('start_error')[0]
-        
-            bus = Bus(id=bus_id, route=route, trip=trip)
-            bus.save()
 
         location = observation.location
+
+        if len(bus_candidates):
+            bus = bus_candidates[0]
+            trip = bus.trip
+        else:
+            #fixme: day of week
+            location_sql = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
+            trip = Trip.objects.filter(route=route).extra(
+                tables = ['mta_data_shape'],
+                select = SortedDict([
+                        ('start_error', 'abs(extract(epoch from start_time - %s))'),
+                        ('shape_error', 'st_distance(st_startpoint(mta_data_shape.geometry), %s)')
+                        ]),  
+                select_params = (client_time.time(), location_sql)
+                ).order_by('start_error')[0]
+        
+            bus = Bus(id=bus_id, trip=trip)
+            bus.save()
 
         if hasattr(observation, 'intersection'):
             obs = IntersectionObservation(bus=bus, location=location, time=client_time, intersection = observation.intersection)
@@ -88,7 +93,7 @@ class Command(BaseCommand):
                 #nondescending.
 
                 #figure out dwell information
-                route_length = route.length
+                route_length = trip.shape.length
                 stop_fudge = STOP_FUDGE / route_length
 
                 prev_bus_stop = TripStop.objects.filter(
