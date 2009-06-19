@@ -4,8 +4,8 @@ from bus_stops import bus_stops
 from datetime import datetime
 from gps import gps
 from os import popen
-from thread import start_new_thread
-
+from random import randint
+from threading import Thread
 import gobject
 import gtk
 import urllib
@@ -13,11 +13,16 @@ import sqlite3
 import time
 import dbus
 
+gprs_apn = 'internet2.voicestream.com'
+gprs_login = 'internet'
+gprs_password = ''
+
 def init_gps():
     global gps_instance
     g = gps()
     gps_instance = g
 
+errors = 0
 def send_observation(lat, lng, intersection = None):
     data = {}
     if intersection:
@@ -35,16 +40,22 @@ def send_observation(lat, lng, intersection = None):
     location_db.execute("insert into location(latitude, longitude, time, route, bus_id, intersection) values (?, ?, ?, ?, ?, ?)", (float(lat), float(lng), int(now.strftime("%s")), data['route'], int(data['bus_id']), intersection or ''))
     location_db.commit()
 
+
     def send_to_server():
+        global errors
         try:
+            print "sending"
             u = urllib.urlopen(url_field.get_text(), urllib.urlencode(data))
             response = u.read()
             u.close()
             server_indicator.set_text("%s... at %s" % (response[:20], datetime.now()))
+            errors = 0
+            print "sent"
         except Exception, e:
             print "Some sort of error sending: %s" % e
-            pass #errors sending are no problem
-    start_new_thread(send_to_server, ())
+            errors += 1
+            
+    Thread(target=send_to_server).start()
 
 def quit_main_loop(*dump):
     gtk.main_quit()
@@ -86,7 +97,7 @@ def start_tracking(*dummy):
     stop = stops[cur_stop]
     stop_button.set_label(stop['location'])
 
-    gps_sender_signal = gobject.timeout_add(900, send_gps_observation)
+    gps_sender_signal = gobject.timeout_add(3000, send_gps_observation)
 
     tracking = True
 
@@ -175,23 +186,53 @@ intersection text
 
     db.commit()
 
-def getDbusObject (bus, busname , objectpath , interface):
-    dbusObject = bus.get_object(busname, objectpath)
-    return dbus.Interface(dbusObject, dbus_interface=interface)
+def get_dbus_object (bus, busname , objectpath , interface):
+    dbus_object = bus.get_object(busname, objectpath)
+    return dbus.Interface(dbus_object, dbus_interface=interface)
 
+class GPRSController:
+    def __init__(self):
+        self.gsm_bus = system_bus.get_object ('org.freesmartphone.ogsmd', '/org/freesmartphone/GSM/Device')
+        self.gprs = dbus.Interface (self.gsm_bus, dbus_interface = 'org.freesmartphone.GSM.PDP')
+
+    def restart_connection(self):
+        print "bringing down GPRS"
+        self.gprs.DeactivateContext()
+        time.sleep(5)
+
+        print "starting GPRS"
+        self.gprs.ActivateContext(gprs_apn, gprs_login, gprs_password)
+        time.sleep(5)
+
+def keep_online():
+    global errors
+
+
+    while 1:
+        time.sleep(1)
+        if errors >= 2:
+            gprs.restart_connection()
+            errors = 0
 
 #enable wifi
 system_bus = dbus.SystemBus()
-wifi = getDbusObject (system_bus, "org.freesmartphone.odeviced", "/org/freesmartphone/Device/PowerControl/WiFi", "org.freesmartphone.Device.PowerControl")
+wifi = get_dbus_object (system_bus, "org.freesmartphone.odeviced", "/org/freesmartphone/Device/PowerControl/WiFi", "org.freesmartphone.Device.PowerControl")
 wifi.SetPower(True)
 
+power = get_dbus_object (system_bus, "org.shr.ophonekitd.Usage", "/org/shr/ophonekitd/Usage", "org.shr.ophonekitd.Usage")
 
+power.RequestResource('CPU')
+power.RequestResource('Display')
 
 init_gps()
 location_db = sqlite3.connect('location.db')
 init_location_db(location_db)
 
-start_new_thread(track_networks, ())
+gprs = GPRSController()
+gprs.restart_connection()
+
+Thread(target=track_networks).start()
+Thread(target=keep_online).start()
 
 win = gtk.Window()
 win.connect('delete-event', quit_main_loop)
@@ -220,6 +261,7 @@ layout.add(url_field)
 
 layout.add(gtk.Label("id"))
 id_field = gtk.Entry()
+id_field.set_text(str(randint(100,1000000)))
 layout.add(id_field)
 
 layout.add(gtk.Label("route"))
