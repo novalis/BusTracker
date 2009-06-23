@@ -1,0 +1,10 @@
+[
+    {% for bus in buses %}
+        {
+            bus_id: {{ bus.id }},
+            lat: {{ bus.location_on_route.y }},
+            lon: {{ bus.location_on_route.x }},
+            route: "{{ bus.trip.route.route_name }}"
+        },
+    {% endfor %}
+]
