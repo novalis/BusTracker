@@ -18,9 +18,11 @@
 # Boston, MA  02110-1301
 # USA
 
-#this install requires python-distutils
-#httplib2 requires python-dev
-#python-pygps is also required, but it is not in pypi
+#- this install requires python-distutils
+#- httplib2 requires python-dev and python-email (you may need to 
+#  upgrade your python-misc to install python-email)
+#- install httplib2 with --no-compile
+#- python-pygps is also required, but it is not in pypi
 
 import sys, os
 from setuptools import setup, find_packages
