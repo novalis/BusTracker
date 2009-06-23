@@ -43,7 +43,7 @@ def process_route(feed, gtfs_route):
                 geometry = shape.geometry
             else:
                 gtfs_shape = feed.GetShape(shape_id)
-                geometry = LineString([point[:2] for point in gtfs_shape.points])
+                geometry = LineString([(point[1], point[0]) for point in gtfs_shape.points])
                 shape = Shape(gid=shape_id,
                               geometry=geometry)
                 shape.save()
