@@ -142,13 +142,16 @@ def geocode(location):
         return None
 
 def _parse_route_name(route_name):
-    route_parts = route_name.split(" ")
-    name, direction = route_parts
-    return name, direction
+    route_parts = route_name.split(" ", 2)
+    parts = route_parts
+    return parts
 
 def _route_by_name(route_name):
-    name, direction = _parse_route_name(route_name)
-    route = Route.objects.get(name = name, direction = direction)        
+    parts = _parse_route_name(route_name)
+    if len(parts) == 2:
+        route = Route.objects.get(name = parts[0], direction = parts[1])
+    else:
+        route = Route.objects.get(name = parts[0], direction = parts[1], headsign=parts[2])
     return route
 
 def _locate(route_name, time, long, lat):
