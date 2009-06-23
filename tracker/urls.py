@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     (r'^locate_by_address$', 'tracker.views.locate_by_address'),
     (r'^show_locate_by_address$', 'tracker.views.show_locate_by_address'),
     (r'^map$', 'tracker.views.map'),
+    (r'bus_locations$', 'tracker.views.bus_locations'),
 )
 
 # Hack to serve static files for development

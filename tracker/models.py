@@ -24,6 +24,10 @@ class Bus(models.Model):
         last = self.busobservation_set.order_by('-time')[0]
         return last.location
 
+    def location_on_route(self):
+        last = self.busobservation_set.order_by('-time')[0]
+        return last.location_on_route()
+
     def estimated_arrival_time(self, target_location, time=None):
         #estimated arrival time is a function of average speed in
         #decimal degrees per second, remaining distance, average speed
@@ -91,7 +95,24 @@ mta_data_shape.gid = %s""", (location, shape.gid))
     row = cursor.fetchone()
     return row[0]
         
-
+# Return the point along shape that is closest to location
+def location_on_route(location, shape):
+    from django.db import connection
+    from django.contrib.gis.geos import fromstr
+    cursor = connection.cursor()
+    location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
+    cursor.execute(
+"""SELECT st_line_interpolate_point(mta_data_shape.geometry,
+st_line_locate_point(mta_data_shape.geometry, %s))
+FROM 
+mta_data_shape
+WHERE 
+mta_data_shape.gid = %s""", (location, shape.gid))
+    row = cursor.fetchone()
+    point = fromstr(row[0])
+    # TODO: Figure out why these need to be reversed
+    point.x, point.y = point.y, point.x
+    return point
 
 class BusObservationManager(models.GeoManager):
     def get_query_set(self):
@@ -146,6 +167,9 @@ class BusObservation(models.Model):
 
     def distance_along_route(self):
         return distance_along_route(self.location, self.bus.trip.shape)
+
+    def location_on_route(self):
+        return location_on_route(self.location, self.bus.trip.shape)
 
 
 

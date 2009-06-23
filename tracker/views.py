@@ -194,3 +194,8 @@ def locate(request):
 def map(request):
     routes = [route.route_name() for route in Route.objects.all()]
     return render_to_response('routes/map.html', {'routes': routes})
+
+# Return JSON list of bus location data
+def bus_locations(request):
+    buses = Bus.objects.all()
+    return render_to_response('routes/bus_locations.json', {'buses': buses})
