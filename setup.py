@@ -31,6 +31,7 @@ setup(
       "pytz",
       "psycopg2",
       "simplejson",
+      "pysqlite",
       "transitfeed",
       ],
     packages=find_packages(),
