@@ -47,12 +47,18 @@
                 <option value="{{ bus.id }}">{{ bus }}</option>
                 {% endfor %}
             </select>
-            <label for="show-route">Show route:</label>
-            <input type="checkbox" id="show-route" checked />
-            <label for="show-intersections">Show intersections:</label>
-            <input type="checkbox" id="show-intersections" />
-            <label for="snap-to-roads">Snap to roads:</label>
-            <input type="checkbox" id="snap-to-roads" checked/>
+            <span class="form-item">
+                <input type="checkbox" id="show-route" class="checkbox" checked />
+                <label for="show-route">Show route</label>
+            </span>
+            <span class="form-item alternate">
+                <input type="checkbox" id="show-intersections" class="checkbox" />
+                <label for="show-intersections">Show intersections</label>
+            </span>
+            <span class="form-item">
+                <input type="checkbox" id="snap-to-roads" class="checkbox" checked/>
+                <label for="snap-to-roads">Snap to roads</label>
+            </span>
             <input type="button" id="load-btn" value="Load Data" />
         </form>
         <div id="map"></div>
