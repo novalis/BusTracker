@@ -110,8 +110,6 @@ WHERE
 mta_data_shape.gid = %s""", (location, shape.gid))
     row = cursor.fetchone()
     point = fromstr(row[0])
-    # TODO: Figure out why these need to be reversed
-    point.x, point.y = point.y, point.x
     return point
 
 class BusObservationManager(models.GeoManager):
@@ -196,3 +194,6 @@ class IntersectionObservation(models.Model):
     
     def distance_along_route(self):
         return distance_along_route(self.location, self.bus.trip.shape)
+
+    def location_on_route(self):
+        return self.location

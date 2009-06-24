@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.utils.datastructures import SortedDict
 from tracker.models import *
+from mta_data.models import Shape
 
 import django.templatetags #for the side-effects of doing so
 import settings
@@ -23,16 +24,24 @@ def index(request):
 def kml(request):
     bus_id = request.REQUEST['bus_id']
     observations = list(BusObservation.objects.filter(bus=bus_id))
-    intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
 
-    observations += intersection_observations
-    observations.sort(key=lambda obs: obs.time)
+    if 'show_intersections' in request.REQUEST:
+        intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
+        observations += intersection_observations
+        observations.sort(key=lambda obs: obs.time)
+
+    snap_to_roads = False
+    if 'snap_to_roads' in request.REQUEST:
+        snap_to_roads = True
     
-    return render_to_response('routes/kml.kml', {'observations': observations})
+    return render_to_response('routes/kml.kml', {'observations': observations,
+                                                 'snap_to_roads': snap_to_roads})
 
 def route_kml(request):
-    route = _route_by_name(request.REQUEST['route'])
-    return render_to_response('routes/route_kml.kml', {'route': route})
+    bus_id = request.REQUEST['bus_id']
+    bus = Bus.objects.get(id=bus_id)
+    trip = bus.trip
+    return render_to_response('routes/route_kml.kml', {'trip': trip})
 
 @transaction.commit_on_success
 def update(request):
@@ -195,8 +204,12 @@ def locate(request):
     return _locate(route_name, time, float(request.REQUEST['long']), float(request.REQUEST['lat']))
 
 def map(request):
-    routes = [route.route_name() for route in Route.objects.all()]
-    return render_to_response('routes/map.html', {'routes': routes})
+    buses = Bus.objects.all()
+    return render_to_response('routes/map.html', {'buses': buses})
+
+# Displays a map of where all the currently running buses are
+def live_map(request):
+    return render_to_response('routes/live_map.html')
 
 # Return JSON list of bus location data
 def bus_locations(request):

@@ -24,23 +24,62 @@ function createMap(map_id) {
     center.transform(new OpenLayers.Projection('EPSG:4326'), map.getProjectionObject());
     map.setCenter(center, 14);
 
-    $('#load-btn').click(function() {
-        var bus_id = $('#bus-id').get(0).value;
-        var url = 'kml?bus_id=' + bus_id;
-        loadBusData(url, 'bus ' + bus_id);
-    });
-    $('#load-route-btn').click(function() {
-        var route = $('#route-select').get(0).value;
-        var url = 'route_kml?route=' + route;
-        var layer = loadKml(url, route);
-        layer.events.register('loadend', layer, function() {
-            map.zoomToExtent(layer.getDataExtent());
+    return map;
+}
+
+function updateBusLocations() {
+    $.getJSON('bus_locations',
+        function(data, textStatus) {
+            /* Data should be a list of bus observations
+               [{bus_id: 1, lat: 74, lon: 42, time: __, route: 'M6 S'},
+                ...]
+
+                These need to be turned into vector features.
+            */
+            if (data.length == 0) {
+                // no buses to display
+                alert("There are currently no buses to display");
+                return;
+            }
+            var features = [];
+            for (var i=0; i<data.length; i++) {
+                var busObs = data[i];
+                var feature = featureFromLatLon(busObs['lat'], busObs['lon']);
+                features.push(feature);
+            }
+            var busLayer = map.getLayersByClass('OpenLayers.Layer.Vector')[0];
+            if (!busLayer) {
+                var style = new OpenLayers.Style({
+                    externalGraphic: '/tracker/static/img/bus.png',
+                    graphicWidth: 16,
+                    graphicHeight: 20
+                });
+                busLayer = new OpenLayers.Layer.Vector('Buses', {
+                    styleMap: new OpenLayers.StyleMap(style)
+                });
+                map.addLayer(busLayer);
+            }
+            busLayer.removeFeatures(busLayer.features);
+            busLayer.addFeatures(features);
         });
-    });
+}
+
+// Takes a lat and a lon and returns an OpenLayers.Feature.Vector object.  If
+// projection is not specified (either as a string or OpenLayers.Projection
+// object), then the resulting point is reprojected as EPSG:900913.
+function featureFromLatLon(lat, lon, projection) {
+    if (typeof(projection) == 'undefined') {
+        projection = new OpenLayers.Projection('EPSG:900913');
+    } else if (typeof(projection) == 'string') {
+        projection = new OpenLayers.Projection(projection);
+    }
+    var lonlat = new OpenLayers.LonLat(lon, lat);
+    lonlat.transform(new OpenLayers.Projection('EPSG:4326'), projection);
+
+    return new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat));
 }
 
 function loadKml(url, name) {
-
     var layerOptions = {
         format: OpenLayers.Format.KML,
         projection: new OpenLayers.Projection('EPSG:4326')

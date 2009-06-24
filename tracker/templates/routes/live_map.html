@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Demo Map</title>
+        <link type="text/css" href="static/css/style.css" rel="Stylesheet" />
+        <link type="text/css" href="static/css/excite-bike/jquery-ui-1.7.1.custom.css" rel="Stylesheet" />
+        <script type="text/javascript" src="static/js/jquery-1.3.2.js"></script>
+        <script type="text/javascript" src="static/js/jquery-ui-1.7.1.js"></script>
+        <script type="text/javascript" src="http://openlayers.org/api/2.8-rc6/OpenLayers.js"></script>
+        <script type="text/javascript" src="static/js/demo_map.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            map = createMap('map');
+            setInterval(function() {
+              var now = new Date();
+              $('#status').html("Last updated " + now);
+              updateBusLocations();
+            }, 3000);
+        });
+        </script>
+    </head>
+
+    <body>
+        <div id="map"></div>
+        <span id="status"></span>
+    </body>
+</html>
+

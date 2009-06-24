@@ -23,3 +23,7 @@ color: white;
 #map {
 height: 500px;
 }
+
+#status {
+font-style: italic;
+}

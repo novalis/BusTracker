@@ -6,7 +6,13 @@
         <styleUrl>#{{ observation|style_for_observation }}</styleUrl>
         <name>{{ observation.time|localdatetime }}</name>
         <Point>
-            <coordinates>{{ observation.location.x }}, {{ observation.location.y }}</coordinates>
+            <coordinates>
+            {% if snap_to_roads %}
+                {{ observation.location_on_route.x }}, {{ observation.location_on_route.y }}
+            {% else %}
+                {{ observation.location.x }}, {{ observation.location.y }}
+            {% endif %}
+            </coordinates>
         </Point>
     </Placemark>
 {% endfor %}

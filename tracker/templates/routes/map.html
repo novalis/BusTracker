@@ -10,29 +10,50 @@
         <script type="text/javascript">
         $(document).ready(function() {
             $('#pause-play-btn').hide();
-            createMap('map'); 
+            map = createMap('map');
+
+            $('#load-btn').click(function() {
+                var busId = $('#bus-select').get(0).value;
+                var busObsUrl = 'kml?bus_id=' + busId;
+                if ($('#show-intersections').is(':checked')) {
+                    busObsUrl += '&show_intersections';
+                }
+                if ($('#snap-to-roads').is(':checked')) {
+                    busObsUrl += '&snap_to_roads';
+                }
+                loadBusData(busObsUrl, 'bus ' + busId);
+
+                if ($('#show-route').is(':checked')) {
+                    var routeUrl = 'route_kml?bus_id=' + busId;
+                    var layer = loadKml(routeUrl, busId + "_route");
+                    layer.events.register('loadend', layer, function() {
+                        map.zoomToExtent(layer.getDataExtent());
+                    });
+                }
+            });
         });
         </script>
     </head>
 
     <body>
-        <p>This map displays plots of bus location data.  Enter a bus
-        id (try 7), click "load data", and then click "Play" at the
-        bottom of the screen.  To see the route itself, select the
-        route (M6 Downtown, in the case of bus Id 7), and click "Show
-        Route".
-	</p>
+        <p>This map displays plots of bus location data. Select a bus from the
+        popup menu below and then click "Load Data". After the data has loaded
+        you can press the "Play" button on the bottom of the screen to watch an
+        animation of the bus data.</p>
         <form>
-            <label for="bus-id">Bus ID:</label>
-            <input type="text" name="bus-id" id="bus-id" />
-            <input type="button" id="load-btn" value="Load Data" />
-            <label for="route-select">Route:</label>
-            <select name="route-select" id="route-select">
-                {% for route in routes %}
-                <option value="{{ route }}">{{ route }}</option>
+            <label for="bus-select">Bus:</label>
+            <select name="bus-select" id="bus-select">
+                {% for bus in buses %}
+                <option value="{{ bus.id }}">{{ bus }}</option>
                 {% endfor %}
             </select>
-            <input type="button" id="load-route-btn" value="Show Route" />
+            <label for="show-route">Show route:</label>
+            <input type="checkbox" id="show-route" checked />
+            <label for="show-intersections">Show intersections:</label>
+            <input type="checkbox" id="show-intersections" />
+            <label for="snap-to-roads">Snap to roads:</label>
+            <input type="checkbox" id="snap-to-roads" checked/>
+            <input type="button" id="load-btn" value="Load Data" />
         </form>
         <div id="map"></div>
         <a href="#" id="pause-play-btn">Play</a>
