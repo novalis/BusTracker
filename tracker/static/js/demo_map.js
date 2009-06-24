@@ -45,14 +45,21 @@ function updateBusLocations() {
             for (var i=0; i<data.length; i++) {
                 var busObs = data[i];
                 var feature = featureFromLatLon(busObs['lat'], busObs['lon']);
+                feature.attributes = {label: busObs['route']};
                 features.push(feature);
             }
             var busLayer = map.getLayersByClass('OpenLayers.Layer.Vector')[0];
             if (!busLayer) {
                 var style = new OpenLayers.Style({
                     externalGraphic: '/tracker/static/img/bus.png',
-                    graphicWidth: 16,
-                    graphicHeight: 20
+                    graphicWidth: 20,
+                    graphicHeight: 25,
+                    graphicXOffset: -22,
+                    label: '${label}',
+                    labelAlign: 'lm', // horizontal: left, vertical: middle
+                    fontSize: '0.9em',
+                    fontWeight: 'bold',
+                    fontColor: '#0057a9'
                 });
                 busLayer = new OpenLayers.Layer.Vector('Buses', {
                     styleMap: new OpenLayers.StyleMap(style)
