@@ -10,6 +10,7 @@ import dbus, e_dbus
 import gobject
 import gtk
 import httplib2
+import signal
 import sqlite3
 import sys
 import time
@@ -30,8 +31,8 @@ class Pinger(Thread):
         self.quitting = False
 
     def run(self):
-        data = None
         while not self.quitting:
+            data = None
             while not data:
                 if self.quitting:
                     break
@@ -44,14 +45,15 @@ class Pinger(Thread):
             try:
                 print "sending"
                 start = time.time()
-                response, content = self.http.request(self.url, method="POST", body=urllib.urlencode(data))
+                encoded = urllib.urlencode(data)
+                response, content = self.http.request(self.url, method="POST", body=encoded)
                 server_indicator.set_text("%s... at %s" % (content[:20], datetime.now()))
                 self.errors = 0
                 print "sent in %s seconds" % (time.time() - start)
             except KeyboardInterrupt, SystemExit:
-                return
+                sys.exit(0)
             except Exception, e:
-                print "Some sort of error sending: %s" % e
+                print "Some sort of error sending %s: %s" % (encoded, e)
                 self.errors += 1
             
 
@@ -87,14 +89,13 @@ quitting = False
 def quit_main_loop(*dump):
     global quitting
     quitting = True
-    pinger.quitting = True
-    gtk.main_quit()
+    if pinger:
+        pinger.quitting = True
     sys.exit(0)
 
 def send_gps_observation():
-
     gps_instance.query("o\r\n")
-    gps_instance.poll
+    gps_instance.poll #do not actually call it, for some reason
     if gps_instance.valid:
         send_observation(gps_instance.fix.latitude, gps_instance.fix.longitude)
         valid_indicator.set_text("valid at %s" % datetime.now())
@@ -130,7 +131,7 @@ def start_tracking(*dummy):
     stop = stops[cur_stop]
     stop_button.set_label(stop['location'])
 
-    gps_sender_signal = gobject.timeout_add(5000, send_gps_observation)
+    gps_sender_signal = gobject.timeout_add(1000, send_gps_observation)
 
     pinger = Pinger(url_field.get_text())
     pinger.start()
@@ -248,15 +249,14 @@ def keep_online():
             gprs.restart_connection()
             pinger.errors = 0
 
-mainloop = e_dbus.DBusEcoreMainLoop()
-system_bus = dbus.SystemBus(mainloop=mainloop)
+system_bus = dbus.SystemBus()
 
 print "Init wifi"
 wifi = get_dbus_object (system_bus, "org.freesmartphone.odeviced", "/org/freesmartphone/Device/PowerControl/WiFi", "org.freesmartphone.Device.PowerControl")
 wifi.SetPower(True)
 
 print "Turn off suspend"
-power = get_dbus_object (system_bus, "org.shr.ophonekitd.Usage", "/org/shr/ophonekitd/Usage", "org.shr.ophonekitd.Usage")
+power = get_dbus_object (system_bus, "org.shr.ophonekitd.Usage", "/org/shr/ophonekitd/Usage", "org.shr.ophonekitd.Usage", ignore_reply=True)
 
 power.RequestResource('CPU')
 power.RequestResource('Display')
@@ -271,8 +271,11 @@ gprs = GPRSController()
 gprs.restart_connection()
 
 print "Start tracking networks and keepalive"
-Thread(target=track_networks).start()
-Thread(target=keep_online).start()
+for target in (track_networks, keep_online):
+    thread = Thread(target=target)
+    thread.setDaemon(True)
+    thread.start()
+
 
 win = gtk.Window()
 win.connect('delete-event', quit_main_loop)
@@ -296,7 +299,7 @@ layout.add(gtk.Label("url"))
 url_field = gtk.Entry()
 
 url_field.set_text("http://bustracker.demo.topplabs.org/tracker/update")
-#url_field.set_text("http://192.168.0.200:8000/tracker/update")
+
 layout.add(url_field)
 
 layout.add(gtk.Label("id"))
@@ -318,4 +321,9 @@ start_button.connect('pressed', start_tracking)
 win.add (layout)
 
 win.show_all()
-gtk.main()
+
+while 1:
+    time.sleep(0.005)
+    gtk.main_iteration(block=False)
+
+quit_main_loop()
