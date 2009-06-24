@@ -6,23 +6,62 @@ from gps import gps
 from os import popen
 from random import randint
 from threading import Thread
+import dbus, e_dbus
 import gobject
 import gtk
-import urllib
+import httplib2
+import signal
 import sqlite3
+import sys
 import time
-import dbus
+import urllib
 
 gprs_apn = 'internet2.voicestream.com'
 gprs_login = 'internet'
 gprs_password = ''
+
+class Pinger(Thread):
+    def __init__(self, url):
+        Thread.__init__(self)
+        self.url = url
+        self.queue = []
+        self.to_send_now = None
+        self.errors = 0
+        self.http = httplib2.Http()
+        self.quitting = False
+
+    def run(self):
+        while not self.quitting:
+            data = None
+            while not data:
+                if self.quitting:
+                    break
+                time.sleep(0.25)
+                data = self.to_send_now
+                if not data:
+                    if self.queue:
+                        data = self.queue.pop(0)
+                
+            try:
+                print "sending"
+                start = time.time()
+                encoded = urllib.urlencode(data)
+                response, content = self.http.request(self.url, method="POST", body=encoded)
+                server_indicator.set_text("%s... at %s" % (content[:20], datetime.now()))
+                self.errors = 0
+                print "sent in %s seconds" % (time.time() - start)
+            except KeyboardInterrupt, SystemExit:
+                sys.exit(0)
+            except Exception, e:
+                print "Some sort of error sending %s: %s" % (encoded, e)
+                self.errors += 1
+            
 
 def init_gps():
     global gps_instance
     g = gps()
     gps_instance = g
 
-errors = 0
 def send_observation(lat, lng, intersection = None):
     data = {}
     if intersection:
@@ -40,30 +79,23 @@ def send_observation(lat, lng, intersection = None):
     location_db.execute("insert into location(latitude, longitude, time, route, bus_id, intersection) values (?, ?, ?, ?, ?, ?)", (float(lat), float(lng), int(now.strftime("%s")), data['route'], int(data['bus_id']), intersection or ''))
     location_db.commit()
 
+    if intersection:
+        #don't block time-sensitive tracking messages
+        pinger.queue.append(data)
+    else:
+        pinger.to_send = data
 
-    def send_to_server():
-        global errors
-        try:
-            print "sending"
-            u = urllib.urlopen(url_field.get_text(), urllib.urlencode(data))
-            response = u.read()
-            u.close()
-            server_indicator.set_text("%s... at %s" % (response[:20], datetime.now()))
-            errors = 0
-            print "sent"
-        except Exception, e:
-            print "Some sort of error sending: %s" % e
-            errors += 1
-            
-    Thread(target=send_to_server).start()
-
+quitting = False
 def quit_main_loop(*dump):
-    gtk.main_quit()
+    global quitting
+    quitting = True
+    if pinger:
+        pinger.quitting = True
+    sys.exit(0)
 
 def send_gps_observation():
-
     gps_instance.query("o\r\n")
-    gps_instance.poll
+    gps_instance.poll #do not actually call it, for some reason
     if gps_instance.valid:
         send_observation(gps_instance.fix.latitude, gps_instance.fix.longitude)
         valid_indicator.set_text("valid at %s" % datetime.now())
@@ -77,9 +109,11 @@ def start_tracking(*dummy):
     global stops
     global gps_sender_signal
     global tracking
+    global pinger
 
     if tracking:
         tracking = False
+        pinger.quitting = True
         gobject.source_remove(gps_sender_signal)
         start_button.set_label('start tracking')
         return
@@ -97,7 +131,10 @@ def start_tracking(*dummy):
     stop = stops[cur_stop]
     stop_button.set_label(stop['location'])
 
-    gps_sender_signal = gobject.timeout_add(3000, send_gps_observation)
+    gps_sender_signal = gobject.timeout_add(1000, send_gps_observation)
+
+    pinger = Pinger(url_field.get_text())
+    pinger.start()
 
     tracking = True
 
@@ -152,7 +189,7 @@ def track_networks():
     init_network_db(db)
 
     try:
-        while 1:
+        while not quitting:
             if not tracking:
                 time.sleep(1)
                 continue
@@ -204,35 +241,41 @@ class GPRSController:
         self.gprs.ActivateContext(gprs_apn, gprs_login, gprs_password)
         time.sleep(5)
 
+pinger = None
 def keep_online():
-    global errors
-
-
-    while 1:
+    while not quitting:
         time.sleep(1)
-        if errors >= 2:
+        if pinger and pinger.errors >= 2:
             gprs.restart_connection()
-            errors = 0
+            pinger.errors = 0
 
-#enable wifi
 system_bus = dbus.SystemBus()
+
+print "Init wifi"
 wifi = get_dbus_object (system_bus, "org.freesmartphone.odeviced", "/org/freesmartphone/Device/PowerControl/WiFi", "org.freesmartphone.Device.PowerControl")
 wifi.SetPower(True)
 
-power = get_dbus_object (system_bus, "org.shr.ophonekitd.Usage", "/org/shr/ophonekitd/Usage", "org.shr.ophonekitd.Usage")
+print "Turn off suspend"
+power = get_dbus_object (system_bus, "org.shr.ophonekitd.Usage", "/org/shr/ophonekitd/Usage", "org.shr.ophonekitd.Usage", ignore_reply=True)
 
 power.RequestResource('CPU')
 power.RequestResource('Display')
 
+print "Init gps"
 init_gps()
 location_db = sqlite3.connect('location.db')
 init_location_db(location_db)
 
+print "Init gprs"
 gprs = GPRSController()
 gprs.restart_connection()
 
-Thread(target=track_networks).start()
-Thread(target=keep_online).start()
+print "Start tracking networks and keepalive"
+for target in (track_networks, keep_online):
+    thread = Thread(target=target)
+    thread.setDaemon(True)
+    thread.start()
+
 
 win = gtk.Window()
 win.connect('delete-event', quit_main_loop)
@@ -256,7 +299,7 @@ layout.add(gtk.Label("url"))
 url_field = gtk.Entry()
 
 url_field.set_text("http://bustracker.demo.topplabs.org/tracker/update")
-#url_field.set_text("http://192.168.0.200:8000/tracker/update")
+
 layout.add(url_field)
 
 layout.add(gtk.Label("id"))
@@ -278,4 +321,9 @@ start_button.connect('pressed', start_tracking)
 win.add (layout)
 
 win.show_all()
-gtk.main()
+
+while 1:
+    time.sleep(0.005)
+    gtk.main_iteration(block=False)
+
+quit_main_loop()
