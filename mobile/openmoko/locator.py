@@ -262,6 +262,9 @@ power.RequestResource('CPU')
 power.RequestResource('Display')
 
 print "Init gps"
+gps_bus = get_dbus_object (system_bus, "org.freesmartphone.ousaged", "/org/freesmartphone/Usage", "org.freesmartphone.Usage")
+gps_bus.SetResourcePolicy("GPS","enabled")
+
 init_gps()
 location_db = sqlite3.connect('location.db')
 init_location_db(location_db)
