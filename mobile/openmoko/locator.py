@@ -41,7 +41,7 @@ class Pinger(Thread):
                 if not data:
                     if self.queue:
                         data = self.queue.pop(0)
-                
+            encoded = None
             try:
                 print "sending"
                 start = time.time()
