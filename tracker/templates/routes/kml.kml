@@ -5,6 +5,16 @@
     <Placemark>
         <styleUrl>#{{ observation|style_for_observation }}</styleUrl>
         <name>{{ observation.time|localdatetime }}</name>
+        {% if observation.horizontal_accuracy %}
+        <ExtendedData>
+            <Data name="horizontalAccuracy">
+                <value>{{ observation.horizontal_accuracy }}</value>
+            </Data>
+            <Data name="verticalAccuracy">
+                <value>{{ observation.vertical_accuracy }}</value>
+            </Data>
+        </ExtendedData>
+        {% endif %}
         <Point>
             <coordinates>
             {% if snap_to_roads %}
@@ -14,6 +24,16 @@
             {% endif %}
             </coordinates>
         </Point>
+    </Placemark>
+{% endfor %}
+{% for error_line in error_lines %}
+    <Placemark>
+        <styleUrl>#error_line</styleUrl>
+        <LineString>
+            <coordinates>
+            {{ error_line.start.x }},{{ error_line.start.y }},0 {{ error_line.end.x }},{{ error_line.end.y }},0
+            </coordinates>
+        </LineString>
     </Placemark>
 {% endfor %}
 </Document>

@@ -94,7 +94,7 @@ WHERE
 mta_data_shape.gid = %s""", (location, shape.gid))
     row = cursor.fetchone()
     return row[0]
-        
+
 # Return the point along shape that is closest to location
 def location_on_route(location, shape):
     from django.db import connection
@@ -108,6 +108,21 @@ FROM
 mta_data_shape
 WHERE 
 mta_data_shape.gid = %s""", (location, shape.gid))
+    row = cursor.fetchone()
+    point = fromstr(row[0])
+    return point
+
+# TODO: Figure out where this belongs.
+def point_on_route_by_distance(distance, shape):
+    from django.db import connection
+    from django.contrib.gis.geos import fromstr
+    cursor = connection.cursor()
+    cursor.execute(
+"""SELECT st_line_interpolate_point(mta_data_shape.geometry, %s)
+FROM
+mta_data_shape
+WHERE
+mta_data_shape.gid = %s""", (distance, shape.gid))
     row = cursor.fetchone()
     point = fromstr(row[0])
     return point
@@ -197,3 +212,4 @@ class IntersectionObservation(models.Model):
 
     def location_on_route(self):
         return self.location
+
