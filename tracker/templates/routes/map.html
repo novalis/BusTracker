@@ -12,6 +12,25 @@
             $('#pause-play-btn').hide();
             map = createMap('map');
 
+            // Forbid setting the checkboxes illogically
+            $('#show-error-lines').click(function() {
+                if ($(this).is(':checked')) {
+                    $('#snap-to-roads').attr('checked', false);
+                    $('#snap-to-roads').attr('disabled', true);
+                } else {
+                    $('#snap-to-roads').attr('disabled', false);
+                }
+            });
+
+            $('#snap-to-roads').click(function() {
+                if ($(this).is(':checked')) {
+                    $('#show-error-lines').attr('checked', false);
+                    $('#show-error-lines').attr('disabled', true);
+                } else {
+                    $('#show-error-lines').attr('disabled', false);
+                }
+            });
+
             $('#load-btn').click(function() {
                 var busId = $('#bus-select').get(0).value;
                 var busObsUrl = 'kml?bus_id=' + busId;
@@ -20,6 +39,9 @@
                 }
                 if ($('#snap-to-roads').is(':checked')) {
                     busObsUrl += '&snap_to_roads';
+                }
+                if ($('#show-error-lines').is(':checked')) {
+                    busObsUrl += '&show_error_lines';
                 }
                 var animateData = $('#animate-data').is(':checked');
                 loadBusData(busObsUrl, 'bus ' + busId, animateData);
@@ -57,10 +79,14 @@
                 <label for="show-intersections">Show intersections</label>
             </span>
             <span class="form-item">
-                <input type="checkbox" id="snap-to-roads" class="checkbox" checked/>
+                <input type="checkbox" id="snap-to-roads" class="checkbox" />
                 <label for="snap-to-roads">Snap to roads</label>
             </span>
             <span class="form-item alternate">
+                <input type="checkbox" id="show-error-lines" class="checkbox" />
+                <label for="show-error-lines">Show error lines</label>
+            </span>
+            <span class="form-item">
                 <input type="checkbox" id="animate-data" class="checkbox" />
                 <label for="animate_data">Animate data</label>
             </span>

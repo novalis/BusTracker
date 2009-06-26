@@ -23,22 +23,19 @@ def index(request):
 
 def kml(request):
     bus_id = request.REQUEST['bus_id']
+
     observations = list(BusObservation.objects.filter(bus=bus_id))
+    intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
+    observations += intersection_observations
+    observations.sort(key=lambda obs: obs.time)
 
-    if 'show_intersections' in request.REQUEST:
-        intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
-        observations += intersection_observations
-        observations.sort(key=lambda obs: obs.time)
-
-    error_lines = []
     snap_to_roads = False
     if 'snap_to_roads' in request.REQUEST:
         snap_to_roads = True
-    elif 'show_intersections' in request.REQUEST:
+
+    error_lines = []
+    if 'show_error_lines' in request.REQUEST:
         # TODO: Break this up into a separate function and KML file?
-        # TODO: make this work even when show_intersections is off? 
-        # this will not draw lines for any observations before the first
-        # intersection
         prev_stop = None
         obs_btw_stops = []
         for obs in observations:
@@ -68,6 +65,9 @@ def kml(request):
             else: # bus observation
                 obs_btw_stops.append(obs)
     
+    if 'show_intersections' not in request.REQUEST:
+        observations = list(BusObservation.objects.filter(bus=bus_id))
+
     return render_to_response('routes/kml.kml', {'observations': observations,
                                                  'snap_to_roads': snap_to_roads,
                                                  'error_lines': error_lines})
