@@ -44,7 +44,17 @@ def kml(request):
         for obs in observations:
             if hasattr(obs, 'intersection'): # intersection or bus stop
                 curr_stop = obs
-                if prev_stop:
+                if obs_btw_stops:
+                    if not prev_stop:
+                        # Make a temp/'fake' prev stop to handle the observations
+                        # between the start of the route and the first real bus
+                        # stop/intersection observation.
+                        loc = Point(obs.bus.trip.shape.geometry.coords[0])
+                        prev_stop = IntersectionObservation(bus=obs.bus,
+                                                            location=loc,
+                                                            time=obs_btw_stops[0].time,
+                                                            intersection="start of route")
+
                     dist_btw_stops = curr_stop.distance_along_route() - prev_stop.distance_along_route()
                     time_btw_stops = (curr_stop.time - prev_stop.time).seconds
                     if dist_btw_stops > 0:
@@ -53,15 +63,7 @@ def kml(request):
                             dist_along_route = dt * dist_btw_stops + prev_stop.distance_along_route()
                             loc_on_route = point_on_route_by_distance(dist_along_route, bus_obs.bus.trip.shape)
                             error_lines.append({'start':bus_obs.location, 'end': loc_on_route})
-                else: # observations before first bus stop
-                    # We can't interpolate with only one stop, so map
-                    # everything directly to the stop we have.
-                    # TODO: This could probably be improved by using the first
-                    # point along the route as prev_stop's location, and the
-                    # the time of the first observation as prev_stop's time.
-                    for bus_obs in obs_btw_stops:
-                        error_lines.append({'start':bus_obs.location, 'end': curr_stop.location})
-                prev_stop = obs
+                prev_stop = curr_stop
                 obs_btw_stops = []
             else: # bus observation
                 obs_btw_stops.append(obs)
