@@ -83,7 +83,7 @@ def send_observation(lat, lng, intersection = None):
         #don't block time-sensitive tracking messages
         pinger.queue.append(data)
     else:
-        pinger.to_send = data
+        pinger.to_send_now = data
 
 quitting = False
 def quit_main_loop(*dump):
@@ -156,7 +156,7 @@ def found_stop(*dummy):
     stop = stops[cur_stop]
     stop_button.set_sensitive(False) 
 
-    source_id = gobject.timeout_add(1000, reenable_stop_button)
+    source_id = gobject.timeout_add(5000, reenable_stop_button)
 
 
 def store_network_list(db, networks):
@@ -256,7 +256,7 @@ wifi = get_dbus_object (system_bus, "org.freesmartphone.odeviced", "/org/freesma
 wifi.SetPower(True)
 
 print "Turn off suspend"
-power = get_dbus_object (system_bus, "org.shr.ophonekitd.Usage", "/org/shr/ophonekitd/Usage", "org.shr.ophonekitd.Usage", ignore_reply=True)
+power = get_dbus_object (system_bus, "org.shr.ophonekitd.Usage", "/org/shr/ophonekitd/Usage", "org.shr.ophonekitd.Usage")
 
 power.RequestResource('CPU')
 power.RequestResource('Display')
