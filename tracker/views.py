@@ -23,19 +23,54 @@ def index(request):
 
 def kml(request):
     bus_id = request.REQUEST['bus_id']
-    observations = list(BusObservation.objects.filter(bus=bus_id))
 
-    if 'show_intersections' in request.REQUEST:
-        intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
-        observations += intersection_observations
-        observations.sort(key=lambda obs: obs.time)
+    observations = list(BusObservation.objects.filter(bus=bus_id))
+    intersection_observations = list(IntersectionObservation.objects.filter(bus=bus_id))
+    observations += intersection_observations
+    observations.sort(key=lambda obs: obs.time)
 
     snap_to_roads = False
     if 'snap_to_roads' in request.REQUEST:
         snap_to_roads = True
+
+    error_lines = []
+    if 'show_error_lines' in request.REQUEST:
+        # TODO: Break this up into a separate function and KML file?
+        prev_stop = None
+        obs_btw_stops = []
+        for obs in observations:
+            if hasattr(obs, 'intersection'): # intersection or bus stop
+                curr_stop = obs
+                if obs_btw_stops:
+                    if not prev_stop:
+                        # Make a temp/'fake' prev stop to handle the observations
+                        # between the start of the route and the first real bus
+                        # stop/intersection observation.
+                        loc = Point(obs.bus.trip.shape.geometry.coords[0])
+                        prev_stop = IntersectionObservation(bus=obs.bus,
+                                                            location=loc,
+                                                            time=obs_btw_stops[0].time,
+                                                            intersection="start of route")
+
+                    dist_btw_stops = curr_stop.distance_along_route() - prev_stop.distance_along_route()
+                    time_btw_stops = (curr_stop.time - prev_stop.time).seconds
+                    if dist_btw_stops > 0:
+                        for bus_obs in obs_btw_stops:
+                            dt = float((bus_obs.time - prev_stop.time).seconds) / time_btw_stops
+                            dist_along_route = dt * dist_btw_stops + prev_stop.distance_along_route()
+                            loc_on_route = point_on_route_by_distance(dist_along_route, bus_obs.bus.trip.shape)
+                            error_lines.append({'start':bus_obs.location, 'end': loc_on_route})
+                prev_stop = curr_stop
+                obs_btw_stops = []
+            else: # bus observation
+                obs_btw_stops.append(obs)
     
+    if 'show_intersections' not in request.REQUEST:
+        observations = list(BusObservation.objects.filter(bus=bus_id))
+
     return render_to_response('routes/kml.kml', {'observations': observations,
-                                                 'snap_to_roads': snap_to_roads})
+                                                 'snap_to_roads': snap_to_roads,
+                                                 'error_lines': error_lines})
 
 def route_kml(request):
     bus_id = request.REQUEST['bus_id']
@@ -215,3 +250,4 @@ def live_map(request):
 def bus_locations(request):
     buses = Bus.objects.all()
     return render_to_response('routes/bus_locations.json', {'buses': buses})
+
