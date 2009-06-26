@@ -163,7 +163,7 @@ def store_network_list(db, networks):
     now = str(int(datetime.now().strftime("%s")))
 
     for cell in networks:
-        db.execute("insert into networks(time, address, quality) values (?, ?, ?);", (now, cell['address'], cell['quality']))
+        db.execute("insert into networks(time, address, quality) values (?, ?, ?);", (now, cell['address'], cell.get('quality')))
     db.commit()
 
 
