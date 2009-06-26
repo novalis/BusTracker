@@ -135,48 +135,50 @@ function loadBusKml(url, name) {
 }
 
 
-function loadBusData(url, name) {
+function loadBusData(url, name, animateData) {
     var layer = loadBusKml(url, name); 
     layer.events.register('loadend', layer, function() {
         this.map.zoomToExtent(this.getDataExtent()); 
-        //TODO Move all this stuff that doesn't belong in loadBusData
-        var busData = []
-        // Store references to the features so we have them after they're
-        // removed from the map
-        for (var i=0; i<layer.features.length; i++) {
-            busData[i] = layer.features[i];
-        }
-        layer.removeFeatures(layer.features);
-        
-        function refreshBusData() {
-            var val = $(this).slider('value');
-            // TODO: Add optional arg for adding/removing appropriate features
-            // when the slider is dragged (may make sense to bucket features
-            // and have a mapping to e.g., secs)
-            layer.addFeatures(busData[val]);
-        }
-        $('#time-slider').slider({
-            max: busData.length-1,
-            range: 'min',
-            value: 0,
-            slide: refreshBusData,
-            change: refreshBusData
-        });
-        $('#pause-play-btn').show().click(function() {
-            // TODO: Fix ugly hack of using global timer
-            if (this.innerHTML == 'Play') {
-                this.innerHTML = 'Pause';
-                var startVal = $('#time-slider').slider('value');
-                timer = animateBusData(startVal);
-            } else {
-                if (this.innerHTML == 'Reset') {
-                    $('#time-slider').slider('value', 0);
-                    layer.removeFeatures(layer.features);
-                }
-                this.innerHTML = 'Play';
-                clearInterval(timer);
+        if (animateData) {
+            //TODO Move all this stuff that doesn't belong in loadBusData
+            var busData = []
+            // Store references to the features so we have them after they're
+            // removed from the map
+            for (var i=0; i<layer.features.length; i++) {
+                busData[i] = layer.features[i];
             }
-        });
+            layer.removeFeatures(layer.features);
+
+            function refreshBusData() {
+                var val = $(this).slider('value');
+                // TODO: Add optional arg for adding/removing appropriate features
+                // when the slider is dragged (may make sense to bucket features
+                // and have a mapping to e.g., secs)
+                layer.addFeatures(busData[val]);
+            }
+            $('#time-slider').slider({
+                max: busData.length-1,
+                range: 'min',
+                value: 0,
+                slide: refreshBusData,
+                change: refreshBusData
+            });
+            $('#pause-play-btn').show().click(function() {
+                // TODO: Fix ugly hack of using global timer
+                if (this.innerHTML == 'Play') {
+                    this.innerHTML = 'Pause';
+                    var startVal = $('#time-slider').slider('value');
+                    timer = animateBusData(startVal);
+                } else {
+                    if (this.innerHTML == 'Reset') {
+                        $('#time-slider').slider('value', 0);
+                        layer.removeFeatures(layer.features);
+                    }
+                    this.innerHTML = 'Play';
+                    clearInterval(timer);
+                }
+            });
+        }
     })
 
     return layer;

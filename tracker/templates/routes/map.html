@@ -21,7 +21,8 @@
                 if ($('#snap-to-roads').is(':checked')) {
                     busObsUrl += '&snap_to_roads';
                 }
-                loadBusData(busObsUrl, 'bus ' + busId);
+                var animateData = $('#animate-data').is(':checked');
+                loadBusData(busObsUrl, 'bus ' + busId, animateData);
 
                 if ($('#show-route').is(':checked')) {
                     var routeUrl = 'route_kml?bus_id=' + busId;
@@ -37,9 +38,9 @@
 
     <body>
         <p>This map displays plots of bus location data. Select a bus from the
-        popup menu below and then click "Load Data". After the data has loaded
-        you can press the "Play" button on the bottom of the screen to watch an
-        animation of the bus data.</p>
+        popup menu, check the boxes you wish, and then click "Load Data". If
+        you have selected the "Animate data" option, you will need to press the
+        "Play" button below the map after the data has loaded.</p>
         <form>
             <label for="bus-select">Bus:</label>
             <select name="bus-select" id="bus-select">
@@ -58,6 +59,10 @@
             <span class="form-item">
                 <input type="checkbox" id="snap-to-roads" class="checkbox" checked/>
                 <label for="snap-to-roads">Snap to roads</label>
+            </span>
+            <span class="form-item alternate">
+                <input type="checkbox" id="animate-data" class="checkbox" />
+                <label for="animate_data">Animate data</label>
             </span>
             <input type="button" id="load-btn" value="Load Data" />
         </form>
