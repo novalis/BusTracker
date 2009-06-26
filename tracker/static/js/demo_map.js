@@ -107,9 +107,12 @@ function loadBusKml(url, name) {
            
     var lookup = {
         '#tracker_busobservation': {fillColor: "green"},
-        '#tracker_intersectionobservation': {fillColor: "red",
+        '#tracker_intersectionobservation': {fillColor: "blue",
                                              fillOpacity: 1.0,
-                                             pointRadius: 10}
+                                             pointRadius: 4},
+        '#error_line': {strokeWidth: 1.0,
+                        strokeColor: "red",
+                        strokeOpacity: 0.6}
     }
  
             
