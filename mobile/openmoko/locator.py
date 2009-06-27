@@ -83,7 +83,7 @@ def send_observation(lat, lng, intersection = None):
         #don't block time-sensitive tracking messages
         pinger.queue.append(data)
     else:
-        pinger.to_send = data
+        pinger.to_send_now = data
 
 quitting = False
 def quit_main_loop(*dump):
