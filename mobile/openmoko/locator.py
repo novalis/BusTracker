@@ -156,7 +156,7 @@ def found_stop(*dummy):
     stop = stops[cur_stop]
     stop_button.set_sensitive(False) 
 
-    source_id = gobject.timeout_add(5000, reenable_stop_button)
+    source_id = gobject.timeout_add(1000, reenable_stop_button)
 
 
 def store_network_list(db, networks):
