@@ -118,7 +118,8 @@ trip_format = LineFormat(
     FieldDef("UNKNOWN_1", 2), 
     FieldDef("start_minutes", 6, numeric=True),
     FieldDef('direction', 2), #NSEW only, I think.
-    FieldDef('trip_type', 2, numeric=True),  #1 = normal; anything else = to/from depot?
+    FieldDef('trip_type', 1, numeric=True),  #1 = normal; anything else = to/from depot?
+    FieldDef('UNKNOWN_3', 1, numeric=True),  #but does it have something to do with local/limited/expressness? because I noticed it on the M5 limited service buses
     FieldDef('start_stop', 4, hex=True), 
     FieldDef('UNKNOWN_4', 2, hex=True),  
     FieldDef('end_minutes', 6, numeric=True),  
@@ -249,6 +250,8 @@ def parse_schedule_dir(dirname):
                     
     use_files.sort()
     for filename, dirname, day_of_week in use_files:
+        if 'm_0005' not in filename:
+            continue
         if 'b_0666' in filename or 'b_0333' in filename:
             continue #there is no B666 or B333 bus -- these are
                      #shuttle buses that don't make stops.  There is
