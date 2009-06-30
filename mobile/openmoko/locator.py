@@ -156,7 +156,7 @@ def found_stop(*dummy):
     stop = stops[cur_stop]
     stop_button.set_sensitive(False) 
 
-    source_id = gobject.timeout_add(5000, reenable_stop_button)
+    source_id = gobject.timeout_add(1000, reenable_stop_button)
 
 
 def store_network_list(db, networks):
@@ -262,6 +262,9 @@ power.RequestResource('CPU')
 power.RequestResource('Display')
 
 print "Init gps"
+gps_bus = get_dbus_object (system_bus, "org.freesmartphone.ousaged", "/org/freesmartphone/Usage", "org.freesmartphone.Usage")
+gps_bus.SetResourcePolicy("GPS","enabled")
+
 init_gps()
 location_db = sqlite3.connect('location.db')
 init_location_db(location_db)
