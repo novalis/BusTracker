@@ -92,6 +92,7 @@ extra_names = {
     'X17' : 'X17J', #but what about all the other X17 routes?
     'S61' : 'S91',
     'S91' : 'S61',
+    'X68' : ['X68A', 'X68B', 'X68C'],
 }
 
 
@@ -393,7 +394,11 @@ class Command(BaseCommand):
                 #get possible shapes
                 names = set()
                 if name in extra_names:
-                    names.add(extra_names[name])
+                    extra = extra_names[name]
+                    if isinstance(extra, str):
+                        names.add(extra)
+                    else:
+                        names.update(extra)
 
                 for trip_rec in route_rec['trips']:
                     route_name = trip_rec['route_name']
@@ -404,10 +409,15 @@ class Command(BaseCommand):
                     rname = fix_leading_zeros.get(rname, rname)
                     nameq |= models.Q(route__iexact = rname)
 
-                    if rname in extra_names and extra_names[rname] not in names:
-                        nameq |= models.Q(route__iexact = extra_names[rname])
-
-
+                    if rname in extra_names:
+                        extra = extra_names[rname] 
+                        if isinstance(extra, str):
+                            if extra not in names:
+                                nameq |= models.Q(route__iexact = extra_names[rname])
+                        else:
+                            for rname in extra:
+                                if rname not in names:
+                                    nameq |= models.Q(route__iexact = extra_names[rname])
                 shapes = list(MTARoute.objects.filter(nameq))
 
                 shapes_by_direction = {}
