@@ -21,6 +21,7 @@
     "fields": {
       "shape": 747, 
       "route": 747, 
+      "day_of_week" : "WKO",
       "start_time": "17:13:00"
     }
   }, 
@@ -30,6 +31,7 @@
     "fields": {
       "shape": 747, 
       "route": 747, 
+      "day_of_week" : "WKO",
       "start_time": "18:13:00"
     }
   }, 

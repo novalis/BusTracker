@@ -1,4 +1,4 @@
-from datetime import time
+from datetime import time, datetime
 from django.contrib.gis.geos import LineString, Point
 from django.core.management.base import BaseCommand
 from django.db import transaction, reset_queries
@@ -99,6 +99,15 @@ class Command(BaseCommand):
             for route_id, route in sorted(feed.routes.items()):
                 process_route(feed, route)
                 transaction.commit()
+
+            periods = feed.GetServicePeriodList()
+            for period in periods:
+                service_id = period.service_id
+                for date in period.ActiveDates():
+                    date = datetime.strptime(date, '%Y%m%d')
+                    ScheduleDay(day=date, day_of_week=service_id).save()
+
+            transaction.commit()                
         except Exception, e:
             import traceback
             traceback.print_exc()

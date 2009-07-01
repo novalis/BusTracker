@@ -100,9 +100,10 @@ def update(request):
         bus = bus_candidates[0]
         trip = bus.trip
     else:
-        #fixme: day of week
         location_sql = "SRID=4326;POINT(%s %s)" % (request.REQUEST['lng'], request.REQUEST['lat'])
-        trip = Trip.objects.filter(route = route).extra(
+
+        day_of_week = ScheduleDay.objects.get(day=client_time.date()).day_of_week
+        trip = Trip.objects.filter(route = route, day_of_week=day_of_week).extra(
             tables=['mta_data_shape'],
             select = SortedDict([
                     ('start_error', 'abs(extract(epoch from start_time - %s))'),

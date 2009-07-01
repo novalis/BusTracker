@@ -7,7 +7,7 @@ from tracker.models import *
 
 
 class UpdateTestCase(TestCase):
-    fixtures = ['location.json', 'm6.json']
+    fixtures = ['location.json', 'm6.json', 'schedule.json']
 
     def test_update_location(self):
         response = self.client.post('/tracker/update', {'bus_id' : '5',

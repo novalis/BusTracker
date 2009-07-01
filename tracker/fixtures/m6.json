@@ -21,6 +21,7 @@
     "fields": {
       "shape": 949, 
       "route": 949, 
+      "day_of_week" : "WKO",
       "start_time": "8:00:00"
     }
   }, 

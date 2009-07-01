@@ -87,4 +87,6 @@ class TripStop(models.Model):
     def distance_along_shape(self):
         return distance_along_shape(self.bus_stop.geometry, self.trip.shape)
 
-
+class ScheduleDay(models.Model):
+    day = models.DateField(primary_key=True)
+    day_of_week = models.CharField(max_length=3)
