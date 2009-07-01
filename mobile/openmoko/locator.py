@@ -112,10 +112,14 @@ def start_tracking(*dummy):
     global pinger
 
     if tracking:
+        #stop tracking
         tracking = False
         pinger.quitting = True
         gobject.source_remove(gps_sender_signal)
         start_button.set_label('start tracking')
+        bus_id = int(id_field.get_text())
+        bus_id += 1
+        id_field.set_text(bus_id)
         return
 
 
