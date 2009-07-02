@@ -1,0 +1,16 @@
+[
+  {
+    "pk": "2009-04-23", 
+    "model": "mta_data.ScheduleDay", 
+    "fields": {
+       "day_of_week" : "WKO"
+       }
+  },
+  {
+    "pk": "2009-04-24", 
+    "model": "mta_data.ScheduleDay", 
+    "fields": {
+       "day_of_week" : "WKO"
+       }
+  }
+]
