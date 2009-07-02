@@ -56,7 +56,10 @@ def kml(request):
                     time_btw_stops = (curr_stop.time - prev_stop.time).seconds
                     if dist_btw_stops > 0:
                         for bus_obs in obs_btw_stops:
-                            dt = float((bus_obs.time - prev_stop.time).seconds) / time_btw_stops
+                            if time_btw_stops:
+                                dt = float((bus_obs.time - prev_stop.time).seconds) / time_btw_stops
+                            else:
+                                dt = 0
                             dist_along_route = dt * dist_btw_stops + prev_stop.distance_along_route()
                             loc_on_route = point_on_route_by_distance(dist_along_route, bus_obs.bus.trip.shape)
                             error_lines.append({'start':bus_obs.location, 'end': loc_on_route})
