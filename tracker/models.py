@@ -7,14 +7,6 @@ class Bus(models.Model):
     """A particular physical bus"""
     id = models.IntegerField(primary_key=True)
     trip = models.ForeignKey(Trip)
-    total_dwell_time = models.IntegerField(default=0)
-    n_dwells = models.IntegerField(default=0)
-
-    def average_dwell_time(self):
-        if self.n_dwells:
-            return self.total_dwell_time / self.n_dwells
-        else:
-            return -1
 
     def __unicode__(self):
         return "<Bus (%d) on route %s %s>" % (self.id, self.trip.route.name, self.trip.route.direction)

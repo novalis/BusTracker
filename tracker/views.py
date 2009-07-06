@@ -12,9 +12,6 @@ import settings
 import urllib
 import tracker.templatetags #to catch import errors
 
-#75 m / 1 decimal degree
-STOP_FUDGE = 0.0000676
-
 def index(request):
 
     routes = Route.objects.all()
@@ -145,35 +142,7 @@ def update(request):
             obs = BusObservation(bus=bus, location=location, time=client_time, **extra_fields)
                                        
             obs.save()
-            
-            #fixme: this WILL NOT WORK until observation distances are
-            #nondescending.
 
-            #figure out dwell information
-            route_length = trip.shape.length
-            stop_fudge = STOP_FUDGE / route_length
-
-            prev_bus_stop = TripStop.objects.filter(
-                trip=bus.trip, 
-                distance__lte=obs.distance + stop_fudge * route_length
-                ).order_by('distance')[:1]
-
-            if len(prev_bus_stop):
-                prev_bus_stop = prev_bus_stop[0]
-
-                try:
-                    prev_observation = obs.get_previous_by_time(bus=bus)
-                    if prev_observation.distance + stop_fudge <= prev_bus_stop.distance:
-                        #this is our first post-stop observation
-
-                        #find the observation that was before the stop.
-                        before_stop_observation = BusObservation.objects.filter(
-                            distance__lte=prev_bus_stop - stop_fudge
-                            )[0]
-                        bus.total_dwell_time += (client_time - before_stop_observation.time).seconds
-                        bus.n_dwells += 1
-                except BusObservation.DoesNotExist:
-                    pass
     return HttpResponse("ok")
 
 # from http://www.djangosnippets.org/snippets/293/
