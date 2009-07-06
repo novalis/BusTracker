@@ -63,7 +63,7 @@ def process_route(feed, gtfs_route):
         start_time = time(hours, minutes, seconds)
         trip = list(Trip.objects.filter(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time))
         if trip:
-            print "This trip seems to exist.  That shoudn't happen."
+            print "This trip seems to exist.  That shouldn't happen."
             trip = trip[0]
         else:
             trip = Trip(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time)
@@ -108,6 +108,11 @@ class Command(BaseCommand):
                     ScheduleDay(day=date, day_of_week=service_id).save()
 
             transaction.commit()                
+
+            curs = connection.cursor()
+            curs.execute ("update mta_data_tripstop set distance = st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id;")
+            curs.commit()
+
         except Exception, e:
             import traceback
             traceback.print_exc()
