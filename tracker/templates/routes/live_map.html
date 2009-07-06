@@ -10,11 +10,11 @@
         <script type="text/javascript">
         $(document).ready(function() {
             map = createMap('map');
-            setInterval(function() {
+            setTimeout(function() {
               var now = new Date();
               $('#status').html("Last updated " + now);
               updateBusLocations();
-            }, 3000);
+            }, 300);
         });
         </script>
     </head>

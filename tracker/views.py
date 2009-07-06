@@ -255,3 +255,57 @@ def bus_locations(request):
     buses = Bus.objects.all()
     return render_to_response('routes/bus_locations.json', {'buses': buses})
 
+# total hack to test how good our predictions are
+def test_accuracy(request):
+    from numpy import std
+
+    intervals =[timedelta(0, x) for x in (60, 120, 600, 1200)]
+
+    for bus in Bus.objects.all():
+        total_diff = 0
+
+        max_diff = 0
+        worst_spot = None
+
+        diffs = []
+
+        observations = list(bus.busobservation_set.all())
+        first_observation_time = observations[0].time
+
+        for observation in observations:
+            for interval in intervals:
+                estimate_time = observation.time - interval
+                if estimate_time > first_observation_time:
+                    estimated_time = bus.estimated_arrival_time(observation.location, estimate_time)
+                    if estimated_time:
+                        #absolute value of difference; can't use
+                        #abs because datetime subtraction is broken.
+                        if estimated_time > observation.time:
+                            diff = (estimated_time - observation.time).seconds
+                        else:
+                            diff = (observation.time - estimated_time).seconds
+                            
+                        diffs.append(diff)
+
+                        if diff > max_diff:
+                            max_diff = diff
+                            worst_spot = observation.location
+                        total_diff += diff * diff
+        n_samples = len(diffs)
+        diffs.sort(reverse=True)
+        print "Bus %s" % bus.id
+        print "Num diffs: %s" % len(diffs)
+        print "Divergence for this data set: %s" % sqrt(total_diff / n_samples)
+        print "Standard deviation: %s" % std(diffs)
+        print "Worst error: %s, at %s, %s" % (max_diff, worst_spot.x, worst_spot.y)
+        print "Worst 20: %s" % diffs[:20]
+        diffs = diffs[20:]
+        n_samples = len(diffs)
+        total_diff = 0
+        for diff in diffs:
+            total_diff += diff * diff
+        print "Num diffs: %s" % n_samples
+        print "Divergence ignoring worst 20: %s" % sqrt(total_diff / n_samples)
+        print "Standard deviation: %s" % std(diffs)
+        print "------------"
+
