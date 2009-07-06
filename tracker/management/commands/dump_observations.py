@@ -21,6 +21,8 @@ class Command(BaseCommand):
         for id in bus_ids:
             id = int(id)
             obs = BusObservation.objects.filter(bus=id)
+            if not len(obs):
+                continue
             route_name = obs[0].bus.trip.route.route_name().replace(' ', '_')
             fname = "%s_%s.json" % (route_name, id)
             f = open(fname, "w")
