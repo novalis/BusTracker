@@ -22,6 +22,7 @@ class Command(BaseCommand):
     def handle(self, dirname, **kw):
         files = os.listdir(dirname)
         for filename in files:
+            print "importing %s" % filename
             f = open(os.path.join(dirname, filename))
             # For a BusObservation queryset of bus_id 7 the filename should look like M6_N_7.json
             # For an IntersectionObservation queryset the filename should look like M6_S_66_intersections.json
@@ -32,7 +33,13 @@ class Command(BaseCommand):
             observation_group = serializers.deserialize('json', data)
         
             for observation in observation_group:
-                self._import_observation(observation.object, route_name, direction)
+                ob = observation.object
+                route = Route.objects.get(name=route_name, direction=direction) # will only work sometimes
+                if hasattr(ob, 'intersection'):
+                    intersection = ob.intersection
+                else:
+                    intersection = None
+                apply_observation(ob.location.y, ob.location.x, ob.time, ob.bus_id, route, intersection=intersection)
 
 
     def _import_observation(self, observation, route_name, direction):

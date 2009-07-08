@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
+from django.utils.datastructures import SortedDict
 from math import sqrt
 from mta_data.models import *
 
@@ -7,6 +9,8 @@ class Bus(models.Model):
     """A particular physical bus"""
     id = models.IntegerField(primary_key=True)
     trip = models.ForeignKey(Trip)
+    next_stop = models.ForeignKey(TripStop)
+    distance = models.FloatField() #nondescending
 
     def __unicode__(self):
         return "<Bus (%d) on route %s %s>" % (self.id, self.trip.route.name, self.trip.route.direction)
@@ -14,13 +18,46 @@ class Bus(models.Model):
     @property
     def location(self):
         last = self.busobservation_set.order_by('-time')[0]
-        return last.location
-
-    def location_on_route(self):
-        last = self.busobservation_set.order_by('-time')[0]
         return last.location_on_route()
 
+    def location_on_route(self):
+        from django.db import connection
+        from django.contrib.gis.geos import fromstr
+        cursor = connection.cursor()
+        location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
+        cursor.execute(
+            """SELECT st_line_interpolate_point(mta_data_shape.geometry,%s)
+FROM 
+mta_data_shape
+WHERE 
+mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
+        row = cursor.fetchone()
+        point = fromstr(row[0])
+        return point
+
+    def estimated_arrival_time2(self, target_bus_stop, time=None):
+        #compute estimated arrival time based on schedule
+
+        if not time:
+            now = datetime.utcnow()
+        else:
+            now = time
+
+        seconds_traveled = (now - self.trip.start_time).seconds
+
+        tripstop = self.trip.tripstop_set.get(busstop_id=target_bus_stop.id)
+        target_distance = tripstop.distance
+
+        for busstop in self.trip.tripstop_set.order_by('-distance'):
+            if busstop.distance <= target_distance:
+                break # last stop we passed
+
+        scheduled_time = busstop.seconds_after_start
+        delay = bus.previousstop_set.filter(arrival_time__lte=now).order_by('id').lateness
+        return bus.trip.start_time + timedelta(0, scheduled_time + lateness)
+
     def estimated_arrival_time(self, target_location, time=None):
+        """target_location is a Point"""
         #estimated arrival time is a function of average speed in
         #decimal degrees per second, remaining distance, average speed
         #in number of intersections per second, and remaining
@@ -34,7 +71,7 @@ class Bus(models.Model):
         #The target location is a point, but needs to be a distance along the route.
         target_distance = distance_along_route(target_location, self.trip.shape)
 
-        #Find out when the bus started moving.  
+        #Find out when the bus started moving.
         #This is when the distance along the route (a) is > 0.01
         observations = self.busobservation_set.filter(time__lte = now).order_by('time')
 
@@ -58,21 +95,21 @@ class Bus(models.Model):
             #the bus has not moved enough or has moved backwards
             #this means no arrival estimate is possible for this bus.
             return None
-        
+
         journey_time = (last_time - start_time).seconds
         rate = (last_distance - start_distance) / journey_time
         d = target_distance - last_distance
 
         estimate_from_distance = d / rate
 
-        #todo: create an estimate from dwell time
-
-        #I guess that's average dwell time * n of remaining stops, plus
-        #some fudge factor for travel time
-
         seconds = estimate_from_distance
         return last_time + timedelta(0, seconds)
 
+class PreviousStop(models.Model):
+    tripstop = models.ForeignKey(TripStop)
+    arrival_time = models.DateTimeField()
+    lateness = models.IntegerField() # seconds after scheduled arrival time
+    bus = models.ForeignKey(Bus)
 
 def distance_along_route(location, shape):
     from django.db import connection
@@ -119,6 +156,12 @@ mta_data_shape.gid = %s""", (distance, shape.gid))
     point = fromstr(row[0])
     return point
 
+def next_stop_by_distance(distance, trip):
+    next = trip.tripstop_set.filter(distance__gt=distance).order_by('distance')[:1]
+    if not next:
+        return None
+    return next[0]
+
 class BusObservationManager(models.GeoManager):
     def get_query_set(self):
         return super(BusObservationManager, self).get_query_set().extra(select={
@@ -164,9 +207,7 @@ class BusObservation(models.Model):
 
 
     def __unicode__(self):
-        
         return "%s at %s at %s" % (self.bus, self.location, self.time)
-
 
     def distance_along_route(self):
         return distance_along_route(self.location, self.bus.trip.shape)
@@ -189,17 +230,101 @@ class IntersectionObservation(models.Model):
         ordering = ["time"]
 
     def __unicode__(self):
-        
+
         return "%s at %s at %s" % (self.bus, self.location, self.time)
 
     def save(self):
         if not self.distance:
             self.distance = self.distance_along_route()
         super(IntersectionObservation, self).save()
-    
+
     def distance_along_route(self):
         return distance_along_route(self.location, self.bus.trip.shape)
 
     def location_on_route(self):
         return self.location
 
+def apply_observation(lat, lon, time, bus_id, route, intersection=None, request={}):
+    #figure out what trip we are on by assuming it is the trip
+    #starting closest to here and now.
+
+    bus_candidates = (Bus.objects.filter(id=bus_id)[:1])
+
+    location = Point(lon, lat)
+
+    if len(bus_candidates):
+        bus = bus_candidates[0]
+        trip = bus.trip
+        distance = distance_along_route(location, trip.shape)
+        if distance > bus.distance:
+            bus.distance = distance
+    else:
+        location_sql = "SRID=4326;POINT(%s %s)" % (lon, lat)
+
+        day_of_week = ScheduleDay.objects.get(day=time.date()).day_of_week
+        trip = Trip.objects.filter(route=route, day_of_week=day_of_week).extra(
+            tables=['mta_data_shape'],
+            select = SortedDict([
+                    ('start_error', 'abs(extract(epoch from start_time - %s))'),
+                    ('shape_error', 'st_distance(st_startpoint(mta_data_shape.geometry), %s)')
+                    ]),
+            select_params = (time.time(), location_sql)
+            ).order_by('start_error')[0] # fixme (should order by both shape and start error)
+
+        def compute_lateness(time, expected_time):
+
+            start_datetime = datetime(time.year, time.month, time.day,
+                                      expected_time.hour, expected_time.minute, expected_time.second)
+            lateness = (time - start_datetime).seconds
+            if lateness < 12 * 60 * 60:
+                lateness += 12 * 60 * 60
+            return lateness
+        lateness = compute_lateness(time, trip.start_time)
+        distance = distance_along_route(location, trip.shape)
+        bus = Bus(id=bus_id, trip=trip, next_stop=next_stop_by_distance(distance, trip), distance=distance)
+        bus.save()
+
+    if intersection:
+        obs = IntersectionObservation(bus=bus, location=location, time=time, intersection=intersection)
+        obs.save()
+    else:
+        while distance > bus.next_stop.distance:
+            expected_time = trip.start_time + timedelta(0, bus.next_stop.seconds_after_start)
+            lateness = compute_lateness(time, expected_time)
+            PreviousStop(tripstop=bus.next_stop,
+                         arrival_time=time,
+                         lateness=lateness,
+                         bus=bus)
+            bus.next_stop = bus.next_stop.get_next_by_distance(trip=trip)
+
+        if bus.previousstop_set.count() == 0:
+            #check if we have passed the initial stop
+            if distance > 0.01: # a huge hack!
+                arrival_time = time - timedelta(0, 30)
+                seconds_traveled = (arrival_time - trip.start_time).seconds
+                PreviousStop(tripstop=trip.tripstop_set.get(distance=0),
+                             arrival_time=arrival_time,
+                             lateness=seconds_traveled,
+                             bus=bus)
+
+        possible_observations = bus.busobservation_set.order_by('-time')[:2]
+        if (len(possible_observations) == 2 and
+            possible_observations[0].location == location and
+            possible_observations[1].location == location):
+            possible_observations[0].time = time
+        else:
+            extra_field_names = ['speed', 'course', 'horizontal_accuracy', 'vertical_accuracy', 'altitude']
+            extra_fields = {}
+            for x in extra_field_names:
+                value = request.get(x)
+                if not value:
+                    continue
+                try:
+                    value = float(value)
+                    extra_fields[x] = value
+                except ValueError:
+                    continue
+
+            obs = BusObservation(bus=bus, location=location, time=time, **extra_fields)
+
+            obs.save()

@@ -92,56 +92,13 @@ def update(request):
 
     client_time = datetime.strptime(request.REQUEST['date'].strip(), "%Y-%m-%dT%H:%M:%SZ")
 
-    bus_candidates = (Bus.objects.filter(id=bus_id)[:1])
-
-    location = Point(float(request.REQUEST['lng']), float(request.REQUEST['lat']))
-
-    if len(bus_candidates):
-        bus = bus_candidates[0]
-        trip = bus.trip
-    else:
-        location_sql = "SRID=4326;POINT(%s %s)" % (request.REQUEST['lng'], request.REQUEST['lat'])
-
-        day_of_week = ScheduleDay.objects.get(day=client_time.date()).day_of_week
-        trip = Trip.objects.filter(route = route, day_of_week=day_of_week).extra(
-            tables=['mta_data_shape'],
-            select = SortedDict([
-                    ('start_error', 'abs(extract(epoch from start_time - %s))'),
-                    ('shape_error', 'st_distance(st_startpoint(mta_data_shape.geometry), %s)')
-                    ]),  
-            select_params = (client_time.time(), location_sql)
-            ).order_by('start_error')[0]
-    
-        bus = Bus(id=bus_id, trip=trip)
-        bus.save()
-
-
-    if 'intersection' in request.REQUEST:
-        obs = IntersectionObservation(bus=bus, location=location, time=client_time, intersection = request.REQUEST['intersection'])
-        obs.save()
-    else:
-
-        possible_observations = bus.busobservation_set.order_by('-time')[:2]
-        if (len(possible_observations) == 2 and 
-            possible_observations[0].location == location and 
-            possible_observations[1].location == location):
-            possible_observations[0].time = client_time
-        else:
-            extra_field_names = ['speed', 'course', 'horizontal_accuracy', 'vertical_accuracy', 'altitude']
-            extra_fields = {}
-            for x in extra_field_names:
-                value = request.REQUEST.get(x)
-                if not value:
-                    continue
-                try:
-                    value = float(value)
-                    extra_fields[x] = value
-                except ValueError:
-                    continue
-
-            obs = BusObservation(bus=bus, location=location, time=client_time, **extra_fields)
-                                       
-            obs.save()
+    apply_observation(float(request.REQUEST['lat']),
+                      float(request.REQUEST['lng']),
+                      client_time,
+                      bus_id,
+                      route,
+                      request.REQUEST.get('intersection'),
+                      request)
 
     return HttpResponse("ok")
 
@@ -245,7 +202,7 @@ def test_accuracy(request):
             for interval in intervals:
                 estimate_time = observation.time - interval
                 if estimate_time > first_observation_time:
-                    estimated_time = bus.estimated_arrival_time(observation.location, estimate_time)
+                    estimated_time = bus.estimated_arrival_time2(observation.location, estimate_time)
                     if estimated_time:
                         #absolute value of difference; can't use
                         #abs because datetime subtraction is broken.
