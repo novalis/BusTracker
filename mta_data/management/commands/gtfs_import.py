@@ -1,7 +1,7 @@
 from datetime import time, datetime
 from django.contrib.gis.geos import LineString, Point
 from django.core.management.base import BaseCommand
-from django.db import transaction, reset_queries
+from django.db import transaction, reset_queries, connection
 from mta_data.models import *
 from mta_data.utils import st_line_locate_point
 
