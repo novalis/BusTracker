@@ -155,8 +155,6 @@ class BusObservation(models.Model):
 
     class Meta:
         unique_together = ('bus', 'time')
-
-    class Meta:
         ordering = ["time"]
 
     def save(self):
