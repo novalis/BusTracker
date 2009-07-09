@@ -111,7 +111,7 @@ class Command(BaseCommand):
 
             curs = connection.cursor()
             curs.execute ("update mta_data_tripstop set distance = st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id;")
-            curs.commit()
+            transaction.commit()
 
         except Exception, e:
             import traceback
