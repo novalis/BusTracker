@@ -52,6 +52,19 @@ class Trip(models.Model):
     def __unicode__(self):
         return "%s for %s starting at %s" % (unicode(self.route), self.day_of_week, self.start_time)
 
+    def start_datetime_relative_to(self, dt):
+        start_time = self.start_time
+        start_datetime = datetime(dt.year, dt.month, dt.day,
+                                  start_time.hour, start_time.minute, start_time.second)
+
+        difference = (start_datetime - dt).seconds
+        if difference > 12 * 60 * 60:
+            start_datetime -= timedelta(1)
+        elif difference < -12 * 60 * 60:
+            start_datetime += timedelta(1)
+        return start_datetime
+
+
 def distance_along_shape(location, shape):
     from django.db import connection
     cursor = connection.cursor()
@@ -86,6 +99,12 @@ class TripStop(models.Model):
 
     def distance_along_shape(self):
         return distance_along_shape(self.bus_stop.geometry, self.trip.shape)
+
+    def datetime_relative_to(self, dt):
+        start_datetime = self.trip.start_datetime_relative_to(dt)
+        
+        return start_datetime + timedelta(0, self.seconds_after_start)
+        
 
 class ScheduleDay(models.Model):
     day = models.DateField(primary_key=True)

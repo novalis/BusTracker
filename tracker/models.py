@@ -43,7 +43,8 @@ mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
         else:
             now = time
 
-        seconds_traveled = (now - self.trip.start_time).seconds
+        start_datetime = self.trip.start_datetime_relative_to(now)
+        seconds_traveled = (now - start_datetime).seconds
 
         tripstop = self.trip.tripstop_set.get(busstop_id=target_bus_stop.id)
         target_distance = tripstop.distance
@@ -54,7 +55,7 @@ mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
 
         scheduled_time = busstop.seconds_after_start
         delay = bus.previousstop_set.filter(arrival_time__lte=now).order_by('id').lateness
-        return bus.trip.start_time + timedelta(0, scheduled_time + lateness)
+        return start_date_time + timedelta(0, scheduled_time + lateness)
 
     def estimated_arrival_time(self, target_location, time=None):
         """target_location is a Point"""
@@ -271,60 +272,59 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
             select_params = (time.time(), location_sql)
             ).order_by('start_error')[0] # fixme (should order by both shape and start error)
 
-        def compute_lateness(time, expected_time):
+        start_datetime = trip.start_datetime_relative_to(time)
+        lateness = (time - start_datetime).seconds
 
-            start_datetime = datetime(time.year, time.month, time.day,
-                                      expected_time.hour, expected_time.minute, expected_time.second)
-            lateness = (time - start_datetime).seconds
-            if lateness < 12 * 60 * 60:
-                lateness += 12 * 60 * 60
-            return lateness
-        lateness = compute_lateness(time, trip.start_time)
         distance = distance_along_route(location, trip.shape)
-        bus = Bus(id=bus_id, trip=trip, next_stop=next_stop_by_distance(distance, trip), distance=distance)
+        next_stop = trip.tripstop_set.all()[0]
+        bus = Bus(id=bus_id, trip=trip, next_stop=next_stop, distance=distance)
         bus.save()
 
     if intersection:
         obs = IntersectionObservation(bus=bus, location=location, time=time, intersection=intersection)
         obs.save()
     else:
-        while distance > bus.next_stop.distance:
-            expected_time = trip.start_time + timedelta(0, bus.next_stop.seconds_after_start)
-            lateness = compute_lateness(time, expected_time)
+        start_datetime = trip.start_datetime_relative_to(time)
+
+        while distance > bus.next_stop.distance:            
+
+            expected_time = start_datetime + timedelta(0, bus.next_stop.seconds_after_start)
+            lateness = time - expected_time
             PreviousStop(tripstop=bus.next_stop,
                          arrival_time=time,
                          lateness=lateness,
                          bus=bus)
-            bus.next_stop = bus.next_stop.get_next_by_distance(trip=trip)
+
+            next_stop = TripStop.objects.filter(trip=trip, seconds_after_start__gt = bus.next_stop.seconds_after_start)[:1]
+
+            if next_stop:
+                bus.next_stop = next_stop[0]
+            else:
+                import pdb;pdb.set_trace()
+                
 
         if bus.previousstop_set.count() == 0:
             #check if we have passed the initial stop
             if distance > 0.01: # a huge hack!
                 arrival_time = time - timedelta(0, 30)
-                seconds_traveled = (arrival_time - trip.start_time).seconds
+                seconds_traveled = (arrival_time - trip.start_datetime_relative_to(time)).seconds
                 PreviousStop(tripstop=trip.tripstop_set.get(distance=0),
                              arrival_time=arrival_time,
                              lateness=seconds_traveled,
                              bus=bus)
 
-        possible_observations = bus.busobservation_set.order_by('-time')[:2]
-        if (len(possible_observations) == 2 and
-            possible_observations[0].location == location and
-            possible_observations[1].location == location):
-            possible_observations[0].time = time
-        else:
-            extra_field_names = ['speed', 'course', 'horizontal_accuracy', 'vertical_accuracy', 'altitude']
-            extra_fields = {}
-            for x in extra_field_names:
-                value = request.get(x)
-                if not value:
-                    continue
-                try:
-                    value = float(value)
-                    extra_fields[x] = value
-                except ValueError:
-                    continue
+        extra_field_names = ['speed', 'course', 'horizontal_accuracy', 'vertical_accuracy', 'altitude']
+        extra_fields = {}
+        for x in extra_field_names:
+            value = request.get(x)
+            if not value:
+                continue
+            try:
+                value = float(value)
+                extra_fields[x] = value
+            except ValueError:
+                continue
 
-            obs = BusObservation(bus=bus, location=location, time=time, **extra_fields)
+        obs = BusObservation(bus=bus, location=location, time=time, **extra_fields)
 
-            obs.save()
+        obs.save()

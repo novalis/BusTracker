@@ -70,6 +70,8 @@ def process_route(feed, gtfs_route):
             trip.save(force_insert=True)
         start = start
 
+        last = stop_times[-1]
+        first = True
         for stop_time in stop_times:
             stop = stop_time.stop
             bus_stop = stop_cache[stop_time.stop_id]
@@ -77,10 +79,20 @@ def process_route(feed, gtfs_route):
             arrival_secs = stop_time.arrival_secs
             if day_later:
                 arrival_secs -= 86400
+            type = 'T'
+            distance = -1
+            if first:
+                type = 'D'
+                distance = 0
+                first = False
+            elif stop_time == last:
+                type = 'A'
+                distance = 1
             ts = TripStop(trip = trip, 
                           seconds_after_start = arrival_secs - start,
-                          bus_stop = bus_stop, distance = -1)
-            ts.save()
+                          bus_stop = bus_stop, distance = distance,
+                          type=type)
+            ts.save(force_insert=True)
 
 class Command(BaseCommand):
     """Import mta schedule and route data from GTFS into DB."""
@@ -109,9 +121,10 @@ class Command(BaseCommand):
 
             transaction.commit()                
 
+            #FIXME: this does not actually work -- it only runs on about 1/3 of rows for some reason
             curs = connection.cursor()
-            curs.execute ("update mta_data_tripstop set distance = st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id;")
-            curs.commit()
+            curs.execute ("update mta_data_tripstop set distance = st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id and mta_data_tripstop.distance = -1;")
+            transaction.commit()
 
         except Exception, e:
             import traceback
