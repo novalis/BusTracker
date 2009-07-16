@@ -106,7 +106,7 @@ class UpdateTestCase(TestCase):
 
         intervals =[timedelta(0, x) for x in (60, 120, 600, 1200)]
 
-        route = Route.objects.get(name="M6", direction="S")
+        route = Route.objects.get(name="M06", direction="S")
 
         total_diff = 0
         n_samples = 0
@@ -140,28 +140,6 @@ class UpdateTestCase(TestCase):
         print "Divergence for this data set: %s" % sqrt(total_diff / n_samples)
         print "Worst error: %s, at %s, %s" % (max_diff, worst_spot.x, worst_spot.y)
 
-    def test_observation_smashing(self):
-        
-        response = self.client.post('/tracker/update', {'bus_id' : '8',
-                                              'route': 'M20 N', 
-                                              'lat': '40.0', 
-                                              'lng' : '-74.0',
-                                              'date' : '2009-04-24T00:00:00Z'})
-        response = self.client.post('/tracker/update', {'bus_id' : '8',
-                                              'route': 'M20 N', 
-                                              'lat': '40.0', 
-                                              'lng' : '-74.0',
-                                              'date' : '2009-04-24T00:00:01Z'})
-        response = self.client.post('/tracker/update', {'bus_id' : '8',
-                                              'route': 'M20 N', 
-                                              'lat': '40.0', 
-                                              'lng' : '-74.0',
-                                              'date' : '2009-04-24T00:00:02Z'})
-
-        response = self.client.get('/tracker/kml', 
-                         { 'bus_id' : '8' })
-
-        self.assertContains(response, '-74.0', count=2)
 
     def test_intersection_observation(self):
                 
