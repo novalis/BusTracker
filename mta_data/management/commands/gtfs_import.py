@@ -128,11 +128,21 @@ class Command(BaseCommand):
             
             curs.execute ("insert into distances select mta_data_tripstop.id, st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_tripstop, mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id and mta_data_tripstop.distance = -1;")
 
-            #this relies on a postgresql extension because the obvious
-            #curs.execute("update mta_data_tripstop set distance=(select distance from distances where tripstop_id=mta_data_tripstop.id) where distance = -1;")
-            #results (at least for me) in an index scan instead of a hash join
+            #drop all constraints to make the update complete in a reasonable time
+            curs.execute("drop index mta_data_tripstop_bus_stop_id;")
+            curs.execute("drop index mta_data_tripstop_trip_id;")
+            curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_pkey;")
+            curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_trip_id_fk;")
+            curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_bus_stop_id_fk;")
 
-            curs.execute("update mta_data_tripstop set distance=distances.distance from distances where tripstop_id=mta_data_tripstop.id;")
+            curs.execute("update mta_data_tripstop set distance=(select distance from distances where tripstop_id=mta_data_tripstop.id) where distance = -1;")
+
+            #and recreate the constraints
+            curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_pkey PRIMARY KEy(id);")
+            curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_bus_stop_id_fk FOREIGN KEY (bus_stop_id) REFERENCES mta_data_busstop (box_no) MATCH FULL;")
+            curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_trip_id_fk FOREIGN KEY (trip_id) REFERENCES mta_data_trip (id) MATCH FULL;")
+            curs.execute("CREATE INDEX mta_data_tripstop_bus_stop_id on mta_data_tripstop(bus_stop_id);")
+            curs.execute("CREATE INDEX mta_data_tripstop_trip_id on mta_data_tripstop(trip_id);")
 
             curs.execute("drop table distances;")
 
