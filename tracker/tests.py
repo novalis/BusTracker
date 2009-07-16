@@ -117,12 +117,23 @@ class UpdateTestCase(TestCase):
         for bus in Bus.objects.filter(trip__route = route):
             observations = list(bus.busobservation_set.all())
             first_observation_time = observations[0].time
+            tripstops = list(bus.trip.tripstop_set.all())
 
-            for observation in observations:
+            nearest_observation_by_stop = {}
+            i = 0
+
+            for stop in tripstops:
+                #find nearest following observation
+                while i < len(observations) - 1 and observations[i].distance <= stop.distance:
+                    i += 1
+                nearest_observation_by_stop[stop] = observations[i]
+
+            for stop in tripstops:
+                observation = nearest_observation_by_stop[stop]
                 for interval in intervals:
                     estimate_time = observation.time - interval
                     if estimate_time > first_observation_time:
-                        estimated_time = bus.estimated_arrival_time(observation.location, estimate_time)
+                        estimated_time = bus.estimated_arrival_time2(stop.bus_stop, estimate_time)
                         if estimated_time:
                             #absolute value of difference; can't use
                             #abs because datetime subtraction is broken.

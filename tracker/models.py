@@ -46,7 +46,7 @@ mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
         start_datetime = self.trip.start_datetime_relative_to(now)
         seconds_traveled = (now - start_datetime).seconds
 
-        tripstop = self.trip.tripstop_set.get(busstop_id=target_bus_stop.id)
+        tripstop = self.trip.tripstop_set.get(bus_stop=target_bus_stop.pk)
         target_distance = tripstop.distance
 
         for busstop in self.trip.tripstop_set.order_by('-distance'):
@@ -54,8 +54,12 @@ mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
                 break # last stop we passed
 
         scheduled_time = busstop.seconds_after_start
-        delay = bus.previousstop_set.filter(arrival_time__lte=now).order_by('id').lateness
-        return start_date_time + timedelta(0, scheduled_time + lateness)
+
+        prev = self.previousstop_set.filter(arrival_time__lte=now).order_by('-id')
+        if not prev:
+            return start_datetime + timedelta(0, scheduled_time) 
+        delay = prev[0].lateness
+        return start_datetime + timedelta(0, scheduled_time + lateness)
 
     def estimated_arrival_time(self, target_location, time=None):
         """target_location is a Point"""
