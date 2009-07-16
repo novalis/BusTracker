@@ -122,9 +122,20 @@ class Command(BaseCommand):
 
             transaction.commit()                
 
-            #FIXME: this does not actually work -- it only runs on about 1/3 of rows for some reason
             curs = connection.cursor()
-            curs.execute ("update mta_data_tripstop set distance = st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id and mta_data_tripstop.distance = -1;")
+
+            curs.execute("create temporary table distances(tripstop_id integer primary key, distance float);")
+            
+            curs.execute ("insert into distances select mta_data_tripstop.id, st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_tripstop, mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id and mta_data_tripstop.distance = -1;")
+
+            #this relies on a postgresql extension because the obvious
+            #curs.execute("update mta_data_tripstop set distance=(select distance from distances where tripstop_id=mta_data_tripstop.id) where distance = -1;")
+            #results (at least for me) in an index scan instead of a hash join
+
+            curs.execute("update mta_data_tripstop set distance=distances.distance from distances where tripstop_id=mta_data_tripstop.id;")
+
+            curs.execute("drop table distances;")
+
             transaction.commit()
 
         except Exception, e:
