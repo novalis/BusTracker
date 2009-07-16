@@ -20,31 +20,22 @@
     "model": "mta_data.trip", 
     "fields": {
       "shape": 949, 
+      "start_time": "8:00:00", 
       "route": 949, 
-      "day_of_week" : "WKO",
-      "start_time": "8:00:00"
+      "day_of_week": "WKO"
     }
   }, 
   {
     "pk": 7, 
     "model": "tracker.bus", 
     "fields": {
+      "distance": 1, 
       "trip": 1, 
-      "n_dwells": 0, 
-      "total_dwell_time": 0
+      "next_stop": 0
     }
   }, 
   {
     "pk": 418, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9771039999999971 40.7655529999999970)", 
-      "time": "2009-04-29 14:56:55"
-    }
-  }, 
-  {
-    "pk": 419, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -80,24 +71,6 @@
     }
   }, 
   {
-    "pk": 450, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769969999999972 40.7658770000000032)", 
-      "time": "2009-04-29 14:57:32"
-    }
-  }, 
-  {
-    "pk": 452, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769969999999972 40.7658770000000032)", 
-      "time": "2009-04-29 14:57:32"
-    }
-  }, 
-  {
     "pk": 457, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -107,29 +80,11 @@
     }
   }, 
   {
-    "pk": 458, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769739999999985 40.7659609999999972)", 
-      "time": "2009-04-29 14:57:36"
-    }
-  }, 
-  {
     "pk": 459, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9769739999999985 40.7659609999999972)", 
-      "time": "2009-04-29 14:57:38"
-    }
-  }, 
-  {
-    "pk": 461, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769739999999985 40.7659719999999979)", 
       "time": "2009-04-29 14:57:38"
     }
   }, 
@@ -197,29 +152,11 @@
     }
   }, 
   {
-    "pk": 489, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9770199999999960 40.7660139999999984)", 
-      "time": "2009-04-29 14:57:59"
-    }
-  }, 
-  {
     "pk": 494, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9769739999999985 40.7660369999999972)", 
-      "time": "2009-04-29 14:58:04"
-    }
-  }, 
-  {
-    "pk": 497, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9770199999999960 40.7660139999999984)", 
       "time": "2009-04-29 14:58:04"
     }
   }, 
@@ -242,15 +179,6 @@
     }
   }, 
   {
-    "pk": 500, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769519999999972 40.7660369999999972)", 
-      "time": "2009-04-29 14:58:09"
-    }
-  }, 
-  {
     "pk": 510, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -269,25 +197,7 @@
     }
   }, 
   {
-    "pk": 512, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769359999999949 40.7660559999999990)", 
-      "time": "2009-04-29 14:58:18"
-    }
-  }, 
-  {
     "pk": 517, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769359999999949 40.7660559999999990)", 
-      "time": "2009-04-29 14:58:23"
-    }
-  }, 
-  {
-    "pk": 518, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -332,15 +242,6 @@
     }
   }, 
   {
-    "pk": 529, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769739999999985 40.7660479999999978)", 
-      "time": "2009-04-29 14:58:31"
-    }
-  }, 
-  {
     "pk": 578, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -355,15 +256,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9769739999999985 40.7659489999999991)", 
-      "time": "2009-04-29 14:59:16"
-    }
-  }, 
-  {
-    "pk": 580, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769739999999985 40.7659420000000026)", 
       "time": "2009-04-29 14:59:16"
     }
   }, 
@@ -395,15 +287,6 @@
     }
   }, 
   {
-    "pk": 612, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769739999999985 40.7659189999999967)", 
-      "time": "2009-04-29 14:59:44"
-    }
-  }, 
-  {
     "pk": 613, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -414,15 +297,6 @@
   }, 
   {
     "pk": 632, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9769359999999949 40.7658229999999975)", 
-      "time": "2009-04-29 15:00:00"
-    }
-  }, 
-  {
-    "pk": 633, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -445,15 +319,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9770429999999948 40.7657779999999974)", 
-      "time": "2009-04-29 15:00:02"
-    }
-  }, 
-  {
-    "pk": 636, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9770429999999948 40.7657889999999981)", 
       "time": "2009-04-29 15:00:02"
     }
   }, 
@@ -638,25 +503,7 @@
     }
   }, 
   {
-    "pk": 678, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9776229999999941 40.7661129999999972)", 
-      "time": "2009-04-29 15:01:13"
-    }
-  }, 
-  {
     "pk": 679, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9777299999999940 40.7661969999999982)", 
-      "time": "2009-04-29 15:01:15"
-    }
-  }, 
-  {
-    "pk": 680, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -1093,15 +940,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9865879999999976 40.7622720000000029)", 
-      "time": "2009-04-29 15:06:16"
-    }
-  }, 
-  {
-    "pk": 763, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9867629999999963 40.7620009999999979)", 
       "time": "2009-04-29 15:06:16"
     }
   }, 
@@ -1979,24 +1817,6 @@
     }
   }, 
   {
-    "pk": 910, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9871289999999959 40.7530209999999968)", 
-      "time": "2009-04-29 15:18:15"
-    }
-  }, 
-  {
-    "pk": 911, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9871289999999959 40.7530209999999968)", 
-      "time": "2009-04-29 15:18:15"
-    }
-  }, 
-  {
     "pk": 914, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -2079,15 +1899,6 @@
   }, 
   {
     "pk": 941, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9879839999999973 40.7506940000000029)", 
-      "time": "2009-04-29 15:19:35"
-    }
-  }, 
-  {
-    "pk": 942, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -2375,15 +2186,6 @@
     }
   }, 
   {
-    "pk": 1123, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9890819999999962 40.7429050000000004)", 
-      "time": "2009-04-29 15:29:12"
-    }
-  }, 
-  {
     "pk": 1131, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -2394,15 +2196,6 @@
   }, 
   {
     "pk": 1133, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9894259999999946 40.7428090000000012)", 
-      "time": "2009-04-29 15:29:26"
-    }
-  }, 
-  {
-    "pk": 1134, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -2474,25 +2267,7 @@
     }
   }, 
   {
-    "pk": 1151, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9891199999999998 40.7422710000000023)", 
-      "time": "2009-04-29 15:29:52"
-    }
-  }, 
-  {
     "pk": 1152, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9890979999999985 40.7420040000000014)", 
-      "time": "2009-04-29 15:29:53"
-    }
-  }, 
-  {
-    "pk": 1153, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -2511,15 +2286,6 @@
   }, 
   {
     "pk": 1173, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9890819999999962 40.7417140000000018)", 
-      "time": "2009-04-29 15:30:07"
-    }
-  }, 
-  {
-    "pk": 1174, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -2592,15 +2358,6 @@
   }, 
   {
     "pk": 1223, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9893110000000007 40.7405550000000005)", 
-      "time": "2009-04-29 15:31:12"
-    }
-  }, 
-  {
-    "pk": 1224, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -2690,15 +2447,6 @@
     }
   }, 
   {
-    "pk": 1291, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9894409999999993 40.7390979999999985)", 
-      "time": "2009-04-29 15:33:57"
-    }
-  }, 
-  {
     "pk": 1292, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -2780,15 +2528,6 @@
     }
   }, 
   {
-    "pk": 1302, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9899369999999976 40.7370680000000007)", 
-      "time": "2009-04-29 15:34:21"
-    }
-  }, 
-  {
     "pk": 1305, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -2803,15 +2542,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9897840000000002 40.7369610000000009)", 
-      "time": "2009-04-29 15:34:23"
-    }
-  }, 
-  {
-    "pk": 1308, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9897229999999979 40.7369309999999984)", 
       "time": "2009-04-29 15:34:23"
     }
   }, 
@@ -2843,15 +2573,6 @@
     }
   }, 
   {
-    "pk": 1312, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9895939999999968 40.7368740000000003)", 
-      "time": "2009-04-29 15:34:26"
-    }
-  }, 
-  {
     "pk": 1311, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -2879,29 +2600,11 @@
     }
   }, 
   {
-    "pk": 1344, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9894869999999969 40.7368129999999979)", 
-      "time": "2009-04-29 15:34:57"
-    }
-  }, 
-  {
     "pk": 1346, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9894259999999946 40.7367780000000010)", 
-      "time": "2009-04-29 15:35:00"
-    }
-  }, 
-  {
-    "pk": 1399, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9894869999999969 40.7368129999999979)", 
       "time": "2009-04-29 15:35:00"
     }
   }, 
@@ -2924,15 +2627,6 @@
     }
   }, 
   {
-    "pk": 1369, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9893110000000007 40.7367249999999999)", 
-      "time": "2009-04-29 15:35:02"
-    }
-  }, 
-  {
     "pk": 1355, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -2951,15 +2645,6 @@
     }
   }, 
   {
-    "pk": 1417, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9891889999999961 40.7366600000000005)", 
-      "time": "2009-04-29 15:35:05"
-    }
-  }, 
-  {
     "pk": 1368, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -2974,15 +2659,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9891199999999998 40.7366290000000006)", 
-      "time": "2009-04-29 15:35:07"
-    }
-  }, 
-  {
-    "pk": 1349, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9890979999999985 40.7366069999999993)", 
       "time": "2009-04-29 15:35:07"
     }
   }, 
@@ -3077,25 +2753,7 @@
     }
   }, 
   {
-    "pk": 1421, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9890819999999962 40.7365879999999976)", 
-      "time": "2009-04-29 15:36:06"
-    }
-  }, 
-  {
     "pk": 1423, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9894259999999946 40.7363929999999996)", 
-      "time": "2009-04-29 15:36:08"
-    }
-  }, 
-  {
-    "pk": 1385, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -3122,38 +2780,11 @@
     }
   }, 
   {
-    "pk": 1389, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9895479999999992 40.7362520000000004)", 
-      "time": "2009-04-29 15:36:11"
-    }
-  }, 
-  {
-    "pk": 1391, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9907529999999980 40.7347949999999983)", 
-      "time": "2009-04-29 15:36:11"
-    }
-  }, 
-  {
     "pk": 1392, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9909899999999965 40.7346530000000016)", 
-      "time": "2009-04-29 15:36:13"
-    }
-  }, 
-  {
-    "pk": 1428, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9896389999999968 40.7360499999999988)", 
       "time": "2009-04-29 15:36:13"
     }
   }, 
@@ -3167,15 +2798,6 @@
     }
   }, 
   {
-    "pk": 1397, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9909899999999965 40.7345279999999974)", 
-      "time": "2009-04-29 15:36:15"
-    }
-  }, 
-  {
     "pk": 1357, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -3185,38 +2807,11 @@
     }
   }, 
   {
-    "pk": 1377, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9909899999999965 40.7343979999999988)", 
-      "time": "2009-04-29 15:36:17"
-    }
-  }, 
-  {
-    "pk": 1383, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9898069999999990 40.7357179999999985)", 
-      "time": "2009-04-29 15:36:17"
-    }
-  }, 
-  {
     "pk": 1410, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9898759999999953 40.7355879999999999)", 
-      "time": "2009-04-29 15:36:19"
-    }
-  }, 
-  {
-    "pk": 1427, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9910129999999953 40.7343559999999982)", 
       "time": "2009-04-29 15:36:19"
     }
   }, 
@@ -3410,15 +3005,6 @@
     }
   }, 
   {
-    "pk": 1488, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9914859999999948 40.7326929999999976)", 
-      "time": "2009-04-29 15:40:06"
-    }
-  }, 
-  {
     "pk": 1489, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -3563,15 +3149,6 @@
     }
   }, 
   {
-    "pk": 1548, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9939499999999981 40.7291829999999990)", 
-      "time": "2009-04-29 15:43:20"
-    }
-  }, 
-  {
     "pk": 1550, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -3644,15 +3221,6 @@
     }
   }, 
   {
-    "pk": 1572, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9955369999999988 40.7276499999999970)", 
-      "time": "2009-04-29 15:44:54"
-    }
-  }, 
-  {
     "pk": 1578, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -3676,15 +3244,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-73.9969099999999997 40.7258799999999965)", 
-      "time": "2009-04-29 15:46:03"
-    }
-  }, 
-  {
-    "pk": 1596, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-73.9967419999999976 40.7254300000000029)", 
       "time": "2009-04-29 15:46:03"
     }
   }, 
@@ -3959,24 +3518,6 @@
     }
   }, 
   {
-    "pk": 1687, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0005189999999970 40.7213709999999978)", 
-      "time": "2009-04-29 15:49:41"
-    }
-  }, 
-  {
-    "pk": 1688, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0005189999999970 40.7213709999999978)", 
-      "time": "2009-04-29 15:49:41"
-    }
-  }, 
-  {
     "pk": 1689, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -4184,15 +3725,6 @@
     }
   }, 
   {
-    "pk": 1729, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0018230000000017 40.7196119999999979)", 
-      "time": "2009-04-29 15:51:09"
-    }
-  }, 
-  {
     "pk": 1732, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -4338,15 +3870,6 @@
   }, 
   {
     "pk": 1763, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0034789999999987 40.7178540000000027)", 
-      "time": "2009-04-29 15:52:21"
-    }
-  }, 
-  {
-    "pk": 1764, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -4517,15 +4040,6 @@
     }
   }, 
   {
-    "pk": 1835, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0060730000000007 40.7143250000000023)", 
-      "time": "2009-04-29 15:55:30"
-    }
-  }, 
-  {
     "pk": 1837, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -4536,15 +4050,6 @@
   }, 
   {
     "pk": 1838, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0063549999999992 40.7141299999999973)", 
-      "time": "2009-04-29 15:55:34"
-    }
-  }, 
-  {
-    "pk": 1839, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
@@ -4652,29 +4157,11 @@
     }
   }, 
   {
-    "pk": 1851, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0074230000000028 40.7127339999999975)", 
-      "time": "2009-04-29 15:55:53"
-    }
-  }, 
-  {
     "pk": 1852, 
     "model": "tracker.busobservation", 
     "fields": {
       "bus": 7, 
       "location": "POINT (-74.0074690000000004 40.7126919999999970)", 
-      "time": "2009-04-29 15:55:54"
-    }
-  }, 
-  {
-    "pk": 1853, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0075530000000015 40.7126689999999982)", 
       "time": "2009-04-29 15:55:54"
     }
   }, 
@@ -4747,15 +4234,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-74.0072100000000006 40.7128409999999974)", 
-      "time": "2009-04-29 15:56:21"
-    }
-  }, 
-  {
-    "pk": 1874, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0075989999999990 40.7128220000000027)", 
       "time": "2009-04-29 15:56:21"
     }
   }, 
@@ -4877,15 +4355,6 @@
     }
   }, 
   {
-    "pk": 1906, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0082400000000007 40.7110399999999970)", 
-      "time": "2009-04-29 15:57:40"
-    }
-  }, 
-  {
     "pk": 1916, 
     "model": "tracker.busobservation", 
     "fields": {
@@ -4945,15 +4414,6 @@
     "fields": {
       "bus": 7, 
       "location": "POINT (-74.0088650000000001 40.7104190000000017)", 
-      "time": "2009-04-29 15:58:50"
-    }
-  }, 
-  {
-    "pk": 1941, 
-    "model": "tracker.busobservation", 
-    "fields": {
-      "bus": 7, 
-      "location": "POINT (-74.0118559999999945 40.7079769999999996)", 
       "time": "2009-04-29 15:58:50"
     }
   }, 
