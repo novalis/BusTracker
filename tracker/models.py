@@ -284,6 +284,10 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
         obs = IntersectionObservation(bus=bus, location=location, time=time, intersection=intersection)
         obs.save()
     else:
+        if BusObservation.objects.filter(bus=bus,time=time).count():
+            #time is unique -- more than one observation per second is no good.
+            return
+
         start_datetime = trip.start_datetime_relative_to(time)
 
         while distance > bus.next_stop.distance:            
