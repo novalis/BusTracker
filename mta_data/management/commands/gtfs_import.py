@@ -92,7 +92,7 @@ def process_route(feed, gtfs_route):
                           seconds_after_start = arrival_secs - start,
                           bus_stop = bus_stop, distance = distance,
                           type=type)
-            ts.save(force_insert=True)
+            ts.save()
 
 class Command(BaseCommand):
     """Import mta schedule and route data from GTFS into DB."""
