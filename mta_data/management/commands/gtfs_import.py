@@ -104,10 +104,11 @@ class Command(BaseCommand):
 
             for stop_id, stop in feed.stops.items():
                 bus_stop = BusStop(box_no=stop_id, location=stop.stop_name,
-                                   geometry=Point(stop.stop_lat, stop.stop_lon))
+                                   geometry=Point(stop.stop_lon, stop.stop_lat))
                 bus_stop.save()
                 stop_cache[stop_id] = bus_stop
             transaction.commit()
+
             for route_id, route in sorted(feed.routes.items()):
                 process_route(feed, route)
                 transaction.commit()
