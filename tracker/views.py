@@ -98,7 +98,7 @@ def update(request):
                       bus_id,
                       route,
                       request.REQUEST.get('intersection'),
-                      request)
+                      request.REQUEST)
 
     return HttpResponse("ok")
 
