@@ -57,11 +57,15 @@ class Trip(models.Model):
         start_datetime = datetime(dt.year, dt.month, dt.day,
                                   start_time.hour, start_time.minute, start_time.second)
 
-        difference = (start_datetime - dt).seconds
-        if difference > 12 * 60 * 60:
-            start_datetime -= timedelta(1)
-        elif difference < -12 * 60 * 60:
-            start_datetime += timedelta(1)
+
+        if start_datetime > dt:
+            difference = (start_datetime - dt).seconds
+            if difference > 12 * 60 * 60:
+                start_datetime -= timedelta(1)
+        else:
+            difference = (dt - start_datetime).seconds
+            if difference < -12 * 60 * 60:
+                start_datetime += timedelta(1)
         return start_datetime
 
 
