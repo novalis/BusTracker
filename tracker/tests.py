@@ -5,6 +5,7 @@ from math import sqrt
 from tracker.views import update
 from tracker.models import *
 
+import time
 
 class UpdateTestCase(TestCase):
     fixtures = ['location.json', 'bus_66.json', 'schedule.json']
@@ -162,3 +163,41 @@ class UpdateTestCase(TestCase):
 
         for io in IntersectionObservation.objects.all():
             self.assertTrue(0 < io.distance < 1)
+
+    def test_benchmark_acquisition(self):
+        #I need to figure out how to get a good fake run of the bus.
+        #perhaps I will just generate distances in advance.
+
+        #generate points
+
+        trip = Trip.objects.all()[0]
+
+        line = trip.shape.geometry
+
+        start = line.coords[0]
+        end = line.coords[-1]
+
+        #pregenerate these
+        points = []
+        N = 1000
+        for i in range(N):
+            distance = i / float(N)
+            coords = (start[0] * distance + end[0] * (1 - distance),
+                      start[1] * distance + end[1] * (1 - distance))
+            points.append(coords)
+
+
+        start_test_time = time.time()
+        start_date = datetime(2009,4,24,05,06,07)
+        route_name = trip.route.route_name()
+        for i, point in enumerate(points):
+            date = (start_date + timedelta(0, i)).strftime("%Y-%m-%dT%H:%M:%SZ")
+            
+            response = self.client.post('/tracker/update', {'bus_id' : '100',
+                                                            'route': route_name, 
+                                                            'lat': point[1], 
+                                                            'lng' : point[0],
+                                                            'date' : date})
+        
+
+        print "Observations per second: %s" % (N / (time.time() - start_test_time))
