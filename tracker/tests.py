@@ -165,11 +165,6 @@ class UpdateTestCase(TestCase):
             self.assertTrue(0 < io.distance < 1)
 
     def test_benchmark_acquisition(self):
-        #I need to figure out how to get a good fake run of the bus.
-        #perhaps I will just generate distances in advance.
-
-        #generate points
-
         trip = Trip.objects.all()[0]
 
         line = trip.shape.geometry
@@ -177,7 +172,7 @@ class UpdateTestCase(TestCase):
         start = line.coords[0]
         end = line.coords[-1]
 
-        #pregenerate these
+        #pregenerate these fake points
         points = []
         N = 1000
         for i in range(N):
