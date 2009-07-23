@@ -7,7 +7,7 @@ from tracker.models import *
 
 
 class UpdateTestCase(TestCase):
-    fixtures = ['location.json', 'm6.json', 'schedule.json']
+    fixtures = ['location.json', 'bus_66.json', 'schedule.json']
 
     def test_update_location(self):
         response = self.client.post('/tracker/update', {'bus_id' : '5',
@@ -90,11 +90,10 @@ class UpdateTestCase(TestCase):
     def test_kml(self):
         
         response = self.client.get('/tracker/kml', 
-                         { 'bus_id' : 7 })
-
+                         { 'bus_id' : 66 })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('-74.01255, 40.702404' in response.content)
+        self.assertTrue('-74.01181, 40.702713' in response.content)
 
     def test_estimate_accuracy(self):
         """Test the accuracy of the estimation algorithm.  It uses
