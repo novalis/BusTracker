@@ -84,11 +84,7 @@ def update(request):
         return HttpResponse("Bad method", status=405)
 
     bus_id = request.REQUEST['bus_id']    
-    
     route = _route_by_name(request.REQUEST['route'])
-
-    #figure out what trip we are on by assuming it is the trip
-    #starting closest to here and now.
 
     client_time = datetime.strptime(request.REQUEST['date'].strip(), "%Y-%m-%dT%H:%M:%SZ")
 
