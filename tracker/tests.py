@@ -177,8 +177,8 @@ class UpdateTestCase(TestCase):
         N = 1000
         for i in range(N):
             distance = i / float(N)
-            coords = (start[0] * distance + end[0] * (1 - distance),
-                      start[1] * distance + end[1] * (1 - distance))
+            coords = (end[0] * distance + start[0] * (1 - distance),
+                      end[1] * distance + start[1] * (1 - distance))
             points.append(coords)
 
 
