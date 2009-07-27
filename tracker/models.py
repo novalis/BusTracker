@@ -253,11 +253,12 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
     #figure out what trip we are on by assuming it is the trip
     #starting closest to here and now.
 
-    bus_candidates = (Bus.objects.filter(id=bus_id)[:1])
+    bus_candidates = list(Bus.objects.filter(id=bus_id)[:1])
 
     location = Point(lon, lat)
 
     if len(bus_candidates):
+
         bus = bus_candidates[0]
         trip = bus.trip
         distance = distance_along_route(location, trip.shape)
