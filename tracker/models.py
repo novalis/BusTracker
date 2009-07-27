@@ -304,7 +304,7 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
                          lateness=lateness,
                          bus=bus).save()
 
-            next_stop = TripStop.objects.filter(trip=trip, seconds_after_start__gt = bus.next_stop.seconds_after_start)[:1]
+            next_stop = list(TripStop.objects.filter(trip=trip, seconds_after_start__gt = bus.next_stop.seconds_after_start)[:1])
 
             if next_stop:
                 bus.next_stop = next_stop[0]
