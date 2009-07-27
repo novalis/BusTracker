@@ -298,11 +298,11 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
         while distance > bus.next_stop.distance:            
 
             expected_time = start_datetime + timedelta(0, bus.next_stop.seconds_after_start)
-            lateness = time - expected_time
+            lateness = (time - expected_time).seconds
             PreviousStop(tripstop=bus.next_stop,
                          arrival_time=time,
                          lateness=lateness,
-                         bus=bus)
+                         bus=bus).save()
 
             next_stop = TripStop.objects.filter(trip=trip, seconds_after_start__gt = bus.next_stop.seconds_after_start)[:1]
 
@@ -320,7 +320,7 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
                 PreviousStop(tripstop=trip.tripstop_set.get(distance=0),
                              arrival_time=arrival_time,
                              lateness=seconds_traveled,
-                             bus=bus)
+                             bus=bus).save()
 
         extra_field_names = ['speed', 'course', 'horizontal_accuracy', 'vertical_accuracy', 'altitude']
         extra_fields = {}
