@@ -116,7 +116,7 @@ class PreviousStop(models.Model):
     lateness = models.IntegerField() # seconds after scheduled arrival time
     bus = models.ForeignKey(Bus)
 
-def distance_along_route(location, shape):
+def distance_along_route(location, shape_id):
     from django.db import connection
     cursor = connection.cursor()
     location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
@@ -125,7 +125,7 @@ def distance_along_route(location, shape):
 FROM 
 mta_data_shape
 WHERE 
-mta_data_shape.gid = %s""", (location, shape.gid))
+mta_data_shape.gid = %s""", (location, shape_id))
     row = cursor.fetchone()
     return row[0]
 
@@ -215,7 +215,7 @@ class BusObservation(models.Model):
         return "%s at %s at %s" % (self.bus, self.location, self.time)
 
     def distance_along_route(self):
-        return distance_along_route(self.location, self.bus.trip.shape)
+        return distance_along_route(self.location, self.bus.trip.shape_id)
 
     def location_on_route(self):
         return location_on_route(self.location, self.bus.trip.shape)
@@ -244,7 +244,7 @@ class IntersectionObservation(models.Model):
         super(IntersectionObservation, self).save()
 
     def distance_along_route(self):
-        return distance_along_route(self.location, self.bus.trip.shape)
+        return distance_along_route(self.location, self.bus.trip.shape_id)
 
     def location_on_route(self):
         return self.location
@@ -261,7 +261,7 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
 
         bus = bus_candidates[0]
         trip = bus.trip
-        distance = distance_along_route(location, trip.shape)
+        distance = distance_along_route(location, trip.shape_id)
         if distance > bus.distance:
             bus.distance = distance
     else:
@@ -280,7 +280,7 @@ def apply_observation(lat, lon, time, bus_id, route, intersection=None, request=
         start_datetime = trip.start_datetime_relative_to(time)
         lateness = (time - start_datetime).seconds
 
-        distance = distance_along_route(location, trip.shape)
+        distance = distance_along_route(location, trip.shape_id)
         next_stop = trip.tripstop_set.all()[0]
         bus = Bus(id=bus_id, trip=trip, next_stop=next_stop, distance=distance)
         bus.save()
