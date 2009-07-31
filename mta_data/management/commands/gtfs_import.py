@@ -68,7 +68,6 @@ def process_route(feed, gtfs_route):
         else:
             trip = Trip(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time)
             trip.save(force_insert=True)
-        start = start
 
         last = stop_times[-1]
         first = True
@@ -126,7 +125,7 @@ class Command(BaseCommand):
 
             curs.execute("create temporary table distances(tripstop_id integer primary key, distance float);")
             
-            curs.execute ("insert into distances select mta_data_tripstop.id, st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_tripstop, mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id and mta_data_tripstop.distance = -1;")
+            curs.execute ("insert into distances select mta_data_tripstop.id, st_line_locate_point(mta_data_shape.geometry, mta_data_busstop.geometry) from mta_data_tripstop, mta_data_trip, mta_data_shape, mta_data_busstop where bus_stop_id=mta_data_busstop.box_no and mta_data_trip.id = trip_id and mta_data_shape.gid = mta_data_trip.shape_id and mta_data_tripstop.type = 'T';")
 
             #drop all constraints to make the update complete in a reasonable time
             curs.execute("drop index mta_data_tripstop_bus_stop_id;")
@@ -135,7 +134,7 @@ class Command(BaseCommand):
             curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_trip_id_fkey;")
             curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_bus_stop_id_fkey;")
 
-            curs.execute("update mta_data_tripstop set distance=(select distance from distances where tripstop_id=mta_data_tripstop.id) where distance = -1;")
+            curs.execute("update mta_data_tripstop set distance=(select distance from distances where tripstop_id=mta_data_tripstop.id) where type = 'T';")
 
             #and recreate the constraints
             curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_pkey PRIMARY KEy(id);")
