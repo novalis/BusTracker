@@ -132,15 +132,15 @@ class Command(BaseCommand):
             curs.execute("drop index mta_data_tripstop_bus_stop_id;")
             curs.execute("drop index mta_data_tripstop_trip_id;")
             curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_pkey;")
-            curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_trip_id;")
-            curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_bus_stop_id;")
+            curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_trip_id_fkey;")
+            curs.execute("alter table mta_data_tripstop drop constraint mta_data_tripstop_bus_stop_id_fkey;")
 
             curs.execute("update mta_data_tripstop set distance=(select distance from distances where tripstop_id=mta_data_tripstop.id) where distance = -1;")
 
             #and recreate the constraints
             curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_pkey PRIMARY KEy(id);")
-            curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_bus_stop_id FOREIGN KEY (bus_stop_id) REFERENCES mta_data_busstop (box_no) MATCH FULL;")
-            curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_trip_id FOREIGN KEY (trip_id) REFERENCES mta_data_trip (id) MATCH FULL;")
+            curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_bus_stop_id_fkey FOREIGN KEY (bus_stop_id) REFERENCES mta_data_busstop (box_no) MATCH FULL;")
+            curs.execute("ALTER TABLE mta_data_tripstop ADD CONSTRAINT mta_data_tripstop_trip_id_fkey FOREIGN KEY (trip_id) REFERENCES mta_data_trip (id) MATCH FULL;")
             curs.execute("CREATE INDEX mta_data_tripstop_bus_stop_id on mta_data_tripstop(bus_stop_id);")
             curs.execute("CREATE INDEX mta_data_tripstop_trip_id on mta_data_tripstop(trip_id);")
 
