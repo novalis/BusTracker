@@ -195,20 +195,22 @@ miscategorized loop?  Route: %s, first and last: %s, %s""" % (
         #faster, it assumes that the shapes are correctly plotted in
         #ascending order, which they appear not to be.
 
-        #also, this doesn't split the line segments that span the
-        #start and end of the route, which is basically OK because
-        #routes are very overdetermined in the MTA data, so the
-        #resulting path is very close.
+        distance = 0
         for point in best_route.the_geom.coords:
-
+            last_distance = distance
             distance = st_line_locate_point(best_route.the_geom, point)
-
-            if start_location <= distance:
-                if distance <= end_location:
+            if start_location <= distance - 0.001:
+                if distance <= end_location + 0.001:
                     shape.AddPoint(point[1], point[0])
                 else:
-                    #break
-                    pass
+                    line_distance_span = distance - last_distance;
+                    end_distance_span = end_location - last_distance;
+                    interp_ratio = end_distance_span / line_distance_span
+                    interp_x = last_point[1] * interp_ratio + point[1] * (1 - interp_ratio)
+                    interp_y = last_point[0] * interp_ratio + point[0] * (1 - interp_ratio)
+                    shape.AddPoint(interp_x, interp_y)
+                    
+            last_point = point
 
         feed.AddShapeObject(shape)
     else: #not a too-short route
