@@ -42,4 +42,4 @@ class Command(BaseCommand):
                     intersection = ob.intersection
                 else:
                     intersection = None
-                #apply_observation(ob.location.y, ob.location.x, ob.time, ob.bus_id, route, intersection=intersection)
+                apply_observation(ob.location.y, ob.location.x, ob.time, ob.bus_id, route, intersection=intersection)
