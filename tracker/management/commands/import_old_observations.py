@@ -34,9 +34,12 @@ class Command(BaseCommand):
         
             for observation in observation_group:
                 ob = observation.object
-                route = Route.objects.get(name=route_name, direction=direction) # will only work sometimes
+                if route_name.isdigit():
+                    route = Route.objects.get(pk=route_name)
+                else:
+                    route = Route.objects.get(name=route_name, direction=direction) # will only work sometimes
                 if hasattr(ob, 'intersection'):
                     intersection = ob.intersection
                 else:
                     intersection = None
-                apply_observation(ob.location.y, ob.location.x, ob.time, ob.bus_id, route, intersection=intersection)
+                #apply_observation(ob.location.y, ob.location.x, ob.time, ob.bus_id, route, intersection=intersection)
