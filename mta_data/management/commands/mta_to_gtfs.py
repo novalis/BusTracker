@@ -154,6 +154,10 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
             best_dist = total_dist
             best_route = route
 
+    if candidate_routes[0].route == 'S55':
+        print "The MTA's route shape for S55 is from 2007.  So we're skipping it."
+        return None
+
     if candidate_routes[0].route == 'Q48':
         #this is a total hack; the Q48 is in general a total hack
         if len(stops) == 22:
@@ -171,8 +175,8 @@ def find_shape_by_stops(feed, candidate_routes, stops, table_name):
     end_location = st_line_locate_point(best_route.the_geom, (stops[-1].stop_lon, stops[-1].stop_lat))
 
     if start_location > end_location:
-        print "Backwards route %s" % route.gid
-        import pdb;pdb.set_trace()
+        print "Backwards route %s, Skipping." % route.gid
+        return None
 
     if end_location - start_location < 0.98 and best_route.route not in loop_routes:
         if end_location - start_location < 0.05:
@@ -461,8 +465,9 @@ class Command(BaseCommand):
                         direction = fix_direction[trip_route_name].get(direction, direction)
                     shapes = shapes_by_direction.get(direction)
 
-                    trip.shape_id = find_shape_by_stops(feed, shapes, stops, route_table_name).shape_id
-
+                    shape = find_shape_by_stops(feed, shapes, stops, route_table_name)
+                    if shape:
+                        trip.shape_id = shape.shape_id
 
             feed.Validate()
             feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % current_borough)

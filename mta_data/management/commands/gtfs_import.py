@@ -34,6 +34,9 @@ def process_route(feed, gtfs_route):
             route_cache[route_id] = route
 
         shape_id = gtfs_trip.shape_id
+        if not shape_id:
+            continue 
+
         if shape_id in shape_cache:
             shape = shape_cache[shape_id]
         else:
