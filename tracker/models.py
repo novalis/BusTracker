@@ -48,17 +48,14 @@ mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
 
         tripstop = self.trip.tripstop_set.get(bus_stop=target_bus_stop.pk)
         target_distance = tripstop.distance
-
-        for busstop in self.trip.tripstop_set.order_by('-distance'):
-            if busstop.distance <= target_distance:
-                break # last stop we passed
-
-        scheduled_time = busstop.seconds_after_start
+        scheduled_time = tripstop.seconds_after_start
 
         prev = self.previousstop_set.filter(arrival_time__lte=now).order_by('-id')
         if not prev:
             return start_datetime + timedelta(0, scheduled_time) 
+
         delay = prev[0].lateness
+
         return start_datetime + timedelta(0, scheduled_time + lateness)
 
     def estimated_arrival_time(self, target_location, time=None):
@@ -74,7 +71,7 @@ mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
             now = time
 
         #The target location is a point, but needs to be a distance along the route.
-        target_distance = distance_along_route(target_location, self.trip.shape)
+        target_distance = distance_along_route(target_location, self.trip.shape_id)
 
         #Find out when the bus started moving.
         #This is when the distance along the route (a) is > 0.01
