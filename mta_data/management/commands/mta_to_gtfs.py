@@ -380,7 +380,7 @@ class Command(BaseCommand):
                     else:
                         nearest = None
 
-                    if nearest and abs(nearest.stop_lat - lat) + abs(nearest.stop_lon - lng) < 0.00001:
+                    if nearest and abs(nearest.stop_lat - lat) + abs(nearest.stop_lon - lng) < 0.000001:
                         stop_hexid_to_stop[stop_id] = nearest
                         stop_name_to_stop[location] = nearest
                     else:
