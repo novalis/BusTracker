@@ -33,25 +33,6 @@ def process_route(feed, gtfs_route):
                 route.save()
             route_cache[route_id] = route
 
-        shape_id = gtfs_trip.shape_id
-        if not shape_id:
-            continue 
-
-        if shape_id in shape_cache:
-            shape = shape_cache[shape_id]
-        else:
-            shape = list(Shape.objects.filter(gid=shape_id))
-            if shape:
-                shape = shape[0]
-                geometry = shape.geometry
-            else:
-                gtfs_shape = feed.GetShape(shape_id)
-                geometry = LineString([(point[1], point[0]) for point in gtfs_shape.points])
-                shape = Shape(gid=shape_id,
-                              geometry=geometry)
-                shape.save()
-            shape_cache[shape_id] = shape
-
         stop_times = gtfs_trip.GetStopTimes()
         start = stop_times[0].arrival_secs
         hours = start / 3600
@@ -62,9 +43,29 @@ def process_route(feed, gtfs_route):
             hours -= 24
             start -= 86400
             day_later = True
-
         start_time = time(hours, minutes, seconds)
+
+
+        shape_id = gtfs_trip.shape_id
+        if not shape_id:
+            continue 
+        if shape_id in shape_cache:
+            shape = shape_cache[shape_id]
+        else:
+            shape = list(Shape.objects.filter(gid=shape_id))
+            if shape:
+                shape = shape[0]
+                geometry = shape.geometry
+            else:
+                
+                geometry = LineString([(stop_time.stop.stop_lon, stop_time.stop.stop_lat) for stop_time in stop_times])
+                shape = Shape(gid=shape_id,
+                              geometry=geometry)
+                shape.save()
+            shape_cache[shape_id] = shape
+
         trip = list(Trip.objects.filter(shape=shape, route=route, day_of_week=gtfs_trip.service_id, start_time=start_time))
+
         if trip:
             print "This trip seems to exist.  That shouldn't happen."
             trip = trip[0]
