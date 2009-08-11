@@ -9,19 +9,44 @@
         <script type="text/javascript" src="static/js/demo_map.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
-            map = createMap('map');
+            mainMap = createMap('main-map', {controls: []});
+            zoomedMap = createMap('zoomed-map', {controls: []});
+            var bounds = new OpenLayers.Bounds(-8237113.1493161, 4973106.4262944,-8235995.2577775, 4973823.0234344); 
+            zoomedMap.zoomToExtent(bounds);
             setTimeout(function() {
               var now = new Date();
               $('#status').html("Last updated " + now);
-              updateBusLocations();
+              updateBusLocations(mainMap);
             }, 300);
         });
         </script>
     </head>
 
     <body>
-        <div id="map"></div>
-        <span id="status"></span>
+        <div id="maincontainer">
+            <div id="wrapper">
+                <div id="leftcolumn">
+                    <div id="main-map"></div>
+                </div>
+            </div>
+            <div id="rightcolumn">
+                <div id="predictions">
+                    <h1>Bus M6</h1>
+                    <h3>Next bus</h3>
+                    <ol>
+                        <li class="first">8 min</li>
+                        <li>15 min</li>
+                        <li>22 min</li>
+                    </ol>
+                </div>
+
+                <div id="zoomed-map-container">
+                    <div id="zoomed-map"></div>
+                </div>
+
+                <span id="status"></span>
+            </div>
+        </div>
     </body>
 </html>
 
