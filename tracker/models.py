@@ -24,7 +24,7 @@ class Bus(models.Model):
         from django.db import connection
         from django.contrib.gis.geos import fromstr
         cursor = connection.cursor()
-        location = "SRID=4326;POINT(%s %s)" % (location.x, location.y)
+        location = "SRID=4326;POINT(%s %s)" % (self.location.x, self.location.y)
         cursor.execute(
             """SELECT st_line_interpolate_point(mta_data_shape.geometry,%s)
 FROM 
