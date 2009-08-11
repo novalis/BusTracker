@@ -7,7 +7,7 @@ function createMap(map_id, options) {
         numZoomLevels: 20
     };
     options = jQuery.extend(true, defaultOptions, options);
-    map = new OpenLayers.Map(map_id, options);
+    var map = new OpenLayers.Map(map_id, options);
     var baseMap = new OpenLayers.Layer.WMS(
         'OpenStreetMap',
         'http://maps.opengeo.org/geowebcache/service/wms',
@@ -28,7 +28,7 @@ function createMap(map_id, options) {
     return map;
 }
 
-function updateBusLocations() {
+function updateBusLocations(map) {
     $.getJSON('bus_locations',
         function(data, textStatus) {
             /* Data should be a list of bus observations
@@ -87,7 +87,7 @@ function featureFromLatLon(lat, lon, projection) {
     return new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat));
 }
 
-function loadKml(url, name) {
+function loadKml(map, url, name) {
     var layerOptions = {
         format: OpenLayers.Format.KML,
         projection: new OpenLayers.Projection('EPSG:4326')
@@ -100,7 +100,7 @@ function loadKml(url, name) {
 
 
 
-function loadBusKml(url, name) {
+function loadBusKml(map, url, name) {
     var styleMap = new OpenLayers.StyleMap({
             fillOpacity: 0.2,
             pointRadius: 5
@@ -137,7 +137,7 @@ function loadBusKml(url, name) {
 
 
 function loadBusData(url, name, animateData) {
-    var layer = loadBusKml(url, name); 
+    var layer = loadBusKml(map, url, name); 
     layer.events.register('loadend', layer, function() {
         this.map.zoomToExtent(this.getDataExtent()); 
         if (animateData) {

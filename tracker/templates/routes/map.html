@@ -44,11 +44,11 @@
                     busObsUrl += '&show_error_lines';
                 }
                 var animateData = $('#animate-data').is(':checked');
-                loadBusData(busObsUrl, 'bus ' + busId, animateData);
+                loadBusData(map, busObsUrl, 'bus ' + busId, animateData);
 
                 if ($('#show-route').is(':checked')) {
                     var routeUrl = 'route_kml?bus_id=' + busId;
-                    var layer = loadKml(routeUrl, busId + "_route");
+                    var layer = loadKml(map, routeUrl, busId + "_route");
                     layer.events.register('loadend', layer, function() {
                         map.zoomToExtent(layer.getDataExtent());
                     });
