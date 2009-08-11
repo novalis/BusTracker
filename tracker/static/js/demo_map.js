@@ -1,11 +1,12 @@
-function createMap(map_id) {
+function createMap(map_id, options) {
     var bounds = new OpenLayers.Bounds(-2.003750834E7,-2.003750834E7,2.003750834E7,2.003750834E7);
-    var options = {
+    var defaultOptions = {
         projection: 'EPSG:900913',
         maxExtent: bounds,
         maxResolution: 156543.03390625,
         numZoomLevels: 20
     };
+    options = jQuery.extend(true, defaultOptions, options);
     map = new OpenLayers.Map(map_id, options);
     var baseMap = new OpenLayers.Layer.WMS(
         'OpenStreetMap',
