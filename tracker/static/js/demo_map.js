@@ -6,7 +6,7 @@ function createMap(map_id) {
         maxResolution: 156543.03390625,
         numZoomLevels: 20
     };
-    map = new OpenLayers.Map('map', options);
+    map = new OpenLayers.Map(map_id, options);
     var baseMap = new OpenLayers.Layer.WMS(
         'OpenStreetMap',
         'http://maps.opengeo.org/geowebcache/service/wms',
