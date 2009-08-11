@@ -56,7 +56,7 @@ mta_data_shape.gid = %s""", (self.distance, self.trip.shape.gid))
 
         delay = prev[0].lateness
 
-        return start_datetime + timedelta(0, scheduled_time + lateness)
+        return start_datetime + timedelta(0, scheduled_time + delay)
 
     def estimated_arrival_time(self, target_location, time=None):
         """target_location is a Point"""
