@@ -136,7 +136,7 @@ function loadBusKml(map, url, name) {
 }
 
 
-function loadBusData(url, name, animateData) {
+function loadBusData(map, url, name, animateData) {
     var layer = loadBusKml(map, url, name); 
     layer.events.register('loadend', layer, function() {
         this.map.zoomToExtent(this.getDataExtent()); 
