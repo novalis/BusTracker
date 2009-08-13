@@ -28,6 +28,19 @@ function createMap(map_id, options) {
     return map;
 }
 
+function updateArrivalTimes(arrivalListId, route, stop) {
+    $.getJSON('arrival_times', {"route": route, "stop": stop},
+        function(data, textStatus) {
+            $('#' + arrivalListId).empty();
+            for (var i=0; i<data.length; i++) {
+                var timeStamp = data[i]['arrival_time'];
+                relativeTime = humane_date(timeStamp).toLowerCase();
+                $('#' + arrivalListId).append('<li>' + relativeTime + '</li>');
+            }
+            $('#' + arrivalListId).children(':first').addClass('first');
+    });
+}
+
 function updateBusLocations(map) {
     $.getJSON('bus_locations',
         function(data, textStatus) {

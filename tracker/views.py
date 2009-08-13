@@ -11,6 +11,7 @@ import django.templatetags #for the side-effects of doing so
 import settings
 import urllib
 import tracker.templatetags #to catch import errors
+import simplejson
 
 def index(request):
 
@@ -176,6 +177,19 @@ def live_map(request):
 def bus_locations(request):
     buses = Bus.objects.all()
     return render_to_response('routes/bus_locations.json', {'buses': buses})
+
+def arrival_times(request):
+    route = _route_by_name(request.REQUEST['route'])
+    stop = BusStop.objects.get(box_no=request.REQUEST['stop'])
+    # How do we efficiently find all buses on a given route?
+    buses = [b for b in Bus.objects.all() if b.trip.route==route]
+    # How to take into account possibility that bus doesn't stop at
+    # stop or has already passed it?
+    arrival_times = [b.estimated_arrival_time2(stop) for b in buses]
+    arrival_times.sort()
+    return render_to_response('routes/arrival_times.json',
+                              {'arrival_times': arrival_times})
+
 
 # total hack to test how good our predictions are
 def test_accuracy(request):

@@ -1,0 +1,7 @@
+[
+    {% for time in arrival_times %}
+        {
+            "arrival_time": "{{ time }}"
+        },
+    {% endfor %}
+]

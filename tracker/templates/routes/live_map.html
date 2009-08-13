@@ -5,18 +5,24 @@
         <link type="text/css" href="static/css/excite-bike/jquery-ui-1.7.1.custom.css" rel="Stylesheet" />
         <script type="text/javascript" src="static/js/jquery-1.3.2.js"></script>
         <script type="text/javascript" src="static/js/jquery-ui-1.7.1.js"></script>
+        <script type="text/javascript" src="static/js/humane_date.js"></script>
         <script type="text/javascript" src="http://openlayers.org/api/2.8/OpenLayers.js"></script>
         <script type="text/javascript" src="static/js/demo_map.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
+            var BUS_ROUTE = "M06 S";
+            var BUS_STOP = "404912"; // Union Square, 14th & Broadway
+
             mainMap = createMap('main-map', {controls: []});
             zoomedMap = createMap('zoomed-map', {controls: []});
             var bounds = new OpenLayers.Bounds(-8237113.1493161, 4973106.4262944,-8235995.2577775, 4973823.0234344); 
             zoomedMap.zoomToExtent(bounds);
+
             setTimeout(function() {
               var now = new Date();
               $('#status').html("Last updated " + now);
               updateBusLocations(mainMap);
+              updateArrivalTimes('arrival-list', BUS_ROUTE, BUS_STOP);
             }, 300);
         });
         </script>
@@ -32,11 +38,8 @@
             <div id="rightcolumn">
                 <div id="predictions">
                     <h1>Bus M6</h1>
-                    <h3>Next bus</h3>
-                    <ol>
-                        <li class="first">8 min</li>
-                        <li>15 min</li>
-                        <li>22 min</li>
+                    <h3>Next bus @ Broadway  & 14th St:</h3>
+                    <ol id="arrival-list">
                     </ol>
                 </div>
 

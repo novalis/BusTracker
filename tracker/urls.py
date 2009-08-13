@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     (r'^map$', 'tracker.views.map'),
     (r'live_map$', 'tracker.views.live_map'),
     (r'bus_locations$', 'tracker.views.bus_locations'),
+    (r'arrival_times$', 'tracker.views.arrival_times'),
     (r'test_accuracy$', 'tracker.views.test_accuracy'),
 )
 
