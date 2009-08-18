@@ -208,20 +208,27 @@ def parse_schedule_file(path):
 
     trip = None
 
+    line_no = 0
     for line in f.readlines():
+        line_no += 1
         line = line.strip('\r\n')
         if len(line) == stop_format.width:
             stop = stop_format.parse(line)
+            stop['_line_no'] = line_no
             route['stops'].append(stop) #stops are out-of-order, and we don't yet know how to order them
         elif len(line) == trip_format.width:
             trip = trip_format.parse(line)
             trip['stops'] = []
+            trip['_line_no'] = line_no
             route['trips'].append(trip)
         elif len(line) == tripstop_format.width:
             stop = tripstop_format.parse(line)
+            stop['_line_no'] = line_no
             trip['stops'].append(stop) 
         elif len(line) == headsign_format.width:
-            route['headsigns'].append(headsign_format.parse(line))
+            headsign = headsign_format.parse(line)
+            headsign['_line_no'] = line_no
+            route['headsigns'].append(headsign)
         elif len(line) == len("41000026000078000849000066000002"):
             route['more_unknown_crap'] = line
         else:
