@@ -131,6 +131,10 @@ fix_leading_zeros = {
 }
 loop_routes = set(['B74'])
 
+rename_routes = {
+    'S7484' : 'S84',
+} 
+
 _shape_by_stops_cache = {}
 def find_shape_by_stops(feed, candidate_routes, stops, table_name):
     """This is brutal -- it matches a set of route paths against a
@@ -459,7 +463,7 @@ class Command(BaseCommand):
                         stops.append(stop)
 
                     #find the appropriate shape from the shapefiles
-                    trip_route_name = trip_rec['route_name']
+                    trip_route_name = rename_routes.get(trip_rec['route_name'], trip_rec['route_name'])
                     direction = trip_rec['direction']
                     if trip_route_name in fix_direction:
                         direction = fix_direction[trip_route_name].get(direction, direction)
