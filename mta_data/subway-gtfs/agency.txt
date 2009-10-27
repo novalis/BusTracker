@@ -1,0 +1,2 @@
+agency_id,agency_name,agency_url,agency_timezone
+mtancytsubway,MTA New York City Transit Subway,http://www.mta.info/nyct/index.html,America/New_York
