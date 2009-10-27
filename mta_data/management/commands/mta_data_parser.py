@@ -6,7 +6,11 @@ import sys
 
 #stif.bx0012sb.309113.wkd.closed
 #stif.q_0031__.509084.sat
-filename_re = re.compile("stif\\.(?P<borough>m|b|bx|q|s)_?(?P<route_no>\d{4})(?P<unknown_flags>x_|c_|o_|sb|__)\\.(?P<unknown_2>\w{6})\\.(?P<day_of_week>sat|sun|wkd\\.open|wkd.\\closed)")
+stif_filename_re = re.compile("stif\\.(?P<borough>m|b|bx|q|s)_?(?P<route_no>\d{4})(?P<unknown_flags>x_|c_|o_|sb|__)\\.(?P<unknown_2>\w{6})\\.(?P<day_of_week>sat|sun|wkd\\.open|wkd.\\closed)")
+
+#rtif.gs..1.0015.000.08127
+#rtif.c...1.0043.000.07009 
+rtif_filename_re = re.compile("rtif\\.(?P<line>[a-z0-9]{0,2})[.]{0,3}(?P<day_of_week>\d)(?P<misc>.*)")
 
 class FieldDef:    
     def __init__(self, name, width, numeric = False, hex = False, stripped = True, strip_underscore=False):
@@ -21,17 +25,20 @@ class FieldDef:
         return "<FieldDef ('%s', %d)>" % (self.name, self.width)
 
 class LineFormat:
-    def __init__(self, name, *fields):
+    formats = {}
+    def __init__(self, name, id, *fields):
         self.name = name
+        self.id = id
         self.fields = list(fields)
         self.fields.insert(0, FieldDef('record_type', 2, numeric=True))
+        LineFormat.formats[id] = self
 
     @property
     def width(self):
         return sum(field.width for field in self.fields)
 
     def parse(self, dataline):
-        values = {}
+        values = {'_format' : self.name}
         pos = 0
         for field in self.fields:
             try:
@@ -48,13 +55,21 @@ class LineFormat:
                     else:
                         value = int(value)
                 values[field.name] = value
-            except:
-                print >>sys.stderr, "Error parsing line %s\nat field %s, at pos %d" % (dataline, field.name, pos)
+            except Exception, e:
+                print >>sys.stderr, "Error parsing line %s\nat field %s, at pos %d: '%s'" % (dataline, field.name, pos, value)
                 print >>sys.stderr, "Parsed so far: %s" % pformat(values)
+                print "Exception: %s" % e
                 import pdb;pdb.set_trace()
                 raise
             pos += field.width
         return values
+
+    @classmethod
+    def parse_line(cls, line):
+        format_id = int(line[:2])
+        format = cls.formats[format_id]
+        return format.parse(line)
+
 
 #there's one of these at the beginning of the file
 #0         1         2         3         4         5         6         7         
@@ -63,7 +78,7 @@ class LineFormat:
 #11UP  M 0025X 11ULMER PARK              GRAND CENTRAL - WALL STR409057   240 S TA  20081013  
 
 route_format = LineFormat(
-    "route",
+    "route", 11,
     FieldDef('depot_short', 4),
     FieldDef('borough', 2),
     FieldDef('route_no', 4, numeric=True),
@@ -87,7 +102,7 @@ route_format = LineFormat(
 #15169bBRIGHTON BEACH AV     CONEY ISLAND AV       000000000000B  BBCIA    N    40578014 -73959770 300012
 
 stop_format = LineFormat(
-    "stop",
+    "stop", 15,
     FieldDef('stop_id', 4, hex=True),
     FieldDef('street1', 22),
     FieldDef('street2', 22),
@@ -113,7 +128,7 @@ stop_format = LineFormat(
 #21f9d 00031500W 1447c100034700       201SBS12_0037   SBS12                        S8127 N N                7270 GH    8745788    201  SBS12 00036000   13  SBS12    201  SBS12 00031300
 
 trip_format = LineFormat(
-    "trip",
+    "trip", 21,
     FieldDef('stop_id', 4, hex=True),
     FieldDef("UNKNOWN_1", 2), 
     FieldDef("start_minutes", 6, numeric=True),
@@ -158,11 +173,11 @@ trip_format = LineFormat(
 #0123456789012345678901
 #314c6700052700D ST   E
 tripstop_format = LineFormat(
-    'tripstop',
+    'tripstop', 31,
     FieldDef("stop_id", 4, hex=True),
     FieldDef("UNKNOWN_2", 2), 
     FieldDef("minutes", 6, numeric=True),
-    FieldDef("type", 2), #D = depart?, T = timed?, A = arrive?
+    FieldDef("type", 2), #D = depart, T = timed, A = arrive
     FieldDef("UNKNOWN_3", 5), #ST or SN -- anything else?
     FieldDef("UNKNOWN_4", 1),
 )
@@ -172,7 +187,7 @@ tripstop_format = LineFormat(
 #351060    M06       MIDTOWN 59 ST via 6 AV
 
 headsign_format = LineFormat(
-    'headsign',
+    'headsign', 35,
     FieldDef("headsign_id", 5, numeric=True), 
     FieldDef("UNKNOWN_2", 3),
     FieldDef("route_id", 5), 
@@ -180,15 +195,63 @@ headsign_format = LineFormat(
     FieldDef("headsign", 100),
 )
 
-def parse_schedule_file(path):
-    """Returns a dict with general data about the route, as well as stops and trips, and stops for each trip"""
-    filename = os.path.basename(path)
-    match = filename_re.match(filename)
+unknown_format_41 = LineFormat(
+    'unknown41', 41,
+    FieldDef("unknown", 30)
+)
 
-    if not match:
-        print >>sys.stdout, "could not parse filename %s" % filename
+subway_stop_format = LineFormat(
+    'subway_stop', 13,
+    FieldDef("location_id", 8),
+    FieldDef("abbrev_name", 8),
+    FieldDef("full_name", 33),
+    FieldDef("feet_east", 6, numeric=True),
+    FieldDef("feet_north", 6, numeric=True),
+    FieldDef("UNKNOWN_1", 20), 
+)
 
-    route = match.groupdict()
+#20H15       004150N 1 H19       005450H         304   H..N21R     H   R44                                           1   00630010                                
+subway_trip_format = LineFormat(
+    'subway_trip', 20,
+    FieldDef("start_location_id", 8),
+    FieldDef("start_minutes", 8, numeric=True),
+    FieldDef("direction", 2), #N or S only
+    FieldDef("trip_type", 2, numeric=True), #1 = normal
+    FieldDef("end_location_id", 8),
+    FieldDef("end_minutes", 8, numeric=True),
+    FieldDef("UNKNOWN_1", 28),
+    FieldDef("line_name", 4),
+    FieldDef("car_type", 4),
+    FieldDef("UNKNOWN_2", 95),
+)
+
+#30M21     J1  009800D SY                
+
+subway_tripstop_format = LineFormat(
+    'subway_tripstop', 30,
+    FieldDef('stop_id', 8),
+    FieldDef('chaining_line', 4),
+    FieldDef('stop_time', 6, numeric=True),
+    FieldDef("type", 2), #D = depart, T = timed, A = arrive
+    FieldDef("is_real_stop", 1),
+    FieldDef("UNKNOWN_1", 1),
+    FieldDef("UNKNOWN_2", 16),
+)
+
+#17***ALL**                                                                      
+subway_unknown_format_1 = LineFormat(
+    'subway_unknown_1', 17,
+    FieldDef('all', 8),
+    FieldDef('UNKNOWN_1', 72),
+)
+
+#90   69    1  224  21612346                                     
+subway_unknown_format_2 = LineFormat(
+    'subway_unknown_2', 90,
+    FieldDef('UNKNOWN_1', 62),
+)
+
+def parse_stif_file(path, route):
 
     #open and closed refer to public schools
     if route['day_of_week'] == 'wkd.open':
@@ -212,49 +275,102 @@ def parse_schedule_file(path):
     for line in f.readlines():
         line_no += 1
         line = line.strip('\r\n')
-        if len(line) == stop_format.width:
-            stop = stop_format.parse(line)
-            stop['_line_no'] = line_no
-            route['stops'].append(stop) #stops are out-of-order, and we don't yet know how to order them
-        elif len(line) == trip_format.width:
-            trip = trip_format.parse(line)
-            trip['stops'] = []
-            trip['_line_no'] = line_no
+        parsed = LineFormat.parse_line(line)
+        parsed['_line_no'] = line_no
+        format = parsed['_format']
+        if format == 'stop':
+            route['stops'].append(parsed)
+        elif format == 'trip':
+            parsed['stops'] = []
+            trip = parsed
             route['trips'].append(trip)
-        elif len(line) == tripstop_format.width:
-            stop = tripstop_format.parse(line)
-            stop['_line_no'] = line_no
-            trip['stops'].append(stop) 
-        elif len(line) == headsign_format.width:
-            headsign = headsign_format.parse(line)
-            headsign['_line_no'] = line_no
-            route['headsigns'].append(headsign)
-        elif len(line) == len("41000026000078000849000066000002"):
-            route['more_unknown_crap'] = line
+        elif format == 'tripstop':
+            trip['stops'].append(parsed ) 
+        elif format == 'headsign':
+            route['headsigns'].append(parsed)
         else:
-            print "unknown line %s" % line
+            route['more_unknown_crap'] = line
 
     return route
+
+def parse_rtif_file(path, route):
+    route['original_filename'] = path
+
+    f = open(path)
+    line = f.readline().strip('\r\n')
+    route.update(route_format.parse(line))
+
+    route['stops'] = []
+    route['trips'] = []
+
+    trip = None
+
+    line_no = 0
+    for line in f.readlines():
+        line_no += 1
+        line = line.strip('\r\n')
+        parsed = LineFormat.parse_line(line)
+        parsed['_line_no'] = line_no
+        format = parsed['_format']
+        if format == 'subway_stop':
+            route['stops'].append(parsed)
+        elif format == 'subway_trip':
+            trip = parsed
+            trip['stops'] = []            
+            if not 'subway_trips' in route:
+                route['subway_trips'] = []
+            route['subway_trips'].append(trip)
+        elif format == 'subway_tripstop':
+            trip['stops'].append(parsed ) 
+        else:
+            route['more_unknown_crap'] = line
+
+    return route
+
+
+def parse_schedule_file(path):
+    """Returns a dict with general data about the route, as well as stops and trips, and stops for each trip"""
+    filename = os.path.basename(path)
+    stif_match = stif_filename_re.match(filename)
+
+    if stif_match:
+        route = stif_match.groupdict()
+        return parse_stif_file(path, route)
+
+    rtif_match = rtif_filename_re.match(filename)
+
+    if rtif_match:
+        route = rtif_match.groupdict()
+        return parse_rtif_file(path, route)
+
+    print >>sys.stdout, "could not parse filename %s" % filename
 
 holidays = {'Christmas' : 'xmd', 'Christmas Eve' : 'xme',
             'New Year\'s Day' : 'nyd', 'New Year\'s Eve' : 'nye'}
 
-def parse_schedule_dir(dirname):
+def parse_schedule_dir(dirname, format):
     files = os.listdir(dirname)
     use_files = []
+
     for filename in files:
-        if filename.startswith('stif'):
+        if filename.startswith(format):
             use_files.append((filename, dirname, None))
-        elif filename in holidays:
-            holiday_abbrev = holidays[filename]
+        else:
             subdirname = os.path.join(dirname, filename)
-            files = os.listdir(subdirname)
-            for filename in files:
-                #schools are necessarily closed on holidays, so I have
-                #no idea why there are open data sets.
-                if filename.startswith('stif') and filename.endswith('.closed'):
-                    use_files.append((filename, subdirname, holiday_abbrev))
-                    
+            if filename in holidays:
+                holiday_abbrev = holidays[filename]
+                files = os.listdir(subdirname)
+                for filename in files:
+                    #schools are necessarily closed on holidays, so I have
+                    #no idea why there are open data sets.
+                    if filename.startswith(format) and filename.endswith('.closed'):
+                        use_files.append((filename, subdirname, holiday_abbrev))
+            elif os.path.isdir(subdirname):
+                for result in parse_schedule_dir(subdirname, format):
+                    yield result
+            else:
+                print subdirname
+            
     use_files.sort()
     for filename, dirname, day_of_week in use_files:
         if 'b_0666' in filename or 'b_0333' in filename:
@@ -265,6 +381,8 @@ def parse_schedule_dir(dirname):
                      
 
         route = parse_schedule_file(os.path.join(dirname, filename))
+        if not route:
+            continue
         if day_of_week:
             route['day_of_week'] = day_of_week
         yield route

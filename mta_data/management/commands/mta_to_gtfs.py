@@ -6,6 +6,7 @@ from mta_data.utils import st_line_locate_point
 from zipfile import ZipFile
 
 import os
+import re
 import transitfeed
 
 rename_location = {
@@ -26,7 +27,7 @@ def google_time_from_centiminutes(centiminutes):
     seconds = ((centiminutes % 6000) - minutes * 100) * 60 / 100
     return "%02d:%02d:%02d" % (hours, minutes, seconds)
 
-class MTARoute(models.Model):
+class MTABusRoute(models.Model):
     gid = models.IntegerField(primary_key=True)
     rt_dir = models.CharField(max_length=1)
     route = models.CharField(max_length=16)
@@ -58,6 +59,22 @@ class MTARoute(models.Model):
 """
         f.close()
         print "dumped %s" % self.gid
+
+
+class MTASubwayRoute(models.Model):
+    gid = models.IntegerField(primary_key=True)
+    id = models.FloatField()
+    line = models.CharField(max_length=20)
+    routes = models.CharField(max_length=9)
+    the_geom = models.GeometryField()
+
+class MTASubwayStop(models.Model):
+    gid = models.IntegerField(primary_key=True)
+    routes = models.CharField(max_length=13)
+    line = models.CharField(max_length=16)
+    facility = models.CharField(max_length=40)
+    the_geom = models.GeometryField()
+
 
 #from Bob Ippolito at 
 #http://bob.pythonmac.org/archives/2005/03/04/frozendict/
@@ -259,21 +276,22 @@ def route_for_trip(feed, trip_rec, headsign):
     feed.AddFareRuleObject(transitfeed.FareRule(fare_id, route_id))
     return route
 
-def save_base_gtfs(gtfs_dir):
-
-    gtfs_file = os.path.dirname(gtfs_dir) + "/gtfs.zip"
-    zip = ZipFile(gtfs_file, "w")
-    for filename in os.listdir(gtfs_dir):
-        if filename.endswith(".txt"):
-            zip.write(os.path.join(gtfs_dir, filename), os.path.basename(filename))
-    zip.close()
+def save_base_gtfs(base_gtfs_dir):
+    for conveyance in ('bus', 'subway'):
+        gtfs_file = os.path.join(base_gtfs_dir, "%s-gtfs.zip" % conveyance)
+        zip = ZipFile(gtfs_file, "w")
+        gtfs_dir =  os.path.join(base_gtfs_dir, "%s-gtfs" % conveyance)
+        for filename in os.listdir(gtfs_dir):
+            if filename.endswith(".txt"):
+                zip.write(os.path.join(gtfs_dir, filename), os.path.basename(filename))
+        zip.close()
 
 def init_q48():
     """the shape for the Q48 is one long loop, instead of three separate
     routes: one for west, one for east from midnight - 6 am, and one
     for east during the day.  This corrects it."""
 
-    q48 = list(MTARoute.objects.filter(route='Q48'))
+    q48 = list(MTABusRoute.objects.filter(route='Q48'))
     if len(q48) > 1:
         return #assume that if there's more than one shape, we have
                #already run this function
@@ -290,191 +308,509 @@ def init_q48():
         (-73.87639, 40.76901), (-73.87624, 40.76807),
         ]
 
-    MTARoute(gid=10705, rt_dir='W', route='Q48', path='WW',
+    MTABusRoute(gid=10705, rt_dir='W', route='Q48', path='WW',
              the_geom = LineString(coords[:502])).save()
-    MTARoute(gid=10706, rt_dir='E', route='Q48', path='ED',
+    MTABusRoute(gid=10706, rt_dir='E', route='Q48', path='ED',
              the_geom = LineString(coords[502:])).save()
-    MTARoute(gid=10707, rt_dir='E', route='Q48', path='EN',
+    MTABusRoute(gid=10707, rt_dir='E', route='Q48', path='EN',
              the_geom = LineString(coords[502:524] + coords[458:410:-1] + on_94_st + coords[565:])).save()
+
+subway_headsign = {
+    '1' : {'S' : 'South Ferry',
+           'N' : '242nd Street'},
+    '2' : {'S' : 'Flatbush Avenue',
+           'N' : '241st Street'},
+    '3' : {'S' : 'New Lots Avenue',
+           'N' : '148th Street'},
+    '4' : {'S' : 'Utica Ave',
+           'N' : 'Woodlawn'},
+    '5' : {'S' : 'Dyre Ave',
+           'N' : 'Flatbush Avenue'},
+    '6' : {'S' : 'Brooklyn Bridge',
+           'N' : 'Pelham Bay Park'},
+    '7' : {'S' : 'Times Square',
+           'N' : 'Flushing - Main Street'},
+
+    'a' : {'N' : 'Lefferts Boulevard, Far Rockaway',
+           'S' : 'Inwood - 207th Street'},
+    'b' : {'N' : 'Bedford Park Boulevard',
+           'S' : 'Brighton Beach'},
+    'c' : {'N' : 'Euclid Avenue',
+           'S' : '168th Street'},
+    'd' : {'N' : 'Norwood - 205th Street',
+           'S' : 'Coney Island'},
+    'e' : {'N' : 'Jamaica Center',
+           'S' : 'World Trade Center'},
+    'f' : {'N' : '179th Street',
+           'S' : 'Coney Island'},
+    'g' : {'N' : '71st Avenue',
+           'S' : 'Church Ave'},
+
+    'h' : {'N' : 'Broad Channel', #?
+           'S' : 'Rockaway Park'}, #?
+
+    'j' : {'N' : 'Jamaica Center',
+           'S' : 'Broad Street'},
+    'l' : {'N' : '8th Avenue',
+           'S' : 'Canarsie'},
+
+    'm' : {'N' : 'Middle Village',
+           'S' : 'Bay Parkway'},
+    'n' : {'N' : 'Ditmars Boulevard',
+           'S' : 'Coney Island'},
+    'q' : {'N' : '57th Street',
+           'S' : 'Coney Island'},
+    'r' : {'N' : '71st Avenue',
+           'S' : 'Bay Ridge - 95th Street'},
+
+    'fs' : {'N' : 'Franklin Avenue',
+            'S' : 'Prospect Park'}, 
+    'gs' : {'N' : 'Grand Central',
+            'S' : 'Times Square'}, 
+
+    't' : {'S' : 'Hanover Square',
+           'N' : '125th Street'},
+    'v' : {'S' : 'Second Avenue',
+           'N' : '71st Street'},
+    'w' : {'S' : 'Whitehall Street',
+           'N' : 'Ditmars Boulevard'},
+    'z' : {'N' : 'Jamaica Center',
+           'S' : 'Broad Street'},
+}
+
+rename_subway_stops = {
+    '110TH STREET-BWAY' : 'CATHEDRAL PKY',
+    '42ND ST.-TIMES SQ.' : 'TIMES SQ',
+    'PELHAM BAY PKWY.' : 'PELHAM PKY',
+    'EAST 238TH STREET' : 'NEREID AVE',
+    'ST. LAWRENCE AVENUE' : 'ST LAWRENCE AVE',
+    'SOUNDVIEW AVENUE' : 'MORRISON AVE',
+    '138TH ST. THIRD AVENUE' : '3RD AVE',
+    'HUNTERS POINT AVENUE' : 'HUNTERSPOINT AVE',
+    'TIMES SQUARE QUEENS' : 'TIMES SQ',
+    'HOYT STREET-SCH' : 'HOYT-SCHERMERHORN STS',
+    'BROADWAY JUNCTION-ENY' : 'BROADWAY-EAST NEW YORK',
+    'BROADWAY-NASSAU' : 'BROADWAY-NASSAU ST',
+    'WEST 4 ST-UPPER LEVEL' : 'W 4TH ST',
+    'WEST 4 ST-LOWER LEVEL' : 'W 4TH ST',
+    'MOTT AVENUE  FAR ROCKAWAY' : 'FAR ROCKAWAY',
+    '9TH STREET' : '9TH ST',
+    '25TH STREET' : '25TH ST',
+    '25 AVENUE' : '25TH AVE',
+    'NINTH AVENUE' : '9TH AVE',
+    'NINTH AVE (WEST END)' : '9TH AVE',
+    'BAY 50 STREET' : 'BAY 50TH ST',
+    'STILLWELL AVE.  C.I.' : 'CONEY ISLAND',
+    'FORT HAMILTON PKWAY' : 'FT HAMILTON PKY',
+    'FORT HAMILTON PKWY.' : 'FORT HAMILTON PKY',
+    'VAN WYCK-JAMAICA' : 'JAMAICA-VAN WYCK',
+    'UNION TURNPIKE' : 'UNION TPKE',
+    'PARSONS-ARCHER' : 'JAMAICA CENTER/ PARSONS ARCHER',
+    'SECOND AVENUE' : '2ND AVE',
+    'DELANCY STREET' : 'DELANCEY ST', #thanks, MTA
+    'EAST BROADWAY' : 'EAST BROADWAY', 
+    '4TH AVENUE' : '4TH AVE',
+    '22 AVENUE-BAY PARKWAY' : 'BAY PKY',
+    'VAN SICKLEN AVENUE (CULVER)' : 'NEPTUNE AVE',
+    'BOTANIC GARDENS-E PKWY' : 'BOTANIC GARDEN',
+    'ELDERTS LANE' : '75TH ST-ELDERT LN',
+    'BROADWAY JUNCTION-EPY' : 'EASTERN PKY',
+    'GATES AVENUE' : 'GATES ST',
+    'BROADWAY-MYRTLE' : 'MYRTLE AVE',
+    'BROADWAY JUNCTION' : 'BROADWAY JCT',
+    'BUSHWICK AVENUE' : 'BUSHWICK-ABERDEEN',
+    'BEVERLEY ROAD' : 'BEVERLY RD',
+    
+}
+
+abbreviations = {
+    "STATION" : "",
+    "SQUARE" : "SQ",
+    "STREET" : "ST",
+    " ROAD" : " RD",
+    "AVENUE" : "AVE",
+    "PLAZA" : "PLZ",
+    "WEST " : "W ",
+    "EAST " : "E ",
+    "PARKWAY" : "PKY",
+    "PLACE" : "PL",
+    "BOULEVARD" : "BLVD",
+    "BURHE" : "BUHRE", #it's misspelled somewhere
+    "HIGHWAY" : "HWY",
+
+}
+
+addl_lines = {
+    "4" : "6",
+    "A" : "C",
+    "D" : "R",
+    "N" : "R",
+    "E" : "FV",
+
+
+}
+
+
+stop_id_to_gid = {
+    '201' : 64,
+    '503' : 67,
+    '208' : 59,
+    '504' : 56,
+    '211' : 66,
+    '415' : 126,
+    'D14' : 255,
+    'D25' : 383,
+    'R36' : 406,
+    'B14' : 416,
+    'B17' : 419,
+    'B20' : 422,
+    'G06' : 464,
+    'F09' : 258,
+    'F11' : 257,
+    'F12' : 256,
+    'B08' : 466,
+    'D18' : 294,
+    'D19' : 293,
+    'S01' : 224,
+    'M21' : 305,
+    'N10' : 434,
+    'N06' : 430,
+    'N04' : 428,
+    'N03' : 427,
+    'N02' : 426,
+    'R23' : 373,
+    'Q01' : 380,
+    'R21' : 371,
+    'R06' : 357,
+    'R05' : 358,
+
+
+}
+
+def handle_subway(dirname):
+
+    feed = transitfeed.Loader("mta_data/subway-gtfs.zip", memory_db=False).Load() #base data
+
+    dow_num_to_service_period = {'1' : 'WD',
+                                 '2' : 'SAT',
+                                 '3' : 'SUN'}
+
+    for route_rec in parse_schedule_dir(os.path.join(dirname, 'rail-subway'), 'rtif'):
+        route_rec['day_of_week'] = dow_num_to_service_period[route_rec['day_of_week']]
+
+        period = feed.GetServicePeriod(route_rec['day_of_week'])
+        route_id = route_rec['line']
+        try:
+            route = feed.GetRoute(route_id)
+        except KeyError:
+            route = transitfeed.Route(route_id=route_id,
+                                      short_name=route_id,
+                                      route_type="Subway")
+            feed.AddRouteObject(route)
+            feed.AddFareRuleObject(transitfeed.FareRule("regular", route_id))
+
+
+        stops_by_id = {}
+        for stop in route_rec['stops']:
+            stop_id = stop['location_id']
+            stops_by_id[stop_id] = stop
+
+        for trip in route_rec['subway_trips']:
+            line_name = trip['line_name'][-1:] #GS -> S
+
+            if not line_name:
+                continue # a bogus trip
+
+            if line_name == '2':
+                if 'NOSTRAND AVE.' in [stops_by_id[stop['stop_id']]['full_name'] for stop in trip['stops']]:
+
+                    #the 2 train, as far as I can tell, does not
+                    #actually run on the 3/4 track in Brooklyn.
+                    continue
+
+            direction = trip['direction']
+            headsign = subway_headsign[route_id][direction] #fixme: depends on actual destination of train
+            gtfs_trip = route.AddTrip(feed, headsign, service_period=period)
+            for tripstop in trip['stops']:
+
+                if tripstop['is_real_stop'] != 'S':
+                    continue
+
+                if tripstop['stop_id'] == '138':
+                    #Cortland St
+                    continue
+
+                stop_id = tripstop['stop_id']
+                if stop_id in feed.stops:
+                    gtfs_stop = feed.GetStop(stop_id)
+                else:
+                    stop = stops_by_id[stop_id]
+
+                    #first, the table
+                    translated_full_name = stop['full_name']
+                    #remove anything following a dot or a dash or an open paren                    
+                    for endchar in ['.','-','(','  ']:
+                        if endchar in translated_full_name:
+                            translated_full_name = translated_full_name[:translated_full_name.index(endchar)]
+
+                    #abbreviations
+                    for long, abbreviated in abbreviations.items():
+                        translated_full_name = translated_full_name.replace(long, abbreviated)
+
+
+                    translated_full_name = translated_full_name.strip()
+                    translated_full_name = translated_full_name.replace("  ", " ")
+
+
+                    number_st_re = re.compile('^(\d+)')
+                    number_st = number_st_re.match(translated_full_name)
+                    is_num = False
+                    if number_st:
+                        translated_full_name = number_st.group(1)
+                        is_num = True
+
+                    translated_full_name = rename_subway_stops.get(stop['full_name'], translated_full_name
+)
+                    possible_stops = MTASubwayStop.objects.filter(routes__contains=line_name, facility__contains=translated_full_name)
+
+
+                    #the A makes C stops late at night
+                    if line_name in addl_lines:
+                        possible_stops = list(possible_stops)
+
+                        for addl_line in addl_lines[line_name]:
+                            addl_possible_stops = MTASubwayStop.objects.filter(routes__contains=addl_line, facility__contains=translated_full_name)
+                            for addl_stop in addl_possible_stops:
+                                if not addl_stop in possible_stops:
+                                    possible_stops.append(addl_stop)
+
+                    #hard coded stop id
+                    if stop_id in stop_id_to_gid:
+                        possible_stops = MTASubwayStop.objects.filter(gid = stop_id_to_gid[stop_id])
+
+                    if is_num:
+                        #we need to make sure our search for 23rd st doesn't
+                        #bring up 232nd st.
+                        new_possible_stops = []
+                        num_re = re.compile("(^|\D)" + translated_full_name + "($|\D)")
+                        for possible_stop in possible_stops:
+                            if num_re.search(possible_stop.facility):
+                                new_possible_stops.append(possible_stop)
+                        possible_stops = new_possible_stops
+
+
+                    if len(possible_stops) == 0:
+                        print "no stops for %s on the %s (translated to %s)" % (stop['full_name'], line_name, translated_full_name)
+                        print "possible stops are %s" % sorted([s.facility for s in MTASubwayStop.objects.filter(routes__contains=line_name)])
+                        import pdb;pdb.set_trace()
+                        continue
+                    elif len(possible_stops) > 1:
+                        print "too many stops for %s on the %s (translated to %s): %s" % (stop['full_name'], line_name, translated_full_name, [(s.facility, s.gid, s.routes) for s in possible_stops])
+                        import pdb;pdb.set_trace()
+                        continue
+                    else:
+                        dbstop = possible_stops[0]
+
+                    gtfs_stop = transitfeed.Stop(
+                        lng=dbstop.the_geom.x,
+                        lat=dbstop.the_geom.y,
+                        stop_id=stop_id,
+                        name=dbstop.facility
+                        )
+                    feed.AddStopObject(gtfs_stop)            
+
+                stop_time = google_time_from_centiminutes(tripstop['stop_time'])
+                gtfs_trip.AddStopTime(gtfs_stop, stop_time=stop_time)
+
+    feed.WriteGoogleTransitFeed('mta_data/subway.zip')
+
+def handle_buses(dirname):
+
+    feed = transitfeed.Loader("mta_data/bus-gtfs.zip", memory_db=False).Load() #base data
+    current_borough = None
+
+    #capture multiple stops with different box ids
+    stop_name_to_stop = {}
+
+    last_route = None
+    for route_rec in parse_schedule_dir(os.path.join(dirname, 'surface-bus'), 'stif'):
+        #gtfs files are organized by borough (not bus prefix)
+        if current_borough != route_rec['borough']:
+            if current_borough:
+                feed.Validate()
+                feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % current_borough)
+                feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()
+                stop_name_to_stop = {}
+            current_borough = route_rec['borough']
+
+        if route_rec['route_name_flag'] == 'X':
+            #express buses
+            borough = 'X'
+        else:
+            borough = route_rec['borough'].title()
+        name = "%s%s" % (borough, 
+                           route_rec['route_no'])
+
+        print name
+
+        if last_route != name:
+            _shape_by_stops_cache.clear()
+            last_route = name
+
+        long_name = route_rec["street_name"]
+        if long_name.startswith(name):
+            long_name = long_name[len(name):].strip()
+
+
+        period = feed.GetServicePeriod(route_rec['day_of_week'].upper())
+
+        stop_hexid_to_stop = {}
+        #add all stops
+        for stop_rec in route_rec['stops']:
+            location = "%s at %s" % (stop_rec['street1'], stop_rec['street2'])
+
+            location = rename_location.get(location, location)
+
+            #check for duplicate box ids
+            box_no = str(stop_rec['box_no'])
+            stop_id = stop_rec['stop_id']
+            if location in stop_name_to_stop:
+                stop_hexid_to_stop[stop_id] = stop_name_to_stop[location]
+                continue
+
+            lat = stop_rec['latitude'] / 1000000.0
+            lng = stop_rec['longitude'] / 1000000.0
+
+            #special case for QVDEP:
+            if location == 'Queens Village Depot':
+                lat, lng = 40.726711, -73.734779
+
+            #not in NYC area
+            if not (-72 > lng > -75) or not (41 > lat > 39):
+                print "bad lat, lng", lat, lng
+                import pdb;pdb.set_trace()
+
+            #now, try to find a nearby stop
+            nearest = feed.GetNearestStops(lat, lng, 1)
+            if len(nearest) and not ' LANE ' in nearest[0].stop_name:
+                #sometimes bus stops really are like 1 m away because 
+                #they are two lanes in a multilane terminal area
+                nearest = nearest[0]
+            else:
+                nearest = None
+
+            if nearest and abs(nearest.stop_lat - lat) + abs(nearest.stop_lon - lng) < 0.000001:
+                stop_hexid_to_stop[stop_id] = nearest
+                stop_name_to_stop[location] = nearest
+            else:
+                stop = transitfeed.Stop(
+                        lng=lng,
+                        lat=lat,
+                        stop_id=box_no,
+                        name=location
+                        )
+                stop_hexid_to_stop[stop_id] = stop
+                stop_name_to_stop[location] = stop
+
+        #figure out headsigns
+
+        headsigns = dict((sign['headsign_id'], sign['headsign']) for sign in route_rec['headsigns'])
+
+        #get possible shapes
+        names = set()
+        if name in extra_names:
+            extra = extra_names[name]
+            if isinstance(extra, str):
+                names.add(extra)
+            else:
+                names.update(extra)
+
+        for trip_rec in route_rec['trips']:
+            route_name = trip_rec['route_name']
+            names.add(route_name)
+
+        nameq = models.Q(route = name)
+        for rname in names:
+            rname = fix_leading_zeros.get(rname, rname)
+            nameq |= models.Q(route__iexact = rname)
+
+            if rname in extra_names:
+                extra = extra_names[rname] 
+                if isinstance(extra, str):
+                    if extra not in names:
+                        nameq |= models.Q(route__iexact = extra_names[rname])
+                else:
+                    for rname in extra:
+                        if rname not in names:
+                            nameq |= models.Q(route__iexact = extra_names[rname])
+        shapes = list(MTABusRoute.objects.filter(nameq))
+
+        shapes_by_direction = {}
+        for shape in shapes:
+            if not shape.rt_dir in shapes_by_direction:
+                shapes_by_direction[shape.rt_dir] = []
+            shapes_by_direction[shape.rt_dir].append(shape)
+        del shapes
+
+        #now trips
+        for trip_rec in route_rec['trips']:
+            if trip_rec['trip_type'] > 1:
+                #these are trips to/from the depot
+                continue
+            if trip_rec['UNKNOWN_1'].startswith('-'):
+                #these trips are bogus -- their stops are out-of-order.
+                continue
+            hid = trip_rec['headsign_id']
+            headsign = headsigns.get(hid, long_name)
+
+            route = route_for_trip(feed, trip_rec, headsign)
+
+            trip = route.AddTrip(feed, headsign, service_period=period)
+            stops = []
+            for tripstop_rec in trip_rec['stops']:
+                stop_id = tripstop_rec['stop_id']
+                stop_time = google_time_from_centiminutes(tripstop_rec['minutes'])
+                stop = stop_hexid_to_stop[stop_id]
+                if not stop.stop_id in feed.stops:
+                    feed.AddStopObject(stop)
+                trip.AddStopTime(stop,
+                                 stop_time=stop_time)
+                stops.append(stop)
+
+            #find the appropriate shape from the shapefiles
+            trip_route_name = rename_routes.get(trip_rec['route_name'], trip_rec['route_name'])
+            direction = trip_rec['direction']
+            if trip_route_name in fix_direction:
+                direction = fix_direction[trip_route_name].get(direction, direction)
+            shapes = shapes_by_direction.get(direction)
+
+            shape = find_shape_by_stops(feed, shapes, stops, route_table_name)
+            if shape:
+                trip.shape_id = shape.shape_id
+
+    feed.Validate()
+    feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % current_borough)
 
 class Command(BaseCommand):
     """Transform mta schedule and route data to GTFS.  Assume route data is 
     truth for matters of directionality"""
 
-    def handle(self, dirname, route_table_name, **kw):
+    def handle(self, dirname, bus_route_table_name, subway_route_table_name = None, subway_stop_table_name = None, **kw):
 
-        MTARoute._meta.db_table = route_table_name
+        MTABusRoute._meta.db_table = bus_route_table_name
+        if subway_route_table_name:
+            MTASubwayRoute._meta.db_table = subway_route_table_name
+            MTASubwayStop._meta.db_table = subway_stop_table_name
 
         init_q48()
 
-        save_base_gtfs("mta_data/gtfs")
-
-        feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load() #base data
-
-        current_borough = None
+        save_base_gtfs("./mta_data")
 
         try:
-            #capture multiple stops with different box ids
-            stop_name_to_stop = {}
+            if subway_route_table_name:
+                handle_subway(dirname)
+            handle_buses(dirname)
 
-            last_route = None
-            for route_rec in parse_schedule_dir(dirname):
-                #gtfs files are organized by borough (not bus prefix)
-                if current_borough != route_rec['borough']:
-                    if current_borough:
-                        feed.Validate()
-                        feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % current_borough)
-                        feed = transitfeed.Loader("mta_data/gtfs.zip", memory_db=False).Load()
-                        stop_name_to_stop = {}
-                    current_borough = route_rec['borough']
-
-                if route_rec['route_name_flag'] == 'X':
-                    #express buses
-                    borough = 'X'
-                else:
-                    borough = route_rec['borough'].title()
-                name = "%s%s" % (borough, 
-                                   route_rec['route_no'])
-
-                print name
-
-                if last_route != name:
-                    _shape_by_stops_cache.clear()
-                    last_route = name
-
-                long_name = route_rec["street_name"]
-                if long_name.startswith(name):
-                    long_name = long_name[len(name):].strip()
-
-
-                period = feed.GetServicePeriod(route_rec['day_of_week'].upper())
-
-                stop_hexid_to_stop = {}
-                #add all stops
-                for stop_rec in route_rec['stops']:
-                    location = "%s at %s" % (stop_rec['street1'], stop_rec['street2'])
-
-                    location = rename_location.get(location, location)
-
-                    #check for duplicate box ids
-                    box_no = str(stop_rec['box_no'])
-                    stop_id = stop_rec['stop_id']
-                    if location in stop_name_to_stop:
-                        stop_hexid_to_stop[stop_id] = stop_name_to_stop[location]
-                        continue
-
-                    lat = stop_rec['latitude'] / 1000000.0
-                    lng = stop_rec['longitude'] / 1000000.0
-
-                    #special case for QVDEP:
-                    if location == 'Queens Village Depot':
-                        lat, lng = 40.726711, -73.734779
-
-                    #not in NYC area
-                    if not (-72 > lng > -75) or not (41 > lat > 39):
-                        print "bad lat, lng", lat, lng
-                        import pdb;pdb.set_trace()
-
-                    #now, try to find a nearby stop
-                    nearest = feed.GetNearestStops(lat, lng, 1)
-                    if len(nearest) and not ' LANE ' in nearest[0].stop_name:
-                        #sometimes bus stops really are like 1 m away because 
-                        #they are two lanes in a multilane terminal area
-                        nearest = nearest[0]
-                    else:
-                        nearest = None
-
-                    if nearest and abs(nearest.stop_lat - lat) + abs(nearest.stop_lon - lng) < 0.000001:
-                        stop_hexid_to_stop[stop_id] = nearest
-                        stop_name_to_stop[location] = nearest
-                    else:
-                        stop = transitfeed.Stop(
-                                lng=lng,
-                                lat=lat,
-                                stop_id=box_no,
-                                name=location
-                                )
-                        stop_hexid_to_stop[stop_id] = stop
-                        stop_name_to_stop[location] = stop
-
-                #figure out headsigns
-
-                headsigns = dict((sign['headsign_id'], sign['headsign']) for sign in route_rec['headsigns'])
-
-                #get possible shapes
-                names = set()
-                if name in extra_names:
-                    extra = extra_names[name]
-                    if isinstance(extra, str):
-                        names.add(extra)
-                    else:
-                        names.update(extra)
-
-                for trip_rec in route_rec['trips']:
-                    route_name = trip_rec['route_name']
-                    names.add(route_name)
-
-                nameq = models.Q(route = name)
-                for rname in names:
-                    rname = fix_leading_zeros.get(rname, rname)
-                    nameq |= models.Q(route__iexact = rname)
-
-                    if rname in extra_names:
-                        extra = extra_names[rname] 
-                        if isinstance(extra, str):
-                            if extra not in names:
-                                nameq |= models.Q(route__iexact = extra_names[rname])
-                        else:
-                            for rname in extra:
-                                if rname not in names:
-                                    nameq |= models.Q(route__iexact = extra_names[rname])
-                shapes = list(MTARoute.objects.filter(nameq))
-
-                shapes_by_direction = {}
-                for shape in shapes:
-                    if not shape.rt_dir in shapes_by_direction:
-                        shapes_by_direction[shape.rt_dir] = []
-                    shapes_by_direction[shape.rt_dir].append(shape)
-                del shapes
-
-                #now trips
-                for trip_rec in route_rec['trips']:
-                    if trip_rec['trip_type'] > 1:
-                        #these are trips to/from the depot
-                        continue
-                    if trip_rec['UNKNOWN_1'].startswith('-'):
-                        #these trips are bogus -- their stops are out-of-order.
-                        continue
-                    hid = trip_rec['headsign_id']
-                    headsign = headsigns.get(hid, long_name)
-
-                    route = route_for_trip(feed, trip_rec, headsign)
-
-                    trip = route.AddTrip(feed, headsign, service_period=period)
-                    stops = []
-                    for tripstop_rec in trip_rec['stops']:
-                        stop_id = tripstop_rec['stop_id']
-                        stop_time = google_time_from_centiminutes(tripstop_rec['minutes'])
-                        stop = stop_hexid_to_stop[stop_id]
-                        if not stop.stop_id in feed.stops:
-                            feed.AddStopObject(stop)
-                        trip.AddStopTime(stop,
-                                         stop_time=stop_time)
-                        stops.append(stop)
-
-                    #find the appropriate shape from the shapefiles
-                    trip_route_name = rename_routes.get(trip_rec['route_name'], trip_rec['route_name'])
-                    direction = trip_rec['direction']
-                    if trip_route_name in fix_direction:
-                        direction = fix_direction[trip_route_name].get(direction, direction)
-                    shapes = shapes_by_direction.get(direction)
-
-                    shape = find_shape_by_stops(feed, shapes, stops, route_table_name)
-                    if shape:
-                        trip.shape_id = shape.shape_id
-
-            feed.Validate()
-            feed.WriteGoogleTransitFeed('mta_data/bus-%s.zip' % current_borough)
         except Exception, e:
             import traceback
             traceback.print_exc()

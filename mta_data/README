@@ -1,14 +1,30 @@
 MTA provides a zip file with shapefiles for the routes of all of their buses.  
 There's also many zip files with schedule data in a funky fixed-width format.
 
-1. There is inconsistent filename case in the route 1zip files.  You'll
+1. There is inconsistent filename case in the route zip files.  You'll
 want to convert everything to lowercase with:
 
 $ rename 'tr/A-Z/a-z/' *
 
 2. The data is in a weird projection.  Import it as that projection:
 
-$ shp2pgsql -S -s 2263 -d  nyc\ bus\ routes\ \(2004-09\)-lk-060427 mta_bus_routes|psql [database_name]
+$ shp2pgsql -S -s 2263 -d  nyc\ bus\ routes\ \(2004-09\)-lk-060427 mta_bus_routes|psql [database]
+
+You can also do the subways, but you don't need them for bus tracking
+
+$ ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:4326 converted.shp GIS\ output/routes/Routes.shp
+
+$ shp2pgsql -S -s 2263 -d converted mta_subway_routes | psql [database]
+
+$ rm converted.* 
+
+
+$ ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:4326 converted.shp GIS\ output/stops/Stops.shp
+
+$ shp2pgsql -S -s 2263 -d converted mta_subway_stops | psql [database]
+
+$ rm converted.* 
+
 
 3. Now, convert the data to 4326:
 
@@ -16,16 +32,24 @@ alter table mta_bus_routes drop constraint enforce_srid_the_geom;
 update mta_bus_routes set the_geom = st_transform(the_geom,4326);
 alter table mta_bus_routes add constraint enforce_srid_the_geom check (srid(the_geom) = 4326);
 
+(if you did the subways)
+alter table mta_subway_routes drop constraint enforce_srid_the_geom;
+update mta_subway_routes set the_geom = st_transform(the_geom,4326);
+alter table mta_subway_routes add constraint enforce_srid_the_geom check (srid(the_geom) = 4326);
+
+
 4. Extract the schedule data (in-place)
 
 ./manage.py mta_extract [dir containing schedule zip files -- probably surface-bus]
 
 5. Convert the schedule and route data to gtfs
 
-./manage.py mta_to_gtfs [dir containing schedule data] [table name for shape data: mta_bus_routes]
+./manage.py mta_bus_to_gtfs [dir containing schedule data] mta_bus_routes
+
+(if you did the subways)
+./manage.py mta_subway_to_gtfs [dir containing schedule data] mta_subway_routes
 
 6. Import the GTFS
 
 ./manage.py gtfs_import mta_data/bus-[borough].zip 
-(for each borough)
-
+(for each borough: B, Q, S, M, Bx)
