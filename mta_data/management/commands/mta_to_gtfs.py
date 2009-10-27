@@ -784,7 +784,7 @@ def handle_buses(dirname):
                 direction = fix_direction[trip_route_name].get(direction, direction)
             shapes = shapes_by_direction.get(direction)
 
-            shape = find_shape_by_stops(feed, shapes, stops, route_table_name)
+            shape = find_shape_by_stops(feed, shapes, stops, 'bus_route_table')
             if shape:
                 trip.shape_id = shape.shape_id
 
@@ -809,7 +809,7 @@ class Command(BaseCommand):
         try:
             if subway_route_table_name:
                 handle_subway(dirname)
-            handle_buses(dirname)
+            #handle_buses(dirname)
 
         except Exception, e:
             import traceback
