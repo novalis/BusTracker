@@ -369,7 +369,7 @@ def parse_schedule_dir(dirname, format):
                 for result in parse_schedule_dir(subdirname, format):
                     yield result
             else:
-                print subdirname
+                print "could not process %s" % subdirname
             
     use_files.sort()
     for filename, dirname, day_of_week in use_files:

@@ -6,6 +6,7 @@ def recursive_extract(dirname):
     files = os.listdir(dirname)
     for filename in files:
         if filename.endswith('.zip'):
+            print "Extracting %s" % filename
             zip = ZipFile(os.path.join(dirname, filename))
             zip.extractall(dirname)
 
