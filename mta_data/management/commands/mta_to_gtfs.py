@@ -379,6 +379,7 @@ subway_headsign = {
 }
 
 rename_subway_stops = {
+    'SOUTH FERRY TERMINAL' : 'SOUTH FERRY',
     '110TH STREET-BWAY' : 'CATHEDRAL PKY',
     '42ND ST.-TIMES SQ.' : 'TIMES SQ',
     'PELHAM BAY PKWY.' : 'PELHAM PKY',
@@ -651,7 +652,7 @@ def handle_buses(dirname):
         name = "%s%s" % (borough, 
                            route_rec['route_no'])
 
-        print name
+        print "processing route:", name
 
         if last_route != name:
             _shape_by_stops_cache.clear()
@@ -809,7 +810,7 @@ class Command(BaseCommand):
         try:
             if subway_route_table_name:
                 handle_subway(dirname)
-            #handle_buses(dirname)
+            handle_buses(dirname)
 
         except Exception, e:
             import traceback
