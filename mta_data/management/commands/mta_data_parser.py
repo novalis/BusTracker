@@ -368,6 +368,8 @@ def parse_schedule_dir(dirname, format):
             elif os.path.isdir(subdirname):
                 for result in parse_schedule_dir(subdirname, format):
                     yield result
+            elif subdirname.endswith('.zip'):
+                continue
             else:
                 print "could not process %s" % subdirname
             
