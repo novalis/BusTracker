@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 from mta_data_parser import parse_schedule_dir
 from mta_data.models import *
 from mta_data.utils import st_line_locate_point
+from subway_stop_to_gid import stop_id_to_gid
 from zipfile import ZipFile
 
 import os
@@ -378,116 +379,6 @@ subway_headsign = {
            'S' : 'Broad Street'},
 }
 
-rename_subway_stops = {
-    'SOUTH FERRY TERMINAL' : 'SOUTH FERRY',
-    '110TH STREET-BWAY' : 'CATHEDRAL PKY',
-    '42ND ST.-TIMES SQ.' : 'TIMES SQ',
-    'PELHAM BAY PKWY.' : 'PELHAM PKY',
-    'EAST 238TH STREET' : 'NEREID AVE',
-    'ST. LAWRENCE AVENUE' : 'ST LAWRENCE AVE',
-    'SOUNDVIEW AVENUE' : 'MORRISON AVE',
-    '138TH ST. THIRD AVENUE' : '3RD AVE',
-    'HUNTERS POINT AVENUE' : 'HUNTERSPOINT AVE',
-    'TIMES SQUARE QUEENS' : 'TIMES SQ',
-    'HOYT STREET-SCH' : 'HOYT-SCHERMERHORN STS',
-    'BROADWAY JUNCTION-ENY' : 'BROADWAY-EAST NEW YORK',
-    'BROADWAY-NASSAU' : 'BROADWAY-NASSAU ST',
-    'WEST 4 ST-UPPER LEVEL' : 'W 4TH ST',
-    'WEST 4 ST-LOWER LEVEL' : 'W 4TH ST',
-    'MOTT AVENUE  FAR ROCKAWAY' : 'FAR ROCKAWAY',
-    '9TH STREET' : '9TH ST',
-    '25TH STREET' : '25TH ST',
-    '25 AVENUE' : '25TH AVE',
-    'NINTH AVENUE' : '9TH AVE',
-    'NINTH AVE (WEST END)' : '9TH AVE',
-    'BAY 50 STREET' : 'BAY 50TH ST',
-    'STILLWELL AVE.  C.I.' : 'CONEY ISLAND',
-    'FORT HAMILTON PKWAY' : 'FT HAMILTON PKY',
-    'FORT HAMILTON PKWY.' : 'FORT HAMILTON PKY',
-    'VAN WYCK-JAMAICA' : 'JAMAICA-VAN WYCK',
-    'UNION TURNPIKE' : 'UNION TPKE',
-    'PARSONS-ARCHER' : 'JAMAICA CENTER/ PARSONS ARCHER',
-    'SECOND AVENUE' : '2ND AVE',
-    'DELANCY STREET' : 'DELANCEY ST', #thanks, MTA
-    'EAST BROADWAY' : 'EAST BROADWAY', 
-    '4TH AVENUE' : '4TH AVE',
-    '22 AVENUE-BAY PARKWAY' : 'BAY PKY',
-    'VAN SICKLEN AVENUE (CULVER)' : 'NEPTUNE AVE',
-    'BOTANIC GARDENS-E PKWY' : 'BOTANIC GARDEN',
-    'ELDERTS LANE' : '75TH ST-ELDERT LN',
-    'BROADWAY JUNCTION-EPY' : 'EASTERN PKY',
-    'GATES AVENUE' : 'GATES ST',
-    'BROADWAY-MYRTLE' : 'MYRTLE AVE',
-    'BROADWAY JUNCTION' : 'BROADWAY JCT',
-    'BUSHWICK AVENUE' : 'BUSHWICK-ABERDEEN',
-    'BEVERLEY ROAD' : 'BEVERLY RD',
-    
-}
-
-abbreviations = {
-    "STATION" : "",
-    "SQUARE" : "SQ",
-    "STREET" : "ST",
-    " ROAD" : " RD",
-    "AVENUE" : "AVE",
-    "PLAZA" : "PLZ",
-    "WEST " : "W ",
-    "EAST " : "E ",
-    "PARKWAY" : "PKY",
-    "PLACE" : "PL",
-    "BOULEVARD" : "BLVD",
-    "BURHE" : "BUHRE", #it's misspelled somewhere
-    "HIGHWAY" : "HWY",
-
-}
-
-addl_lines = {
-    "4" : "6",
-    "A" : "C",
-    "D" : "R",
-    "N" : "R",
-    "E" : "FV",
-
-
-}
-
-
-stop_id_to_gid = {
-    '201' : 64,
-    '503' : 67,
-    '208' : 59,
-    '504' : 56,
-    '211' : 66,
-    '415' : 126,
-    'D14' : 255,
-    'D25' : 383,
-    'R36' : 406,
-    'B14' : 416,
-    'B17' : 419,
-    'B20' : 422,
-    'G06' : 464,
-    'F09' : 258,
-    'F11' : 257,
-    'F12' : 256,
-    'B08' : 466,
-    'D18' : 294,
-    'D19' : 293,
-    'S01' : 224,
-    'M21' : 305,
-    'N10' : 434,
-    'N06' : 430,
-    'N04' : 428,
-    'N03' : 427,
-    'N02' : 426,
-    'R23' : 373,
-    'Q01' : 380,
-    'R21' : 371,
-    'R06' : 357,
-    'R05' : 358,
-
-
-}
-
 def handle_subway(dirname):
 
     feed = transitfeed.Loader("mta_data/subway-gtfs.zip", memory_db=False).Load() #base data
@@ -546,71 +437,7 @@ def handle_subway(dirname):
                     gtfs_stop = feed.GetStop(stop_id)
                 else:
                     stop = stops_by_id[stop_id]
-
-                    #first, the table
-                    translated_full_name = stop['full_name']
-                    #remove anything following a dot or a dash or an open paren                    
-                    for endchar in ['.','-','(','  ']:
-                        if endchar in translated_full_name:
-                            translated_full_name = translated_full_name[:translated_full_name.index(endchar)]
-
-                    #abbreviations
-                    for long, abbreviated in abbreviations.items():
-                        translated_full_name = translated_full_name.replace(long, abbreviated)
-
-
-                    translated_full_name = translated_full_name.strip()
-                    translated_full_name = translated_full_name.replace("  ", " ")
-
-
-                    number_st_re = re.compile('^(\d+)')
-                    number_st = number_st_re.match(translated_full_name)
-                    is_num = False
-                    if number_st:
-                        translated_full_name = number_st.group(1)
-                        is_num = True
-
-                    translated_full_name = rename_subway_stops.get(stop['full_name'], translated_full_name
-)
-                    possible_stops = MTASubwayStop.objects.filter(routes__contains=line_name, facility__contains=translated_full_name)
-
-
-                    #the A makes C stops late at night
-                    if line_name in addl_lines:
-                        possible_stops = list(possible_stops)
-
-                        for addl_line in addl_lines[line_name]:
-                            addl_possible_stops = MTASubwayStop.objects.filter(routes__contains=addl_line, facility__contains=translated_full_name)
-                            for addl_stop in addl_possible_stops:
-                                if not addl_stop in possible_stops:
-                                    possible_stops.append(addl_stop)
-
-                    #hard coded stop id
-                    if stop_id in stop_id_to_gid:
-                        possible_stops = MTASubwayStop.objects.filter(gid = stop_id_to_gid[stop_id])
-
-                    if is_num:
-                        #we need to make sure our search for 23rd st doesn't
-                        #bring up 232nd st.
-                        new_possible_stops = []
-                        num_re = re.compile("(^|\D)" + translated_full_name + "($|\D)")
-                        for possible_stop in possible_stops:
-                            if num_re.search(possible_stop.facility):
-                                new_possible_stops.append(possible_stop)
-                        possible_stops = new_possible_stops
-
-
-                    if len(possible_stops) == 0:
-                        print "no stops for %s on the %s (translated to %s)" % (stop['full_name'], line_name, translated_full_name)
-                        print "possible stops are %s" % sorted([s.facility for s in MTASubwayStop.objects.filter(routes__contains=line_name)])
-                        import pdb;pdb.set_trace()
-                        continue
-                    elif len(possible_stops) > 1:
-                        print "too many stops for %s on the %s (translated to %s): %s" % (stop['full_name'], line_name, translated_full_name, [(s.facility, s.gid, s.routes) for s in possible_stops])
-                        import pdb;pdb.set_trace()
-                        continue
-                    else:
-                        dbstop = possible_stops[0]
+                    dbstop = MTASubwayStop.objects.filter(gid=stop_id_to_gid[stop_id])[0]
 
                     gtfs_stop = transitfeed.Stop(
                         lng=dbstop.the_geom.x,
@@ -810,7 +637,7 @@ class Command(BaseCommand):
         try:
             if subway_route_table_name:
                 handle_subway(dirname)
-            handle_buses(dirname)
+            #handle_buses(dirname)
 
         except Exception, e:
             import traceback
