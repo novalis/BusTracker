@@ -44,10 +44,7 @@ alter table mta_subway_routes add constraint enforce_srid_the_geom check (srid(t
 
 5. Convert the schedule and route data to gtfs
 
-./manage.py mta_bus_to_gtfs [dir containing schedule data] mta_bus_routes
-
-(if you did the subways)
-./manage.py mta_subway_to_gtfs [dir containing schedule data] mta_subway_routes
+./manage.py mta_to_gtfs [dir containing schedule data] mta_bus_routes mta_subway_routes mta_subway_stops
 
 6. Import the GTFS
 
