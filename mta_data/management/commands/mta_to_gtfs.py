@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from mta_data_parser import parse_schedule_dir
 from mta_data.models import *
 from mta_data.utils import st_line_locate_point
-from subway_stop_to_gid import stop_id_to_gid
+from subway_stop_to_gid import stop_id_to_gid, end_of_line
 from zipfile import ZipFile
 
 import os
@@ -432,21 +432,36 @@ def handle_subway(dirname):
                     #Cortland St
                     continue
 
+                direction = trip['direction']
+
                 stop_id = tripstop['stop_id']
-                if stop_id in feed.stops:
+                dir_stop_id = stop_id + "_" + direction
+                if dir_stop_id in feed.stops:
+                    gtfs_stop = feed.GetStop(dir_stop_id)
+                elif stop_id in feed.stops:
                     gtfs_stop = feed.GetStop(stop_id)
                 else:
-                    stop = stops_by_id[stop_id]
                     dbstop = MTASubwayStop.objects.filter(gid=stop_id_to_gid[stop_id])[0]
-
-                    gtfs_stop = transitfeed.Stop(
-                        lng=dbstop.the_geom.x,
-                        lat=dbstop.the_geom.y,
-                        stop_id=stop_id,
-                        name=dbstop.facility
-                        )
-                    feed.AddStopObject(gtfs_stop)            
-
+                    if stop_id in end_of_line:
+                        gtfs_stop = transitfeed.Stop(
+                            lng=dbstop.the_geom.x,
+                            lat=dbstop.the_geom.y,
+                            stop_id=stop_id,
+                            name=dbstop.facility
+                            )
+                        feed.AddStopObject(gtfs_stop)
+                    else:
+                        for new_direction in 'NS':                        
+                            new_gtfs_stop = transitfeed.Stop(
+                                lng=dbstop.the_geom.x,
+                                lat=dbstop.the_geom.y,
+                                stop_id=stop_id + "_" + new_direction,
+                                name=dbstop.facility
+                                )
+                        feed.AddStopObject(new_gtfs_stop)
+                        if new_direction == direction:
+                            gtfs_stop = new_gtfs_stop
+                
                 stop_time = google_time_from_centiminutes(tripstop['stop_time'])
                 gtfs_trip.AddStopTime(gtfs_stop, stop_time=stop_time)
 
