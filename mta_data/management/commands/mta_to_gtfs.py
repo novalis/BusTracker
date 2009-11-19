@@ -9,6 +9,7 @@ from zipfile import ZipFile
 import os
 import re
 import transitfeed
+import zipfile
 
 rename_location = {
 'BROADWAY at 207 ST' : 'BROADWAY at W 207 ST',
@@ -466,6 +467,11 @@ def handle_subway(dirname):
                 gtfs_trip.AddStopTime(gtfs_stop, stop_time=stop_time)
 
     feed.WriteGoogleTransitFeed('mta_data/subway.zip')
+    #add back extra files
+    z = zipfile.ZipFile('mta_data/subway.zip', 'a', zipfile.ZIP_DEFLATED)
+    z.write('mta_data/subway-gtfs/entrances.txt', 'entrances.txt')
+    z.write('mta_data/subway-gtfs/stop_entrances.txt', 'stop_entrances.txt')
+    z.close()
 
 def handle_buses(dirname):
 

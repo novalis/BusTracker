@@ -1,0 +1,1905 @@
+entrance_id,entrance_name,entrance_lon,entrance_lat,entrance_type
+1,Broadway & 242nd St At Nw Corner,40.8898073564,-73.8984308072,0
+2,Broadway & 242nd St At Nw Corner,40.8901750037,-73.8982711075,0
+3,Grand Concourse & 188th St At Sw Corner,40.8614296393,-73.898054783,0
+4,Broadway & 242nd St At Ne Corner,40.8897026342,-73.89794994,0
+5,Grand Concourse & 188th St At Nw Corner,40.8615942412,-73.8979641503,0
+6,Broadway & 242nd St At Ne Corner,40.8899906979,-73.8978048273,0
+7,Jerome Ave & Kingsbridge Rd At Nw Corner,40.8676348987,-73.8974848605,0
+8,Grand Concourse & 188th St At Se Corner,40.8611656102,-73.8974478352,0
+9,201 East 188 Street,40.8613631673,-73.8973788416,0
+10,Jerome Ave & Kingsbridge Rd At Ne Corner,40.8675989604,-73.8971956724,0
+11,Jerome Ave & Kingsbridge Rd At Ne Corner,40.867749796,-73.8970580482,0
+12,Grand Concourse & Fordham Rd At Se Corner,40.8623151612,-73.8969110045,0
+13,Grand Concourse & Fordham Rd At Ne Corner,40.8626827209,-73.8966537501,0
+14,Grand Concourse & Kingsbridge Rd At Nw Corner,40.8663834009,-73.8945329444,0
+15,Grand Concourse & Kingsbridge Rd At Ne Corner,40.8661993211,-73.8943307701,0
+16,Grand Concourse & Kingsbridge Rd At Ne Corner,40.8661468768,-73.894009077,0
+17,Grand Concourse & 196th St At Nw Corner,40.8680811693,-73.8932286464,0
+18,Grand Concourse & 196th St At Se Corner,40.8677623994,-73.8928133696,0
+19,White Plains Rd & Pelham Pkwy At Se Corner,40.856427987,-73.8675415332,0
+20,700 Pelham Parkway South,40.8564333186,-73.8674041549,0
+21,White Plains Rd & Pelham Pkwy At Sw Corner,40.8564666989,-73.867790887,0
+22,White Plains Rd & Pelham Pkwy At Nw Corner,40.8580585737,-73.8677443422,0
+23,White Plains Rd & Pelham Pkwy At Ne Corner,40.8580665175,-73.8674912745,0
+24,White Plains Rd & Allerton Ave At Se Corner,40.865358882,-73.8672236641,0
+25,White Plains Rd & Allerton Ave At Nw Corner,40.8655568739,-73.8675486579,0
+26,White Plains & Burke Ave At Se Corner,40.8713805449,-73.8670453155,0
+27,White Plains Rd & Burke Ave At Nw Corner,40.87157573,-73.8673161074,0
+28,Grand Concourse & Bedofrd Park Blvd At Ne Corner,40.8721543298,-73.8874838442,0
+29,Grand Concourse & Bedford Park Blvd At Se Corner,40.8722177781,-73.8878127742,0
+30,Grand Concourse & Bedford Park Blvd At Nw Corner,40.8725060795,-73.8879243779,0
+31,Jerome Ave & Bedford Park Blvd At Sw Corner,40.8735481039,-73.8897775617,0
+32,Grand Concourse & 203rd St At Ne Corner,40.8740170436,-73.8865297122,0
+33,Grand Concourse & 203rd St At Nw Corner,40.8740339234,-73.8869491271,0
+34,Perry Ave & 205th St At Se Corner,40.8740928942,-73.87749707,0
+35,Perry Ave & 205th St At Nw Corner,40.8742603778,-73.8775510001,0
+36,Bainbridge Ave & 205th St At Se Corner,40.8749155257,-73.8793649968,0
+37,Bainbridge Ave & 205th St At Ne Corner,40.875074729,-73.8793755558,0
+38,White Plains Rd & 211th St At Sw Corner,40.8777883569,-73.8661357093,0
+39,White Plains Rd & 211th St At Sw Corner,40.8778957768,-73.8664609425,0
+40,Jerome Ave & Mosholu Pkwy At Se Corner,40.8792278591,-73.8851575204,0
+41,Jerome Ave & Mosholu Pkwy At Sw Corner,40.8793652876,-73.885352557,0
+42,Jerome Ave & Mosholu Pkwy At Se Corner,40.8793731547,-73.8849836925,0
+43,Jerome Ave & Mosholu Pkwy At Sw Corner,40.8795105907,-73.8851859616,0
+44,Jerome Ave & Mosholu Pkwy At Ne Corner,40.8800585237,-73.8841797056,0
+45,Jerome Ave & Mosholu Pkwy At Ne Corner,40.880179141,-73.8840312301,0
+46,Jerome Ave & Mosholu Pkwy At Nw Corner,40.8801959755,-73.8843964399,0
+47,Jerome Ave & Mosholu Pkwy At Nw Corner,40.8803193415,-73.884251576,0
+48,Jerome Ave & Bainbridge Ave At Se Corner,40.8867548452,-73.8781464226,0
+49,Jerome Ave & Bainbridge Ave At Sw Corner,40.8868374565,-73.8784030492,0
+50,Grand Concourse & Echo Pl At Sw Corner,40.8499772326,-73.9059774346,0
+51,Grand Concourse & Echo Pl At Nw Corner,40.8500814576,-73.9058869225,0
+52,Grand Concourse & Echo Pl At Ne Corner,40.8499602263,-73.9053196042,0
+53,Broadway & 231st St At Sw Corner (To Manhattan Only),40.8787930658,-73.9050507275,0
+54,Grand Concourse & 179th St At Sw Corner,40.8511402165,-73.905035982,0
+55,Broadway & 231st St At Se Corner (To Van Cortlandt Pk Only),40.8787133001,-73.904844721,0
+56,Broadway & 231st St At Nw Corner (To Manhattan Only),40.8791880745,-73.9047753342,0
+57,Broadway & 231st St At Ne Corner (To Van Cortlandt Pk Only),40.879111047,-73.9045620906,0
+58,Grand Concourse & 179th St At Ne Corner,40.8511478923,-73.9043600316,0
+59,Jerome Ave & 183rd St At Sw Corner,40.8583744898,-73.9041110468,0
+60,Jerome Ave & 183rd St At Nw Corner,40.8585143853,-73.9040096237,0
+61,Jerome Ave & 183rd St At Ne Corner,40.8584483047,-73.9037602809,0
+62,Jerome Ave & Fordham Rd At Sw Corner,40.8626621758,-73.9014042539,0
+63,Jerome Ave & Fordham Rd At Nw Corner,40.8629336997,-73.9011688575,0
+64,Grand Concourse & 182nd St At Sw Corner,40.8561185562,-73.9011103011,0
+65,Jerome Ave & Fordham Rd At Se Corner,40.8626591123,-73.9010318851,0
+66,Grand Concourse & 182nd St At Nw Corner,40.856236507,-73.9010269824,0
+67,Broadway & 238th St At Sw Corner (To Manhattan Only),40.8848526323,-73.9009409826,0
+68,Jerome Ave & Fordham Rd At Ne Corner,40.8628620957,-73.9008869716,0
+69,Broadway & 238th St At Ne Corner (To Van Cortlandt Pk Only),40.8849346899,-73.9006117601,0
+70,Grand Concourse & 182nd St At Se Corner,40.8559589194,-73.9005936061,0
+71,Broadway & 238th St At Se Corner (To Van Cortlandt Pk Only),40.8852090462,-73.9004811559,0
+72,Grand Concourse & 182nd St At Ne Corner,40.8560521644,-73.9005067088,0
+73,Metropolitan Ave & Westchester Ave At Sw Corner,40.8331313962,-73.8609748925,0
+74,Metropolitan Ave & Westchester Ave At Nw Corner,40.833362004,-73.8610177749,0
+75,Castle Hill Ave & Westchester Ave At Sw Corner,40.8341108292,-73.8518120495,0
+76,Castle Hill Ave & Westchester Ave At Ne Corner,40.8343630402,-73.8515765946,0
+77,Westchester Ave & Zerega Ave At Se Corner,40.8366868619,-73.8466529375,0
+78,Westchester Ave & Zerega Ave At Nw Corner,40.8369642213,-73.8467607147,0
+79,Westchester Ave & Ferris Pl At Sw Corner,40.8402278593,-73.8428102581,0
+80,Westchester Ave & Middletown Rd At Ne Corner,40.8435759513,-73.836556937,0
+81,Westchester Ave & Middletown Rd At Nw Corner,40.8438970508,-73.8365344625,0
+82,Edison Ave & Westchester Ave At Se Corner,40.8468307396,-73.8324248876,0
+83,Edison Ave & Buhre Ave At Sw Corner,40.846998392,-73.8325798857,0
+84,Edison Ave & Westchester Ave At Ne Corner,40.847231303,-73.8323118308,0
+85,Esplanade & Paulding Ave At W Corner,40.8545831605,-73.8602360043,0
+86,Esplanade & Laconia Ave At Ne Corner,40.8587548552,-73.8555710334,0
+87,Seymour Ave & Gun Hill Rd At Se Corner,40.870206888,-73.8458452674,0
+88,Baychester Ave & Tillotson Ave At Nw Corner,40.8793054168,-73.8377347683,0
+89,Baychester Ave & Tillotson Ave At Nw Corner,40.879648792,-73.8379400539,0
+90,White Plains Rd & 219th St At Se Corner,40.8835070468,-73.8627356175,0
+91,White Plains Rd & 219th St At Nw Corner,40.8837131517,-73.8629485609,0
+92,White Plains Rd & 225th St At Se Corner,40.8877365724,-73.860412234,0
+93,White Plains Rd & 225th St At Sw Corner,40.8878137075,-73.860647154,0
+94,White Plains Rd & 225th St At Nw Corner,40.887926174,-73.8605926685,0
+95,Dyre Ave & Light St At Ne Corner,40.8880105172,-73.8312505523,0
+96,White Plains Rd & 233rd St At Se Corner,40.8932825264,-73.8573008677,0
+97,White Plains Rd & 233rd St At Nw Corner,40.8935654607,-73.8574883421,0
+98,White Plains Rd & Nereid Ave At Se Corner,40.8983426699,-73.8542587748,0
+99,White Plains Rd & Nereid Ave At Nw Corner,40.8986337653,-73.8543847397,0
+100,White Plains Rd & 241st St At Se Corner,40.9033027933,-73.8503446276,0
+101,White Plains Rd & 241st St At Ne Corner,40.903530376,-73.8501704751,0
+102,White Plains Rd & 241st St At Nw Corner,40.9035965999,-73.8504416386,0
+103,River Ave & 161st St At Sw Corner,40.8276885163,-73.9263413876,0
+104,River Ave & 161st St At Se Corner,40.8277595733,-73.9258643431,0
+105,River Ave & 161st St At Sw Corner,40.8278037019,-73.9261967249,0
+106,River Ave & 161st St At Ne Corner,40.8278830133,-73.9257521906,0
+107,River Ave & 161st St At Nw Corner,40.827982025,-73.9260664451,0
+108,River Ave & 161st St At Ne Corner,40.8280366521,-73.9256508442,0
+109,River Ave & 161st St At Ne Corner,40.8281491434,-73.9255856773,0
+110,Hillside Ave & Nagle Ave At Sw Corner,40.8612006218,-73.9251365629,0
+111,Hillside Ave & Nagle Ave At Sw Corner,40.8612060901,-73.92510402,0
+112,Broadway & Dyckman St At Se Corner,40.8652669071,-73.9273048502,0
+113,Broadway & Dyckman St At Se Corner,40.8653136488,-73.9274349542,0
+114,Broadway & Dyckman St At Sw Corner,40.8653634157,-73.9280133672,0
+115,Broadway & Dyckman St At Ne Corner,40.8653819743,-73.9269721056,0
+116,Broadway & Dyckman St At Ne Corner,40.8654533638,-73.9270154123,0
+117,4761 Broadway,40.8657636286,-73.9271958439,0
+118,4761 Broadway,40.8657774114,-73.9272898303,0
+119,Saint Nicholas Ave & 145th St At Se Corner,40.8238342422,-73.9447438874,0
+120,Saint Nicholas Ave & 145th St At Sw Corner,40.8239551495,-73.9450364539,0
+121,Saint Nicholas Ave & 145th St At Ne Corner,40.8240701558,-73.9444690901,0
+122,Saint Nicholas Ave & 145th St At Nw Corner,40.8242460238,-73.9448989125,0
+123,Saint Nicholas Ave & 146th St At Nw Corner,40.8248688576,-73.9444467442,0
+124,Saint Nicholas Ave & 147th St At Ne Corner,40.8254311155,-73.9436043874,0
+125,741 St Nicholas Avenue,40.8255602669,-73.9439114048,0
+126,Saint Nicholas Ave & 155th St At Sw Corner,40.8307740769,-73.9415979569,0
+127,Saint Nicholas Ave & 155th St At Sw Corner,40.8308728975,-73.9416195514,0
+128,Saint Nicholas Ave & 155th St At Ne Corner,40.8309467568,-73.9411316573,0
+129,Saint Nicholas Ave & 155th St At Ne Corner,40.8310099073,-73.9411749641,0
+130,Saint Nicholas Ave & 155th St At Nw Corner,40.8312159866,-73.9416192504,0
+131,Saint Nicholas Ave & 155th St At Nw Corner,40.8312324237,-73.9415578053,0
+132,Broadway & 157th St At Se Corner (Uptown Only),40.8339017957,-73.9446198875,0
+133,Broadway & 157th St At Se Corner (Uptown Only),40.8339128283,-73.9447319033,0
+134,Broadway & 157th St At Nw Corner (Downtown Only),40.8342561035,-73.945121901,0
+135,Broadway & 157th St At Nw Corner (Downtown Only),40.834286328,-73.945190537,0
+136,Hunts Point Ave & 163rd St At Sw Corner,40.820659316,-73.8915994009,0
+137,Hunts Point Ave & 163rd St At Se Corner,40.8207136176,-73.890970651,0
+138,Hunts Point Ave & 163rd St At Se Corner,40.8208119102,-73.8904249266,0
+139,Whitlock Ave & Westchester Ave At Se Corner,40.8273922987,-73.8860997388,0
+140,Whitlock Ave & Westchester Ave At Sw Corner,40.8274419032,-73.8863020022,0
+141,Elder Ave & Westchester Ave At Sw Corner,40.8284914664,-73.8792648808,0
+142,Elder Ave & Westchester Ave At Ne Corner,40.8287520777,-73.8791343243,0
+143,Morrison Ave & Westchester Ave At Sw Corner,40.8294005633,-73.8746777386,0
+144,Morrison Ave & Westchester Ave At Nw Corner,40.829636687,-73.8747495635,0
+145,1200 Morrison Avenue,40.8296941256,-73.8745651677,0
+146,Southern Blvd & Freeman St At Sw Corner (To Manhattan Only),40.8300521731,-73.8920610807,0
+147,Southern Blvd & Freeman St At Se Corner (Northbound Only),40.8301258091,-73.8915586836,0
+148,Southern Blvd & Freeman St At Ne Corner (Northbound Only),40.8302218196,-73.8915007109,0
+149,Southern Blvd & Freeman St At Nw Corner (To Manhattan Only),40.8303705461,-73.8920461101,0
+150,St Lawrence Ave & Westchester Ave At Sw Corner,40.8315112916,-73.8673526412,0
+151,St Lawrence Ave & Westchester Ave At Ne Corner,40.8317938387,-73.8672147611,0
+152,Boston Rd & 174th St At Se Corner (Northbound Only),40.8372610066,-73.8875862238,0
+153,Boston Rd & 174th St At Ne Corner (Northbound Only),40.8373650445,-73.8873186194,0
+154,Boston Rd & 174th St At Sw Corner (To Manhattan Only),40.8374068699,-73.8879907346,0
+155,Boston Rd & 174th St At Nw Corner (To Manhattan Only),40.8375549225,-73.8878242454,0
+156,Boston Rd & E Tremont Ave At Nw Corner,40.8402510304,-73.880425336,0
+157,Boston Rd & E Tremont Ave At Ne Corner,40.840371204,-73.8798540978,0
+158,Boston Rd & 178th St At Sw Corner,40.8406456671,-73.8798463739,0
+159,Boston Rd & 178th St At Se Corner,40.840724913,-73.879510121,0
+160,Boston Rd & 178th St At Nw Corner,40.8410981023,-73.8794227065,0
+161,Morris Park Ave & 180th St At Nw Corner,40.8412152856,-73.8735134225,0
+162,Morris Park Ave & 180th St At Nw Corner,40.8414561164,-73.8728732646,0
+163,Birchall Ave & Sagamore St At Se Corner,40.8488809895,-73.8683662161,0
+164,Birchall Ave & Sagamore St At Ne Corner,40.849070279,-73.8682827071,0
+165,Birchall Ave & Sagamore St At Nw Corner,40.8491171163,-73.8684380397,0
+166,Grand Concourse & 167th St At Se Corner,40.8343055892,-73.9175888265,0
+167,3rd Ave & 149th St At Se Corner (Northbound Only),40.8158994871,-73.91754659,0
+168,3rd Ave & 149th St At Nw Corner (To Manhattan Only),40.8162590065,-73.9174919533,0
+169,Grand Concourse & 167th St At Ne Corner,40.8346264926,-73.9172704189,0
+170,10th Ave & 215th St At Sw Corner (Downtown Only),40.8694088576,-73.9155133316,0
+171,10th Ave & 215th St At Se Corner (Uptown Only),40.8693290732,-73.9152567228,0
+172,10th Ave & 215th St At Nw Corner (Downtown Only),40.8698093388,-73.9151801818,0
+173,10th Ave & 215th St At Ne Corner (Uptown Only),40.8697488065,-73.914977782,0
+174,Jerome Ave & Cross Bronx Expwy At Sw Corner,40.8447196452,-73.9146736424,0
+175,Jerome Ave & Mt Eden Ave At Ne Corner,40.8443765062,-73.9146054112,0
+176,Grand Concourse & 170th St At Sw Corner,40.8386836704,-73.9141898838,0
+177,Grand Concourse & 170th St At Nw Corner,40.8390649559,-73.9138822027,0
+178,Grand Concourse & 170th St At Se Corner,40.8384636756,-73.9136300038,0
+179,Grand Concourse & 171st St At Nw Corner,40.8401157865,-73.9133568052,0
+180,Grand Concourse & 171st St At Ne Corner,40.8397695093,-73.9127681692,0
+181,Jerome Ave & 176th St At Nw Corner,40.8483407309,-73.9121063195,0
+182,Grand Concourse & 174th St At Nw Corner,40.8448738021,-73.9116301973,0
+183,Jerome Ave & 176th St At Se Corner,40.8485654183,-73.9116108349,0
+184,Grand Concourse & 174th St At Nw Corner,40.8448955128,-73.9113084949,0
+185,Grand Concourse & 174th St At Ne Corner,40.8449665381,-73.9108710684,0
+186,Broadway & 225th St At Nw Corner (Downtown Only),40.8744718373,-73.9105675559,0
+187,Broadway & 225th St At Se Corner (To Bronx Only),40.8743257862,-73.9098192592,0
+188,Grand Concourse & 175th St At Sw Corner,40.846549353,-73.9097376406,0
+189,Grand Concourse & 175th St At Ne Corner,40.8463156077,-73.9091704991,0
+190,Jerome Ave & Burnside Ave At Sw Corner,40.8533328931,-73.9080005759,0
+191,Jackson Ave & 152nd St At Ne Corner (Northbound Only),40.8161831891,-73.9079796769,0
+192,Jackson Ave & 152nd St At Ne Corner (Northbound Only),40.81636699,-73.9078602016,0
+193,Jerome Ave & Burnside Ave At Se Corner,40.8532009916,-73.9078055612,0
+194,Jackson Ave & Westchester Ave At Ne Corner (To Manhattan Only),40.8166469426,-73.9078489757,0
+195,Jerome Ave & Burnside Ave At Sw Corner,40.8536894472,-73.9076783666,0
+196,Jerome Ave & Burnside Ave At Se Corner,40.8536151317,-73.9074182054,0
+197,Broadway & 207th St At Sw Corner,40.8678183795,-73.9214448624,0
+198,River Ave & 167th St At Sw Corner,40.8357218302,-73.9214791462,0
+199,River Ave & 167th St At Ne Corner,40.8358837336,-73.9214283617,0
+200,Broadway & 207th St At Se Corner,40.8675520678,-73.9213330952,0
+201,River Ave & 167th St At Se Corner,40.8356310946,-73.921244356,0
+202,4941 Broadway,40.8679828886,-73.9211915786,0
+203,River Ave & 167th St At Nw Corner,40.8357902187,-73.9211429808,0
+204,Broadway & 207th St At Sw Corner,40.8676506495,-73.9210003484,0
+205,Broadway & Isham St At Nw Corner,40.8683056902,-73.919636496,0
+206,Grand Concourse & Mcclellan St At Sw Corner,40.8331294055,-73.9194260277,0
+207,Broadway & 211th St At Ne Corner,40.8680502066,-73.9193114037,0
+208,10th Ave & 207th St At Sw Corner (Downtown Only),40.864347542,-73.919214666,0
+209,10th Ave & 207th St At Se Corner (Uptown Only),40.8642760025,-73.9189616776,0
+210,10th Ave & 207th St At Nw Corner (Downtown Only),40.8647178731,-73.9189249853,0
+211,Grand Concourse & Mcclellan St At Se Corner,40.8329313809,-73.918848082,0
+212,10th Ave & 207th St At Ne Corner (Uptown Only),40.8645667775,-73.918729939,0
+213,Grand Concourse & 167th St At Sw Corner,40.8344844173,-73.9181812589,0
+214,Melrose Ave & 149th St At Sw Corner (Northbound Only),40.8160508329,-73.9180883139,0
+215,Jerome Ave & 170th St At Sw Corner,40.8400341084,-73.9180190296,0
+216,Melrose Ave & 149th St At Sw Corner (Northbound Only),40.815982161,-73.9180125309,0
+217,Melrose Ave & 149th St At Nw Corner (To Manhattan Only),40.8162730318,-73.9179146282,0
+218,Grand Concourse & 167th St At Nw Corner,40.834808067,-73.9178628499,0
+219,Jerome Ave & 170th St At Se Corner,40.8399433787,-73.917802299,0
+220,Melrose Ave & 149th St At Nw Corner (To Manhattan Only),40.8162729648,-73.9178206966,0
+221,3rd Ave & 149th St At Se Corner (Northbound Only),40.8158776764,-73.9177525428,0
+222,Jerome Ave & 170th St At Se Corner,40.8401299183,-73.9176611206,0
+223,Melrose Ave & 149th St At Ne Corner (To Manhattan Only),40.8162618416,-73.9176183962,0
+224,Adam C. Powell Blvd & 149th St At Ne Corner,40.8242062722,-73.9369535527,0
+225,Frederick Douglass Blvd & 156th St At Nw Corner,40.8301237809,-73.9367744973,0
+226,Lenox Ave & 145th St At Sw Corner (Downtown Only),40.8203634296,-73.9365200234,0
+227,Lenox Ave & 145th St At Nw Corner (Downtown Only),40.8206597395,-73.9363029612,0
+228,Lenox Ave & 145th St At Se Corner (Exit Only),40.8201958643,-73.9362708885,2
+229,Lenox Ave & 145th St At Ne Corner (Exit Only),40.8206101504,-73.9359706137,2
+230,Fort Washington Ave & Margaret Corbin Dr At Se Corner,40.8585713676,-73.9344338206,0
+231,Saint Nicholas Ave & 181st St At Se Corner,40.8491895731,-73.9337346181,0
+232,1422 St Nicholas Avenue,40.8494418735,-73.9333656821,0
+233,Fort Washington Ave & 192nd St At Nw Corner,40.8586418275,-73.9328648171,0
+234,Broadway & 190th St At Ne Corner,40.856484384,-73.932679018,0
+235,Grand Concourse & 138th St At Nw Corner,40.8133139183,-73.9299337645,0
+236,Grand Concourse & 138th St At Ne Corner,40.8131875227,-73.9297063046,0
+237,1611 St Nicholas Avenue,40.8554011536,-73.9296327711,0
+238,Southern Blvd & 149th St At Se Corner (To Pelham Bay Pk Only),40.8118681786,-73.9042322389,0
+239,Southern Blvd & 149th St At Ne Corner (To Pelham Bay Pk Only),40.8120463058,-73.9038960177,0
+240,849a East 149 Street (To Manhattan Only),40.8123841199,-73.9041520205,0
+241,Southern Blvd & 149th St At Nw Corner (To Manhattan Only),40.8123920863,-73.9038304926,0
+242,1030 Longwood Avenue (To Pelham Bay Pk Only),40.8161375099,-73.8962057948,0
+243,Southern Blvd & Longwood Ave At Sw Corner (To Manhattan Only),40.8163463845,-73.8965125536,0
+244,Southern Blvd & Longwood Ave At Ne Corner (To Pelham Bay Pk Only),40.8164035294,-73.8959633248,0
+245,1025 Longwood Avenue (To Manhattan Only),40.8165712241,-73.8962593099,0
+246,Jackson Ave & Westchester Ave At Nw Corner (To Manhattan Only),40.8168799341,-73.9074620848,0
+247,Prospect Ave & Longwood Ave At Ne Corner (Northbound Only),40.8195784865,-73.9014319574,0
+248,Westchester & 160th St At Sw Corner (To Manhattan Only),40.8196530897,-73.9020135301,0
+249,Prospect Ave & Longwood Ave At Ne Corner (Northbound Only),40.8197019494,-73.9013739675,0
+250,Prospect Ave & 160th St At Nw Corner (To Manhattan Only),40.8199218105,-73.9017060334,0
+251,Intervale Ave & Westchester Ave At Se Corner,40.822041898,-73.8967566109,0
+252,Intervale Ave & Westchester Ave At Ne Corner,40.8223519732,-73.8966694158,0
+253,Intervale Ave & Westchester Ave At Ne Corner,40.822395963,-73.8967524485,0
+254,Westchester Ave & Simpson St At Sw Corner (Northbound Only),40.8239131394,-73.8930249158,0
+255,Westchester Ave & Simpson St At Se Corner (Northbound Only),40.8241379576,-73.8927571789,0
+256,Westchester Ave & Simpson St At Nw Corner (To Manhattan Only),40.8241959521,-73.8931400831,0
+257,Westchester Ave & Simpson St At Ne Corner (To Manhattan Only),40.8243905821,-73.8928760072,0
+258,Westchester Ave & Simpson St At Ne Corner (To Manhattan Only),40.8244206463,-73.8927386573,0
+259,Alexander Ave & 138th St At Sw Corner,40.8101328133,-73.9255985959,0
+260,Alexander Ave & 138th St At Nw Corner,40.8102643825,-73.9253239042,0
+261,Alexander Ave & 138th St At Nw Corner,40.8103001106,-73.9253961128,0
+262,Lincoln Ave & 138th St At Se Corner,40.8106770795,-73.9268659575,0
+263,Lincoln Ave & 138th St At Se Corner,40.8107183419,-73.9270104103,0
+264,3rd Ave & 138th St At Ne Corner,40.8108718905,-73.9267645946,0
+265,Grand Concourse & 149th St At Sw Corner,40.8183380933,-73.927652369,0
+266,Grand Concourse & 149th St At Se Corner,40.818357054,-73.9272513201,0
+267,Grand Concourse & 149th St At Sw Corner,40.8184094333,-73.9276161627,0
+268,Grand Conccourse & 149th St At Se Corner,40.8184228474,-73.9271247977,0
+269,Walton Ave & 161st St At Nw Corner,40.8273742257,-73.9241917881,0
+270,River Ave & 161st St At Sw Corner,40.8274580503,-73.9264825638,0
+271,River Ave & 161st St At Sw Corner,40.8274908554,-73.9262765659,0
+272,River Ave & 161st St At Se Corner,40.8274906934,-73.9260236306,0
+273,River Ave & 161st St At Sw Corner,40.8275293829,-73.9264355113,0
+274,Walton Ave & 161st St At Nw Corner,40.8275278821,-73.9241193457,0
+275,River Ave & 161st St At Sw Corner,40.8275649303,-73.9262258967,0
+276,Walton Ave & 161st St At Nw Corner,40.8275689815,-73.9240108978,0
+277,River Ave & 161st St At Sw Corner,40.8276062049,-73.9263884525,0
+278,Lenox Ave & 135th St At Ne Corner (Uptown Only),40.8141954941,-73.9406407048,0
+279,Fort Washington Ave & 175th St At Sw Corner,40.8463990328,-73.9402722152,0
+280,Broadway & 168th St At Sw Corner,40.8408958663,-73.9402193306,0
+281,Amsterdam Ave & 161st St At Se Corner (Downtown Only),40.8352252691,-73.9401702191,0
+282,2042 Amsterdam Avenue (Downtown Only),40.8359553583,-73.9401623349,0
+283,Fort Washington Ave & 175th St At Se Corner,40.8464427566,-73.9399035079,0
+284,Broadway & 168th St At Se Corner,40.840747417,-73.9397677036,0
+285,Fort Washington Ave & 177th St At Sw Corner,40.8478315018,-73.9397576745,0
+286,Fort Washington Ave & 177th St At Nw Corner,40.8479632193,-73.9397033381,0
+287,Saint Nicholas Ave & 161st St At Ne Corner (Uptown Only),40.8353045927,-73.9396461486,0
+288,Fort Washington Ave & 177th St At Nw Corner,40.8481223441,-73.9395730725,0
+289,Saint Nicholas Ave & 169th St At Nw Corner,40.841880883,-73.9395787419,0
+290,Saint Nicholas Ave & 169th St At Nw Corner,40.8419329794,-73.9394774984,0
+291,Fort Washington Ave & 177th St At Ne Corner,40.8480343921,-73.9393418257,0
+292,Fort Washington Ave & 177th St At Ne Corner,40.8478779364,-73.9393275105,0
+293,Saint Nicholas Ave & 168th St At Se Corner,40.8407608828,-73.9392761761,0
+294,Broadway & 169th St At Ne Corner,40.841776337,-73.9391089988,0
+295,Fort Washington Ave & 181st St At Sw Corner,40.8508774573,-73.9384934088,0
+296,Fort Washington Ave & 181st St At Sw Corner,40.8508143195,-73.938475394,0
+297,Fort Washington Ave & 181st St At Se Corner,40.8507428297,-73.9382368949,0
+298,Fort Washington Ave & 181st St At Se Corner,40.8507729886,-73.9381754182,0
+299,Lexington Ave & 125th St At Sw Corner,40.8042854682,-73.9376587209,0
+300,Fort Washington Ave & 185th St At Se Corner,40.8531604645,-73.9374032557,0
+301,Lexington Ave & 125th St At Se Corner,40.8041920321,-73.9374456947,0
+302,Lexington Ave & 125th St At Nw Corner,40.8046009862,-73.9374272497,0
+303,Lexington Ave & 125th St At Ne Corner,40.804502074,-73.9372395127,0
+304,Lexington Ave & 103rd St At Se Corner,40.7902127466,-73.9476969771,0
+305,Lexington Ave & 103rd St At Sw Corner,40.7902594888,-73.9478775074,0
+306,Lexington Ave & 110th St At Se Corner (Uptown Only),40.7947042872,-73.944316618,0
+307,Lexington Ave & 110th St At Ne Corner (Uptown Only),40.7948167774,-73.9442262342,0
+308,Lexington Ave & 110th St At Sw Corner (Downtown Only),40.7948334547,-73.944659611,0
+309,Lexington Ave & 110th St At Nw Corner (Downtown Only),40.7949569102,-73.9445403257,0
+310,Lexington Ave & 116th St At Se Corner (Uptown Only),40.7984385488,-73.9416588318,0
+311,Lexington Ave & 116th St At Sw Corner (Downtown Only),40.7984990496,-73.9418899333,0
+312,Lexington Ave & 116th St At Ne Corner (Uptown Only),40.7987431055,-73.9414454685,0
+313,Lexington Ave & 116th St At Nw Corner (Downtown Only),40.7988804279,-73.9416151028,0
+314,Lenox Ave & 125th St At Se Corner (Uptown Only),40.8075776077,-73.9454690029,0
+315,Lenox Ave & 125th St At Sw Corner (Downtown Only),40.8077094907,-73.945757878,0
+316,Lenox Ave & 125th St At Ne Corner (Uptown Only),40.8078821744,-73.9452628524,0
+317,Lenox Ave & 125th St At Nw Corner (Downtown Only),40.8079921035,-73.9455589709,0
+318,Lenox Ave & 135th St At Se Corner (Uptown Only),40.8139375907,-73.9408360166,0
+319,Lenox Ave & 135th St At Sw Corner (Downtown Only),40.8140530095,-73.9411104742,0
+320,Lenox Ave & 135th St At Nw Corner (Downtown Only),40.8143191549,-73.9409296063,0
+321,Saint Nicholas Ave & 135th St At Se Corner (Uptown Only),40.8169025788,-73.9479577984,0
+322,Saint Nicholas Ave & 135th St At Sw Corner (Uptown Only),40.8169217494,-73.9478638509,0
+323,Saint Nicholas Ave & 135th St At Sw Corner (Downtown Only),40.8171250457,-73.9482791636,0
+324,Edgecombe Ave & 135th St At Ne Corner (Uptown Only),40.8171934095,-73.9477155131,0
+325,Saint Nicholas Ave & 137th St At Se Corner (Uptown Only),40.8183926243,-73.947215995,0
+326,Saint Nicholas Ave & 137th St At Sw Corner (Downtown Only),40.818571186,-73.947555464,0
+327,Broadway & 137th St At Sw Corner (Downtown Only),40.8213737188,-73.9544252392,0
+328,Broadway & 137th St At Nw Corner (Downtown Only),40.8215877423,-73.9542625057,0
+329,Broadway & 137th St At Ne Corner (Uptown Only),40.8214421169,-73.9538723981,0
+330,Broadway & 137th St At Ne Corner (Uptown Only),40.8215985267,-73.9537747375,0
+331,Saint Nicholas Ave & 125th St At Sw Corner,40.8106741822,-73.9528900498,0
+332,Saint Nicholas Ave & 125th St At Nw Corner,40.8110144227,-73.9526333238,0
+333,St Nicholas Ave & Central Park North At Nw Corner,40.7985176922,-73.9526422158,0
+334,Saint Nicholas Ave & 125th St At Se Corner,40.8106026936,-73.9525830425,0
+335,Saint Nicholas Ave & 125th St At Ne Corner,40.8108990357,-73.9523696962,0
+336,Saint Nicholas Ave & 126th St At Nw Corner,40.8115961352,-73.9522246973,0
+337,Lenox Ave & 111th St At Nw Corner,40.7990225012,-73.9521073077,0
+338,Saint Nicholas Ave & 126th St At Se Corner,40.8113188087,-73.951961185,0
+339,Saint Nicholas Ave & 127th St At Sw Corner,40.8119747142,-73.951762023,0
+340,Saint Nicholas Ave & 127th St At Se Corner,40.8118784881,-73.9513791661,0
+341,Lexington Ave & 96th St At Sw Corner,40.7858803792,-73.9512681515,0
+342,Lexington Ave & 96th St At Nw Corner,40.7860696785,-73.9510621795,0
+343,Lexington Ave & 96th St At Se Corner,40.7856661445,-73.9509252545,0
+344,Lexington Ave & 96th St At Ne Corner,40.7859213183,-73.9507228445,0
+345,Broadway & 145th St At Ne Corner (Downtown Only),40.8266666812,-73.9505517505,0
+346,Broadway & 145th St At Sw Corner (Uptown Only),40.8262384406,-73.9504003104,0
+347,Broadway & 145th St At Nw Corner (Uptown Only),40.8265018257,-73.9501507958,0
+348,Lenox Ave & 116th St At Sw Corner (Downtown Only),40.8019804,-73.9499488288,0
+349,Lenox Ave & 116th St At Nw Corner (Downtown Only),40.8022355747,-73.9497535894,0
+350,Lenox Ave & 116th St At Se Corner (Uptown Only),40.8018595079,-73.949663574,0
+351,Lenox Ave & 116th St At Ne Corner (Uptown Only),40.8021174267,-73.9494683317,0
+352,Central Park West & 77th St At Nw Corner,40.7804008382,-73.9731825386,0
+353,180 Central Park West,40.780914048,-73.9729440168,0
+354,Central Park West & 81st St At Sw Corner,40.7819870194,-73.9720228032,0
+355,Central Park West & 81st St At Nw Corner,40.7822614321,-73.9717735352,0
+356,Central Park West & 86th St At Sw Corner,40.7852251897,-73.9695911934,0
+357,Central Park West & 86th St At Sw Corner,40.7853102936,-73.9696561539,0
+358,Central Park West & 86th St At Nw Corner,40.7854968906,-73.9694863479,0
+359,Central Park West & 87th St At Nw Corner,40.7861225713,-73.9690418938,0
+360,Central Park West & 88th St At Nw Corner,40.7867701725,-73.9684674194,0
+361,Broadway & 96th St At Se Corner,40.7931143316,-73.9727187573,0
+362,Broadway & 96th St At Se Corner,40.7932021484,-73.9726573258,0
+363,Broadway & 96th St At Sw Corner,40.7932900775,-73.9730726128,0
+364,Broadway & 96th St At Sw Corner,40.7933916147,-73.97299673,0
+365,Broadway & 96th St At Se Corner,40.7943382637,-73.971815365,0
+366,Broadway & 96th St At Se Corner,40.7944672447,-73.9717286327,0
+367,Broadway & 96th St At Sw Corner,40.7944975466,-73.9721800663,0
+368,Broadway & 96th St At Sw Corner,40.7946155472,-73.972086116,0
+369,Broadway & 103rd St At Ne Corner,40.7991598492,-73.9683387485,0
+370,Broadway & 103rd St At Ne Corner,40.7992421791,-73.9682953674,0
+371,Broadway & 103rd St At Nw Corner,40.7993191429,-73.9687034679,0
+372,Broadway & 103rd St At Nw Corner,40.7994097032,-73.9686456359,0
+373,Broadway & 104th St At Se Corner,40.7996044312,-73.9681073787,0
+374,Broadway & Cathedral Pkwy At Se Corner (Uptown Only),40.8039955808,-73.9666496038,0
+375,Broadway & Cathedral Pkwy At Ne Corner (Uptown Only),40.8042754841,-73.9664471858,0
+376,Broadway & Cathedral Pkwy At Nw Corner (Downtown Only),40.8044100812,-73.966811941,0
+377,Frederick Douglass Blvd & Cathedral Pkwy At Sw Corner,40.8008913629,-73.958412373,0
+378,Lexington Ave & 86th St At Sw Corner (Downtown Only),40.7794870108,-73.9558946002,0
+379,Lexington Ave & 86th St At Sw Corner (Downtown Only),40.7794705202,-73.9558368391,0
+380,Lexington Ave & 86th St At Nw Corner (Downtown Only),40.7797065273,-73.9557319702,0
+381,Frederick Douglass Blvd & 116th St At Sw Corner (Downtown Only),40.8043486898,-73.9556541759,0
+382,125 East 86 Street (Downtown Only),40.7797449175,-73.9556380646,0
+383,Lexington Ave & 86th St At Se Corner (Uptown Only),40.7793743545,-73.9555769287,0
+384,Frederick Douglass Blvd & 116th St At Nw Corner (Downtown Only),40.8045764393,-73.9554914788,0
+385,Lexington Ave & 86th St At Se Corner (Uptown Only),40.7793441346,-73.9555047339,0
+386,Lexington Ave & 86th St At Ne Corner (Uptown Only),40.7796624904,-73.9554178628,0
+387,Lexington Ave & 86th St At Ne Corner (Uptown Only),40.7795142593,-73.9553782437,0
+388,Frederick Douglass Blvd & 116th St At Se Corner (Uptown Only),40.8042085202,-73.955166636,0
+389,Frederick Douglass Blvd & 116th St At Ne Corner (Uptown Only),40.8044445342,-73.9550833984,0
+390,Lexington Ave & 59th St At Se Corner,40.7621360642,-73.9681578082,0
+391,Lexington Ave & 59th St At Sw Corner,40.7622651426,-73.9684320931,0
+392,Lexington Ave & 59th St At Nw Corner,40.7624160846,-73.9683634348,0
+393,131 East 60 Street,40.7626601723,-73.9676630089,0
+394,Lexington Ave & 60th St At Ne Corner,40.7628797283,-73.9675798756,0
+395,131 East 60 Street,40.7630389962,-73.9678397084,0
+396,764 5 Avenue,40.764618835,-73.9742538288,0
+397,5th Ave & 60th St At Se Corner,40.7646842323,-73.9722033493,0
+398,5th Ave & 60th St At Se Corner,40.7647254321,-73.9723224606,0
+399,Lexington Ave & 63rd St At Sw Corner,40.7647568471,-73.9665826132,0
+400,Grand Army Plaza & Central Park South At Ne Corner,40.7647889056,-73.9737952981,0
+401,Grand Army Plaza & Central Park South At Ne Corner,40.7648191133,-73.9738638755,0
+402,5th Ave & 60th St At Ne Corner,40.7648269693,-73.9722466092,0
+403,Lexington Ave & 63rd St At Nw Corner,40.7648748438,-73.9664886949,0
+404,5 Av (Between E 60 St And E 61 St),40.7653320606,-73.9724918781,0
+405,3rd Ave & 60th St At Sw Corner,40.7621108516,-73.966363742,0
+406,3rd Ave & 60th St At Nw Corner,40.7623770346,-73.9661686768,0
+407,3rd Ave & 60th St At Se Corner,40.7619872727,-73.9661399963,0
+408,3rd Ave & 60th St At Ne Corner,40.7622836399,-73.9659196463,0
+409,Central Park West & 96th St At Sw Corner,40.7917179356,-73.9650414491,0
+410,Lexington Ave & 68th St At Sw Corner,40.767794659,-73.9645197084,0
+411,Central Park West & 97th St At Sw Corner,40.7923298237,-73.9644307921,0
+412,Lexington Ave & 68th St At Sw Corner,40.7678000939,-73.9643428095,0
+413,Central Park West & 97th St At Nw Corner,40.7926179835,-73.9643114597,0
+414,Lexington Ave & 68th St At Nw Corner,40.7680141433,-73.96421273,0
+415,Broadway & 115th St At Se Corner,40.8075629236,-73.9639927902,0
+416,Broadway & 116th St At Nw Corner,40.8082820321,-73.9639635026,0
+417,138 East 68 Street,40.7677011687,-73.9639746304,0
+418,Lexington Ave & 68th St At Ne Corner,40.7678850471,-73.9639131587,0
+419,Broadway & 116th St At Nw Corner,40.8084055186,-73.9638803522,0
+420,Broadway & 116th St At Ne Corner,40.808125474,-73.9636168055,0
+421,Broadway & 116th St At Ne Corner,40.8082489602,-73.9635336547,0
+422,Central Park West & 103rd St At Nw Corner,40.7962703474,-73.9616007508,0
+423,Lexington Ave & 77th St At Sw Corner (Downtown Only),40.7736889342,-73.9601587633,0
+424,Lexington Ave & 77th St At Sw Corner (Downtown Only),40.7736559724,-73.9600865742,0
+425,Lexington Ave & 77th St At Nw Corner (Downtown Only),40.7737986912,-73.9600648259,0
+426,125 East 77 Street (Downtown Only),40.7737986612,-73.9599781752,0
+427,Lexington Ave & 77th St At Se Corner (Uptown Only),40.7735460686,-73.9597580904,0
+428,Lexington Ave & 77th St At Ne Corner (Uptown Only),40.7736503434,-73.9596858186,0
+429,Lexington Ave & 77th St At Se Corner (Uptown Only),40.7735131065,-73.9596859017,0
+430,Lexington Ave & 77th St At Ne Corner (Uptown Only),40.7736228669,-73.9596027951,0
+431,Frederick Douglass Blvd & 109th St At Sw Corner,40.8000187096,-73.9588860733,0
+432,Broadway & 125th St At Sw Corner,40.8153260223,-73.9588513279,0
+433,Broadway & Tiemann Pl At Nw Corner,40.8157074413,-73.9585801379,0
+434,Frederick Douglass Blvd & 109th St At Ne Corner,40.8000295435,-73.958481537,0
+435,3180 Broadway,40.8151666743,-73.9584215159,0
+436,Main St & Roosevelt Ave At Nw Corner,40.759627683,-73.830391835,0
+437,Main St & Roosevelt Ave At Sw Corner,40.7594327108,-73.8303273573,0
+438,Main St & Roosevelt Ave At Ne Corner,40.7597286424,-73.8299872923,0
+439,Main St & Roosevelt Ave At Se Corner,40.7595419575,-73.8299588914,0
+440,Main St & Roosevelt Ave At Se Corner,40.7594101728,-73.8299339601,0
+441,Main St & Roosevelt Ave At Ne Corner,40.75991686,-73.829196287,0
+442,Main St & Roosevelt Ave At Ne Corner,40.7599605188,-73.8290229091,0
+443,136-32 Roosevelt Avenue,40.7598120241,-73.8288355861,0
+444,Main St & Roosevelt Ave At Ne Corner,40.7600341548,-73.8287050657,0
+445,136-32 Roosevelt Avenue,40.7598693524,-73.8286260761,0
+446,Burr Ave & Westchester Ave At Ne Corner,40.8529766868,-73.827211388,0
+447,Burr Ave & Westchester Ave At Se Corner,40.8527570569,-73.8271758111,0
+448,Burr Ave & Westchester Ave At Ne Corner,40.8529241529,-73.8269548771,0
+449,6th Ave & 47th St At Se Corner,40.7578188027,-73.9818149232,0
+450,6th Ave & 47th St At Se Corner,40.7578819233,-73.9817607622,0
+451,6th Ave & 47th St At Ne Corner,40.7579999163,-73.9815658119,0
+452,6th Ave & 47th St At Sw Corner,40.758043917,-73.9821036293,0
+453,6th Ave & 48th St At Sw Corner,40.7586421905,-73.9815909015,0
+454,7th Ave & 53rd St At Se Corner,40.7628197071,-73.9816980425,0
+455,7th Ave & 53rd St At Ne Corner,40.762948698,-73.9816222,0
+456,Broadway & 53rd St At Se Corner,40.7631766825,-73.9827267582,0
+457,824 7 Avenue,40.7634264279,-73.9825534189,0
+458,8th Ave & 57th St At Ne Corner,40.766753064,-73.9826139186,0
+459,8th Ave & 58th St At Ne Corner,40.7673870301,-73.9821624904,0
+460,8th Ave & 58th St At Nw Corner,40.7676945008,-73.9825523008,0
+461,1824 Broadway,40.7687209084,-73.981743353,0
+462,Broadway & 60th St At Sw Corner,40.7687950769,-73.9821296217,0
+463,Broadway & 65th St At Sw Corner,40.7729341903,-73.9824317847,0
+464,Broadway & 66th St At Se Corner,40.7732470399,-73.9821031541,0
+465,Broadway & 66th St At Se Corner,40.7734693598,-73.9820778213,0
+466,Broadway & 66th St At Sw Corner,40.7735984329,-73.9825363122,0
+467,Broadway & 66th St At Se Corner,40.7736889332,-73.9820416578,0
+468,Broadway & 66th St At Sw Corner,40.7739030922,-73.9824929069,0
+469,Broadway & 72nd St At Se Corner,40.7784482943,-73.9819573281,0
+470,Broadway & 72nd St At Se Corner,40.778618464,-73.9819320071,0
+471,Broadway & 72nd St At Ne Corner,40.7788654635,-73.981762236,0
+472,Broadway & 72nd St At Ne Corner,40.7790356239,-73.9816791426,0
+473,Columbus Circle & 59th St At Se Corner,40.7676476699,-73.9814620583,0
+474,6th Ave & 48-49th Sts At W Corner,40.7589962283,-73.9813778346,0
+475,Columbus Circle & 59th St At Se Corner,40.7677052932,-73.9813609589,0
+476,6th Ave & 48-49th Sts At W Corner,40.7591224701,-73.981276729,0
+477,7th Ave & 55th St At Sw Corner,40.764277095,-73.9812608402,0
+478,Central Park West & 60th St At Ne Corner,40.7686686724,-73.9812090621,0
+479,6th Ave & 48th St At Se Corner,40.7585048874,-73.9811830525,0
+480,7th Ave & 55th St At Nw Corner,40.7643896159,-73.9811777799,0
+481,5th Ave & 42nd St At Sw Corner,40.753427104,-73.9811556121,0
+482,6th Ave & 48th St At Ne Corner,40.7586338803,-73.9811216524,0
+483,6th Ave & 49th St At Nw Corner,40.7594517986,-73.9810275691,0
+484,7th Ave & 55th St At Se Corner,40.7640958708,-73.9808277004,0
+485,1220 6 Avenue,40.7590153491,-73.9808147242,0
+486,7th Ave & 55th St At Ne Corner,40.7642083913,-73.9807446397,0
+487,6th Ave & 50th St At Sw Corner,40.7599156112,-73.9807314419,0
+488,30 Rockefeller Plaza,40.759319983,-73.9806197146,0
+489,6th Ave & 50th St At Nw Corner,40.7601433903,-73.9805256226,0
+490,7th Ave & 57th St At Sw Corner,40.7654105187,-73.9803327528,0
+491,Broadway & 79th St At Sw Corner (Downtown Only),40.7838029995,-73.9802912102,0
+492,1261 6 Avenue,40.760522117,-73.980243953,0
+493,1260 6 Avenue,40.7599731509,-73.9801430443,0
+494,Broadway & 79th St At Nw Corner (Downtown Only),40.7840746934,-73.9800889134,0
+495,7th Ave & 57th St At Se Corner,40.7653144106,-73.980087302,0
+496,7th Ave & 57th St At Nw Corner,40.7658139448,-73.9800366124,0
+497,Broadway & 79th St At Se Corner (Uptown Only),40.7836519775,-73.9799337675,0
+498,8th Ave & 49th St At Sw Corner (Downtown Only),40.7617609511,-73.9869505869,0
+499,7 Times Square,40.7557664241,-73.9869012287,0
+500,8th Ave & 49th St At Sw Corner (Downtown Only),40.7617087874,-73.9868314739,0
+501,Broadway & 40th St At Se Corner,40.7541909178,-73.9867066316,0
+502,815 8 Avenue (Downtown Only),40.7619859899,-73.9866870268,0
+503,Broadway & 40th St At Ne Corner,40.7543199141,-73.9866488556,0
+504,815 8 Avenue (Downtown Only),40.7623290498,-73.9864053917,0
+505,Broadway & 43rd St At Sw Corner,40.7564937162,-73.986338002,0
+506,Broadway & 42nd St At Se Corner,40.7555934393,-73.9863345771,0
+507,8th Ave & 50th St At Nw Corner (Downtown Only),40.7624717671,-73.9863259462,0
+508,8th Ave & 50th St At Se Corner (Uptown Only),40.7621039144,-73.985853136,0
+509,8th Ave & 50th St At Ne Corner (Uptown Only),40.7622356532,-73.9857809116,0
+510,8th Ave & 51st St At Ne Corner (Uptown Only),40.7629190513,-73.9854378291,0
+511,6th Ave & 40th St At Sw Corner,40.7534908346,-73.9852846882,0
+512,6th Ave & 40th St At Nw Corner,40.7537268601,-73.9851077774,0
+513,6th Ave & 40th St At Se Corner,40.7534276578,-73.984916549,0
+514,Broadway & 47th St At Ne Corner (Downtown Only),40.7595456946,-73.9849151636,0
+515,6th Ave & 40th St At Ne Corner,40.7535648804,-73.984804628,0
+516,7th Ave & 47th St At Nw Corner (Downtown Only),40.7594139231,-73.98473471,0
+517,1081 6 Avenue,40.7548686147,-73.9846527349,0
+518,Madison Ave & 42nd St At Sw Corner,40.7528642054,-73.9798239344,0
+519,7th Ave & 57th St At Ne Corner,40.7656656897,-73.9798128363,0
+520,Broadway & 79th St At Ne Corner (Uptown Only),40.7839840492,-73.9796989524,0
+521,11 East 42 Street,40.7531056972,-73.9795639897,0
+522,33 East 42 Street,40.7528475793,-73.978943267,0
+523,51 East 42 Street,40.7527349654,-73.978513795,0
+524,43 East 41 Street,40.7522381487,-73.978420114,0
+525,Vanderbilt Ave & 42nd St At Se Corner,40.7522985114,-73.9783045974,0
+526,Park Ave & 42nd St At Sw Corner,40.7522024015,-73.9780736349,0
+527,6th Ave & 56th St At Sw Corner,40.763590318,-73.9779218802,0
+528,Park Ave & 42nd St At Se Corner,40.7516726087,-73.9777778508,0
+529,6th Ave & 56th St At Nw Corner,40.763845545,-73.97774491,0
+530,Park Ave & 42nd St At Se Corner,40.7517604287,-73.9777164642,0
+531,6th Ave & 56th St At Se Corner,40.7634832285,-73.9776908827,0
+532,6th Ave & 57th St At Sw Corner,40.7642297548,-73.977466817,0
+533,101 East 41 Street,40.7516670469,-73.9774061,0
+534,6th Ave & 56th St At Ne Corner,40.7639031036,-73.9773297509,0
+535,6th Ave & 57th St At Se Corner,40.7640073903,-73.9772611269,0
+536,101 East 41 Street,40.7517411188,-73.9772220029,0
+537,Central Park West & 70th St At Sw Corner,40.7749588848,-73.9771707351,0
+538,6th Ave & 57th St At Nw Corner,40.7646578727,-73.9771526062,0
+539,Broadway & 86th St At Sw Corner (Downtown Only),40.7883750918,-73.9768844581,0
+540,6th Ave & 57th St At Ne Corner,40.7645260718,-73.9768855154,0
+541,Broadway & 86th St At Nw Corner (Downtown Only),40.7885232731,-73.976714678,0
+542,117 East 41 Street,40.7513704167,-73.9764208799,0
+543,Broadway & 86th St At Se Corner (Uptown Only),40.7881416804,-73.9763464664,0
+544,Central Park West & 72nd St At Sw Corner,40.776235006,-73.976271263,0
+545,Broadway & 86th St At Ne Corner (Uptown Only),40.7883090793,-73.9762019575,0
+546,656 5 Avenue,40.7604417492,-73.9761722073,0
+547,107 East 42 Street,40.7517189364,-73.9761139701,0
+548,Central Park West & 72nd St At Nw Corner,40.7764490401,-73.9760040028,0
+549,640 3 Avenue,40.7508705955,-73.9751036966,0
+550,137 East 42 Street,40.7513647213,-73.9754355613,0
+551,137 East 42 Street (Enter From E 43 St),40.7518203246,-73.9753198971,0
+552,111 East 50 Street,40.7567108155,-73.9724665622,0
+553,Lexington Ave & 51st St At Se Corner,40.7569851125,-73.9717337127,0
+554,Lexington Ave & 51st St At Se Corner,40.7570263058,-73.9718239337,0
+555,Lexington Ave & 51st St At Ne Corner,40.7570619245,-73.9715676412,0
+556,Lexington Ave & 51st St At Sw Corner,40.7571224413,-73.9721090471,0
+557,Lexington Ave & 51st St At Ne Corner,40.7571360735,-73.9717336487,0
+558,Lexington Ave & 51st St At Sw Corner,40.7571718606,-73.9721667792,0
+559,Lexington Ave & 51st St At Nw Corner,40.75728984,-73.9719826426,0
+560,Lexington Ave & 51st St At Nw Corner,40.7573200725,-73.9721486695,0
+561,3rd Ave & 53rd St At Se Corner,40.7574950066,-73.969278992,0
+562,3rd Ave & 53rd St At Ne Corner,40.7576925877,-73.9691272987,0
+563,3rd Ave & 53rd St At Ne Corner,40.7577420134,-73.969203077,0
+564,137 East 52 Street,40.7578303426,-73.9711233345,0
+565,Lexington Ave & 53rd St At Se Corner,40.7581349373,-73.970838044,0
+566,884 3 Avenue (Enter On E 53 St),40.7583352247,-73.9705275298,0
+567,28 East 53 Street,40.7595739614,-73.9740933434,0
+568,31 East 53 Street,40.7597385988,-73.9738839175,0
+569,5th Ave & 53rd St At Se Corner,40.7602851924,-73.9756632933,0
+570,5th Ave & 53rd St At Ne Corner,40.7603922214,-73.9755874501,0
+571,52nd St & Roosevelt Ave At Sw Corner,40.7438496135,-73.9130814195,0
+572,52nd St & Roosevelt Ave At Nw Corner,40.7441515114,-73.9130485461,0
+573,53-02 Roosevelt Avenue,40.7443478819,-73.911406261,0
+574,41-31 53 Street,40.7446415089,-73.9113264754,0
+575,61st St & Roosevelt Ave At Se Corner,40.7455490298,-73.9032737675,0
+576,61st St & Roosevelt Ave At Ne Corner,40.7457109578,-73.9032590967,0
+577,61st St & Roosevelt Ave At Ne Corner,40.7457355179,-73.9030894414,0
+578,69th St & Roosevelt Ave At Sw Corner,40.7461716305,-73.8964338961,0
+579,38-23 69 Street,40.7465392382,-73.8962240042,0
+580,65th St & Broadway At Se Corner,40.7491561129,-73.8974831181,0
+581,65th St & Broadway At Ne Corner,40.7493289066,-73.8973420964,0
+582,54th St & Northern Blvd At Nw Corner (To Jamaica Only),40.7531194796,-73.9071319767,0
+583,54th St & Broadway At Sw Corner (To Manhattan And Brooklyn Only),40.7534458944,-73.9068716486,0
+584,48-02 Broadway (To Jamaica Only),40.7558136463,-73.912647109,0
+585,48th St & Newtown Rd At Ne Corner (To Manhattan And Brooklyn Only),40.7560466148,-73.9122064459,0
+586,46th St & Broadway At Sw Corner (To Jamaica Only),40.7566548575,-73.9144038426,0
+587,46th St & Broadway At Nw Corner (To Manhattan And Brooklyn Only),40.7568798352,-73.9142808294,0
+588,31st St & Hoyt Ave North At Ne Corner,40.7708991757,-73.9169235705,0
+589,31st St & Hoyt Ave North At Nw Corner,40.7710640238,-73.9171508139,0
+590,31st St & 23rd Ave At Ne Corner,40.7748151531,-73.912188923,0
+591,31st St & 23rd Ave At Nw Corner,40.7749470434,-73.9123764957,0
+592,31st St & 23rd Ave At Ne Corner,40.7750646843,-73.9118744787,0
+593,31st St & 23rd Ave At Nw Corner,40.7751965779,-73.9120656621,0
+594,Cypress Ave & 138th St At Se Corner (To Pelham Bay Pk Only),40.8052555692,-73.9139548429,0
+595,Cypress Ave & 138th St At Ne Corner (To Manhattan Only),40.8053239631,-73.9136549452,0
+596,Cypress Ave & 138th St At Sw Corner (To Pelham Bay Pk Only),40.8053628126,-73.9142220043,0
+597,Cypress Ave & 138th St At Ne Corner (To Manhattan Only),40.8054119564,-73.913871561,0
+598,Southern Blvd & St Mary's St At Se Corner (To Pelham Bay Pk Only),40.8080476425,-73.9077452877,0
+599,Southern Blvd & St Mary's St At Sw Corner (To Manhattan Only),40.8081988792,-73.9080918604,0
+600,Southern Blvd & St Mary's St At Nw Corner (To Manhattan Only),40.8083415529,-73.9080266416,0
+601,Southern Blvd & St Mary's St At Ne Corner (To Pelham Bay Pk Only),40.8083577151,-73.9076437128,0
+602,Park Ave & 28th St At Sw Corner (Downtown Only),40.7434120071,-73.9844352371,0
+603,7th Ave & 47th St At Se Corner (Uptown Only),40.7590378477,-73.9843954892,0
+604,1627 Broadway (Downtown Only),40.7614504773,-73.9843949239,0
+605,Park Ave & 28th St At Sw Corner (Downtown Only),40.7433708212,-73.9843269827,0
+606,Park Ave & 28th St At Nw Corner (Downtown Only),40.7435025662,-73.9843052988,0
+607,6th Ave & 42nd St At Nw Corner,40.7550277588,-73.9842737079,0
+608,Broadway & 50th St At Nw Corner (Downtown Only),40.7615794507,-73.9841783065,0
+609,7th Ave & 49th St At Sw Corner (Downtown Only),40.7605062291,-73.9839836362,0
+610,6th Ave & 42nd St At Nw Corner,40.7553515955,-73.9839596094,0
+611,6th Ave & 42nd St At Se Corner,40.7546269771,-73.9839200804,0
+612,Park Ave & 28th St At Se Corner (Uptown Only),40.7431868672,-73.9839228415,0
+613,742 7 Avenue (Downtown Only),40.7606242415,-73.9839005839,0
+614,Broadway & 50th St At Se Corner (Uptown Only),40.7612994453,-73.983878762,0
+615,Park Ave & 28th St At Ne Corner (Uptown Only),40.7433240992,-73.9838831116,0
+616,Park Ave & 28th St At Se Corner (Uptown Only),40.7431456833,-73.9838326317,0
+617,Broadway & 50th St At Ne Corner (Uptown Only),40.7613845223,-73.9838065459,0
+618,Park Ave & 28th St At Ne Corner (Uptown Only),40.7432746769,-73.9837640333,0
+619,1100 6 Avenue,40.7548520127,-73.9836818042,0
+620,729 7 Avenue (Uptown Only),40.760316787,-73.9835938322,0
+621,Broadway & 50th St At Se Corner (Uptown Only),40.7611292119,-73.9834600709,0
+622,7th Ave & 49th St At Ne Corner (Uptown Only),40.7605006652,-73.9834566172,0
+623,Broadway & 50th St At Ne Corner (Uptown Only),40.761230756,-73.9833806308,0
+624,949 8 Avenue,40.7666817865,-73.9831915472,0
+625,5th-6th Aves & 42nd St At S Corner,40.7542316031,-73.98301061,0
+626,973 8 Avenue,40.7669617214,-73.9829965324,0
+627,5th-6th Aves & 42nd St At S Corner,40.7541931596,-73.9828951195,0
+628,956 8 Avenue,40.7664703898,-73.9828414256,0
+629,47th St & Queens Blvd At Sw Corner,40.7429831634,-73.9180410142,0
+630,46th St & Queens Blvd At Se Corner,40.7430713742,-73.9185750059,0
+631,46th St & Queens Blvd At Sw Corner,40.7431320006,-73.9189177667,0
+632,47th St & Queens Blvd At Nw Corner,40.7432081815,-73.9179685615,0
+633,46th St & Queens Blvd At Ne Corner,40.7432689604,-73.9185242413,0
+634,46th St & Queens Blvd At Nw Corner,40.7433103813,-73.9188778528,0
+635,40th St & Queens Blvd At Se Corner (To Flushing Only),40.7437174405,-73.924131799,0
+636,40th St & Queens Blvd At Sw Corner (To Flushing Only),40.7437561042,-73.9244926372,0
+637,40th St & Queens Blvd At Ne Corner (To Manhattan Only),40.7439040526,-73.9240846717,0
+638,40th St & Queens Blvd At Nw Corner (To Manhattan Only),40.7439509553,-73.9244527192,0
+639,36th St & Northern Blvd At Se Corner (To Jamaica Only),40.7519728626,-73.9271686183,0
+640,37-01 36 Street (To Manhattan And Brooklyn Only),40.7522366721,-73.9276664107,0
+641,35th St & 38th Ave At Ne Corner (To Manhattan And Brooklyn Only),40.7522401207,-73.928796112,0
+642,34-02 Steinway Street,40.7566321981,-73.9211103595,0
+643,Steinway St & 34th Ave At Ne Corner,40.756708751,-73.9206735165,0
+644,Steinway St & Broadway At Sw Corner,40.758135453,-73.9198560475,0
+645,Steinway St & Broadway At Se Corner,40.7583025953,-73.9194443509,0
+646,31st St & Broadway At Se Corner,40.761792448,-73.9254251772,0
+647,31st St & Broadway At Sw Corner,40.761899647,-73.9256633043,0
+648,31st St & Broadway At Nw Corner,40.7622370635,-73.9253741419,0
+649,31st St & 30th Ave At Se Corner,40.7666891569,-73.9214269627,0
+650,31st St & 30th Ave At Sw Corner,40.7667853777,-73.9216542836,0
+651,31st St & 30th Ave At Ne Corner,40.7669909057,-73.9211739011,0
+652,31st St & 30th Ave At Nw Corner,40.7671090849,-73.9214011967,0
+653,31st St & Hoyt Ave South At Se Corner,40.7701724416,-73.9177909379,0
+654,31st St & Hoyt Ave South At Sw Corner,40.7703208221,-73.9180218115,0
+655,Brook Ave & 138th St At Se Corner (To Pelham Bay Pk Only),40.8074469518,-73.9192584427,0
+656,Brook Ave & 138th St At Sw Corner (To Pelham Bay Pk Only),40.8075129364,-73.919417303,0
+657,250 Brook Avenue (To Manhattan Only),40.8076251611,-73.9189764683,0
+658,235 Brook Avenue (To Manhattan Only),40.8077846083,-73.9193375036,0
+659,Alexander Ave & 138th St At Sw Corner,40.8100503503,-73.9254108424,0
+660,392 7 Avenue,40.7498080283,-73.9917458775,0
+661,242 West 34 Street,40.7510650894,-73.9912945697,0
+662,7th Ave & 33rd St At Nw Corner,40.7504941809,-73.9912802075,0
+663,401 7 Avenue,40.7496734917,-73.991153995,0
+664,613 8 Avenue,40.7560083606,-73.9910737451,0
+665,7th Ave & 34th St At Sw Corner,40.7510019315,-73.990922829,0
+666,8th Ave & 40th St At Nw Corner,40.7561208824,-73.9909113029,0
+667,421 7 Avenue,40.7503322097,-73.9908796101,0
+668,401 7 Avenue,40.7500961586,-73.9908435508,0
+669,7th Ave & 34th St At Nw Corner,40.7512050342,-73.9908145246,0
+670,421 7 Avenue,40.750302001,-73.9906738912,0
+671,8th Ave & 40th St At Se Corner,40.7558189356,-73.9906009293,0
+672,8th Ave & 40th St At Ne Corner,40.7559479318,-73.9905178931,0
+673,7th Ave & 34th St At Se Corner,40.750828979,-73.9905077941,0
+674,441 7 Avenue,40.7510375666,-73.9903489589,0
+675,8th Ave & 42nd St At Nw Corner,40.7574822012,-73.9900087261,0
+676,8th Ave & 42nd St At Ne Corner,40.7573037574,-73.9896080923,0
+677,8th Ave & 43rd St At Sw Corner,40.7579487691,-73.9895718958,0
+678,441 7 Avenue (Corner Of Broadway And W 35 St),40.7506421037,-73.9880138679,0
+679,1331 Broadway,40.7508973595,-73.9879596839,0
+680,7th Ave & 40th St At Se Corner,40.7545862875,-73.9878507349,0
+681,7th Ave & 41st St At Nw Corner,40.7555716355,-73.9877025672,0
+682,1282 Broadway,40.7496127898,-73.987696449,0
+683,902 6 Avenue,40.7498460763,-73.9875376032,0
+684,7th Ave & 41st St At Se Corner,40.7552669348,-73.9873886018,0
+685,6th Ave & 35th St At Nw Corner,40.7506612486,-73.987375037,0
+686,7th Ave & 42nd St At Sw Corner,40.7560601527,-73.9872657291,0
+687,7th Ave & 41st St At Se Corner,40.755352004,-73.9872261605,0
+688,6th Ave & 35th St At Se Corner,40.7503483239,-73.9871621548,0
+689,7th Ave & 42nd St At Nw Corner,40.7562605071,-73.9871574059,0
+690,Broadway & 40th St At Nw Corner,40.7545258251,-73.9871324745,0
+691,Broadway & 40th St At Sw Corner,40.7543529049,-73.9871216797,0
+692,6th Ave & 35th St At Ne Corner,40.7504388844,-73.98701777,0
+693,8th Ave & 44th St At Sw Corner,40.758585504,-73.9890772776,0
+694,Broadway & 28th St At Nw Corner (Downtown Only),40.7455067811,-73.9890361149,0
+695,8th Ave & 44th St At Nw Corner,40.7587035221,-73.9890158945,0
+696,Broadway & 28th St At Sw Corner (Downtown Only),40.7453311117,-73.9889784013,0
+697,6th Ave & 32nd St At Nw Corner,40.7487647683,-73.9887288059,0
+698,8th Ave & 44th St At Se Corner,40.7584207827,-73.988698295,0
+699,6th Ave & 33rd St At Sw Corner,40.7489870769,-73.9885663586,0
+700,Broadway & 28th St At Ne Corner (Uptown Only),40.7453091136,-73.9885669898,0
+701,Broadway & 28th St At Se Corner (Uptown Only),40.7451114862,-73.9885128903,0
+702,6th Ave & 32nd St At Ne Corner,40.7485808484,-73.988508683,0
+703,Broadway & 32nd St At Nw Corner,40.7484957416,-73.9883138075,0
+704,Broadway & 34th St At Sw Corner,40.749851635,-73.9881944677,0
+705,Broadway & 34th St At Nw Corner,40.7500959116,-73.9881366777,0
+706,7th Ave & 40th St At Sw Corner,40.7547098263,-73.9880925431,0
+707,Broadway & 32nd St At Ne Corner,40.7483804374,-73.98807202,0
+708,34th St & Queens Blvd At Sw Corner,40.7445149749,-73.9309696861,0
+709,33rd St & Queens Blvd At Se Corner,40.7445812213,-73.9315939513,0
+710,33rd St & Queens Blvd At Nw Corner,40.7446060781,-73.9318537643,0
+711,34th St & Queens Blvd At Nw Corner,40.7446823699,-73.9309117707,0
+712,33rd St & Queens Blvd At Ne Corner,40.7447431294,-73.931539652,0
+713,33rd St & Queens Blvd At Sw Corner,40.744795438,-73.9318066552,0
+714,Jackson Ave & West St At Se Corner,40.7484852825,-73.9382703455,0
+715,42-01 28 Street,40.7487241972,-73.9384974968,0
+716,Jackson Ave & Queens Blvd At Se Corner,40.7487290799,-73.937371456,0
+717,29-00 Northern Boulevard,40.7488524263,-73.9370645667,0
+718,42-01 28 Street,40.7491630917,-73.938002643,0
+719,Northern Blvd & 41st Ave At Se Corner,40.7495957323,-73.9361182704,0
+720,Northern Blvd & 41st Ave At Nw Corner,40.7498757545,-73.9362226673,0
+721,Queens Plaza South & 27th St At Sw Corner,40.7502951008,-73.9402212325,0
+722,41-41 Crescent Street,40.7508547564,-73.9396973955,0
+723,34th St & Northern Blvd At Sw Corner (To Jamaica Only),40.7519173464,-73.9306083075,0
+724,35th St & 38th Ave At Sw Corner (To Manhattan And Brooklyn Only),40.7522019789,-73.9292581406,0
+725,31st St & 39th Ave At Se Corner,40.7525362364,-73.9328382086,0
+726,31st St & 39th Ave At Nw Corner,40.7529342855,-73.9329424775,0
+727,31st St & 36th Ave At Se Corner,40.7564017547,-73.9297698398,0
+728,31st St & 36th Ave At Sw Corner,40.7565144298,-73.9300007298,0
+729,31st St & 36th Ave At Nw Corner,40.7568216852,-73.9297441303,0
+730,8th Ave & 33rd St At Sw Corner,40.7515785435,-73.9942685199,0
+731,8th Ave & 33rd St At Sw Corner,40.7515565825,-73.9942071647,0
+732,8th Ave & 33rd St At Nw Corner,40.7516965607,-73.9941313582,0
+733,300 7 Avenue (Downtown Only),40.746805412,-73.9939802117,0
+734,8th Ave & 33rd St At Se Corner,40.75130954,-73.9939112293,0
+735,8th Ave & 34th St At Sw Corner,40.7521960834,-73.9937270751,0
+736,8th Ave & 34th St At Nw Corner,40.7524458541,-73.9937053959,0
+737,7th Ave & 28th St At Sw Corner (Downtown Only),40.7472829799,-73.9936373124,0
+738,7th Ave & 27th St At Ne Corner (Uptown Only),40.746613258,-73.9935796328,0
+739,8th Ave & 33rd St At Ne Corner,40.7514495032,-73.9935647297,0
+740,7th Ave & 28th St At Nw Corner (Downtown Only),40.7474119775,-73.9935362476,0
+741,8th Ave & 34th St At Se Corner,40.7520396132,-73.9933769907,0
+742,8th Ave & 35th St At Nw Corner,40.7530716325,-73.9932830457,0
+743,481 8 Avenue,40.7528959679,-73.9932686261,0
+744,8th Ave & 35th St At Nw Corner,40.7530496705,-73.9932144707,0
+745,6th Ave & 23rd St At Sw Corner (Downtown Only),40.7429956567,-73.9932118859,0
+746,311 7 Avenue (Uptown Only),40.7470551387,-73.9931645553,0
+747,7th Ave & 28th St At Ne Corner (Uptown Only),40.7472335463,-73.9931464919,0
+748,8th Ave & 34th St At Ne Corner,40.7521795811,-73.9931351553,0
+749,6th Ave & 23rd St At Nw Corner (Downtown Only),40.7431411234,-73.9931252602,0
+750,6th Ave & 23rd St At Sw Corner (Downtown Only),40.7429407544,-73.9930891931,0
+751,6th Ave & 23rd St At Nw Corner (Downtown Only),40.7430834758,-73.9929953499,0
+752,8th Ave & 35th St At Se Corner,40.75270655,-73.9927669518,0
+753,8th Ave & 35th St At Ne Corner,40.7528135905,-73.9926947539,0
+754,6th Ave & 23rd St At Se Corner (Uptown Only),40.7427321257,-73.9926417279,0
+755,8th Ave & 35th St At Ne Corner,40.7527861384,-73.9926225708,0
+756,6th Ave & 23rd St At Ne Corner (Uptown Only),40.7428995483,-73.9925298374,0
+757,6th Ave & 23rd St At Se Corner (Uptown Only),40.7426772225,-73.9925154273,0
+758,6th Ave & 23rd St At Ne Corner (Uptown Only),40.7428446452,-73.9924071453,0
+759,21st St & 49th Ave At Ne Corner,40.7424242495,-73.9481350641,0
+760,21st St & 49th Ave At Ne Corner,40.742440757,-73.9482216612,0
+761,21st St & 49th Ave At Ne Corner,40.7425122886,-73.9485969161,0
+762,Jackson Ave & 47th Ave At Se Corner,40.7445405829,-73.9484257345,0
+763,Jackson Ave & 47th Ave At Sw Corner,40.7446369238,-73.9490427765,0
+764,Jackson Ave & 47th Ave At Nw Corner,40.744763022,-73.9486817925,0
+765,23rd St & 45th Rd At Se Corner,40.746147593,-73.9453604912,0
+766,Court Square & Jackson Ave At Sw Corner,40.746243011,-73.9440106634,0
+767,Jackson Ave & 45th Rd At Nw Corner,40.7462489959,-73.9450392109,0
+768,23rd St & 45th Rd At Ne Corner,40.7462601311,-73.9453676168,0
+769,Jackson Ave & 45th Rd At Nw Corner,40.7462708469,-73.9448154376,0
+770,23rd St & 45th Rd At Nw Corner,40.7463151882,-73.9457104229,0
+771,Jackson Ave & 45th Ave At Nw Corner,40.7467397103,-73.9438045339,0
+772,Hunter St & 44th Ave At Sw Corner,40.7473903,-73.943977218,0
+773,23rd St & 44th Ave At Ne Corner,40.7477309785,-73.9446590395,0
+774,21st St & 44th Ave At Se Corner,40.7479654914,-73.9472357059,0
+775,21st St & 44th Ave At Ne Corner,40.7482042481,-73.9471561174,0
+776,40-33 21 Street,40.7540865849,-73.9421560677,0
+777,21st St & 41st Ave At Nw Corner,40.7541498947,-73.9425169512,0
+778,21st St & 41st Ave At Nw Corner,40.7542130383,-73.9425457718,0
+779,40-33 21 Street,40.7542731296,-73.9419609986,0
+780,21st St & 41st Ave At Nw Corner,40.7543419674,-73.9423976754,0
+781,73rd St & Broadway At Sw Corner,40.7469612142,-73.8924519451,0
+782,73rd St & 37th Rd At Ne Corner,40.7472271678,-73.8921447498,0
+783,74th St & Roosevelt Av At Sw Corner,40.7466117276,-73.8914889122,0
+784,74th St & Roosevelt Ave At Ne Corner,40.7470370613,-73.8913799494,0
+785,40-02 75 Street,40.7465725915,-73.8907383089,0
+786,40-02 75 Street,40.7468196187,-73.8907379038,0
+787,40-15 75 Street,40.7463937472,-73.8902802635,0
+788,75th St & Broadway At Se Corner,40.7459929557,-73.8902195715,0
+789,82nd St & Roosevelt Ave At Nw Corner,40.7477984664,-73.8840703968,0
+790,81-20 Roosevelt Avenue,40.7474745427,-73.8840276522,0
+791,82-01 Roosevelt Avenue,40.7478366747,-73.8838537876,0
+792,Britton Ave & Broadway At Sw Corner,40.7428540931,-73.8830071941,0
+793,Britton Ave & Broadway At Nw Corner,40.7429635967,-73.8827255169,0
+794,Elmhurst Ave & Broadway At Sw Corner,40.7419000787,-73.8814571183,0
+795,Elmhurst Ave & Broadway At Se Corner,40.7417295249,-73.8810893329,0
+796,82-55 Broadway,40.7420890049,-73.8810092992,0
+797,7th Ave & 18th St At Se Corner (Uptown Only),40.7409400159,-73.9977229304,0
+798,7th Ave & 18th St At Ne Corner (Uptown Only),40.741033335,-73.997603841,0
+799,7th Ave & 18th St At Sw Corner (Downtown Only),40.7410992188,-73.9981307055,0
+800,7th Ave & 18th St At Nw Corner (Downtown Only),40.7412254762,-73.9980585283,0
+801,7th Ave & 18th St At Ne Corner (Uptown Only),40.7416344269,-73.9972212966,0
+802,7th Ave & 18th St At Nw Corner (Downtown Only),40.7418018649,-73.9975821611,0
+803,7th Ave & 23rd St At Se Corner (Uptown Only),40.7439289891,-73.9956333157,0
+804,7th Ave & 23rd St At Sw Corner (Downtown Only),40.744036045,-73.9959256244,0
+805,7th Ave & 23rd St At Ne Corner (Uptown Only),40.7441375799,-73.9953734655,0
+806,7th Ave & 23rd St At Nw Corner (Downtown Only),40.7443324748,-73.995835385,0
+807,8th Ave & 23rd St At Se Corner,40.745120282,-73.9983904331,0
+808,8th Ave & 23rd St At Sw Corner,40.745295951,-73.9987946261,0
+809,8th Ave & 23rd St At Ne Corner,40.7453179007,-73.9981702851,0
+810,8th Ave & 23rd St At Nw Corner,40.7455237638,-73.9986683099,0
+811,8th Ave & 24th St At Se Corner,40.7458339086,-73.9978779473,0
+812,8th Ave & 24th St At Nw Corner,40.7461276018,-73.9981702628,0
+813,8th Ave & 25th St At Se Corner,40.7464459773,-73.9973762815,0
+814,8th Ave & 25th St At Ne Corner,40.7465008674,-73.9971669591,0
+815,8th Ave & 25th St At Ne Corner,40.7465530207,-73.9972968799,0
+816,8th Ave & 25th St At Sw Corner,40.7466216507,-73.9978273966,0
+817,8th Ave & 25th St At Nw Corner,40.7467506521,-73.9977371678,0
+818,Park Ave & 22nd St At Ne Corner (Uptown Only),40.739495518,-73.9865868715,0
+819,280 Park Avenue South (Downtown Only),40.7395202862,-73.9871606326,0
+820,47 East 22 Street (Downtown Only),40.7396931951,-73.9870667756,0
+821,Park Ave & 23rd St At Se Corner (Uptown Only),40.7400032712,-73.9863666437,0
+822,Park Ave & 23rd St At Se Corner (Uptown Only),40.7400279611,-73.98625838,0
+823,Park Ave & 23rd St At Sw Corner (Downtown Only),40.7401158365,-73.9866264415,0
+824,Park Ave & 23rd St At Sw Corner (Downtown Only),40.7401981807,-73.9866408595,0
+825,Park Ave & 23rd St At Ne Corner (Uptown Only),40.7401981084,-73.9860310014,0
+826,1 Madison Avenue (Enter On E 23 St) (Downtown Only),40.7404369552,-73.9864784228,0
+827,Broadway & 22nd St At Ne Corner (Uptown Only),40.7406815277,-73.9892245589,0
+828,Broadway & 22nd St At Nw Corner (Downtown Only),40.7407776337,-73.9896575825,0
+829,Broadway & 23rd St At Se Corner (Uptown Only),40.741098719,-73.9891090138,0
+830,Broadway & 23rd St At Se Corner (Uptown Only),40.7411535982,-73.9889430056,0
+831,5th Ave & 22nd St At Ne Corner (Downtown Only),40.7412909028,-73.9896647202,0
+832,Broadway & 23rd St At Ne Corner (Uptown Only),40.741397879,-73.9889213129,0
+833,Broadway & 23rd St At Ne Corner (Uptown Only),40.7415570836,-73.9890151126,0
+834,Broadway & 23rd St At Nw Corner (Downtown Only),40.7419990273,-73.9894300432,0
+835,6th Ave & 14th St At Se Corner,40.7371686992,-73.9966044355,0
+836,7th Ave & 12th St At Ne Corner,40.7372154093,-74.000425799,0
+837,6th Ave & 14th St At Se Corner,40.7372153637,-73.9967307295,0
+838,6th Ave & 14th St At Ne Corner,40.7373059326,-73.9964636982,0
+839,6th Ave & 14th St At Ne Corner,40.737336127,-73.9965322576,0
+840,6th Ave & 14th St At Sw Corner,40.7373882931,-73.9971060025,0
+841,6th Ave & 14th St At Sw Corner,40.7374404469,-73.9972467309,0
+842,6th Ave & 14th St At Nw Corner,40.7375365069,-73.996994133,0
+843,6th Ave & 14th St At Nw Corner,40.7375914055,-73.9971348616,0
+844,7th Ave & 13th St At Ne Corner,40.7378659164,-73.999956698,0
+845,7th Ave & 13th St At Nw Corner,40.738030601,-74.000353634,0
+846,7th Ave & 14th St At Se Corner,40.7383764399,-73.9996824494,0
+847,7th Ave & 14th St At Sw Corner,40.7385026989,-73.9999386549,0
+848,6th Ave & 16th St At Se Corner,40.738546535,-73.9957094478,0
+849,7th Ave & 14th St At Ne Corner,40.7386042533,-73.9994298504,0
+850,6th Ave & 16th St At Ne Corner,40.7386974945,-73.9956589184,0
+851,6th Ave & 16th St At Sw Corner,40.7387359384,-73.99614607,0
+852,7th Ave & 14th St At Nw Corner,40.7387936424,-73.9997365757,0
+853,6th Ave & 16th St At Nw Corner,40.7388567042,-73.996048632,0
+854,Broadway & Queens Blvd At Sw Corner,40.7374960304,-73.8774378844,0
+855,Broadway & Queens Blvd At Se Corner,40.7373722822,-73.8772179949,0
+856,54th St & Queens Blvd At Sw Corner,40.7360546982,-73.8771229958,0
+857,54th St & Queens Blvd At Se Corner,40.7359117515,-73.8769175806,0
+858,90th St & Roosevelt Ave At Nw Corner,40.748564727,-73.8766018676,0
+859,90th St & Roosevelt Ave At Se Corner,40.7483285551,-73.8764868148,0
+860,90th St & Roosevelt Ave At Ne Corner,40.7485947412,-73.876435794,0
+861,54th St & Queens Blvd At Ne Corner,40.7363119866,-73.876451355,0
+862,Woodhaven Blvd & Queens Blvd At Sw Corner,40.7333499036,-73.8709975486,0
+863,Woodhaven Blvd & Queens Blvd At Se Corner,40.7331294966,-73.8702618925,0
+864,38-10 Junction Boulevard,40.7493009248,-73.8696745935,0
+865,40-02 Junction Boulevard,40.7490235217,-73.8695127262,0
+866,59-02 92 Street,40.7336199836,-73.8695320658,0
+867,Junction Blvd & Roosevelt Ave At Ne Corner,40.749339016,-73.8693785706,0
+868,40-01 Junction Boulevard,40.7490753116,-73.8691950229,0
+869,Horace Harding Expwy & Queens Blvd At Ne Corner,40.7332320921,-73.8687570506,0
+870,3rd Ave & 14th St At Se Corner (To Brooklyn Only),40.7329794853,-73.9866819973,0
+871,3rd Ave & 14th St At Ne Corner (To 8 Av Only),40.7331414133,-73.9865737176,0
+872,3rd Ave & 14th St At Se Corner (To Brooklyn Only),40.7331524489,-73.9870680451,0
+873,3rd Ave & 14th St At Ne Corner (To 8 Av Only),40.7332951635,-73.9869561616,0
+874,4th Ave & 14th St At Se Corner,40.7342259017,-73.9895720001,0
+875,4th Ave & 14th St At Se Corner,40.7342670843,-73.9896982844,0
+876,101 East 14 Street,40.7343795834,-73.9893049609,0
+877,4th Ave & 14th St At Sw Corner,40.7344921979,-73.9901998059,0
+878,4th Ave & 14th St At Sw Corner,40.7345416126,-73.9903080483,0
+879,Broadway & 14th St At Sw Corner,40.7347914406,-73.9909899873,0
+880,Broadway & 14th St At Sw Corner,40.7349094891,-73.991303897,0
+881,101 East 14 Street (Enter On E 14th St),40.7351783528,-73.9898136109,0
+882,Broadway & 14th St At Ne Corner,40.735351377,-73.9910765124,0
+883,4th Ave & 15th St At Sw Corner,40.7353622939,-73.9903079289,0
+884,Broadway & 16th St At Se Corner,40.7363586659,-73.9906289334,0
+885,Broadway & 16th St At Ne Corner,40.7365425516,-73.990473745,0
+886,1st Ave & 14th St At Se Corner (To Brooklyn Only),40.731068599,-73.982648486,0
+887,1st Ave & 14th St At Se Corner (To Brooklyn Only),40.7311372086,-73.9825871298,0
+888,1st Ave & 14th St At Ne Corner (To 8 Av Only),40.7314171045,-73.9821360376,0
+889,1st Ave & 14th St At Ne Corner (To 8 Av Only),40.7315021969,-73.9821684882,0
+890,Park Ave & 32nd St At Se Corner (Uptown Only),40.745604742,-73.9822224563,0
+891,Park Ave & 32nd St At Se Corner (Uptown Only),40.7456596224,-73.9821286096,0
+892,Park Ave & 32nd St At Sw Corner (Downtown Only),40.7457420307,-73.98255805,0
+893,52 East 32 Street (Downtown Only),40.7458408483,-73.9826013313,0
+894,Park Ave & 33rd St At Se Corner (Uptown Only),40.7462606436,-73.9816268035,0
+895,Park Ave & 33rd St At Se Corner (Uptown Only),40.7462826113,-73.9816881497,0
+896,37 East 32 Street (Downtown Only),40.7464665854,-73.9821717008,0
+897,Park Ave & 33rd St At Ne Corner (Uptown Only),40.7465680445,-73.9815581482,0
+898,Park Ave & 33rd St At Nw Corner (Downtown Only),40.7466504425,-73.9819081962,0
+899,67th Dr & Queens Blvd At Sw Corner,40.7260919823,-73.8520883277,0
+900,67th Dr & Queens Blvd At Nw Corner,40.7262587623,-73.8515828546,0
+901,67th Ave & Queens Blvd At Se Corner,40.7266125671,-73.8535158996,0
+902,67th Ave & Queens Blvd At Ne Corner,40.7270815292,-73.8532081953,0
+903,64th Rd & Queens Blvd At Se Corner,40.7289752703,-73.8596984688,0
+904,64th Rd & Queens Blvd At Nw Corner,40.729342922,-73.8595786292,0
+905,63rd Dr & Queens Blvd At Sw Corner,40.7297411148,-73.8620168429,0
+906,63rd Rd & Queens Blvd At Sw Corner,40.7300547456,-73.8626259595,0
+907,63rd Dr & Queens Blvd At Nw Corner,40.7300890225,-73.8614532612,0
+908,63rd Rd & Queens Blvd At Ne Corner,40.7304359947,-73.862397863,0
+909,103rd St & Roosevelt Ave At Se Corner,40.7497867362,-73.8625816604,0
+910,103rd St & Roosevelt Ave At Se Corner,40.7497946688,-73.8623290034,0
+911,39-23 103 Street,40.7500776705,-73.8625738419,0
+912,103-07 Roosevelt Avenue,40.750079997,-73.8622237478,0
+913,108-70 Roosevelt Avenue,40.7514281995,-73.8559264433,0
+914,40-01 111 Street,40.7515020094,-73.8556880735,0
+915,39-16 111 Street,40.751716542,-73.8560413159,0
+916,126th St & Roosevelt Ave At Sw Corner,40.7542562236,-73.8460378041,0
+917,126th St & Roosevelt Ave At Nw Corner,40.7547395537,-73.8462279863,0
+918,126th St & Roosevelt Ave At Nw Corner,40.7548460631,-73.845827094,0
+919,126th St & Roosevelt Ave At Nw Corner,40.7549003871,-73.8454010556,0
+920,6th Ave & Spring St At Nw Corner,40.7256132491,-74.0043510528,0
+921,6th Ave & Vandam St At Sw Corner,40.7262280868,-74.0040155609,0
+922,166 6 Avenue,40.7256022904,-74.0037737981,0
+923,7th Ave & Christopher St At Sw Corner (Downtown Only),40.7335346521,-74.0031716667,0
+924,7th Ave & Christopher St At Nw Corner (Downtown Only),40.7336526772,-74.0031500227,0
+925,7th Ave & Christopher St At Sw Corner (Downtown Only),40.7334852485,-74.0030994991,0
+926,7th Ave & Christopher St At Nw Corner (Downtown Only),40.7336718936,-74.0030309505,0
+927,8th Ave & 14th St At Sw Corner,40.7397515263,-74.0028291453,0
+928,7th Ave & West 4th St At Se Corner (Uptown Only),40.7334221275,-74.0027747527,0
+929,8th Ave & 14th St At Nw Corner,40.7399683652,-74.0026812013,0
+930,8th Ave & 14th St At Se Corner,40.7395676374,-74.0024141492,0
+931,8th Ave & 14th St At Ne Corner,40.7397954545,-74.002280639,0
+932,8th Ave & 15th St At Nw Corner,40.7406161366,-74.0022084941,0
+933,Broadway & Canal St At Sw Corner,40.7194430945,-74.00216811,0
+934,Broadway & Canal St At Sw Corner,40.7194074136,-74.0021139963,0
+935,Broadway & Canal St At Nw Corner,40.7196516988,-74.0020274237,0
+936,Broadway & Canal St At Nw Corner,40.7196050391,-74.001955272,0
+937,103 8 Avenue,40.7409564905,-74.0019450726,0
+938,Broadway & Canal St At Se Corner,40.719245477,-74.0018758966,0
+939,Broadway & Canal St At Se Corner,40.7192043066,-74.0018145681,0
+940,8th Ave & 15th St At Ne Corner,40.7404377351,-74.0017862772,0
+941,8th Ave & 16th St At Nw Corner,40.7412529269,-74.0017393862,0
+942,418 Broadway,40.7194897641,-74.0016414155,0
+943,6th Ave & West 3rd St At Nw Corner,40.7311522384,-74.0015587156,0
+944,8th Ave & 16th St At Se Corner,40.7409619876,-74.001429033,0
+945,8th Ave & 16th St At Ne Corner,40.7410745235,-74.0013316012,0
+946,6th Ave & West 3rd St At Ne Corner,40.7311110718,-74.0011509953,0
+947,Lafayette St & Canal St At Sw Corner,40.7185236173,-74.0008513592,0
+948,7th Ave & 12th St At Nw Corner,40.7374075397,-74.0008407751,0
+949,Lafayette St & Canal St At Nw Corner,40.7186581119,-74.0006493431,0
+950,Lafayette St & Canal St At Nw Corner,40.7186087066,-74.0005771934,0
+951,Chrystie St & Grand St At Ne Corner,40.7181748513,-73.9934777567,0
+952,Chrystie St & Grand St At Ne Corner,40.7182105402,-73.9936040135,0
+953,Essex St & Delancey St At Se Corner,40.7182265917,-73.9882974702,0
+954,Chrystie St & Grand St At Nw Corner,40.718284665,-73.993903424,0
+955,Essex St & Delancey St At Sw Corner,40.7183775709,-73.9884706011,0
+956,Norfolk St & Delancey St At Ne Corner,40.718432334,-73.9872188067,0
+957,Norfolk St & Delancey St At Nw Corner,40.7185696188,-73.9876480678,0
+958,Essex St & Delancey St At Nw Corner,40.7187727996,-73.9883045893,0
+959,116 Delancey Street,40.7188551021,-73.9879149678,0
+960,Bowery & Delancey St At Se Corner,40.7200248264,-73.9936074469,0
+961,Bowery & Delencey St At Ne Corner,40.7203239964,-73.9934522935,0
+962,Allen St & Houston St At Sw Corner,40.7228268738,-73.9889676923,0
+963,1st Ave & Houston St At Nw Corner,40.7232193666,-73.9888882577,0
+964,Chrystie St & Houston St At Sw Corner,40.723683466,-73.9916769585,0
+965,2nd Ave & Houston St At Nw Corner,40.7239688947,-73.9913233634,0
+966,Lafayette St & Mulberry St At Sw Corner (Uptown Only),40.7257449531,-73.9946026635,0
+967,Lafayette St & Mulberry St At Se Corner (Uptown Only),40.7257723907,-73.9943934062,0
+968,Lafayette St & Mulberry St At Ne Corner (Uptown Only),40.7258629654,-73.9943464965,0
+969,Lafayette St & Bleecker St At Nw Corner ((4)(6)<6> Dntn, (B)(D)(F)(V)),40.726066098,-73.9947830306,0
+970,Broadway & Waverly Pl At Ne Corner (Uptown Only),40.7297110434,-73.9930617007,0
+971,Broadway & Waverly Pl At Nw Corner (Downtown Only),40.7298043777,-73.9932745668,0
+972,Lafayette St & Astor Pl At Nw Corner (Downtown Only),40.7299881541,-73.99143443,0
+973,4th Ave & East 8th St At Ne Corner (Uptown Only),40.73010339,-73.9908643383,0
+974,Broadway & 8th Ave At Se Corner (Uptown Only),40.7304959957,-73.9923111336,0
+975,Broadway & 8th Ave At Ne Corner (Uptown Only),40.7305975471,-73.9922425678,0
+976,Broadway & 8th Ave At Sw Corner (Downtown Only),40.7306195323,-73.9926574978,0
+977,Broadway & 8th Ave At Sw Corner (Downtown Only),40.7306579642,-73.9927404802,0
+978,Broadway & 8th Ave At Nw Corner (Downtown Only),40.7307457844,-73.9925528486,0
+979,Broadway & 8th Ave At Nw Corner (Downtown Only),40.7307869612,-73.9926394388,0
+980,240 Canal Street,40.7179225176,-74.0003354902,0
+981,Lafayette St & Canal St At Se Corner,40.7181722907,-74.0003427064,0
+982,Lafayette St & Canal St At Se Corner,40.7182162067,-74.0004148553,0
+983,Lafayette St & Canal St At Ne Corner,40.7183232529,-74.000162335,0
+984,Lafayette St & Canal St At Ne Corner,40.7183754032,-74.0002416989,0
+985,27 Cleveland Place (Uptown Only),40.7221356826,-73.9969371053,0
+986,Lafayette St & Spring St At Ne Corner (Uptown Only),40.7222537047,-73.9968433008,0
+987,Lafayette St & Spring St At Sw Corner (Downtown Only),40.7224074265,-73.9974638118,0
+988,Lafayette St & Spring St At Nw Corner (Downtown Only),40.7224870235,-73.9974205167,0
+989,Broadway & Prince St At Se Corner (Uptown Only),40.7241421185,-73.9977054656,0
+990,Broadway & Prince St At Ne Corner (Uptown Only),40.7242244596,-73.997626092,0
+991,565 Broadway (Downtown Only),40.7242793619,-73.9980012977,0
+992,Broadway & Prince St At Nw Corner (Downtown Only),40.7243754269,-73.9979147083,0
+993,Lafayette St & Houston St At Sw Corner ((4)(6)<6> Dntn, (B)(D)(F)(V)),40.7250066579,-73.9956525946,0
+994,Crosby St & Houston St At Se Corner ((4)(6)<6> Dntn, (B)(D)(F)(V)),40.7250286204,-73.9957716508,0
+995,Broadway & Houston St At Ne Corner ((4)(6)<6> Dntn, (B)(D)(F)(V)),40.7252207811,-73.9966086521,0
+996,Crosby St & Houston St At Ne Corner ((4)(6)<6> Dntn, (B)(D)(F)(V)),40.7253634758,-73.9956381401,0
+997,Broadway & Houston St At Se Corner ((4)(6)<6> Dntn, (B)(D)(F)(V)),40.725517209,-73.9964138141,0
+998,Lafayette St & Bleecker St At Sw Corner ((4)(6)<6> Dntn, (B)(D)(F)(V)),40.7259755243,-73.9948551949,0
+999,378 6 Avenue,40.7330845559,-73.9997546395,0
+1000,6th Ave & Waverly Pl At Nw Corner,40.7330900454,-74.0002164946,0
+1001,390 6 Avenue,40.7332766884,-73.9996391747,0
+1002,214 North 7 Street,40.7168629909,-73.9563256366,0
+1003,551 Driggs Avenue,40.7170413537,-73.956202869,0
+1004,Bedford Ave & N 7th St At Se Corner,40.7177390877,-73.9577139163,0
+1005,183 Bedford Avenue,40.7178735398,-73.957602001,0
+1006,623 Manhattan Avenue,40.7236787805,-73.950884315,0
+1007,626 Manhattan Avenue,40.7237335615,-73.9506173021,0
+1008,Manhattan Ave & Nassau Ave At Nw Corner,40.7238297714,-73.9509527508,0
+1009,628 Manhattan Avenue,40.7239230038,-73.9507434328,0
+1010,Manhattan Ave & Norman Ave At Nw Corner,40.7254962527,-73.9519328547,0
+1011,Manhattan Ave & Norman Ave At Ne Corner,40.7255757419,-73.9516730331,0
+1012,Manhattan Ave & Greenpoint Ave At Sw Corner,40.730097473,-73.9544118957,0
+1013,158 Greenpoint Avenue,40.7301193121,-73.9541124099,0
+1014,133 Greenpoint Avenue,40.7303280509,-73.9544586432,0
+1015,134 India Street,40.7322357805,-73.9547748607,0
+1016,Manhattan Ave & India St At Se Corner,40.7322877985,-73.9544392628,0
+1017,Jackson Ave & 50th Ave At Se Corner (To Flushing Only),40.7423576228,-73.9527651363,0
+1018,Jackson Ave & 50th Ave At Sw Corner (To Flushing Only),40.7424428765,-73.9531728647,0
+1019,Jackson Ave & 50th Ave At Ne Corner (To Manhattan Only),40.7425029847,-73.9524979856,0
+1020,Vernon Blvd & 50th Ave At Sw Corner (To Flushing Only),40.7425915425,-73.9542914752,0
+1021,Jackson Ave & 50th Ave At Nw Corner (To Manhattan Only),40.7426266334,-73.9528262945,0
+1022,Vernon Blvd & 50th Ave At Sw Corner (To Flushing Only),40.7426574036,-73.9542589511,0
+1023,Vernon Blvd & 50th Ave At Ne Corner (To Manhattan Only),40.74276978,-73.9538619095,0
+1024,Vernon Blvd & 50th Ave At Ne Corner (To Manhattan Only),40.7428356944,-73.9539629095,0
+1025,West Rd & Unnamed St At Se Corner,40.7590350212,-73.9535293842,0
+1026,Union Tpke & Queens Blvd At Nw Corner,40.7147148563,-73.8320211699,0
+1027,Union Tpke & Queens Blvd At Nw Corner,40.7149474173,-73.8315119591,0
+1028,Union Tpke & Queens Blvd At Sw Corner,40.7150216735,-73.831612775,0
+1029,75th Rd & Queens Blvd At Se Corner (To Jamaica Only),40.7179219628,-73.8366847065,0
+1030,111-37 75 Avenue (To Jamaica Only),40.7185911941,-73.8382811733,0
+1031,75th & Queens Blvd At Nw Corner (To Manhattan And Brooklyn Only),40.7190409536,-73.8380095204,0
+1032,71st & Queens Blvd At Se Corner,40.7211325658,-73.844047169,0
+1033,107-31 71 Avenue,40.7212977538,-73.8444183663,0
+1034,71st & Queens Blvd At Ne Corner,40.7215159647,-73.8434077227,0
+1035,108th St & Queens Blvd At Nw Corner,40.72194828,-73.8444312783,0
+1036,70th Rd & Queens Blvd At Nw Corner,40.7222372625,-73.8450114371,0
+1037,Chambers St & West Broadway At Sw Corner,40.7154628225,-74.0094799547,0
+1038,Chambers St & Broadway At Sw Corner,40.7155588915,-74.00945111,0
+1039,Chambers St & West Broadway At Nw Corner,40.7157537775,-74.0093537404,0
+1040,Chambers St & West Broadway At Se Corner,40.7153667758,-74.0092346457,0
+1041,Chambers St & West Broadway At Ne Corner,40.715594605,-74.0090579198,0
+1042,Church St & Chambers St At Sw Corner,40.7148920114,-74.0081884752,0
+1043,Church St & Chambers St At Nw Corner,40.7151170939,-74.0080153539,0
+1044,Church St & Chambers St At Se Corner,40.7147959629,-74.0079287412,0
+1045,Church St & Chambers St At Ne Corner,40.7150100656,-74.0077628325,0
+1046,Varick St & Franklin St At Sw Corner (Downtown Only),40.7189845183,-74.0071464165,0
+1047,Varick St & Franklin St At Nw Corner (Downtown Only),40.7192699773,-74.0070815122,0
+1048,Varick St & North Moore St At Nw Corner (Downtown Only),40.7199067694,-74.0069517088,0
+1049,West Broadway & Franklin St At Sw Corner (Uptown Only),40.7190202271,-74.0066990926,0
+1050,Varick St & North Moore St At Ne Corner (Uptown Only),40.7199369798,-74.0066450718,0
+1051,Canal St & Varick St At Nw Corner (Downtown Only),40.7229507247,-74.0066453723,0
+1052,Canal St & Varick St At Nw Corner (Downtown Only),40.7228958354,-74.0065443515,0
+1053,Canal St & Varick St At Ne Corner (Uptown Only),40.7225884466,-74.006104185,0
+1054,Canal St & Varick St At Ne Corner (Uptown Only),40.7225170875,-74.0060175944,0
+1055,Varick St & King St At Sw Corner (Downtown Only),40.7278584008,-74.0057077922,0
+1056,Varick St & King St At Nw Corner (Downtown Only),40.7280011297,-74.0056753327,0
+1057,St. John La & Laight St At Se Corner,40.7216689753,-74.005660363,0
+1058,Varick St & Houston St At Sw Corner (Downtown Only),40.7285802787,-74.0055635341,0
+1059,Varick St & Houston St At Nw Corner (Downtown Only),40.7287037937,-74.0055418964,0
+1060,6th Ave & West Broadway At Nw Corner,40.72077694,-74.0054257948,0
+1061,Varick St & King St At Se Corner (Uptown Only),40.7277568629,-74.0053289483,0
+1062,Varick St & King St At Ne Corner (Uptown Only),40.7280066379,-74.0052820647,0
+1063,Varick St & Houston St At Se Corner (Uptown Only),40.7284897181,-74.0052135511,0
+1064,Thompson St & Canal St At Ne Corner,40.721984646,-74.0051589276,0
+1065,Varick St & Houston St At Ne Corner (Uptown Only),40.7286736213,-74.0051125414,0
+1066,6th Ave & Walker St At Ne Corner,40.7198876545,-74.0050649696,0
+1067,Lispenard St & West Broadway At Ne Corner,40.720722063,-74.0050253497,0
+1068,West Broadway & Vesey St At Se Corner,40.7125696246,-74.011849429,0
+1069,Church St & Vesey St At Nw Corner,40.7122760814,-74.0103307809,0
+1070,Church St & Barclay St At Sw Corner,40.7126988112,-74.0099160254,0
+1071,Church St & Park Pl At Sw Corner,40.7133054355,-74.0095373626,0
+1072,Church St & Park Pl At Nw Corner,40.7134536706,-74.0093173458,0
+1073,Church St & Park Pl At Se Corner,40.713055684,-74.0092703971,0
+1074,Church St & Murray St At Sw Corner,40.7137720825,-74.0090721009,0
+1075,Church St & Park Pl At Ne Corner,40.7133521352,-74.0090576151,0
+1076,Church St & Murray St At Nw Corner,40.7139669674,-74.0089855545,0
+1077,Church St & Warren St At Sw Corner,40.7143320493,-74.008610452,0
+1078,Church St & Warren St At Nw Corner,40.7145571315,-74.0084517626,0
+1079,Church St & Warren St At Se Corner,40.7142195309,-74.0083831825,0
+1080,1 Barclay Street (Enter On Park Place),40.7126303236,-74.0082495187,0
+1081,Park Pl & Broadway At Nw Corner,40.7127319117,-74.0077914243,0
+1082,Broadway & Warren St At Se Corner,40.7131052456,-74.0070736429,0
+1083,Broadway & Warren St At Ne Corner,40.7134565925,-74.0067851058,0
+1084,Broadway & Warren St At Se Corner,40.7135389389,-74.006723792,0
+1085,Centre St & Brooklyn Bridge Approach At Nw Corner,40.7127046181,-74.0050247452,0
+1086,Centre St & Brooklyn Bridge Approach At Nw Corner,40.7128857807,-74.0048299728,0
+1087,Centre St & Brooklyn Bridge Approach At Ne Corner,40.7122462711,-74.0043285375,0
+1088,1 Centre Street,40.7127183777,-74.0041229612,0
+1089,Centre St & Reade St At Nw Corner,40.7138492284,-74.0038669199,0
+1090,Centre St & Reade St At Nw Corner,40.7139096199,-74.0036613127,0
+1091,Lafayette St & Duane St At Ne Corner,40.7143131141,-74.0031779665,0
+1092,Rutgers St & Broadway At Nw Corner,40.7142139443,-73.9903759341,0
+1093,Rutgers St & Madison Ave At Nw Corner,40.712745478,-73.9901525033,0
+1094,Rutgers St & Broadway At Se Corner,40.7139257158,-73.9900405056,0
+1095,Essex St & Canal St At Ne Corner,40.7144225092,-73.9899430361,0
+1096,Union Ave & Metropolitan Ave At Ne Corner,40.7137870422,-73.9517753676,0
+1097,Union Ave & Metropolitan Ave At Sw Corner,40.7139489694,-73.9517427856,0
+1098,Union Ave & Metropolitan Ave At Se Corner,40.7137869133,-73.9514687558,0
+1099,543 Metropolitan Avenue,40.7142175914,-73.9508804651,0
+1100,574 Lorimer Street,40.7142251407,-73.9493004962,0
+1101,566 Lorimer Street,40.7139588782,-73.949253805,0
+1102,Graham Ave & Metropolitan Ave At Sw Corner (To Manhattan Only),40.7146346819,-73.9445855161,0
+1103,Graham Ave & Metropolitan Ave At Nw Corner (To Canarsie Only),40.7144425192,-73.9445243528,0
+1104,344 Graham Avenue (To Manhattan Only),40.7147059064,-73.944296877,0
+1105,Graham Ave & Metropolitan Ave At Se Corner (To Canarsie Only),40.7144671001,-73.9442718259,0
+1106,Grand St & Bushwick Ave At Ne Corner (To Canarsie Only),40.7120527805,-73.9409156297,0
+1107,Fulton St & Nassau St At Se Corner,40.7101243956,-74.0076720886,0
+1108,192 Broadway (Enter On John St.),40.7101819252,-74.0091798224,0
+1109,Broadway & John St At Se Corner,40.7101873932,-74.0094467414,0
+1110,Church St & Cortlandt St At Se Corner (Uptown Only),40.7102201706,-74.0112249995,0
+1111,Fulton St & Nassau St At Ne Corner,40.7102259575,-74.0075855321,0
+1112,126 Fulton Street,40.7102588633,-74.0080472328,0
+1113,Fulton St & Nassau St At Nw Corner,40.7104180658,-74.0079570766,0
+1114,189 Broadway,40.7104371465,-74.0096884469,0
+1115,Church St & Cortlandt St At Ne Corner (Uptown Only),40.7104534884,-74.0110915791,0
+1116,Broadway & Dey St At Sw Corner,40.7104728257,-74.0097209153,0
+1117,204 Broadway,40.7105744668,-74.008656858,0
+1118,Broadway & Dey St At Nw Corner,40.7105743987,-74.0095189367,0
+1119,2 Ann Street,40.7107117199,-74.008454882,0
+1120,Church St & Dey St At Ne Corner (Uptown Only),40.7108899341,-74.0107922673,0
+1121,Broadway & Fulton St At Sw Corner,40.7109312364,-74.0092917439,0
+1122,Broadway & Fulton St At Nw Corner,40.7110574993,-74.0092448699,0
+1123,Church St & Dey St At Se Corner (Uptown Only),40.7110848237,-74.0106696591,0
+1124,Broadway & Fulton St At Nw Corner,40.7111343401,-74.0093999839,0
+1125,Church St & Dey St At Sw Corner (Downtown Only),40.7112247463,-74.0113009169,0
+1126,Church St & Fulton St At Ne Corner,40.7117298827,-74.0102296978,0
+1127,Church St & Vesey St At Se Corner,40.7118122291,-74.0101900324,0
+1128,Nassau St & Frankfort St At Se Corner,40.7118345262,-74.005078786,0
+1129,Nassau St & Frankfort St At Se Corner,40.7118949061,-74.0051870035,0
+1130,Grand St & Bushwick Ave At Nw Corner (To Canarsie Only),40.7118441119,-73.9407859593,0
+1131,95 Bushwick Avenue (To Manhattan Only),40.7121486856,-73.9406017261,0
+1132,Grand St & Bushwick Ave At Sw Corner (To Manhattan Only),40.7119235388,-73.9404540358,0
+1133,69th St & Metropolitan Ave At Sw Corner,40.7121000593,-73.8895647921,0
+1134,Union Tpke & Queens Blvd At Se Corner,40.7138305759,-73.8317023571,0
+1135,Union Tpke & Queens Blvd At Se Corner,40.7139892597,-73.8313520565,0
+1136,9 Kew Gardens Road,40.7136580165,-73.8300795538,0
+1137,Union Tpke & Queens Blvd At Ne Corner,40.7141134597,-73.8299521399,0
+1138,168th St & Hillside Ave At Nw Corner,40.7101670833,-73.7949417436,0
+1139,168th St & Hillside Ave At Ne Corner,40.7102024308,-73.7947540701,0
+1140,168th St & Hillside Ave At Sw Corner,40.7098345822,-73.7947263468,0
+1141,168-02 Hillside Avenue,40.7098974477,-73.7945782663,0
+1142,169th St & Hillside Ave At Nw Corner,40.7108392477,-73.7932371489,0
+1143,169th St & Hillside Ave At Sw Corner,40.7105314916,-73.7930469309,0
+1144,169th St & Hillside Ave At Ne Corner,40.7109650331,-73.7929734437,0
+1145,169th St & Hillside Ave At Se Corner,40.710599812,-73.7928807951,0
+1146,179th St & Hillside Ave At Nw Corner,40.7125178977,-73.7851158773,0
+1147,179th St & Hillside Ave At Sw Corner,40.7122514478,-73.7850049154,0
+1148,179th St & Hillside Ave At Sw Corner,40.7123548515,-73.7845248334,0
+1149,179th St & Hillside Ave At Ne Corner,40.7126730943,-73.7844444473,0
+1150,179th St & Hillside Ave At Se Corner,40.7124176161,-73.7843298452,0
+1151,179th St & Hillside Ave At Ne Corner,40.7127167266,-73.7842928059,0
+1152,179th Pl & Hillside Ave At Sw Corner,40.712581022,-73.7836475663,0
+1153,180th St & Hillside Ave At Nw Corner,40.7129262843,-73.7833398369,0
+1154,179-30 Hillside Avenue,40.7126653019,-73.7832180421,0
+1155,180th St & Hillside Ave At Nw Corner,40.7129589633,-73.7832026584,0
+1156,179-36 Hillside Avenue,40.7127006847,-73.7830592124,0
+1157,180th St & Hillside Ave At Sw Corner,40.7127960299,-73.7826765437,0
+1158,180th St & Hillside Ave At Nw Corner,40.7130787395,-73.7826756219,0
+1159,88-01 180 Street,40.7128450744,-73.7824852044,0
+1160,Midland Pkwy & Hillside Ave At Ne Corner,40.7132178971,-73.7822386996,0
+1161,Broadway & Rector St At Sw Corner,40.7073325818,-74.0121875419,0
+1162,Broadway & Rector St At Sw Corner,40.7074478718,-74.0120937847,0
+1163,Broadway & Rector St At Se Corner,40.7072090849,-74.0120216046,0
+1164,Broadway & Rector St At Nw Corner,40.7075961037,-74.0119531439,0
+1165,Broadway & Rector St At Nw Corner,40.7076894332,-74.0118810233,0
+1166,Broadway & Wall St At Se Corner,40.7074643633,-74.0118737695,0
+1167,Broadway & Wall St At Se Corner,40.7075961242,-74.0117547665,0
+1168,Broad St & Exchange Pl At Sw Corner,40.7057900885,-74.0115668962,0
+1169,Broad St & Exchange Pl At Sw Corner,40.7060398689,-74.0114984108,0
+1170,Broad St & Exchange Pl At Se Corner,40.705847754,-74.0113108257,0
+1171,Broad St & Exchange Pl At Nw Corner,40.7063967079,-74.0113000984,0
+1172,Broad St & Exchange Pl At Se Corner,40.7061606726,-74.0111521802,0
+1173,Broad St & Wall St At Sw Corner,40.7070307863,-74.0109070612,0
+1174,Broad St & Wall St At Sw Corner,40.7071268605,-74.0108277265,0
+1175,Broad St & Wall St At Se Corner,40.7069210137,-74.0107158814,0
+1176,Broad St & Wall St At Se Corner,40.7069484799,-74.0105139035,0
+1177,Nassau St & Cedar St At Se Corner,40.708046445,-74.0098395887,0
+1178,William St & Wall St At Sw Corner,40.7064050895,-74.0096842541,0
+1179,William St & Wall St At Nw Corner,40.7065258687,-74.0095688539,0
+1180,William St & Wall St At Se Corner,40.7062898271,-74.0094714366,0
+1181,William St & Wall St At Ne Corner,40.7064106061,-74.0093560362,0
+1182,47 Pine Street,40.7068196117,-74.008905241,0
+1183,47 Pine Street,40.7067729566,-74.0088294916,0
+1184,William St & Cedar St At Nw Corner,40.7074509152,-74.0088043334,0
+1185,1 Federal Reserve Plaza,40.7093942378,-74.0084006105,0
+1186,John St & Nassau St At Ne Corner,40.7095259922,-74.0083212738,0
+1187,69 John Street,40.7086477545,-74.007022673,0
+1188,69 John Street,40.7090649696,-74.0068387629,0
+1189,128 William Street,40.709218685,-74.0066908937,0
+1190,William St & Fulton St At Sw Corner,40.7095892324,-74.0066151845,0
+1191,William St & Fulton St At Se Corner,40.7094931759,-74.0064348267,0
+1192,266 Broadway (To Queens And Canarsie Only),40.7087175745,-73.9591515881,0
+1193,265 Broadway (To Manhattan Only),40.7089316172,-73.9590143933,0
+1194,Marcy Ave & Broadway At Sw Corner (To Queens And Canarsie Only),40.7082286844,-73.9582537701,0
+1195,300 Broadway,40.7083686333,-73.958159903,0
+1196,295 Broadway (To Manhattan Only),40.7086073817,-73.958033511,0
+1197,170 Marcy Avenue (To Manhattan Only),40.7087336185,-73.9579721138,0
+1198,302 Broadway (To Queens And Canarsie Only),40.7082505112,-73.9578930666,0
+1199,299 Broadway (To Manhattan Only),40.7085249333,-73.9577450098,0
+1200,394 Broadway,40.7070936329,-73.9543951662,0
+1201,Hooper St & Broadway At Nw Corner,40.7072884839,-73.9543265028,0
+1202,Hewes St & Broadway At Se Corner,40.7064368493,-73.9524551567,0
+1203,Hewes St & Broadway At Ne Corner,40.7066454155,-73.9523684445,0
+1204,502 Broadway,40.7054891112,-73.9505695027,0
+1205,Union Ave & Broadway At Sw Corner,40.7052749606,-73.9504326054,0
+1206,Union Ave & Broadway At Se Corner,40.7052748141,-73.9500935721,0
+1207,1 Boerum Street,40.7056014363,-73.9500825074,0
+1208,Montrose Ave & Bushwick Ave At Sw Corner,40.7077595362,-73.9400754269,0
+1209,235 Bushwick Avenue,40.707806005,-73.9397074838,0
+1210,Intersection Of Harrison Place And Bogart Street,40.7060927072,-73.9336893133,0
+1211,Morgan Ave & Harrison Pl At Sw Corner,40.7062536719,-73.932015602,0
+1212,Morgan Ave & Harrison Pl At Ne Corner,40.7064785931,-73.9317628963,0
+1213,Morgan Ave & Harrison Pl At Se Corner,40.70632485,-73.9317017382,0
+1214,Jefferson St & Wyckoff Ave At Sw Corner,40.7071296856,-73.9239353893,0
+1215,Jefferson St & Wyckoff Ave At Nw Corner,40.7072613101,-73.9237476831,0
+1216,Starr St & Wyckoff Ave At Sw Corner,40.7060691305,-73.922324368,0
+1217,Starr St & Wyckoff Ave At Se Corner,40.7060333267,-73.9221440707,0
+1218,Starr St & Wyckoff Ave At Nw Corner,40.706324235,-73.922089629,0
+1219,Starr St & Wyckoff Ave At Ne Corner,40.7062335674,-73.9219562838,0
+1220,Forest Ave & Myrtle Ave At Nw Corner,40.7048351429,-73.9022327943,0
+1221,67-05 Fresh Pond Road,40.7059744809,-73.8962582996,0
+1222,62nd St & 67th Ave At Se Corner,40.7061330672,-73.8955835837,0
+1223,Van Wyck Blvd & Queens Blvd At Sw Corner (To Jamaica Only),40.7081094391,-73.8201242316,0
+1224,Van Wyck Blvd & Queens Blvd At Se Corner (To Jamaica Only),40.7093000714,-73.8197422877,0
+1225,84th Rd & Queens Blvd At Ne Corner (To Manhattan Only),40.7097226284,-73.8196545773,0
+1226,144th St & Hillside Ave At Sw Corner,40.7049454838,-73.8120140253,0
+1227,144-01 Hillside Avenue,40.705359683,-73.8118541603,0
+1228,146-18 Hillside Avenue,40.7055841371,-73.8098084924,0
+1229,Sutphin Blvd & Hillside Ave At Ne Corner,40.7059215098,-73.8096668654,0
+1230,Sutphin Blvd & Hillside Ave At Se Corner,40.7056687415,-73.8095161029,0
+1231,153rd St & Hillside Ave At Sw Corner,40.7071095984,-73.8045165047,0
+1232,153rd St & Hillside Ave At Ne Corner,40.7073977489,-73.8044868048,0
+1233,153rd St & Hillside Ave At Se Corner,40.7071559284,-73.804321599,0
+1234,Parsons Blvd & Hillside Ave At Nw Corner,40.7077794195,-73.8029635812,0
+1235,Parsons Blvd & Hillside Ave At Sw Corner,40.7075733157,-73.8028199156,0
+1236,Parsons Blvd & Hillside Ave At Se Corner,40.7076031495,-73.8026106287,0
+1237,Broadway & Battery Pl At Nw Corner,40.7048428005,-74.0145963717,0
+1238,Broadway & Battery Pl At Nw Corner,40.7048126226,-74.0144809503,0
+1239,Greenwich St & Morris St At Nw Corner (Downtown Only),40.7065308649,-74.0143226241,0
+1240,Greenwich St & Morris St At Ne Corner (Uptown Only),40.7065720591,-74.0141386857,0
+1241,Greenwich St & Morris St At Ne Corner (Uptown Only),40.7066791085,-74.0141098539,0
+1242,Greenwich St & Morris St At Ne Corner (Uptown Only),40.7063332717,-74.0140809264,0
+1243,Greenwich St & Rector St At Sw Corner (Downtown Only),40.7075766725,-74.0138936322,0
+1244,Greenwich St & Rector St At Nw Corner (Downtown Only),40.7081805524,-74.0136268479,0
+1245,Greenwich St & Rector St At Ne Corner (Uptown Only),40.7081256754,-74.0134717403,0
+1246,Trinity Pl & Exchange Alley At Nw Corner (Downtown Only),40.707324207,-74.0134499372,0
+1247,Trinity Pl & Rector St At Sw Corner (Downtown Only),40.7075328274,-74.0132912775,0
+1248,Trinity Pl & Rector St At Sw Corner (Downtown Only),40.7077387017,-74.0131434369,0
+1249,Trinity Pl & Rector St At Nw Corner (Downtown Only),40.7079281076,-74.0129919852,0
+1250,Trinity Pl & Rector St At Se Corner (Uptown Only),40.7076646152,-74.0129486514,0
+1251,Trinity Pl & Rector St At Nw Corner (Downtown Only),40.7080818261,-74.0128874154,0
+1252,Trinity Pl & Rector St At Ne Corner (Uptown Only),40.7079198947,-74.0128008189,0
+1253,Trinity Pl & Rector St At Ne Corner (Uptown Only),40.7080269485,-74.0127287018,0
+1254,158th St & Archer Ave At Sw Corner,40.7016770135,-73.802509159,0
+1255,South St & Whitehall St At Ne Corner,40.701955542,-74.0126121327,0
+1256,Intersection Of Archer Avenue And 153 Street,40.7018379068,-73.8018991737,0
+1257,State St & Whitehall St At   Corner,40.7020378257,-74.0131423129,0
+1258,Water St & Whitehall St At Se Corner,40.7021119885,-74.0126590476,0
+1259,State St & Whitehall St At   Corner,40.7021448757,-74.0131062683,0
+1260,153rd St & Archer Ave At Ne Corner,40.7022248371,-73.8018511383,0
+1261,Intersection Of Parsons Block And Archer Avenue,40.7023780069,-73.7999536167,0
+1262,Van Wyck Expwy & Jamaica Ave At Nw Corner,40.7026784493,-73.8172175358,0
+1263,Parsons Blvd & Archer Ave At Ne Corner,40.7026549202,-73.7997760621,0
+1264,1745 Palmetto Street,40.7028196789,-73.907912549,0
+1265,701 Seneca Avenue,40.702855034,-73.9075049534,0
+1266,Parsons Blvd & Archer Ave At Ne Corner,40.702888394,-73.7998727396,0
+1267,Stanhope St & Wycoff Ave At Se Corner,40.7032772763,-73.9177580198,0
+1268,Lorimer St & Broadway At Sw Corner,40.7033327492,-73.9467120043,0
+1269,Stanhope St & Wycoff Ave At Sw Corner,40.7033597814,-73.917985136,0
+1270,Stanhope St & Wycoff Ave At Ne Corner,40.7034802986,-73.9176315368,0
+1271,Lorimer St & Broadway At Nw Corner,40.7035330519,-73.9465711851,0
+1272,Stanhope St & Wycoff Ave At Nw Corner,40.7035682316,-73.9177720874,0
+1273,Stone St & Whitehall St At Sw Corner,40.704033251,-74.0133086131,0
+1274,Stone St & Whitehall St At Nw Corner,40.7041155926,-74.0133194496,0
+1275,Stone St & Whitehall St At Ne Corner,40.7041430737,-74.0130273143,0
+1276,State & Battery Pl At Sw Corner,40.7041758304,-74.0145349121,0
+1277,Dekalb Ave & Wycoff Ave At Se Corner,40.7041704147,-73.9192969699,0
+1278,Moore St & Broadway At Sw Corner,40.7042145408,-73.9482946323,0
+1279,Dekalb Ave & Wycoff Ave At Sw Corner,40.7043434611,-73.9194770949,0
+1280,Moore St & Broadway At Nw Corner,40.7044148453,-73.9481538159,0
+1281,Dekalb Ave & Wycoff Ave At Ne Corner,40.7044090496,-73.9190694594,0
+1282,1623 De Kalb Avenue,40.7044997332,-73.9192208306,0
+1283,Forest Ave & Myrtle Ave At Sw Corner,40.7045194952,-73.9022332572,0
+1284,Broadway & Bowling Green At Nw Corner,40.7046535362,-74.0135792397,0
+1285,926 Broadway,40.6970416421,-73.9357611151,0
+1286,111th St & Jamaica Blvd At Se Corner,40.6970486692,-73.8371577744,0
+1287,51 Clark Street,40.6975973422,-73.9931840513,0
+1288,Clark St & Henry St At Nw Corner,40.6976686986,-73.9930578226,0
+1289,85 Cedar Street,40.6978732795,-73.9265389073,0
+1290,Myrtle Ave & Cedar St At Nw Corner,40.6980817872,-73.9263908172,0
+1291,1340 Greene Avenue,40.6987078429,-73.9186075503,0
+1292,Myrtle Ave & Greene Ave At Se Corner,40.6989275133,-73.918733506,0
+1293,Red Cross Pl & Adams St At Sw Corner,40.699180743,-73.9889391476,0
+1294,Sands St & Adams St At Se Corner,40.6992767463,-73.9882971901,0
+1295,Cadman Plaza West & Cranberry St At Nw Corner,40.6994444528,-73.991427535,0
+1296,54-00 Myrtle Avenue,40.6994869615,-73.910672462,0
+1297,Union Ave & Flushing Ave At Sw Corner (To Downtown Brooklyn Only),40.6997030223,-73.9502852778,0
+1298,1605 Palmetto Street,40.6998248414,-73.9110254408,0
+1299,1605 Palmetto Street,40.6998333039,-73.911321158,0
+1300,Union Ave & Flushing Ave At Ne Corner (To Queens Only),40.6999855832,-73.9499388477,0
+1301,121st St & Jamaica Ave At Sw Corner,40.7002569575,-73.8293383185,0
+1302,Sutphin Blvd & Archer Ave At Sw Corner,40.700429147,-73.8079694662,0
+1303,Flushing Ave & Broadway At Se Corner,40.7006132836,-73.9422601679,0
+1304,Flushing Ave & Broadway At Se Corner,40.7006488441,-73.9420185024,0
+1305,121st St & Jamaica Ave At Nw Corner,40.7005395449,-73.8292546459,0
+1306,93-01 Sutphin Boulevard,40.7005599615,-73.8074100832,0
+1307,123rd St & Jamaica Ave At Se Corner,40.7006298963,-73.8272636303,0
+1308,Flushing Ave & Broadway At Nw Corner,40.7008627773,-73.9417045509,0
+1309,123rd St & Jamaica Ave At Nw Corner,40.7007922968,-73.8275697622,0
+1310,Sutphin Blvd & Archer Ave At Nw Corner,40.7007858815,-73.8079179476,0
+1311,Sutphin Blvd & Archer Ave At Ne Corner,40.7008678569,-73.8076977144,0
+1312,135-02 89 Avenue,40.7009889925,-73.816324146,0
+1313,Jay St & York St At Sw Corner,40.7013406345,-73.9866774983,0
+1314,Van Wyck Expwy & 89th Ave At Sw Corner,40.7012224812,-73.8164389116,0
+1315,1 Whitehall Street,40.7016233412,-74.0133586236,0
+1316,368 Jay Street,40.6924174918,-73.9875375192,0
+1317,Jay St & Willoughby St At Nw Corner,40.6923241693,-73.9875339306,0
+1318,368 Jay Street,40.6929856516,-73.9874688977,0
+1319,368 Jay Street,40.6930570144,-73.987458066,0
+1320,Jay St & Willoughby St At Nw Corner,40.6923241595,-73.9874437797,0
+1321,Jay St & Fulton St At Nw Corner,40.6916269878,-73.987440305,0
+1322,Jay St & Willoughby St At Nw Corner,40.6924147353,-73.9874293385,0
+1323,Jay St & Metrotech Walk At Sw Corner,40.6929801514,-73.9873715347,0
+1324,Jay St & Metrotech Walk At Sw Corner,40.6930542597,-73.9873679146,0
+1325,Jay St & Fulton St At Ne Corner,40.6915748205,-73.987288863,0
+1326,Jay St & Willoughby St At Ne Corner,40.6923021811,-73.987259876,0
+1327,Jay St & Metrotech Walk At Se Corner,40.6930871778,-73.9871948166,0
+1328,Lawrence St & Willoughby St At Ne Corner,40.6920632687,-73.9862394172,0
+1329,Lawrence St & Willoughby St At Ne Corner,40.6923761694,-73.9862141104,0
+1330,Lawrence St & Willoughby St At Se Corner,40.6921428567,-73.9861528562,0
+1331,Lawrence St & Willoughby St At Se Corner,40.6922773486,-73.9861384041,0
+1332,35 Hoyt Street,40.689104374,-73.9859659823,0
+1333,Bridge St & Fulton St At Nw Corner (To Manhattan Only),40.6909487967,-73.9854607593,0
+1334,Bridge St & Willoughby St At Sw Corner,40.6921153144,-73.9853883845,0
+1335,Hoyt St & Fulton St At Sw Corner (To New Lots And Flatbush Only),40.6904684409,-73.985294991,0
+1336,Bridge St & Fulton St At Ne Corner (To Manhattan Only),40.6909130917,-73.9852804691,0
+1337,Bridge St & Willoughby St At Se Corner,40.6920933379,-73.9852441483,0
+1338,Bridge St & Willoughby St At Ne Corner,40.6922525317,-73.9852224769,0
+1339,Duffield St & Fulton St At Nw Corner (To Manhattan Only),40.6904601127,-73.9845774116,0
+1340,Duffield St & Fulton St At Ne Corner (To Manhattan Only),40.6904244029,-73.9843718816,0
+1341,36 Bond Street,40.6884152136,-73.9842425428,0
+1342,Elm Pl & Fulton St At Sw Corner (To New Lots And Flatbush Only),40.6900675647,-73.9842385464,0
+1343,Flatbush Ave & Fleet St At Nw Corner,40.6915467327,-73.9824243813,0
+1344,Flatbush Ave & Fleet St At Ne Corner,40.6915274827,-73.9821863908,0
+1345,Flatbush Ave & De Kalb Ave At Sw Corner,40.6898832664,-73.9815557967,0
+1346,Flatbush Ave & De Kalb Ave At Se Corner,40.6898832391,-73.9813863192,0
+1347,Flatbush Ave & De Kalb Ave At Se Corner,40.689800889,-73.9813430714,0
+1348,Flatbush Ave & De Kalb Ave At Se Corner,40.6898887099,-73.9812709287,0
+1349,Flatbush Ave & Livingston St At Nw Corner,40.6881291915,-73.9805430493,0
+1350,Flatbush Ave & Livingston St At Nw Corner,40.6880495864,-73.9805034086,0
+1351,Flatbush Ave & Livingston St At Ne Corner,40.6881840556,-73.9803591368,0
+1352,Flatbush Ave & Livingston St At Ne Corner,40.6881017039,-73.9803086797,0
+1353,4th Ave & Pacific St At Nw Corner,40.6839431251,-73.9788965189,0
+1354,4th Ave & Pacific St At Ne Corner,40.6837591608,-73.9785468365,0
+1355,4th Ave & Pacific St At Ne Corner,40.6838469847,-73.9784999357,0
+1356,Ashland Pl & Hanson Pl At Se Corner,40.6849749745,-73.9779118528,0
+1357,Ashland Pl & Hanson Pl At Ne Corner,40.685172571,-73.977771167,0
+1358,Pine St & Fulton St At Se Corner,40.683424608,-73.8727959546,0
+1359,3327 Fulton Street,40.6836058464,-73.8728713258,0
+1360,109-04 Liberty Avenue,40.6839799309,-73.8327259655,0
+1361,109th St & Liberty Ave At Nw Corner,40.6842985492,-73.8328802075,0
+1362,111th St & Liberty Ave At Se Corner,40.6846390073,-73.8310729346,0
+1363,111th St & Liberty Ave At Ne Corner,40.6849136004,-73.8311515632,0
+1364,104-02 116 Street,40.6856978581,-73.8269525595,0
+1365,116th St & Liberty Ave At Nw Corner,40.6859724594,-73.827034778,0
+1366,118-16 Liberty Avenue,40.6860481096,-73.8244276574,0
+1367,Lefferts Blvd & Liberty Ave At Nw Corner,40.6862267009,-73.8245461757,0
+1368,2 Hemlock Street,40.6894719606,-73.8733541479,0
+1369,Crescent St & Jamaica Ave At Ne Corner,40.6896341754,-73.8736026466,0
+1370,Autumn Ave & Jamaica Ave At Se Corner,40.690222129,-73.8716399077,0
+1371,75-06 Jamaica Avenue,40.6913715155,-73.866228711,0
+1372,75th St & Jamaica At Nw Corner,40.6914899966,-73.8666215269,0
+1373,85th St & Jamaica Ave At Se Corner,40.6924140985,-73.8589712545,0
+1374,85th St & Jamaica Ave At Ne Corner,40.6926667804,-73.8591041442,0
+1375,92-20 Jamaica Avenue,40.6934516982,-73.8524636505,0
+1376,92-17 Jamaica Avenue,40.6936824618,-73.8526218089,0
+1377,95th St & Jamaica Ave At Sw Corner,40.6941682856,-73.8504931114,0
+1378,104th St & Jamaica Ave At Se Corner,40.695141409,-73.8433470575,0
+1379,104th St & Jamaica Ave At Ne Corner,40.6952868472,-73.8433214724,0
+1380,111th St & Jamaica Blvd At Ne Corner,40.6968152164,-73.8370537623,0
+1381,Patchen Ave & Broadway At Sw Corner,40.6930131727,-73.927928995,0
+1382,Linden St & Broadway At Sw Corner,40.6899770908,-73.9231219911,0
+1383,Linden St & Broadway At Nw Corner,40.6901608914,-73.9229739364,0
+1384,Palmetto St & Broadway At Sw Corner,40.6890867517,-73.9215905258,0
+1385,Palmetto St & Broadway At Nw Corner,40.6893199611,-73.9214496224,0
+1386,Jefferson Ave & Broadway At Se Corner,40.6867618103,-73.9174935361,0
+1387,Jefferson Ave & Broadway At Ne Corner,40.6869510752,-73.917320226,0
+1388,Weirfield St & Broadway At Se Corner,40.6858933067,-73.9158972897,0
+1389,1561 Broadway,40.686071606,-73.9157456254,0
+1390,1720 Broadway,40.6831999773,-73.9113000109,0
+1391,1725 Broadway,40.6834852692,-73.9110869033,0
+1392,1772 Broadway,40.6824056996,-73.909963426,0
+1393,Chauncey St & Broadway At Ne Corner,40.6826854883,-73.9097359006,0
+1394,Halsey St & Wycoff Ave At Se Corner (To Canarsie Only),40.6958569874,-73.9054951731,0
+1395,Halsey St & Wycoff Ave At Sw Corner (To Canarsie Only),40.6957305592,-73.9052897976,0
+1396,De Sales Pl & Bushwick Ave At Nw Corner,40.6822700301,-73.9050853742,0
+1397,Lirr Bay Ridge Divide & Wilson Ave At Nw Corner,40.6888050198,-73.9047046696,0
+1398,9-91 Wyckoff Avenue (To Manhattan Only),40.6961088368,-73.9046834113,0
+1399,George St & Wycoff Ave At Ne Corner (To Manhattan Only),40.6961607211,-73.9043623812,0
+1400,10-34 Wyckoff Avenue (To Canarsie Only),40.6952325363,-73.903819177,0
+1401,10-51 Wyckoff Avenue (To Manhattan Only),40.6951714644,-73.9030006593,0
+1402,Franklin Ave & Fulton St At Sw Corner,40.6810545299,-73.9557217438,0
+1403,Franklin Ave & Fulton St At Ne Corner,40.6812164382,-73.9556351058,0
+1404,908 Fulton Street (To Queens Only),40.6828444446,-73.9645793292,0
+1405,957 Fulton Street (To Manhattan Only),40.6832616732,-73.9646548241,0
+1406,Washington Ave & Lafayette Ave At Se Corner,40.6880076687,-73.9655970289,0
+1407,344 Classon Avenue,40.6887826896,-73.9601734372,0
+1408,361 Classon Avenue,40.6888045299,-73.9598344746,0
+1409,Classon Ave & Lafayette Ave At Nw Corner,40.6890324811,-73.9602237701,0
+1410,Bedford Ave & Lafayette Ave At Sw Corner,40.6893188543,-73.9552474921,0
+1411,Bedford Ave & Lafayette Ave At Se Corner,40.6893489484,-73.9549950606,0
+1412,Bedford Ave & Lafayette Ave At Nw Corner,40.6895713998,-73.9553158345,0
+1413,Bedford Ave & Lafayette Ave At Ne Corner,40.6895932484,-73.9550345605,0
+1414,586 Lafayette Avenue,40.6897044035,-73.95163052,0
+1415,573 Lafayette Avenue,40.6900447762,-73.9516807559,0
+1416,Smith St & President St At Nw Corner,40.6811342781,-73.9944187917,0
+1417,Smith St & President St At Ne Corner,40.6809338966,-73.9941556127,0
+1418,Clinton St & Montague St At Nw Corner,40.6944600442,-73.9927191784,0
+1419,78 Clinton Street,40.6942404581,-73.9926470796,0
+1420,Clinton St & Montague St At Nw Corner,40.6944106284,-73.9925641194,0
+1421,Smith St & Warren St At Nw Corner (To Coney Island Only),40.6856135681,-73.9915086379,0
+1422,Court St & Joralemon St At Sw Corner,40.6925358564,-73.9912156664,0
+1423,Smith St & Warren St At Ne Corner (To Manhattan And Queens Only),40.6854653228,-73.9911408788,0
+1424,Court St & Joralemon St At Nw Corner,40.6926456375,-73.99108944,0
+1425,Court St & Montague St At Sw Corner,40.6937435144,-73.9907034391,0
+1426,45 Court Street,40.6924013205,-73.990678384,0
+1427,Smith St & Bergen St At Sw Corner (To Coney Island Only),40.6867525805,-73.9906359048,0
+1428,Court St & Joralemon St At Ne Corner,40.6926236427,-73.9906278682,0
+1429,Court St & Montague St At Sw Corner,40.6936611644,-73.990616904,0
+1430,Smith St & Bergen St At Nw Corner (To Coney Island Only),40.6868953006,-73.9905385297,0
+1431,Smith St & Bergen St At Se Corner (To Manhattan And Queens Only),40.6866427724,-73.9904267879,0
+1432,45 Court Street,40.6923271826,-73.9903250027,0
+1433,Smith St & Bergen St At Ne Corner (To Manhattan And Queens Only),40.6867470628,-73.9902969665,0
+1434,Court St & Joralemon St At Ne Corner,40.6925796879,-73.9901662999,0
+1435,Cadman Plaza West & Montague St At Ne Corner,40.6938450234,-73.9901336582,0
+1436,77th St & Liberty Ave At Se Corner,40.6791883922,-73.8600880334,0
+1437,80th St & Liberty Ave At Se Corner,40.6793144828,-73.857711851,0
+1438,77th St & Liberty Ave At Ne Corner,40.6794766018,-73.8600946394,0
+1439,Liberty St (Between 80 St And 81 St),40.6796136984,-73.8577400555,0
+1440,105-02 86 Street,40.6796512218,-73.8526600281,0
+1441,214 Cleveland Street,40.6797162697,-73.885735449,0
+1442,88-04 Liberty Avenue,40.6797581191,-73.8504172565,0
+1443,86th St & Liberty Ave At Nw Corner,40.6799120672,-73.8527315592,0
+1444,88th St & Liberty Ave At Ne Corner,40.6800382542,-73.8505464217,0
+1445,93-18 Liberty Avenue,40.6801408497,-73.8451056681,0
+1446,94th St & Liberty Ave At Nw Corner,40.6803933588,-73.8450978708,0
+1447,96-02 Liberty Avenue,40.680592997,-73.8425375673,0
+1448,97th St & Liberty Ave At Sw Corner,40.6808153924,-73.842587518,0
+1449,104-02 102 Street,40.6813068885,-73.8387537676,0
+1450,102nd St & Liberty Ave At Nw Corner,40.6815705024,-73.8388360558,0
+1451,Norwood Ave & Fulton St At Ne Corner,40.6818256403,-73.879032867,0
+1452,104th St & Liberty Ave At Se Corner,40.6818943506,-73.8368630762,0
+1453,104th St & Liberty Ave At Ne Corner,40.6821827402,-73.836995774,0
+1454,Fort Greene Pl & Lafayette Ave At Nw Corner,40.687143112,-73.9767356579,0
+1455,Fort Greene Pl & Lafayette Ave At Ne Corner,40.6871649789,-73.9762885363,0
+1456,Flatbush Ave & Bergen St At Sw Corner (To New Lots And Flatbush Only),40.6808903036,-73.9756814515,0
+1457,463 Bergen Street (To New Lots And Flatbush Only),40.6810631906,-73.9755227497,0
+1458,Flatbush Ave & Bergen St At Sw Corner (To New Lots And Flatbush Only),40.6807172875,-73.9752344439,0
+1459,469 Bergen Street (To Manhattan Only),40.6809615201,-73.9749927899,0
+1460,70 6 Avenue (To Manhattan Only),40.6806924875,-73.9747873825,0
+1461,South Portland Ave & Fulton St At Nw Corner,40.6873348343,-73.9747812652,0
+1462,South Portland Ave & Fulton St At Sw Corner,40.6870987737,-73.9747344797,0
+1463,Portland Ave & Fulton Ave At Nw Corner (To Manhattan Only),40.6865305864,-73.9746445518,0
+1464,Portland Ave & Fulton Ave At Sw Corner (To Queens Only),40.6861709975,-73.9745365175,0
+1465,Portland Ave & Fulton Ave At Ne Corner (To Manhattan Only),40.6864921029,-73.9743885602,0
+1466,Portland Ave & Fulton Ave At Se Corner (To Queens Only),40.6860858615,-73.974320208,0
+1467,Oxford St & Fulton Ave At Sw Corner (To Queens Only),40.6857480583,-73.9734549745,0
+1468,1 Greene Avenue (To Manhattan Only),40.68609661,-73.9733070021,0
+1469,9 Greene Avenue (To Manhattan Only),40.6860004741,-73.9730113736,0
+1470,Oxford St & Fulton Ave At Sw Corner (To Queens Only),40.6856051991,-73.9728925463,0
+1471,Flatbush Ave & Park Pl At Sw Corner,40.6774587005,-73.9728381739,0
+1472,Oxford St & Fulton Ave At Ne Corner (To Manhattan Only),40.6858110339,-73.9727951092,0
+1473,657 Carlton Avenue,40.6773405385,-73.9722649909,0
+1474,Flatbush Ave & Plaza Street West At Nw Corner,40.6752240418,-73.9711446811,0
+1475,Flatbush Ave & Plaza Street West At Sw Corner,40.6751608902,-73.9710581859,0
+1476,Flatbush Ave & Plaza Street East At Se Corner,40.6751992907,-73.970953621,0
+1477,Flatbush Ave & Plaza Street East At Se Corner,40.6752706521,-73.9709427745,0
+1478,Clinton Ave & Lafayette Ave At Sw Corner,40.6878518856,-73.9679120298,0
+1479,Clinton Ave & Lafayette Ave At Ne Corner,40.6881400158,-73.9676594844,0
+1480,486 Clinton Avenue (To Manhattan Only),40.6836960844,-73.9671424375,0
+1481,856 Fulton Street (To Queens Only),40.6834078772,-73.9671209462,0
+1482,493 Clinton Avenue (To Manhattan Only),40.6836465719,-73.9667710884,0
+1483,Clinton Ave & Fulton Ave At Se Corner (To Queens Only),40.6832870037,-73.9667604509,0
+1484,Washington Ave & Lafayette Ave At Ne Corner,40.688375497,-73.9656941964,0
+1485,Shepherd Ave & Pitkin Ave At Nw Corner,40.6739802648,-73.8808928814,0
+1486,Shepherd Ave & Pitkin Ave At Se Corner,40.6740184825,-73.8806909304,0
+1487,Pennsylvania Ave & Liberty Ave At Sw Corner,40.6742590359,-73.8966933746,0
+1488,Shepherd Ave & Pitkin Ave At Sw Corner,40.6742822607,-73.8809608383,0
+1489,Pennsylvania Ave & Liberty Ave At Se Corner,40.674302615,-73.8963183804,0
+1490,Shepherd Ave & Pitkin Ave At Ne Corner,40.6743122591,-73.8807733213,0
+1491,349 Liberty Avenue,40.6744814046,-73.8967398962,0
+1492,Pennsylvania Ave & Liberty Ave At Ne Corner,40.6745826176,-73.896357601,0
+1493,Euclid Ave & Pitkin Ave At Se Corner,40.6752797575,-73.8718056612,0
+1494,Euclid Ave & Pitkin Ave At Sw Corner,40.6752855881,-73.8721120851,0
+1495,Snediker Ave & New York Ave At Sw Corner,40.6754115567,-73.9026616759,0
+1496,Euclid Ave & Pitkin Ave At Nw Corner,40.6755079146,-73.8721116588,0
+1497,Euclid Ave & Pitkin Ave At Ne Corner,40.6755487211,-73.8717835134,0
+1498,Snediker Ave & New York Ave At Sw Corner,40.6756750854,-73.9026973427,0
+1499,Snediker Ave & New York Ave At Sw Corner,40.6757163697,-73.9028306727,0
+1500,Alabama Av & Fulton St At Se Corner,40.6767868119,-73.8996096703,0
+1501,Alabama Av & Fulton St At Se Corner,40.6767868119,-73.8996096703,0
+1502,Grant Ave & Pitkin Ave At Ne Corner,40.6767547569,-73.8655153588,0
+1503,Georgia Av & Fulton St At Sw Corner,40.6768523334,-73.899205789,0
+1504,Georgia Av & Fulton St At Sw Corner,40.6768523334,-73.899205789,0
+1505,104 Van Siclen Avenue,40.677776045,-73.8917559407,0
+1506,2154 Fulton Street,40.6780722419,-73.9106578827,0
+1507,2152 Fulton Street,40.6781575283,-73.9109137428,0
+1508,2084 Fulton Street,40.6782968855,-73.9136932277,0
+1509,2059 Fulton Street,40.6784401113,-73.9107475221,0
+1510,Fulton St & Van Sinderen Ave At Sw Corner,40.6784482725,-73.9038433836,0
+1511,Rockaway Ave & Fulton St At Nw Corner,40.6784787308,-73.9109962354,0
+1512,Hopkinson Ave & Fulton St At Nw Corner,40.6786098653,-73.913793771,0
+1513,Ralph Ave & Fulton St At Se Corner,40.6787334345,-73.9215414085,0
+1514,Ralph Ave & Fulton St At Ne Corner,40.679002373,-73.9214689858,0
+1515,Ralph Ave & Mac Dougal St At Ne Corner,40.6791810728,-73.921894204,0
+1516,1289 Fulton Street (To Manhattan Only),40.6805607726,-73.9497731596,0
+1517,1276 Fulton Street (To Queens Only),40.6803027467,-73.9497336946,0
+1518,1293 Fulton Street (To Manhattan Only),40.6805441714,-73.9494703184,0
+1519,Marcy Ave & Myrtle Ave At Nw Corner,40.6954565022,-73.949448198,0
+1520,1280 Fulton Street (To Queens Only),40.6802641808,-73.9494164498,0
+1521,602 Marcy Avenue,40.6939988796,-73.949106721,0
+1522,567 Marcy Avenue,40.6955222208,-73.9490947396,0
+1523,Kingston Ave & Eastern Pkwy At Sw Corner,40.6693888134,-73.9423737136,0
+1524,Kingston Ave & Eastern Pkwy At Se Corner,40.6693776967,-73.9420997587,0
+1525,1490 Fulton Street (To Queens Only),40.6797965025,-73.9413840622,0
+1526,1492 Fulton Street (To Queens Only),40.6797881338,-73.9411208783,0
+1527,Throop Ave & Fulton St At Nw Corner (To Manhattan Only),40.6801254256,-73.9405076662,0
+1528,Throop Ave & Fulton St At Ne Corner (To Manhattan Only),40.6799714994,-73.9400859753,0
+1529,Broadway & Myrtle Ave At Nw Corner,40.6968713072,-73.9354763828,0
+1530,Schenectady Ave & Eastern Pkwy At Ne Corner,40.6690465989,-73.9338126586,0
+1531,Schenectady Ave & Eastern Pkwy At Se Corner,40.6688325064,-73.933812871,0
+1532,Stuyvesant Ave & Fulton St At Nw Corner,40.6796597854,-73.9323311411,0
+1533,1663 Atlantic Avenue,40.6792754302,-73.9321837124,0
+1534,Utica Ave & Eastern Pkwy At Nw Corner,40.6689326482,-73.9313975736,0
+1535,Utica Ave & Eastern Pkwy At Sw Corner,40.6687240345,-73.9313797643,0
+1536,Utica Ave & Eastern Pkwy At Nw Corner,40.6689215593,-73.9312137416,0
+1537,Utica Ave & Eastern Pkwy At Se Corner,40.6686991375,-73.9310553615,0
+1538,Utica Ave & Eastern Pkwy At Se Corner,40.6686824848,-73.9307489741,0
+1539,Utica Ave & Fulton St At Sw Corner,40.6790654444,-73.9298765205,0
+1540,Utica Ave & Fulton St At Nw Corner,40.679504531,-73.9297498718,0
+1541,1122 Broadway,40.6936894764,-73.9296916527,0
+1542,1117 Broadway,40.6939034491,-73.9294966964,0
+1543,Patchen Ave & Broadway At Ne Corner,40.6928211878,-73.9281672028,0
+1544,Howard Pl & Windsor Pl At Ne Corner,40.6594654073,-73.9799855407,0
+1545,Prospect Park West & 16th St At Ne Corner,40.660170767,-73.9797077981,0
+1546,4th Ave & 25th St At Se Corner (To Manhattan Only),40.6603180129,-73.9979996098,0
+1547,4th Ave & 25th St At Sw Corner (To Bay Ridge And Coney Island Only),40.6604964277,-73.9982555109,0
+1548,Prospect Park West & Prospect Park Southwest At Se Corner,40.6607526348,-73.9795634479,0
+1549,Prospect Park West & Prospect Park Southwest At Ne Corner,40.6607827287,-73.9790155802,0
+1550,Prospect Park West & 14th St At Se Corner,40.6613289998,-73.9793470096,0
+1551,Prospect Park West & 14th St At Sw Corner,40.6614498323,-73.9796965959,0
+1552,4th Ave & Prospect Ave At Sw Corner (To Manhattan Only),40.665126669,-73.9929855136,0
+1553,4th Ave & Prospect Ave At Se Corner (To Bay Ridge And Coney Island Onl,40.6653105853,-73.9932558375,0
+1554,4th Ave & Prospect Ave At Ne Corner (To Manhattan Only),40.6653352569,-73.9927403804,0
+1555,8th Ave & 9th St At Se Corner,40.6655119869,-73.9790393245,0
+1556,902 8 Avenue,40.6656959728,-73.9795150736,0
+1557,819 8 Avenue,40.6657782047,-73.9788986614,0
+1558,820 8 Avenue,40.6660170698,-73.979280675,0
+1559,7th Ave & 9th St At Se Corner,40.6666899153,-73.9814793031,0
+1560,7th Ave & 9th St At Sw Corner,40.6668821084,-73.9818469252,0
+1561,7th Ave & 9th St At Ne Corner,40.6669122108,-73.9812845896,0
+1562,326 7 Avenue,40.6671318586,-73.9816918562,0
+1563,4th Ave & 10th St At Nw Corner,40.6698693788,-73.9894991511,0
+1564,4th Ave & 10th St At Nw Corner,40.6699736492,-73.9891638857,0
+1565,4th Ave & 9th St At Ne Corner,40.6704264715,-73.9884860997,0
+1566,4th Ave & 9th St At Nw Corner,40.6705637403,-73.9887888843,0
+1567,Smith St & 9th St At Ne Corner,40.6746347582,-73.9973466608,0
+1568,4th Ave & Union St At Se Corner (To Manhattan Only),40.6770709084,-73.9831059761,0
+1569,4th Ave & Union St At Sw Corner (To Bay Ridge And Coney Island Only),40.6771834897,-73.9834196016,0
+1570,4th Ave & Union St At Se Corner (To Manhattan Only),40.6772136233,-73.9830158095,0
+1571,4th Ave & Union St At Sw Corner (To Bay Ridge And Coney Island Only),40.6773207154,-73.9833294368,0
+1572,Smith St & 2nd St At Nw Corner,40.6792212274,-73.9957312913,0
+1573,Smith St & 2nd St At Se Corner,40.6793529587,-73.9952770106,0
+1574,Smith St & President St At Se Corner,40.6808158814,-73.9943575263,0
+1575,Van Sinderen Ave & New Lots Ave At Sw Corner,40.6590333622,-73.8993588611,0
+1576,103rd St & 159th Ave At Se Corner,40.6602370106,-73.8304643276,0
+1577,103rd St & 159th Ave At Se Corner,40.660390617,-73.8303954551,0
+1578,103rd St & 159th Ave At Ne Corner,40.6605692664,-73.8305571956,0
+1579,103rd St & 159th Ave At Ne Corner,40.6605691018,-73.8304454619,0
+1580,Saratoga Ave & Livonia Ave At Sw Corner,40.6614261323,-73.9155749096,0
+1581,Saratoga Ave & Livonia Ave At Se Corner,40.6615439856,-73.915340476,0
+1582,Saratoga Ave & Livonia Ave At Ne Corner,40.6616949696,-73.9153691195,0
+1583,Rockaway Ave & Livonia Ave At Se Corner,40.6624557406,-73.9087972894,0
+1584,233 Livonia Avenue,40.6627304808,-73.9091285221,0
+1585,Powell St & Livonia Ave At Sw Corner,40.6633346807,-73.9028378958,0
+1586,Van Sinderen Ave & Livonia Ave At Sw Corner,40.6633684099,-73.9005526103,0
+1587,Powell St & Livonia Ave At Sw Corner,40.6634167373,-73.9024989555,0
+1588,Van Sinderen Ave & Livonia Ave At Sw Corner,40.6636347031,-73.9006098851,0
+1589,624 Livonia Avenue,40.6646198715,-73.8942211695,0
+1590,Rutland Rd & E. 98th St At Sw Corner,40.6649337604,-73.9231184136,0
+1591,Rutland Rd & E. 98th St At Ne Corner,40.6649499416,-73.9226894525,0
+1592,625 Livonia Avenue,40.6649324972,-73.8939178908,0
+1593,69 East 98 Street,40.6651668976,-73.922865825,0
+1594,770 Livonia Avenue,40.6654954164,-73.8883695328,0
+1595,Van Siclen Ave & Livonia Ave At Nw Corner,40.66572625,-73.8886503054,0
+1596,Ashford St & Livonia Av At Sw Corner,40.6663001102,-73.8833144906,0
+1597,632 Ashford Street,40.6664895618,-73.8833754381,0
+1598,Cohancy St & North Conduit Ave At Ne Corner,40.6670982217,-73.833712728,0
+1599,Lirr Bay Ridge Divide & Sutter Ave At Nw Corner,40.6686286045,-73.9019470184,0
+1600,99th Pl & Hawtree St At Ne Corner,40.6694273362,-73.8347811532,0
+1601,Lirr Bay Ridge Divide & Belmont Ave At Nw Corner,40.6698009638,-73.90234543,0
+1602,2222 Pitkin Avenue,40.6725185255,-73.8904126102,0
+1603,Van Siclen Ave & Pitkin Ave At Se Corner,40.6725237916,-73.8901782786,0
+1604,Van Siclen Ave & Pitkin Ave At Ne Corner,40.6728861945,-73.8902750165,0
+1605,Van Siclen Ave & Pitkin Ave At Nw Corner,40.6728973729,-73.8904840875,0
+1606,692 Parkside Avenue (To Flatbush Only),40.6561681966,-73.950375386,0
+1607,1231 Nostrand Avenue (To Manhattan Only),40.6572165575,-73.9500394212,0
+1608,462 Flatbush Avenue (Enter From Lincoln Rd),40.660877203,-73.9620751662,0
+1609,462 Flatbush Avenue,40.6625021891,-73.96230853,0
+1610,Flatbush Ave & Empire Blvd At Sw Corner,40.6627464626,-73.9622723476,0
+1611,1021 Nostrand Avenue,40.663255358,-73.95069812,0
+1612,Nostrand Ave & Sterling St At Nw Corner,40.6632966897,-73.9510729541,0
+1613,Nostrand Ave & President St At Ne Corner,40.6681464679,-73.9504998492,0
+1614,Nostrand Ave & President St At Nw Corner,40.6681877941,-73.9508602918,0
+1615,Nostrand Ave & Eastern Pkwy At Se Corner,40.6698234906,-73.9504156937,0
+1616,Nostrand Ave & Eastern Pkwy At Sw Corner,40.6698345905,-73.9506968616,0
+1617,Franklin Ave & Eastern Pkwy At Se Corner,40.6703617092,-73.9579133814,0
+1618,Franklin Ave & Eastern Pkwy At Se Corner,40.6704906595,-73.9577655009,0
+1619,Franklin Ave & Eastern Pkwy At Sw Corner,40.6705652363,-73.9590595987,0
+1620,Franklin Ave & Eastern Pkwy At Ne Corner,40.6707596131,-73.957671604,0
+1621,Franklin Ave & Eastern Pkwy At Ne Corner,40.6709462857,-73.957747188,0
+1622,Washington Ave & Eastern Pkwy At Sw Corner,40.6718954849,-73.9644012924,0
+1623,Washington Ave & Eastern Pkwy At Nw Corner,40.6721561692,-73.9641776466,0
+1624,Franklin Ave & Park Pl At Nw Corner,40.6745035713,-73.9578999525,0
+1625,Franklin Ave & Park Pl At Nw Corner,40.6747231295,-73.9578349224,0
+1626,1842 Nostrand Avenue (To Flatbush Only),40.6407637237,-73.948675298,0
+1627,1039 44 Street,40.6411895082,-73.9944941982,0
+1628,New Utrecht Ave & 44th St At Ne Corner,40.6412059576,-73.9941050432,0
+1629,1518 Cortelyou Road,40.6412965388,-73.9639924299,0
+1630,Mcdonald Ave & Church Ave At Sw Corner,40.6426507957,-73.9795689921,0
+1631,102 Beverly Road,40.6427330851,-73.9792662849,0
+1632,Mcdonald Ave & Church Ave At Nw Corner,40.6431503676,-73.9796877506,0
+1633,101 Church Avenue,40.6432326528,-73.9793598177,0
+1634,1512 Beverly Road,40.6442748084,-73.9645637697,0
+1635,Mcdonald Ave & Albemarle Rd At Sw Corner,40.6449619842,-73.9800223225,0
+1636,2914 Beverly Road (To Flatbush Only),40.6450293271,-73.9491404694,0
+1637,Mcdonald Ave & Albemarle Rd At Se Corner,40.6450387902,-73.9797484349,0
+1638,3010 Beverly Road (To Manhattan Only),40.6450538878,-73.9488197407,0
+1639,Glenwood Rd & Rockaway Pkwy At Nw Corner,40.6455646866,-73.9025214391,0
+1640,9th Ave & New Utrecht Ave At Ne Corner,40.6463304915,-73.9945226024,0
+1641,1713 Church Avenue,40.649418213,-73.963537582,0
+1642,Prospect Expwy & Fort Hamilton Pkwy At Nw Corner,40.6499210136,-73.9758765308,0
+1643,3000 Church Avenue (To Manhattan Only),40.6505381688,-73.9492768173,0
+1644,2848 Church Avenue (To Flatbush Only),40.6506811032,-73.9497452009,0
+1645,Nostrand Ave & Church Ave At Se Corner (To Manhattan Only),40.6506809705,-73.9494424829,0
+1646,2843 Church Avenue (To Flatbush Only),40.650950117,-73.9498026591,0
+1647,3001 Church Avenue (To Manhattan Only),40.650966431,-73.9494494742,0
+1648,Nostrand Ave & Church Ave At Nw Corner (To Flatbush Only),40.6510681222,-73.9497557208,0
+1649,Turnbull Ave & E 105th St At Se Corner,40.651226827,-73.8989345751,0
+1650,St. Pauls Pl & Caton Ave At Se Corner,40.6514765854,-73.9628661448,0
+1651,Turnbull Ave & E 105th St At Se Corner,40.6514384123,-73.8992045418,0
+1652,Prospect Ave & Greenwood Ave At Nw Corner,40.6516007841,-73.9757029393,0
+1653,Prospect Ave & Greenwood Ave At Ne Corner,40.6518231982,-73.9761173008,0
+1654,Prospect Ave & Reeve Pl At Se Corner,40.6526273818,-73.9759368183,0
+1655,Ocean Ave & Woodruff Ave At Nw Corner,40.654160684,-73.9619528452,0
+1656,Ocean Ave & Parkside Ave At Ne Corner,40.6552557595,-73.9616747101,0
+1657,New Utrecht Ave & 55th St At Se Corner,40.6314235934,-73.995345252,0
+1658,New Utrecht Ave & 55th St At Sw Corner,40.631566334,-73.9956406678,0
+1659,New Utrecht Ave & 55th St At Ne Corner,40.6315882794,-73.9953128157,0
+1660,3001 Avenue H,40.631754728,-73.947341998,0
+1661,Nostrand Ave & Flatbush Ave At Se Corner,40.6324849256,-73.9475251649,0
+1662,Nostrand Ave & Flatbush Ave At Ne Corner,40.6326714673,-73.9472980409,0
+1663,Nostrand Ave & Flatbush Ave At Ne Corner,40.6327813116,-73.9474132444,0
+1664,Nostrand Ave & Flatbush Ave At Ne Corner,40.6328774335,-73.9475320619,0
+1665,2137 Nostrand Avenue,40.6330530999,-73.9475319238,0
+1666,Nostrand Ave & Flatbush Ave At Nw Corner,40.6332701297,-73.9479532862,0
+1667,Nostrand Ave & Flatbush Ave At Nw Corner,40.6332865495,-73.9478451879,0
+1668,1515 Foster Avenue (Enter From Newkirk Ave Pz),40.635060006,-73.9628068239,0
+1669,Mcdonald Ave & Ditmas Ave At Sw Corner,40.6354427406,-73.9782272936,0
+1670,100 Ditmas Avenue,40.6354591419,-73.9778741978,0
+1671,1173 50 Street,40.6360485473,-73.9950206598,0
+1672,New Utrecht Ave & 50th St At Ne Corner,40.6361555789,-73.9946819696,0
+1673,4902 12 Avenue,40.6363943733,-73.9946387144,0
+1674,4910 New Utrecht Avenue,40.6364108572,-73.9949737935,0
+1675,Mcdonald Ave & Cortelyou Rd At Sw Corner,40.6370018358,-73.9785258379,0
+1676,Mcdonald Ave & Cortelyou Rd At Se Corner,40.6370154974,-73.9781943531,0
+1677,Nostrand Ave & Newkirk Ave At Sw Corner (To Flatbush Only),40.6398990841,-73.9486038989,0
+1678,3001 Foster Avenue (Enter (To Manhattan Only),40.6399044023,-73.9482219551,0
+1679,New Utrecht Ave & 45th St At Nw Corner,40.6403550933,-73.9944942671,0
+1680,4405 New Utrecht Avenue,40.6404017394,-73.9941843854,0
+1681,75 Richmond Terrace,40.6447432335,-74.076743011,0
+1682,Bay St & Cross St At Ne Corner,40.627781484,-74.0751672052,0
+1683,Minthorne St & Victory Bl At Se Corner,40.6376518279,-74.0750414062,0
+1684,Bay St & Hannah St At Ne Corner,40.6363290312,-74.0747480747,0
+1685,Staten Island Ferry Terminal,40.6442816146,-74.0732939864,0
+1686,Bay St & Norwood Av At Se Corner,40.6218520746,-74.0719077133,0
+1687,Bay St & Townsend Av At Ne Corner,40.6216133971,-74.0717165387,0
+1688,4th Ave & 95th St At Sw Corner,40.6160513162,-74.0313979065,0
+1689,4th Ave & 95th St At Nw Corner,40.6161885961,-74.0312502922,0
+1690,5th Ave & 95th St At Ne Corner,40.6159828524,-74.0308215682,0
+1691,4th Ave & 93th St At Sw Corner,40.6176132996,-74.030671037,0
+1692,4th Ave & 93th St At Ne Corner,40.6175475173,-74.030321613,0
+1693,4th Ave & 86th St At Sw Corner,40.6226422972,-74.0285804277,0
+1694,4th Ave & 86th St At Se Corner,40.6225627563,-74.0283462462,0
+1695,4th Ave & 85th St At Sw Corner,40.62348778,-74.0282277626,0
+1696,4th Ave & 77th St At Nw Corner,40.6295570905,-74.0257589148,0
+1697,7514 4 Avenue,40.6303201925,-74.0255322401,0
+1698,4th Ave & 77th St At Ne Corner,40.6294995126,-74.0254778865,0
+1699,4th Ave & Bay Ridge Ave At Nw Corner,40.6347808805,-74.0236279981,0
+1700,4th Ave & Bay Ridge Ave At Ne Corner,40.6347534886,-74.023354166,0
+1701,4th Ave & 68th St At Nw Corner,40.6355138027,-74.0233147995,0
+1702,7102 16 Avenue,40.6187866682,-73.9989626055,0
+1703,New Utrecht Ave & 71st St At Ne Corner,40.6189705684,-73.9988761529,0
+1704,6908 New Utrecht Avenue,40.6203896254,-73.9988293011,0
+1705,1548 Bay Ridge Avenue,40.6203127676,-73.9985159157,0
+1706,14th Ave & 61st St At Nw Corner,40.6271307974,-73.9969666829,0
+1707,New Utrecht Ave & 62nd St At Se Corner,40.6256513537,-73.9968947014,0
+1708,14th Ave & 61st St At Nw Corner,40.6273888012,-73.9967325068,0
+1709,14th Ave & 61st St At Ne Corner,40.6272021498,-73.99653798,0
+1710,63rd St & 15th Ave At Se Corner,40.6242953986,-73.99597256,0
+1711,17th Ave & 64th St At Ne Corner,40.6213390162,-73.9915168147,0
+1712,18th Ave & 64th St At Nw Corner,40.6200570254,-73.9894277407,0
+1713,20th Ave & 64th St At Ne Corner,40.617377606,-73.98492568,0
+1714,Bay Pkwy & 66th St At Se Corner,40.6130953427,-73.9822253292,0
+1715,8th St & Avenue O At Ne Corner,40.6105618061,-73.9816425413,0
+1716,956 Mc Donald Avenue,40.6304360803,-73.9773642807,0
+1717,36 Lawrence Avenue (Enter From Parkville Av),40.6284954466,-73.977022693,0
+1718,Mcdonald Ave & 18th Ave At Se Corner,40.6306528008,-73.9767733636,0
+1719,23 Avenue I,40.6260991493,-73.9765479934,0
+1720,1029 Mc Donald Avenue,40.6286847293,-73.9764894433,0
+1721,Mcdonald Ave & Avenue J At Nw Corner,40.6245455225,-73.9761810971,0
+1722,101 Avenue I,40.6261621792,-73.9760616389,0
+1723,1175 Mc Donald Avenue,40.6245838705,-73.9758028338,0
+1724,Mcdonald Ave & Bay Pkwy At Sw Corner,40.6208728545,-73.9755268115,0
+1725,Mcdonald Ave & Bay Pkwy At Nw Corner,40.6211747769,-73.9755050876,0
+1726,Mcdonald Ave & Bay Pkwy At Se Corner,40.6208947324,-73.975152177,0
+1727,Mcdonald Ave & Avenue M At Sw Corner,40.6161186609,-73.9745452303,0
+1728,Mcdonald Ave & Avenue M At Se Corner,40.6161597719,-73.9742714685,0
+1729,Mcdonald Ave & Avenue N At Nw Corner,40.6143372156,-73.97421094,0
+1730,Mcdonald Ave & Avenue N At Ne Corner,40.6143426344,-73.9738975791,0
+1731,Mcdonald Ave & Avenue P At Ne Corner,40.6090586818,-73.972930831,0
+1732,15th St & Avenue H At Se Corner,40.6299050101,-73.9619414546,0
+1733,15th St & Avenue H At Se Corner,40.6295893391,-73.9618803896,0
+1734,1518 Avenue H,40.6299487804,-73.9615019043,0
+1735,1506 Avenue J,40.625018993,-73.9610724598,0
+1736,15th St & Avenue J At Se Corner,40.6251589076,-73.9608670409,0
+1737,15th St & Avenue M At Se Corner,40.6180384404,-73.9594880381,0
+1738,15th St & Kings Hwy At Ne Corner,40.6090733535,-73.9578475745,0
+1739,15th St & Kings Hwy At Se Corner,40.6089305778,-73.957721611,0
+1740,4th Ave & 60th St At Sw Corner,40.6407269807,-74.0187909408,0
+1741,6003 4 Avenue,40.6406090121,-74.0184377898,0
+1742,4th Ave & 59th St At Nw Corner,40.6416383921,-74.0178975796,0
+1743,4th Ave & 59th St At Nw Corner,40.6417591844,-74.0177570831,0
+1744,4th Ave & 59th St At Ne Corner,40.6414600205,-74.0176416983,0
+1745,4th Ave & 59th St At Ne Corner,40.6415972802,-74.0175084127,0
+1746,4th Ave & 53rd St At Sw Corner,40.6445537947,-74.0147957867,0
+1747,4th Ave & 53rd St At Se Corner,40.6443973664,-74.0146047694,0
+1748,4th Ave & 53rd St At Sw Corner,40.6446718449,-74.0146048294,0
+1749,4th Ave & 53rd St At Se Corner,40.644575802,-74.0144102218,0
+1750,4th Ave & 52nd St At Nw Corner,40.6456957629,-74.0136825533,0
+1751,8th Ave & 62nd St At Nw Corner,40.6344589128,-74.0108339504,0
+1752,4th Ave & 45th St At Nw Corner,40.6494318161,-74.0097264364,0
+1753,4th Ave & 45th St At Nw Corner,40.6496157322,-74.0095390693,0
+1754,4th Ave & 45th St At Ne Corner,40.6493247909,-74.0094705572,0
+1755,4th Ave & 45th St At Ne Corner,40.6495279207,-74.009275985,0
+1756,969 62 Street (Enter From Ft Hamilton Py),40.6322057627,-74.0066039111,0
+1757,4th Ave & 36th St At Nw Corner,40.6545099861,-74.0045121991,0
+1758,4th Ave & 36th St At Nw Corner,40.6546664461,-74.0043175936,0
+1759,4 Ave (Between 35 St And 36 St),40.654320608,-74.0041986398,0
+1760,11th Ave & 62nd St At Nw Corner,40.6305782173,-74.0041647218,0
+1761,18th Ave & 85th St At Se Corner,40.6077086692,-74.001923183,0
+1762,18th Ave & 85th St At Ne Corner,40.6078376796,-74.0015954527,0
+1763,18th Ave & 85th St At Se Corner,40.6076647584,-74.0015306222,0
+1764,1673 79 Street,40.6128414467,-74.0010084881,0
+1765,1654 77 Street,40.6141863982,-74.0006555305,0
+1766,New Utrecht Ave & 79th St At Ne Corner,40.612860663,-74.0006195,0
+1767,New Utrecht Ave & 77th St At Ne Corner,40.6140381808,-74.0003097555,0
+1768,1550 71 Street,40.6189541028,-73.9992651771,0
+1769,1551 71 Street,40.6192148576,-73.9992039387,0
+1770,Bay Pkwy & 86th St At Se Corner,40.6017989726,-73.9938096273,0
+1771,Bay Pkwy & 86th St At Sw Corner,40.6019417154,-73.9940616949,0
+1772,Bay Pkwy & 86th St At Ne Corner,40.6019636494,-73.9936079473,0
+1773,Mcdonald Ave & Avenue S At Nw Corner,40.6021142924,-73.9726959696,0
+1774,Bay Pkwy & 86th St At Nw Corner,40.6021365873,-73.993896024,0
+1775,Mcdonald Ave & Avenue S At Ne Corner,40.602215775,-73.9723826263,0
+1776,7th St & Highlawn Ave At Sw Corner,40.6032302221,-73.9802256746,0
+1777,Mcdonald Ave & Kings Hwy At Se Corner,40.604024528,-73.9721009792,0
+1778,Mcdonald Ave & Kings Hwy At Sw Corner,40.6040493128,-73.9724394882,0
+1779,20th Ave & 86th St At Se Corner,40.6044780479,-73.9982821837,0
+1780,20th Ave & 86th St At Sw Corner,40.6045988216,-73.9984694481,0
+1781,20th Ave & 86th St At Ne Corner,40.6046564559,-73.9980480945,0
+1782,20th Ave & 86th St At Nw Corner,40.604801934,-73.998289378,0
+1783,275 Kings Highway,40.6053574773,-73.9804483276,0
+1784,Mcdonald Ave & Avenue P At Sw Corner,40.6086250532,-73.9731398948,0
+1785,15th St & Kings Hwy At Se Corner,40.6087961872,-73.9580062166,0
+1786,West Rd & Noel Rd At Ne Corner,40.6079566446,-73.8159930621,0
+1787,Beach 90th St & Rockaway Frwy At Ne Corner,40.5880265306,-73.8142297691,0
+1788,Beach 89th St & Rockaway Frwy At Nw Corner,40.5881494112,-73.8138369815,0
+1789,Beach 89th St & Rockaway Frwy At Sw Corner,40.5879705851,-73.8135818509,0
+1790,Beach 67th St & Rockaway Frwy At Nw Corner,40.5906914558,-73.7978038136,0
+1791,Beach 67th St & Rockaway Frwy At Sw Corner,40.5908595297,-73.7966115169,0
+1792,Beach 67th St & Rockaway Frwy At Nw Corner,40.5911531014,-73.7965422117,0
+1793,Beach 67th St & Rockaway Frwy At Sw Corner,40.5908999296,-73.796175725,0
+1794,Beach 69th St & Rockaway Frwy At Se Corner,40.591193533,-73.7961244206,0
+1795,Beach 60th St & Rockaway Frwy At Se Corner,40.5922412881,-73.7896112606,0
+1796,Beach 60th St & Rockaway Frwy At Ne Corner,40.5925264892,-73.7894699363,0
+1797,Beach 59th Sr & Rockaway Frwy At Sw Corner,40.592248724,-73.7891755593,0
+1798,Beach 59th Sr & Rockaway Frwy At Nw Corner,40.5925258025,-73.7890954701,0
+1799,Beach 59th St & Rockaway Frwy At Se Corner,40.5922371725,-73.7873752746,0
+1800,Beach 45th St & Edgemere Ave At Sw Corner,40.5928444917,-73.7761896416,0
+1801,Beach 45th St & Edgemere Ave At Ne Corner,40.5931105119,-73.7760735279,0
+1802,Beach 44th St & Edgemere Ave At Nw Corner,40.5931564149,-73.7756844991,0
+1803,Beach 44th St & Edgemere Ave At Sw Corner,40.5929038169,-73.7756457401,0
+1804,Beach 36th & Edgemere Ave At Ne Corner,40.5955489853,-73.7683127791,0
+1805,Beach 36th & Edgemere Ave At Se Corner,40.5952442266,-73.7682706268,0
+1806,Beach 35th & Rockaway Frwy At Nw Corner,40.5956774383,-73.7680386703,0
+1807,Beach 35th & Rockaway Frwy At Sw Corner,40.5954301456,-73.7679098999,0
+1808,Beach 25th St & Rockaway Frwy At Nw Corner,40.5994588274,-73.7621990598,0
+1809,Beach 25th St & Rockaway Frwy At Sw Corner,40.5992331136,-73.7618901758,0
+1810,25-04 Brookhaven Avenue,40.5995591909,-73.761622536,0
+1811,Beach 22nd St & Mott Ave At Sw Corner,40.6047586887,-73.7541996554,0
+1812,Stillwell Ave & Bay 50th St At Sw Corner,40.5880136118,-73.9837549761,0
+1813,Stillwell Ave & Bay 50th St At Se Corner,40.5881508174,-73.9835137152,0
+1814,Stillwell Ave & Bay 50th St At Sw Corner,40.5883484866,-73.9838197023,0
+1815,Stillwell Ave & Bay 50th St At Se Corner,40.5884362803,-73.9835388477,0
+1816,Mcdonald Ave & Avenue X At Ne Corner,40.5904162743,-73.9740473524,0
+1817,Mcdonald Ave & Avenue X At Nw Corner,40.5905288637,-73.9742813437,0
+1818,8th St & 86th St At Se Corner,40.5926899081,-73.9786085005,0
+1819,15th St & Gravesend Neck Rd At Ne Corner,40.5950381826,-73.9551450446,0
+1820,Mcdonald Ave & Gravesend Neck Rd At Se Corner,40.5950905133,-73.9733721887,0
+1821,Mcdonald Ave & Gravesend Neck Rd At Sw Corner,40.5951097974,-73.9736782479,0
+1822,8th St & Avenue U At Ne Corner,40.5964585826,-73.9789637782,0
+1823,Mcdonald Ave & Avenue U At Se Corner,40.596847139,-73.9731770406,0
+1824,Mcdonald Ave & Avenue U At Sw Corner,40.5968664219,-73.973475906,0
+1825,25th Ave & 86th St At Se Corner,40.5977827897,-73.987216695,0
+1826,25th Ave & 86th St At Sw Corner,40.5979008391,-73.9874255268,0
+1827,25th Ave & 86th St At Ne Corner,40.5979858801,-73.9869969986,0
+1828,25th Ave & 86th St At Nw Corner,40.5981094215,-73.9872238343,0
+1829,8th St & Avenue T At Se Corner,40.5985309769,-73.9793592322,0
+1830,15th St & Avenue U At Se Corner,40.5987989008,-73.9560355628,0
+1831,15th St & Avenue U At Ne Corner,40.5989663541,-73.9560894675,0
+1832,Fremont Av & N Railroad Av At Sw Corner,40.5790773945,-74.109772465,0
+1833,Lincoln Av & N Railroad Av At Sw Corner,40.5794595425,-74.1091215029,0
+1834,Jefferson Av & N Railroad Av At Sw Corner,40.5840821172,-74.1028179142,0
+1835,Jefferson Av & S Railroad Av At Nw Corner,40.5840163353,-74.1027134074,0
+1836,Seaview Av & N Railroad Av At Sw Corner,40.5886355968,-74.096664572,0
+1837,Seaview Av & Hancock St At Nw Corner,40.5885397557,-74.0963944007,0
+1838,Seaview Av & Hancock St At Ne Corner,40.588674468,-74.0961353633,0
+1839,Garretson Av & Hancock St At Nw Corner,40.588998727,-74.0956893731,0
+1840,N Railroad Av & Old Town Rd At Ne Corner,40.5961277378,-74.0878605528,0
+1841,Oregon Rd & Old Town Rd At Nw Corner,40.5961032408,-74.0875904574,0
+1842,Clove Rd & Hillcrest Te At Sw Corner,40.6036653628,-74.0836354021,0
+1843,8th St & Surf Ave At Nw Corner,40.575518123,-73.977022919,0
+1844,8th St & Surf Ave At Nw Corner,40.5757953244,-73.976904032,0
+1845,102 Brighton Beach Avenue,40.5761801245,-73.9677064955,0
+1846,Ocean Pkwy & Brighton Beach Rd At Se Corner,40.5761911953,-73.968034069,0
+1847,Stillwell Ave & Surf Ave At Ne Corner,40.5763505211,-73.9809751863,0
+1848,101 Brighton Beach Avenue,40.5764958484,-73.9679619275,0
+1849,101 Brighton Beach Avenue,40.5765369458,-73.9676955237,0
+1850,Ocean Pkwy & Brighton Beach Rd At Nw Corner,40.5765895537,-73.9693622004,0
+1851,Ocean Pkwy & Brighton Beach Rd At Nw Corner,40.5765977022,-73.9690418154,0
+1852,Stillwell Ave & Mermaid Ave At Se Corner,40.5769708739,-73.9811406008,0
+1853,Branch 6 St & Brighton Beach Rd At Sw Corner,40.5773860649,-73.9619173832,0
+1854,Branch 6 St & Brighton Beach Rd At Sw Corner,40.5774408819,-73.9616797629,0
+1855,Branch 6 St & Brighton Beach Rd At Nw Corner,40.5776797814,-73.9619856129,0
+1856,Branch 7 St & Brighton Beach Rd At Se Corner,40.5777012073,-73.960408867,0
+1857,Branch 6 St & Brighton Beach Rd At Nw Corner,40.577726363,-73.9617443964,0
+1858,Branch 7 St & Brighton Beach Rd At Se Corner,40.5777423085,-73.9602036511,0
+1859,3069 Brighton 7 Street,40.5779949359,-73.9605094891,0
+1860,West 6th St & Neptune Ave At Nw Corner,40.5805653508,-73.9748035809,0
+1861,West 6th St & Neptune Ave At Ne Corner,40.5805954697,-73.9744687691,0
+1862,Beach 116th St & Wainwright Ct At Ne Corner,40.5805135992,-73.8375139116,0
+1863,Beach 106th St & Rockaway Frwy At Nw Corner,40.5831039781,-73.8276036074,0
+1864,Beach 106th St & Rockaway Frwy At Sw Corner,40.5832158333,-73.8271496994,0
+1865,Beach 106th St & Rockaway Frwy At Sw Corner,40.5834168363,-73.8275703983,0
+1866,Beach 106th St & Rockaway Frwy At Nw Corner,40.5835095915,-73.8271921411,0
+1867,Beach 106th St & Rockaway Frwy At Nw Corner,40.5837143116,-73.8264355737,0
+1868,Beach 98th St & Rockaway Frwy At Sw Corner,40.5851848036,-73.8206029327,0
+1869,Beach 98th St & Rockaway Frwy At Sw Corner,40.5853461275,-73.8202064699,0
+1870,Beach 98th St & Rockaway Frwy At Nw Corner,40.5855905946,-73.8203210207,0
+1871,14th St & Voorhies Ave At Ne Corner,40.5857878805,-73.9543195919,0
+1872,15th St & Sheepshead Bay Rd At Se Corner,40.5873578663,-73.9542177076,0
+1873,Beach 90th St & Rockaway Frwy At Se Corner,40.5877462471,-73.8140361273,0
+1874,7 Bentley Street,40.5121331873,-74.2528574589,0
+1875,Main St & Utah St At Nw Corner,40.5132324698,-74.2509914928,0
+1876,Main St & Ellis St At Sw Corner,40.5134132416,-74.2511683951,0
+1877,Tracy Av & Arthur Kill Rd At Nw Corner,40.5154073631,-74.2454574386,0
+1878,& Ellis St At S Corner,40.5155499853,-74.2455083135,0
+1879,Bethel Av & St Andrew's Pl At Nw Corner,40.5176334738,-74.2389269435,0
+1880,Nassau Pl & Averill Pl At Sw Corner,40.5178500964,-74.2390320202,0
+1881,Richmond Valley Rd & Amboy Rd At Ne Corner,40.5195300782,-74.2295462604,0
+1882,Richmond Valley Rd & Richmond Valley Rd At Se Corner,40.5196206065,-74.2295717484,0
+1883,Richmond Valley Rd & Amboy Rd At Nw Corner,40.5196882122,-74.2287051671,0
+1884,Weiner St & Richmond Valley Rd At Sw Corner,40.5197838215,-74.2289356856,0
+1885,Amboy Rd & Penton St At Nw Corner,40.52250822,-74.2168378923,0
+1886,Amboy Rd & Station Av At Sw Corner,40.5228132672,-74.2166410521,0
+1887,Seguine Av & Herbert St At Ne Corner,40.5251232069,-74.2006921271,0
+1888,Seguine Av & Waterbury Av At Se Corner,40.5253699817,-74.2008403467,0
+1889,Huguenot Av & West Te At Se Corner,40.533221006,-74.1923379549,0
+1890,E Tenafly Av & S Railroad St At Nw Corner,40.5402560143,-74.1787259891,0
+1891,Belfield Av & N Railroad St At Sw Corner,40.5405720811,-74.1784605931,0
+1892,Annadale Rd & N Railroad St At Sw Corner,40.5406586814,-74.1774858042,0
+1893,Richmond Av & Mosely Av At Ne Corner,40.5442262426,-74.1650748045,0
+1894,Richmond Av & Eltingville Bl At Se Corner,40.5444071618,-74.1652407622,0
+1895,Nelson Av & Brower St At Ne Corner,40.5510630547,-74.15151486,0
+1896,Giffords La & Baltimore St At Sw Corner,40.5516186227,-74.150666886,0
+1897,Bay Te & S Railroad Av At Ne Corner,40.5560158691,-74.1374948197,0
+1898,Justin Av & S Railroad Av At Nw Corner,40.556870902,-74.1363233932,0
+1899,Guyon Av & N Railroad Av At Se Corner,40.5646742142,-74.1269023447,0
+1900,Oak Av & S Railroad Av At Nw Corner,40.5651883961,-74.1260827089,0
+1901,Cedarview Av & N Railroad Av At Se Corner,40.5653555681,-74.1263205708,0
+1902,Rose Av & New Dorp Pz At   Corner,40.573308239,-74.1176605383,0
+1903,New Dorp La & New Dorp Pz At   Corner,40.5739735089,-74.116653808,0
+1904,Fremont Av & S Railroad Av At Nw Corner,40.5789430642,-74.1095994481,0
